@@ -1,0 +1,375 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – Welcome to HttpRunner+</title><link>https://httprunner.github.io/docs/</link><description>Recent content in Welcome to HttpRunner+ on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Overview</title><link>https://httprunner.github.io/docs/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/overview/</guid><description>
+&lt;p>&lt;a href="https://pkg.go.dev/github.com/httprunner/hrp">&lt;img src="https://pkg.go.dev/badge/github.com/httprunner/hrp.svg" alt="Go Reference">&lt;/a>
+&lt;a href="https://github.com/httprunner/hrp/actions">&lt;img src="https://github.com/httprunner/hrp/actions/workflows/unittest.yml/badge.svg" alt="Github Actions">&lt;/a>
+&lt;a href="https://codecov.io/gh/httprunner/hrp">&lt;img src="https://codecov.io/gh/httprunner/hrp/branch/main/graph/badge.svg?token=HPCQWCD7KO" alt="codecov">&lt;/a>
+&lt;a href="https://goreportcard.com/report/github.com/httprunner/hrp">&lt;img src="https://goreportcard.com/badge/github.com/httprunner/hrp" alt="Go Report Card">&lt;/a>
+&lt;a href="https://app.fossa.com/reports/c2742455-c8ab-4b13-8fd7-4a35ba0b2840">&lt;img src="https://app.fossa.com/api/projects/custom%2B27856%2Fgithub.com%2Fhttprunner%2Fhrp.svg?type=shield" alt="FOSSA Status">&lt;/a>&lt;/p>
+&lt;p>&lt;code>hrp&lt;/code> is a golang implementation of [HttpRunner]. Ideally, hrp will be fully compatible with HttpRunner, including testcase format and usage. What&amp;rsquo;s more, hrp will integrate Boomer natively to be a better load generator for [locust].&lt;/p>
+&lt;h2 id="key-features">Key Features&lt;/h2>
+&lt;p>&lt;img src="https://httprunner.github.io/images/flow.jpg" alt="flow chart">&lt;/p>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Full support for HTTP(S) requests, more protocols are also in the plan.&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Testcases can be described in multiple formats, &lt;code>YAML&lt;/code>/&lt;code>JSON&lt;/code>/&lt;code>Golang&lt;/code>, and they are interchangeable.&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> With [&lt;code>HAR&lt;/code>][HAR] support, you can use Charles/Fiddler/Chrome/etc as a script recording generator.&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Supports &lt;code>variables&lt;/code>/&lt;code>extract&lt;/code>/&lt;code>validate&lt;/code>/&lt;code>hooks&lt;/code> mechanisms to create extremely complex test scenarios.&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> Built-in integration of rich functions, and you can also use [&lt;code>go plugin&lt;/code>][plugin] to create and call custom functions.&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Inherit all powerful features of [&lt;code>Boomer&lt;/code>][Boomer] and [&lt;code>locust&lt;/code>][locust], you can run &lt;code>load test&lt;/code> without extra work.&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> Use it as a &lt;code>CLI tool&lt;/code> or as a &lt;code>library&lt;/code> are both supported.&lt;/li>
+&lt;/ul>
+&lt;h2 id="quick-start">Quick Start&lt;/h2>
+&lt;h3 id="use-as-cli-tool">use as CLI tool&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp/hrp
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since installed, you will get a &lt;code>hrp&lt;/code> command with multiple sub-commands.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">$ hrp -h
+hrp (HttpRunner+) is the next generation for HttpRunner. Enjoy! ✨ 🚀 ✨
+License: Apache-2.0
+Github: https://github.com/httprunner/hrp
+Copyright 2021 debugtalk
+Usage:
+hrp [command]
+Available Commands:
+boom run load test with boomer
+completion generate the autocompletion script for the specified shell
+har2case Convert HAR to json/yaml testcase files
+help Help about any command
+run run API test
+Flags:
+-h, --help help for hrp
+--log-json set log to json format
+-l, --log-level string set log level (default &amp;#34;INFO&amp;#34;)
+-v, --version version for hrp
+Use &amp;#34;hrp [command] --help&amp;#34; for more information about a command.
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can use &lt;code>hrp run&lt;/code> command to run HttpRunner JSON/YAML testcases. The following is an example running [examples/demo.json][demo.json]&lt;/p>
+&lt;details>
+&lt;summary>$ hrp run examples/demo.json&lt;/summary>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">8:04PM INF Set log to pretty console
+8:04PM INF Set log level to INFO
+8:04PM INF [init] SetDebug debug=true
+8:04PM INF load json testcase path=/Users/debugtalk/MyProjects/HttpRunner-dev/hrp/examples/demo.json
+8:04PM INF call function success arguments=[5] funcName=gen_random_string output=B64R8
+8:04PM INF call function success arguments=[12.3,3.45] funcName=max output=12.3
+8:04PM INF run testcase start testcase=&amp;#34;demo with complex mechanisms&amp;#34;
+8:04PM INF call function success arguments=[12.3,34.5] funcName=max output=34.5
+8:04PM INF run step start step=&amp;#34;get with params&amp;#34;
+-------------------- request --------------------
+GET /get?foo1=B64R8&amp;amp;foo2=34.5 HTTP/1.1
+Host: postman-echo.com
+User-Agent: HttpRunnerPlus
+==================== response ===================
+HTTP/1.1 200 OK
+Content-Length: 304
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Nov 2021 12:04:32 GMT
+Etag: W/&amp;#34;130-LUQ0LVU7KVSZha0O3nQxqPlr5dw&amp;#34;
+Set-Cookie: sails.sid=s%3Ag6vZXrHHzs-B7Q1bFrYQq83dUje_EkSu.06vsqbkZvIOJ6mb1It7c6i354e%2B0t91K4cG14YFjSX0; Path=/; HttpOnly
+Vary: Accept-Encoding
+{&amp;#34;args&amp;#34;:{&amp;#34;foo1&amp;#34;:&amp;#34;B64R8&amp;#34;,&amp;#34;foo2&amp;#34;:&amp;#34;34.5&amp;#34;},&amp;#34;headers&amp;#34;:{&amp;#34;x-forwarded-proto&amp;#34;:&amp;#34;https&amp;#34;,&amp;#34;x-forwarded-port&amp;#34;:&amp;#34;443&amp;#34;,&amp;#34;host&amp;#34;:&amp;#34;postman-echo.com&amp;#34;,&amp;#34;x-amzn-trace-id&amp;#34;:&amp;#34;Root=1-618d06d0-7516144f65e561a8238adab5&amp;#34;,&amp;#34;user-agent&amp;#34;:&amp;#34;HttpRunnerPlus&amp;#34;,&amp;#34;accept-encoding&amp;#34;:&amp;#34;gzip&amp;#34;},&amp;#34;url&amp;#34;:&amp;#34;https://postman-echo.com/get?foo1=B64R8&amp;amp;foo2=34.5&amp;#34;}
+--------------------------------------------------
+8:04PM INF extract value from=body.args.foo1 value=B64R8
+8:04PM INF set variable value=B64R8 variable=varFoo1
+8:04PM INF validate status_code assertMethod=equals checkValue=200 expectValue=200 result=true
+8:04PM INF validate headers.&amp;#34;Content-Type&amp;#34; assertMethod=startswith checkValue=&amp;#34;application/json; charset=utf-8&amp;#34; expectValue=application/json result=true
+8:04PM INF validate body.args.foo1 assertMethod=length_equals checkValue=B64R8 expectValue=5 result=true
+8:04PM INF validate $varFoo1 assertMethod=length_equals checkValue=B64R8 expectValue=5 result=true
+8:04PM INF validate body.args.foo2 assertMethod=equals checkValue=34.5 expectValue=34.5 result=true
+8:04PM INF run step end exportVars={&amp;#34;varFoo1&amp;#34;:&amp;#34;B64R8&amp;#34;} step=&amp;#34;get with params&amp;#34; success=true
+8:04PM INF run step start step=&amp;#34;post json data&amp;#34;
+8:04PM INF call function success arguments=[12.3,3.45] funcName=max output=12.3
+-------------------- request --------------------
+POST /post HTTP/1.1
+Host: postman-echo.com
+Content-Type: application/json; charset=UTF-8
+{&amp;#34;foo1&amp;#34;:&amp;#34;B64R8&amp;#34;,&amp;#34;foo2&amp;#34;:12.3}
+==================== response ===================
+HTTP/1.1 200 OK
+Content-Length: 424
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Nov 2021 12:04:32 GMT
+Etag: W/&amp;#34;1a8-1umvYElau4WkHR7VON+jKXozT2c&amp;#34;
+Set-Cookie: sails.sid=s%3AeNnS5IE6TBePzx95OfuwyIweJy5aExb0.7MH6Vb42vbZ6OhNT2nhQGcAmHgqcFmtM8X03Qsoxa1k; Path=/; HttpOnly
+Vary: Accept-Encoding
+{&amp;#34;args&amp;#34;:{},&amp;#34;data&amp;#34;:{&amp;#34;foo1&amp;#34;:&amp;#34;B64R8&amp;#34;,&amp;#34;foo2&amp;#34;:12.3},&amp;#34;files&amp;#34;:{},&amp;#34;form&amp;#34;:{},&amp;#34;headers&amp;#34;:{&amp;#34;x-forwarded-proto&amp;#34;:&amp;#34;https&amp;#34;,&amp;#34;x-forwarded-port&amp;#34;:&amp;#34;443&amp;#34;,&amp;#34;host&amp;#34;:&amp;#34;postman-echo.com&amp;#34;,&amp;#34;x-amzn-trace-id&amp;#34;:&amp;#34;Root=1-618d06d0-360475ad34903a97191978d7&amp;#34;,&amp;#34;content-length&amp;#34;:&amp;#34;28&amp;#34;,&amp;#34;user-agent&amp;#34;:&amp;#34;Go-http-client/1.1&amp;#34;,&amp;#34;content-type&amp;#34;:&amp;#34;application/json; charset=UTF-8&amp;#34;,&amp;#34;accept-encoding&amp;#34;:&amp;#34;gzip&amp;#34;},&amp;#34;json&amp;#34;:{&amp;#34;foo1&amp;#34;:&amp;#34;B64R8&amp;#34;,&amp;#34;foo2&amp;#34;:12.3},&amp;#34;url&amp;#34;:&amp;#34;https://postman-echo.com/post&amp;#34;}
+--------------------------------------------------
+8:04PM INF validate status_code assertMethod=equals checkValue=200 expectValue=200 result=true
+8:04PM INF validate body.json.foo1 assertMethod=length_equals checkValue=B64R8 expectValue=5 result=true
+8:04PM INF validate body.json.foo2 assertMethod=equals checkValue=12.3 expectValue=12.3 result=true
+8:04PM INF run step end exportVars=null step=&amp;#34;post json data&amp;#34; success=true
+8:04PM INF run step start step=&amp;#34;post form data&amp;#34;
+8:04PM INF call function success arguments=[12.3,3.45] funcName=max output=12.3
+-------------------- request --------------------
+POST /post HTTP/1.1
+Host: postman-echo.com
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+foo1=B64R8&amp;amp;foo2=12.3
+==================== response ===================
+HTTP/1.1 200 OK
+Content-Length: 445
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Nov 2021 12:04:32 GMT
+Etag: W/&amp;#34;1bd-g/z+op+J2/U1DlrEv2g2VhZ0on4&amp;#34;
+Set-Cookie: sails.sid=s%3ALfq9XEgKVT4dKQ8PnxUJ9-WSq4wI96Po.2P90TP9V2Pje3GNJ1hJmLcRRgcQy%2FDwBPF63Xdvdq4o; Path=/; HttpOnly
+Vary: Accept-Encoding
+{&amp;#34;args&amp;#34;:{},&amp;#34;data&amp;#34;:&amp;#34;&amp;#34;,&amp;#34;files&amp;#34;:{},&amp;#34;form&amp;#34;:{&amp;#34;foo1&amp;#34;:&amp;#34;B64R8&amp;#34;,&amp;#34;foo2&amp;#34;:&amp;#34;12.3&amp;#34;},&amp;#34;headers&amp;#34;:{&amp;#34;x-forwarded-proto&amp;#34;:&amp;#34;https&amp;#34;,&amp;#34;x-forwarded-port&amp;#34;:&amp;#34;443&amp;#34;,&amp;#34;host&amp;#34;:&amp;#34;postman-echo.com&amp;#34;,&amp;#34;x-amzn-trace-id&amp;#34;:&amp;#34;Root=1-618d06d0-56d250242bf05b7144edf2cb&amp;#34;,&amp;#34;content-length&amp;#34;:&amp;#34;20&amp;#34;,&amp;#34;user-agent&amp;#34;:&amp;#34;Go-http-client/1.1&amp;#34;,&amp;#34;content-type&amp;#34;:&amp;#34;application/x-www-form-urlencoded; charset=UTF-8&amp;#34;,&amp;#34;accept-encoding&amp;#34;:&amp;#34;gzip&amp;#34;},&amp;#34;json&amp;#34;:{&amp;#34;foo1&amp;#34;:&amp;#34;B64R8&amp;#34;,&amp;#34;foo2&amp;#34;:&amp;#34;12.3&amp;#34;},&amp;#34;url&amp;#34;:&amp;#34;https://postman-echo.com/post&amp;#34;}
+--------------------------------------------------
+8:04PM INF validate status_code assertMethod=equals checkValue=200 expectValue=200 result=true
+8:04PM INF validate body.form.foo1 assertMethod=length_equals checkValue=B64R8 expectValue=5 result=true
+8:04PM INF validate body.form.foo2 assertMethod=equals checkValue=12.3 expectValue=12.3 result=true
+8:04PM INF run step end exportVars=null step=&amp;#34;post form data&amp;#34; success=true
+8:04PM INF run testcase end testcase=&amp;#34;demo with complex mechanisms&amp;#34;
+&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
+&lt;h3 id="use-as-library">use as library&lt;/h3>
+&lt;p>Beside using &lt;code>hrp&lt;/code> as a CLI tool, you can also use it as golang library.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is an example of &lt;code>HttpRunner+&lt;/code> testcase. You can find more in the [&lt;code>examples&lt;/code>][examples] directory.&lt;/p>
+&lt;details>
+&lt;summary>demo&lt;/summary>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;testing&amp;#34;&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;github.com/httprunner/hrp&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">func&lt;/span> &lt;span style="color:#000">TestCaseDemo&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">t&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">testing&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">demoTestCase&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">TestCase&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">Config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">TConfig&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">Name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;demo with complex mechanisms&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">BaseURL&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;https://postman-echo.com&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000">Variables&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">interface&lt;/span>&lt;span style="color:#000;font-weight:bold">{}{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// global level variables
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;n&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;a&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12.3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;b&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3.45&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${gen_random_string($n)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;varFoo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${max($a, $b)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 12.3; eval with built-in function
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000">TestSteps&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">IStep&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Step&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;get with params&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithVariables&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">interface&lt;/span>&lt;span style="color:#000;font-weight:bold">{}{&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// step level variables
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;n&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// inherit config level variables if not set in step level, a/varFoo1
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;b&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">34.5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// override config level variable if existed, n/b/varFoo2
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;varFoo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${max($a, $b)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 34.5; override variable b and eval again
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">}).&lt;/span>
+&lt;span style="color:#000">GET&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/get&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithParams&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">interface&lt;/span>&lt;span style="color:#000;font-weight:bold">{}{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;$varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;$varFoo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}).&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// request with params
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">WithHeaders&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;User-Agent&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HttpRunnerPlus&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}).&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// request with headers
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">Extract&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">WithJmesPath&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.args.foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// extract variable with jmespath
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check response status code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// validate response status code
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">AssertStartsWith&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;headers.\&amp;#34;Content-Type\&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;application/json&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// validate response header
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">AssertLengthEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.args.foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check args foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// validate response body with jmespath
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">AssertLengthEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;$varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check args foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// assert with extracted variable from current step
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.args.foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;34.5&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check args foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// notice: request params value will be converted to string
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Step&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;post json data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">POST&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/post&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithBody&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">interface&lt;/span>&lt;span style="color:#000;font-weight:bold">{}{&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;$varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// reference former extracted variable
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${max($a, $b)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 12.3; step level variables are independent, variable b is 3.45 here
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">}).&lt;/span>
+&lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check status code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">AssertLengthEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.json.foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check args foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.json.foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12.3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check args foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Step&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;post form data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">POST&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/post&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithHeaders&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Content-Type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;application/x-www-form-urlencoded; charset=UTF-8&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}).&lt;/span>
+&lt;span style="color:#000">WithBody&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">interface&lt;/span>&lt;span style="color:#000;font-weight:bold">{}{&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;$varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// reference former extracted variable
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${max($a, $b)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 12.3; step level variables are independent, variable b is 3.45 here
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">}).&lt;/span>
+&lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check status code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">AssertLengthEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.form.foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check args foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.form.foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;12.3&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check args foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// form data will be converted to string
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000">err&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewRunner&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">nil&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>&lt;span style="color:#000">Run&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">demoTestCase&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// hrp.Run(demoTestCase)
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000">err&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">!=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">nil&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">t&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Fatalf&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;run testcase error: %v&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">err&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
+&lt;p>The Overview is where your users find out about your project. Depending on the size of your docset, you can have a separate overview page (like this one) or put your overview contents in the Documentation landing page (like in the Docsy User Guide).&lt;/p>
+&lt;p>Try answering these questions for your user in this page:&lt;/p>
+&lt;h2 id="what-is-httprunner">What is HttpRunner?&lt;/h2>
+&lt;blockquote>
+&lt;p>Introduce your project, including what it does or lets you do, why you would use it, and its primary goal (and how it achieves it). This should be similar to your README description, though you can go into a little more detail here if you want.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="why-do-i-want-it">Why do I want it?&lt;/h2>
+&lt;p>Help your user know if your project will help them. Useful information can include:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>What is it good for?&lt;/strong>: What types of problems does your project solve? What are the benefits of using it?&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>What is it not good for?&lt;/strong>: For example, point out situations that might intuitively seem suited for your project, but aren&amp;rsquo;t for some reason. Also mention known limitations, scaling issues, or anything else that might let your users know if the project is not for them.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>What is it &lt;em>not yet&lt;/em> good for?&lt;/strong>: Highlight any useful features that are coming soon.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="where-should-i-go-next">Where should I go next?&lt;/h2>
+&lt;p>Give your users next steps from the Overview. For example:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://httprunner.github.io/docs/getting-started/">Getting Started&lt;/a>: Get started with $project&lt;/li>
+&lt;li>&lt;a href="https://httprunner.github.io/docs/examples/">Examples&lt;/a>: Check out some example code!&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Installation</title><link>https://httprunner.github.io/docs/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/installation/</guid><description>
+&lt;p>&lt;code>HttpRunner+&lt;/code> is developed with Golang, it supports Go &lt;code>1.13+&lt;/code> and most operating systems. Combination of Go &lt;code>1.13/1.14/1.15/1.16/1.17&lt;/code> and &lt;code>macOS/Linux/Windows&lt;/code> are tested continuously on &lt;a href="https://github.com/httprunner/hrp/actions">GitHub-Actions&lt;/a>.&lt;/p>
+&lt;h2 id="install-as-cli-tool">install as CLI tool&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp/hrp
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since installed, you will get a &lt;code>hrp&lt;/code> command with multiple sub-commands.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">$ hrp -h
+hrp (HttpRunner+) is the next generation for HttpRunner. Enjoy! ✨ 🚀 ✨
+License: Apache-2.0
+Github: https://github.com/httprunner/hrp
+Copyright 2021 debugtalk
+Usage:
+hrp [command]
+Available Commands:
+boom run load test with boomer
+completion generate the autocompletion script for the specified shell
+har2case Convert HAR to json/yaml testcase files
+help Help about any command
+run run API test
+Flags:
+-h, --help help for hrp
+--log-json set log to json format
+-l, --log-level string set log level (default &amp;#34;INFO&amp;#34;)
+-v, --version version for hrp
+Use &amp;#34;hrp [command] --help&amp;#34; for more information about a command.
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="install-as-library">install as library&lt;/h2>
+&lt;p>Beside using &lt;code>hrp&lt;/code> as a CLI tool, you can also use it as golang library.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then you can import &lt;code>github.com/httprunner/hrp&lt;/code> and write testcases in Golang.&lt;/p></description></item><item><title>Docs: Getting Started</title><link>https://httprunner.github.io/docs/quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/quickstart/</guid><description>
+&lt;p>Information in this section helps your user try your project themselves.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>What do your users need to do to start using your project? This could include downloading/installation instructions, including any prerequisites or system requirements.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Introductory “Hello World” example, if appropriate. More complex tutorials should live in the Tutorials section.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Consider using the headings below for your getting started page. You can delete any that are not applicable to your project.&lt;/p>
+&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
+&lt;p>Are there any system requirements for using your project? What languages are supported (if any)? Do users need to already have any software or tools installed?&lt;/p>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;p>Where can your user find your project code? How can they install it (binaries, installable package, build from source)? Are there multiple options/versions they can install and how should they choose the right one for them?&lt;/p>
+&lt;h2 id="setup">Setup&lt;/h2>
+&lt;p>Is there any initial setup users need to do after installation to try your project?&lt;/p>
+&lt;h2 id="try-it-out">Try it out!&lt;/h2>
+&lt;p>Can your users test their installation, for example by running a command or deploying a Hello World example?&lt;/p></description></item><item><title>Docs: Concepts</title><link>https://httprunner.github.io/docs/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/concepts/</guid><description>
+&lt;h2 id="testcase">TestCase&lt;/h2>
+&lt;h2 id="teststep">TestStep&lt;/h2>
+&lt;h2 id="testsuite">TestSuite&lt;/h2>
+&lt;h2 id="functions">functions&lt;/h2>
+&lt;pre tabindex="0">&lt;code>&amp;quot;${func{$a, $b}}&amp;quot;
+&lt;/code>&lt;/pre>&lt;h2 id="variables">variables&lt;/h2>
+&lt;p>&lt;code>$abc&lt;/code> or &lt;code>${abc}&lt;/code>&lt;/p>
+&lt;h2 id="extract">extract&lt;/h2>
+&lt;h2 id="validate">validate&lt;/h2></description></item><item><title>Docs: Contribution Guidelines</title><link>https://httprunner.github.io/docs/contribution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/contribution/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
+&lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p>
+&lt;/div>
+&lt;p>We use &lt;a href="https://gohugo.io/">Hugo&lt;/a> to format and generate our website, the
+&lt;a href="https://github.com/google/docsy">Docsy&lt;/a> theme for styling and site structure,
+and &lt;a href="https://www.netlify.com/">Netlify&lt;/a> to manage the deployment of the site.
+Hugo is an open-source static site generator that provides us with templates,
+content organisation in a standard directory structure, and a website generation
+engine. You write the pages in Markdown (or HTML if you want), and Hugo wraps them up into a website.&lt;/p>
+&lt;p>All submissions, including submissions by project members, require review. We
+use GitHub pull requests for this purpose. Consult
+&lt;a href="https://help.github.com/articles/about-pull-requests/">GitHub Help&lt;/a> for more
+information on using pull requests.&lt;/p>
+&lt;h2 id="quick-start-with-netlify">Quick start with Netlify&lt;/h2>
+&lt;p>Here&amp;rsquo;s a quick guide to updating the docs. It assumes you&amp;rsquo;re familiar with the
+GitHub workflow and you&amp;rsquo;re happy to use the automated preview of your doc
+updates:&lt;/p>
+&lt;ol>
+&lt;li>Fork the &lt;a href="https://github.com/google/docsy-example">Goldydocs repo&lt;/a> on GitHub.&lt;/li>
+&lt;li>Make your changes and send a pull request (PR).&lt;/li>
+&lt;li>If you&amp;rsquo;re not yet ready for a review, add &amp;ldquo;WIP&amp;rdquo; to the PR name to indicate
+it&amp;rsquo;s a work in progress. (&lt;strong>Don&amp;rsquo;t&lt;/strong> add the Hugo property
+&amp;ldquo;draft = true&amp;rdquo; to the page front matter, because that prevents the
+auto-deployment of the content preview described in the next point.)&lt;/li>
+&lt;li>Wait for the automated PR workflow to do some checks. When it&amp;rsquo;s ready,
+you should see a comment like this: &lt;strong>deploy/netlify — Deploy preview ready!&lt;/strong>&lt;/li>
+&lt;li>Click &lt;strong>Details&lt;/strong> to the right of &amp;ldquo;Deploy preview ready&amp;rdquo; to see a preview
+of your updates.&lt;/li>
+&lt;li>Continue updating your doc and pushing your changes until you&amp;rsquo;re happy with
+the content.&lt;/li>
+&lt;li>When you&amp;rsquo;re ready for a review, add a comment to the PR, and remove any
+&amp;ldquo;WIP&amp;rdquo; markers.&lt;/li>
+&lt;/ol>
+&lt;h2 id="updating-a-single-page">Updating a single page&lt;/h2>
+&lt;p>If you&amp;rsquo;ve just spotted something you&amp;rsquo;d like to change while using the docs, Docsy has a shortcut for you:&lt;/p>
+&lt;ol>
+&lt;li>Click &lt;strong>Edit this page&lt;/strong> in the top right hand corner of the page.&lt;/li>
+&lt;li>If you don&amp;rsquo;t already have an up to date fork of the project repo, you are prompted to get one - click &lt;strong>Fork this repository and propose changes&lt;/strong> or &lt;strong>Update your Fork&lt;/strong> to get an up to date version of the project to edit. The appropriate page in your fork is displayed in edit mode.&lt;/li>
+&lt;li>Follow the rest of the &lt;a href="#quick-start-with-netlify">Quick start with Netlify&lt;/a> process above to make, preview, and propose your changes.&lt;/li>
+&lt;/ol>
+&lt;h2 id="previewing-your-changes-locally">Previewing your changes locally&lt;/h2>
+&lt;p>If you want to run your own local Hugo server to preview your changes as you work:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Follow the instructions in &lt;a href="https://httprunner.github.io/docs/getting-started">Getting started&lt;/a> to install Hugo and any other tools you need. You&amp;rsquo;ll need at least &lt;strong>Hugo version 0.45&lt;/strong> (we recommend using the most recent available version), and it must be the &lt;strong>extended&lt;/strong> version, which supports SCSS.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Fork the &lt;a href="https://github.com/google/docsy-example">Goldydocs repo&lt;/a> repo into your own project, then create a local copy using &lt;code>git clone&lt;/code>. Don’t forget to use &lt;code>--recurse-submodules&lt;/code> or you won’t pull down some of the code you need to generate a working site.&lt;/p>
+&lt;pre tabindex="0">&lt;code>git clone --recurse-submodules --depth 1 https://github.com/google/docsy-example.git
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>Run &lt;code>hugo server&lt;/code> in the site root directory. By default your site will be available at http://localhost:1313/. Now that you&amp;rsquo;re serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Continue with the usual GitHub workflow to edit files, commit them, push the
+changes up to your fork, and create a pull request.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="creating-an-issue">Creating an issue&lt;/h2>
+&lt;p>If you&amp;rsquo;ve found a problem in the docs, but you&amp;rsquo;re not sure how to fix it yourself, please create an issue in the &lt;a href="https://github.com/google/docsy-example/issues">Goldydocs repo&lt;/a>. You can also create an issue about a specific page by clicking the &lt;strong>Create Issue&lt;/strong> button in the top right hand corner of the page.&lt;/p>
+&lt;h2 id="useful-resources">Useful resources&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.docsy.dev/docs/">Docsy user guide&lt;/a>: All about Docsy, including how it manages navigation, look and feel, and multi-language support.&lt;/li>
+&lt;li>&lt;a href="https://gohugo.io/documentation/">Hugo documentation&lt;/a>: Comprehensive reference for Hugo.&lt;/li>
+&lt;li>&lt;a href="https://guides.github.com/activities/hello-world/">Github Hello World!&lt;/a>: A basic introduction to GitHub concepts and workflow.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Sponsors</title><link>https://httprunner.github.io/docs/sponsors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/sponsors/</guid><description>
+&lt;h3 id="gold-sponsor">Gold Sponsor&lt;/h3>
+&lt;p>&lt;a href="https://ceshiren.com/">&lt;img src="https://httprunner.github.io/images/hogwarts.jpeg" alt="霍格沃兹测试开发学社" width="400">&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://ceshiren.com">霍格沃兹测试开发学社&lt;/a>是业界领先的测试开发技术高端教育品牌，隶属于&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://www.testing-studio.com">测吧（北京）科技有限公司&lt;/a> 。学院课程由一线大厂测试经理与资深测试开发专家参与研发，实战驱动。课程涵盖 web/app 自动化测试、接口测试、性能测试、安全测试、持续集成/持续交付/DevOps，测试左移&amp;amp;右移、精准测试、测试平台开发、测试管理等内容，帮助测试工程师实现测试开发技术转型。通过优秀的学社制度（奖学金、内推返学费、行业竞赛等多种方式）来实现学员、学社及用人企业的三方共赢。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://ceshiren.com/t/topic/14940">进入测试开发技术能力测评!&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="open-source-sponsor">Open Source Sponsor&lt;/h3>
+&lt;p>&lt;a href="https://sentry.io/_/open-source/">&lt;img src="https://httprunner.github.io/images/sentry-logo-black.svg" alt="Sentry" width="150">&lt;/a>&lt;/p>
+&lt;p>HttpRunner is in Sentry Sponsored plan.&lt;/p>
+&lt;h2 id="成为赞助商">成为赞助商&lt;/h2>
+&lt;p>如果你所在的公司或个人也想对 HttpRunner 进行赞助，可参考如下方案，具体可联系&lt;a href="mailto:debugtalk@gmail.com">项目作者&lt;/a>。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">等级&lt;/th>
+&lt;th style="text-align:center">金牌赞助商&lt;br/>（Gold Sponsor）&lt;/th>
+&lt;th style="text-align:center">银牌赞助商&lt;br/>（Silver Sponsor）&lt;/th>
+&lt;th style="text-align:center">个人赞赏&lt;br/>（Personal Sponsor）&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">金额&lt;/td>
+&lt;td style="text-align:center">￥20000/年&lt;/td>
+&lt;td style="text-align:center">￥8000/年&lt;/td>
+&lt;td style="text-align:center">￥10+ 任意&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">权益&lt;/td>
+&lt;td style="text-align:center">公司 logo（大）和链接展示在 README.md&lt;br/>200 字的宣传文案&lt;/td>
+&lt;td style="text-align:center">公司 logo（中）和链接展示在 README.md&lt;br/>80 字的宣传文案&lt;/td>
+&lt;td style="text-align:center">个人 ID 和链接展示在 sponsors.md&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>
