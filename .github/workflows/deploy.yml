@@ -30,6 +30,5 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.PRIVATE_KEY }}
           external_repository: <httprunner/httprunner.github.io>
           publish_dir: ./public
