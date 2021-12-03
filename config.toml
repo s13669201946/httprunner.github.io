@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://httprunner.github.io"
 title = "HttpRunner"
 
 enableRobotsTXT = true
@@ -15,6 +15,9 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
+
+time_format_default = "2006.01.02"
+time_format_blog = "2006.01.02"
 
 # Comment out to enable taxonomies in Docsy
 # disableKinds = ["taxonomy", "taxonomyTerm"]
@@ -67,24 +70,19 @@ anchor = "smart"
 id = "G-N2DPN3VP7K"
 
 # Language configuration
-
 [languages]
 [languages.en]
-title = "HttpRunner+"
+title = "HttpRunner"
 description = "One-stop solution for HTTP(S) testing."
 languageName ="English"
 # Weight used for sorting.
 weight = 1
-time_format_default = "2006.01.02"
-time_format_blog = "2006.01.02"
 
-[languages.zh]
-title = "HttpRunner"
-description = "一站式 HTTP(S) 测试解决方案"
-languageName = "中文"
-contentDir = "content/zh"
-time_format_default = "2006.01.02"
-time_format_blog = "2006.01.02"
+# [languages.zh]
+# title = "HttpRunner"
+# description = "一站式 HTTP(S) 测试解决方案"
+# languageName = "中文"
+# contentDir = "content/zh"
 
 [markup]
   [markup.goldmark]
@@ -128,7 +126,7 @@ version = "0.0"
 url_latest_version = "https://example.com"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/httprunner/hrp"
+github_repo = "https://github.com/httprunner/httprunner.github.io"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
 github_project_repo = "https://github.com/httprunner/hrp"
 
@@ -173,8 +171,8 @@ sidebar_search_disable = false
 [params.ui.feedback]
 enable = true
 # The responses that the user sees after clicking "yes" (the page was helpful) or "no" (the page was not helpful).
-yes = 'Glad to hear it! Please <a href="https://github.com/httprunner/hrp/issues/new">tell us how we can improve</a>.'
-no = 'Sorry to hear that. Please <a href="https://github.com/httprunner/hrp/issues/new">tell us how we can improve</a>.'
+yes = 'Glad to hear it! Please <a href="https://github.com/httprunner/httprunner.github.io/issues/new">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/httprunner/httprunner.github.io/issues/new">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
 # If you want this feature, but occasionally need to remove the Reading time from a single page,
@@ -202,7 +200,7 @@ enable = false
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "GitHub"
-	url = "https://github.com/httprunner/hrp"
+	url = "https://github.com/httprunner"
 	icon = "fab fa-github"
         desc = "Development takes place here!"
 # [[params.links.developer]]

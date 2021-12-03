@@ -1,9 +1,7 @@
-
 ---
 title: "Examples"
 linkTitle: "Examples"
-weight: 3
-date: 2017-01-05
+weight: 5
 description: >
   See your project in action!
 ---
