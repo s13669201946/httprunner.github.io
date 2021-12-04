@@ -37,7 +37,6 @@ taxonomyCloudTitle = ["Tag Cloud", "Categories"]
 # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 taxonomyPageHeader = ["tags", "categories"]
 
-
 # Highlighting config
 pygmentsCodeFences = true
 pygmentsUseClasses = false
@@ -57,6 +56,13 @@ plainIDAnchors = true
 hrefTargetBlank = true
 angledQuotes = false
 latexDashes = true
+
+# Additional menu items
+# [[menu.main]]
+#     name = "DebugTalk"
+#     weight = 40
+#     url = "https://debugtalk.com/"
+#     pre = "<i class='fas fa-laptop-code'></i>"
 
 # Image processing configuration.
 [imaging]
@@ -138,13 +144,15 @@ github_project_repo = "https://github.com/httprunner/hrp"
 github_branch= "main"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "d72aa9b2712488cc3"
+# gcs_engine_id = "d72aa9b2712488cc3"
 
 # Enable Algolia DocSearch
 algolia_docsearch = false
 
 # Enable Lunr.js offline search
-offlineSearch = false
+offlineSearch = true             # enable local search
+offlineSearchSummaryLength = 200 # summary length of the local search results
+offlineSearchMaxResults = 25     # maximum result count of the local search
 
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = false

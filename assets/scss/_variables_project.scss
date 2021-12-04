@@ -4,3 +4,9 @@ Add styles or override variables from the theme here.
 
 */
 
+// set the width of the local search results popover
+body {
+    .popover.offline-search-result {
+        max-width: 800px;
+    }
+}
