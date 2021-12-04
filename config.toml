@@ -155,7 +155,7 @@ offlineSearchSummaryLength = 200 # summary length of the local search results
 offlineSearchMaxResults = 25     # maximum result count of the local search
 
 # Enable syntax highlighting and copy buttons on code blocks with Prism
-prism_syntax_highlighting = false
+prism_syntax_highlighting = true
 
 # User interface configuration
 [params.ui]
