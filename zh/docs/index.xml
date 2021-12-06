@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – Welcome to HttpRunner+</title><link>https://httprunner.github.io/docs/</link><description>Recent content in Welcome to HttpRunner+ on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Overview</title><link>https://httprunner.github.io/docs/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/overview/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – 欢迎使用 HttpRunner+</title><link>https://httprunner.github.io/zh/docs/</link><description>Recent content in 欢迎使用 HttpRunner+ on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.github.io/zh/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 整体概览</title><link>https://httprunner.github.io/zh/docs/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/zh/docs/overview/</guid><description>
 &lt;p>&lt;a href="https://pkg.go.dev/github.com/httprunner/hrp">&lt;img src="https://pkg.go.dev/badge/github.com/httprunner/hrp.svg" alt="Go Reference">&lt;/a>
 &lt;a href="https://github.com/httprunner/hrp/actions">&lt;img src="https://github.com/httprunner/hrp/actions/workflows/unittest.yml/badge.svg" alt="Github Actions">&lt;/a>
 &lt;a href="https://codecov.io/gh/httprunner/hrp">&lt;img src="https://codecov.io/gh/httprunner/hrp/branch/main/graph/badge.svg?token=HPCQWCD7KO" alt="codecov">&lt;/a>
@@ -189,7 +189,7 @@ Vary: Accept-Encoding
 &lt;span style="color:#000">t&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Fatalf&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;run testcase error: %v&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">err&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/details></description></item><item><title>Docs: Installation</title><link>https://httprunner.github.io/docs/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/installation/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/details></description></item><item><title>Docs: Installation</title><link>https://httprunner.github.io/zh/docs/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/zh/docs/installation/</guid><description>
 &lt;p>&lt;code>HttpRunner+&lt;/code> is developed with Golang, it supports Go &lt;code>1.13+&lt;/code> and most operating systems. Combination of Go &lt;code>1.13/1.14/1.15/1.16/1.17&lt;/code> and &lt;code>macOS/Linux/Windows&lt;/code> are tested continuously on &lt;a href="https://github.com/httprunner/hrp/actions">GitHub-Actions&lt;/a>.&lt;/p>
 &lt;h2 id="install-as-cli-tool">install as CLI tool&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp/hrp
@@ -216,7 +216,7 @@ Use &amp;#34;hrp [command] --help&amp;#34; for more information about a command.
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="install-as-library">install as library&lt;/h2>
 &lt;p>Beside using &lt;code>hrp&lt;/code> as a CLI tool, you can also use it as golang library.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then you can import &lt;code>github.com/httprunner/hrp&lt;/code> and write testcases in Golang.&lt;/p></description></item><item><title>Docs: Getting Started</title><link>https://httprunner.github.io/docs/quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/quickstart/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then you can import &lt;code>github.com/httprunner/hrp&lt;/code> and write testcases in Golang.&lt;/p></description></item><item><title>Docs: Getting Started</title><link>https://httprunner.github.io/zh/docs/quickstart/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/zh/docs/quickstart/</guid><description>
 &lt;p>Information in this section helps your user try your project themselves.&lt;/p>
 &lt;ul>
 &lt;li>
@@ -234,84 +234,70 @@ Use &amp;#34;hrp [command] --help&amp;#34; for more information about a command.
 &lt;h2 id="setup">Setup&lt;/h2>
 &lt;p>Is there any initial setup users need to do after installation to try your project?&lt;/p>
 &lt;h2 id="try-it-out">Try it out!&lt;/h2>
-&lt;p>Can your users test their installation, for example by running a command or deploying a Hello World example?&lt;/p></description></item><item><title>Docs: Concepts</title><link>https://httprunner.github.io/docs/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/concepts/</guid><description>
-&lt;h2 id="testcase">TestCase&lt;/h2>
-&lt;h2 id="teststep">TestStep&lt;/h2>
-&lt;h2 id="testsuite">TestSuite&lt;/h2>
+&lt;p>Can your users test their installation, for example by running a command or deploying a Hello World example?&lt;/p></description></item><item><title>Docs: 核心概念</title><link>https://httprunner.github.io/zh/docs/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/zh/docs/concepts/</guid><description>
+&lt;h2 id="测试用例testcase">测试用例（TestCase）&lt;/h2>
+&lt;p>从 2.0 版本开始，HttpRunner 开始对测试用例的定义进行进一步的明确，参考 &lt;a href="https://en.wikipedia.org/wiki/Test_case">wiki&lt;/a> 上的描述。&lt;/p>
+&lt;blockquote>
+&lt;p>A test case is a specification of the inputs, execution conditions, testing procedure, and expected results that define a single test to be executed to achieve a particular software testing objective, such as to exercise a particular program path or to verify compliance with a specific requirement.&lt;/p>
+&lt;/blockquote>
+&lt;p>概括下来，一条测试用例（testcase）应该是为了测试某个特定的功能逻辑而精心设计的，并且至少包含如下几点：&lt;/p>
+&lt;ul>
+&lt;li>明确的测试目的（achieve a particular software testing objective）&lt;/li>
+&lt;li>明确的输入（inputs）&lt;/li>
+&lt;li>明确的运行环境（execution conditions）&lt;/li>
+&lt;li>明确的测试步骤描述（testing procedure）&lt;/li>
+&lt;li>明确的预期结果（expected results）&lt;/li>
+&lt;/ul>
+&lt;p>对应地，HttpRunner 的测试用例描述方式进行如下设计：&lt;/p>
+&lt;ul>
+&lt;li>测试用例应该是完整且独立的，每条测试用例应该是都可以独立运行的；在 HttpRunner 中，每个 &lt;code>YAML/JSON&lt;/code> 文件对应一条测试用例。&lt;/li>
+&lt;li>测试用例包含 &lt;code>测试脚本&lt;/code> 和 &lt;code>测试数据&lt;/code> 两部分：
+&lt;ul>
+&lt;li>&lt;code>测试用例 = 测试脚本 + 测试数据&lt;/code>&lt;/li>
+&lt;li>&lt;code>测试脚本&lt;/code> 重点是描述测试的 &lt;code>业务功能逻辑&lt;/code>，包括预置条件、测试步骤、预期结果等，并且可以结合辅助函数（debugtalk.py）实现复杂的运算逻辑；可以将 &lt;code>测试脚本&lt;/code> 理解为编程语言中的 &lt;code>类（class）&lt;/code>；&lt;/li>
+&lt;li>&lt;code>测试数据&lt;/code> 重点是对应测试的 &lt;code>业务数据逻辑&lt;/code>，可以理解为类的实例化数据；&lt;/li>
+&lt;li>&lt;code>测试数据&lt;/code> 和 &lt;code>测试脚本&lt;/code> 分离后，就可以比较方便地实现数据驱动测试，通过对测试脚本传入一组数据，实现同一业务功能在不同数据逻辑下的测试验证。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="测试步骤teststep">测试步骤（TestStep）&lt;/h2>
+&lt;p>测试用例是测试步骤的 &lt;code>有序&lt;/code> 集合，而对于接口测试来说，每一个测试步骤应该就对应一个 API 的请求描述。&lt;/p>
+&lt;h2 id="测试用例集testsuite">测试用例集（TestSuite）&lt;/h2>
+&lt;p>&lt;code>测试用例集&lt;/code> 是 &lt;code>测试用例&lt;/code> 的 &lt;code>无序&lt;/code> 集合，集合中的测试用例应该都是相互独立，不存在先后依赖关系的。&lt;/p>
+&lt;p>如果确实存在先后依赖关系怎么办，例如登录功能和下单功能。正确的做法应该是，在下单测试用例的前置步骤中执行登录操作。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">order product&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">test&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">login&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">testcase&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">testcases/login.yml&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">test&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">add to cart&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">api&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">api/add_cart.yml&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>- &lt;span style="color:#204a87;font-weight:bold">test&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">make order&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">api&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">api/make_order.yml&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="测试场景">测试场景&lt;/h2>
+&lt;p>&lt;code>测试场景&lt;/code> 和 &lt;code>测试用例集&lt;/code> 是同一概念，都是 &lt;code>测试用例&lt;/code> 的 &lt;code>无序&lt;/code> 集合。&lt;/p>
+&lt;ul>
+&lt;li>接口&lt;/li>
+&lt;li>测试用例集&lt;/li>
+&lt;li>参数&lt;/li>
+&lt;li>变量&lt;/li>
+&lt;li>测试脚本（YAML/JSON）&lt;/li>
+&lt;li>debugtalk.py&lt;/li>
+&lt;li>环境变量&lt;/li>
+&lt;/ul>
+&lt;h2 id="项目根目录">项目根目录&lt;/h2>
 &lt;h2 id="functions">functions&lt;/h2>
 &lt;pre tabindex="0">&lt;code>&amp;quot;${func{$a, $b}}&amp;quot;
 &lt;/code>&lt;/pre>&lt;h2 id="variables">variables&lt;/h2>
 &lt;p>&lt;code>$abc&lt;/code> or &lt;code>${abc}&lt;/code>&lt;/p>
 &lt;h2 id="extract">extract&lt;/h2>
-&lt;h2 id="validate">validate&lt;/h2></description></item><item><title>Docs: Contribution Guidelines</title><link>https://httprunner.github.io/docs/contribution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/contribution/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
-&lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
-&lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p>
-&lt;/div>
-&lt;p>We use &lt;a href="https://gohugo.io/">Hugo&lt;/a> to format and generate our website, the
-&lt;a href="https://github.com/google/docsy">Docsy&lt;/a> theme for styling and site structure,
-and &lt;a href="https://www.netlify.com/">Netlify&lt;/a> to manage the deployment of the site.
-Hugo is an open-source static site generator that provides us with templates,
-content organisation in a standard directory structure, and a website generation
-engine. You write the pages in Markdown (or HTML if you want), and Hugo wraps them up into a website.&lt;/p>
-&lt;p>All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-&lt;a href="https://help.github.com/articles/about-pull-requests/">GitHub Help&lt;/a> for more
-information on using pull requests.&lt;/p>
-&lt;h2 id="quick-start-with-netlify">Quick start with Netlify&lt;/h2>
-&lt;p>Here&amp;rsquo;s a quick guide to updating the docs. It assumes you&amp;rsquo;re familiar with the
-GitHub workflow and you&amp;rsquo;re happy to use the automated preview of your doc
-updates:&lt;/p>
-&lt;ol>
-&lt;li>Fork the &lt;a href="https://github.com/google/docsy-example">Goldydocs repo&lt;/a> on GitHub.&lt;/li>
-&lt;li>Make your changes and send a pull request (PR).&lt;/li>
-&lt;li>If you&amp;rsquo;re not yet ready for a review, add &amp;ldquo;WIP&amp;rdquo; to the PR name to indicate
-it&amp;rsquo;s a work in progress. (&lt;strong>Don&amp;rsquo;t&lt;/strong> add the Hugo property
-&amp;ldquo;draft = true&amp;rdquo; to the page front matter, because that prevents the
-auto-deployment of the content preview described in the next point.)&lt;/li>
-&lt;li>Wait for the automated PR workflow to do some checks. When it&amp;rsquo;s ready,
-you should see a comment like this: &lt;strong>deploy/netlify — Deploy preview ready!&lt;/strong>&lt;/li>
-&lt;li>Click &lt;strong>Details&lt;/strong> to the right of &amp;ldquo;Deploy preview ready&amp;rdquo; to see a preview
-of your updates.&lt;/li>
-&lt;li>Continue updating your doc and pushing your changes until you&amp;rsquo;re happy with
-the content.&lt;/li>
-&lt;li>When you&amp;rsquo;re ready for a review, add a comment to the PR, and remove any
-&amp;ldquo;WIP&amp;rdquo; markers.&lt;/li>
-&lt;/ol>
-&lt;h2 id="updating-a-single-page">Updating a single page&lt;/h2>
-&lt;p>If you&amp;rsquo;ve just spotted something you&amp;rsquo;d like to change while using the docs, Docsy has a shortcut for you:&lt;/p>
-&lt;ol>
-&lt;li>Click &lt;strong>Edit this page&lt;/strong> in the top right hand corner of the page.&lt;/li>
-&lt;li>If you don&amp;rsquo;t already have an up to date fork of the project repo, you are prompted to get one - click &lt;strong>Fork this repository and propose changes&lt;/strong> or &lt;strong>Update your Fork&lt;/strong> to get an up to date version of the project to edit. The appropriate page in your fork is displayed in edit mode.&lt;/li>
-&lt;li>Follow the rest of the &lt;a href="#quick-start-with-netlify">Quick start with Netlify&lt;/a> process above to make, preview, and propose your changes.&lt;/li>
-&lt;/ol>
-&lt;h2 id="previewing-your-changes-locally">Previewing your changes locally&lt;/h2>
-&lt;p>If you want to run your own local Hugo server to preview your changes as you work:&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Follow the instructions in &lt;a href="https://httprunner.github.io/docs/getting-started">Getting started&lt;/a> to install Hugo and any other tools you need. You&amp;rsquo;ll need at least &lt;strong>Hugo version 0.45&lt;/strong> (we recommend using the most recent available version), and it must be the &lt;strong>extended&lt;/strong> version, which supports SCSS.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Fork the &lt;a href="https://github.com/google/docsy-example">Goldydocs repo&lt;/a> repo into your own project, then create a local copy using &lt;code>git clone&lt;/code>. Don’t forget to use &lt;code>--recurse-submodules&lt;/code> or you won’t pull down some of the code you need to generate a working site.&lt;/p>
-&lt;pre tabindex="0">&lt;code>git clone --recurse-submodules --depth 1 https://github.com/google/docsy-example.git
-&lt;/code>&lt;/pre>&lt;/li>
-&lt;li>
-&lt;p>Run &lt;code>hugo server&lt;/code> in the site root directory. By default your site will be available at http://localhost:1313/. Now that you&amp;rsquo;re serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Continue with the usual GitHub workflow to edit files, commit them, push the
-changes up to your fork, and create a pull request.&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="creating-an-issue">Creating an issue&lt;/h2>
-&lt;p>If you&amp;rsquo;ve found a problem in the docs, but you&amp;rsquo;re not sure how to fix it yourself, please create an issue in the &lt;a href="https://github.com/google/docsy-example/issues">Goldydocs repo&lt;/a>. You can also create an issue about a specific page by clicking the &lt;strong>Create Issue&lt;/strong> button in the top right hand corner of the page.&lt;/p>
-&lt;h2 id="useful-resources">Useful resources&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://www.docsy.dev/docs/">Docsy user guide&lt;/a>: All about Docsy, including how it manages navigation, look and feel, and multi-language support.&lt;/li>
-&lt;li>&lt;a href="https://gohugo.io/documentation/">Hugo documentation&lt;/a>: Comprehensive reference for Hugo.&lt;/li>
-&lt;li>&lt;a href="https://guides.github.com/activities/hello-world/">Github Hello World!&lt;/a>: A basic introduction to GitHub concepts and workflow.&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Sponsors</title><link>https://httprunner.github.io/docs/sponsors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/sponsors/</guid><description>
-&lt;h3 id="gold-sponsor">Gold Sponsor&lt;/h3>
+&lt;h2 id="validate">validate&lt;/h2></description></item><item><title>Docs: Sponsors</title><link>https://httprunner.github.io/zh/docs/sponsors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/zh/docs/sponsors/</guid><description>
+&lt;h3 id="金牌赞助商">金牌赞助商&lt;/h3>
 &lt;p>&lt;a href="https://ceshiren.com/">&lt;img src="https://httprunner.github.io/images/hogwarts.jpeg" alt="霍格沃兹测试开发学社" width="400">&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://ceshiren.com">霍格沃兹测试开发学社&lt;/a>是业界领先的测试开发技术高端教育品牌，隶属于&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://www.testing-studio.com">测吧（北京）科技有限公司&lt;/a> 。学院课程由一线大厂测试经理与资深测试开发专家参与研发，实战驱动。课程涵盖 web/app 自动化测试、接口测试、性能测试、安全测试、持续集成/持续交付/DevOps，测试左移&amp;amp;右移、精准测试、测试平台开发、测试管理等内容，帮助测试工程师实现测试开发技术转型。通过优秀的学社制度（奖学金、内推返学费、行业竞赛等多种方式）来实现学员、学社及用人企业的三方共赢。&lt;/p>
@@ -319,7 +305,7 @@ changes up to your fork, and create a pull request.&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://ceshiren.com/t/topic/14940">进入测试开发技术能力测评!&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="open-source-sponsor">Open Source Sponsor&lt;/h3>
+&lt;h3 id="开源赞助商">开源赞助商&lt;/h3>
 &lt;p>&lt;a href="https://sentry.io/_/open-source/">&lt;img src="https://httprunner.github.io/images/sentry-logo-black.svg" alt="Sentry" width="150">&lt;/a>&lt;/p>
 &lt;p>HttpRunner is in Sentry Sponsored plan.&lt;/p>
 &lt;h2 id="成为赞助商">成为赞助商&lt;/h2>
