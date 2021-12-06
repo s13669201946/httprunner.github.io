@@ -243,7 +243,48 @@ Use &amp;#34;hrp [command] --help&amp;#34; for more information about a command.
 &lt;/code>&lt;/pre>&lt;h2 id="variables">variables&lt;/h2>
 &lt;p>&lt;code>$abc&lt;/code> or &lt;code>${abc}&lt;/code>&lt;/p>
 &lt;h2 id="extract">extract&lt;/h2>
-&lt;h2 id="validate">validate&lt;/h2></description></item><item><title>Docs: Contribution Guidelines</title><link>https://httprunner.github.io/docs/contribution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/contribution/</guid><description>
+&lt;h2 id="validate">validate&lt;/h2></description></item><item><title>Docs: Run load test</title><link>https://httprunner.github.io/docs/loadtest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/loadtest/</guid><description>
+&lt;h2 id="start-with-cli">Start with CLI&lt;/h2>
+&lt;p>&lt;code>HttpRunner+&lt;/code> supports running load test without extra work. You can use &lt;code>hrp boom&lt;/code> command to run YAML/JSON testcases in load testing mode.&lt;/p>
+&lt;p>By default, hrp will print load testing results in console output, refreshed every 3 seconds.&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1
+6:09PM INF Set log to pretty console
+6:09PM INF Set log level to INFO
+6:09PM INF Set log level to WARN
+2021/12/02 18:09:48 Spawning 10 clients immediately
+Current time: 2021/12/02 18:09:51, Users: 10, Total RPS: 20, Total Fail Ratio: 0.0%
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| TYPE | NAME | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN | MAX | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET | get with params | 10 | 0 | 2400 | 2423.00 | 2422 | 2424 | 300 | 10 | 0 |
+| request-POST | post json data | 10 | 0 | 310 | 304.50 | 301 | 307 | 420 | 10 | 0 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+Current time: 2021/12/02 18:09:54, Users: 10, Total RPS: 16, Total Fail Ratio: 0.0%
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| TYPE | NAME | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN | MAX | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET | get with params | 18 | 0 | 1200 | 1157.39 | 1083 | 1367 | 300 | 9 | 0 |
+| request-POST | post json data | 10 | 0 | 290 | 290.20 | 287 | 293 | 420 | 10 | 0 |
+| request-POST | post form data | 20 | 0 | 310 | 300.00 | 287 | 311 | 441 | 10 | 0 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+Current time: 2021/12/02 18:09:57, Users: 10, Total RPS: 17, Total Fail Ratio: 0.0%
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| TYPE | NAME | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN | MAX | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET | get with params | 12 | 0 | 1100 | 1153.92 | 1081 | 1464 | 300 | 6 | 0 |
+| request-POST | post json data | 20 | 0 | 270 | 279.70 | 269 | 337 | 420 | 6 | 0 |
+| request-POST | post form data | 20 | 0 | 270 | 272.85 | 269 | 279 | 441 | 10 | 0 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+&lt;/code>&lt;/pre>&lt;p>If you want to disable console output, you can add a &lt;code>--disable-console-output&lt;/code> flag.&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --disable-console-output
+&lt;/code>&lt;/pre>&lt;p>You can reference this &lt;a href="cmd/hrp_boom.md">doc&lt;/a> for all command arguments.&lt;/p>
+&lt;h2 id="report-metrics-to-prometheus-pushgateway">Report metrics to Prometheus Pushgateway&lt;/h2>
+&lt;p>Besides printing load testing results in console, you can also push metrics to &lt;a href="https://github.com/prometheus/pushgateway">Prometheus Pushgateway&lt;/a>, and then you can configure pretty graphs on &lt;a href="https://grafana.com/">Grafana&lt;/a>.&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --prometheus-gateway http://127.0.0.1:9091
+&lt;/code>&lt;/pre>&lt;p>You can deploy the Pushgateway using the &lt;a href="https://hub.docker.com/r/prom/pushgateway">prom/pushgateway&lt;/a> Docker image at ease.&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ docker pull prom/pushgateway
+$ docker run -d -p 9091:9091 prom/pushgateway
+&lt;/code>&lt;/pre></description></item><item><title>Docs: Contribution Guidelines</title><link>https://httprunner.github.io/docs/contribution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/contribution/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>These basic sample guidelines assume that your Docsy site is deployed using Netlify and your files are stored in GitHub. You can use the guidelines &amp;ldquo;as is&amp;rdquo; or adapt them with your own instructions: for example, other deployment options, information about your doc project&amp;rsquo;s file structure, project-specific review guidelines, versioning guidelines, or any other information your users might find useful when updating your site. &lt;a href="https://github.com/kubeflow/website/blob/master/README.md">Kubeflow&lt;/a> has a great example.&lt;/p>
 &lt;p>Don&amp;rsquo;t forget to link to your own doc repo rather than our example site! Also make sure users can find these guidelines from your doc repo README: either add them there and link to them from this page, add them here and link to them from the README, or include them in both locations.&lt;/p>
