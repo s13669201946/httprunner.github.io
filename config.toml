@@ -84,11 +84,11 @@ languageName ="English"
 # Weight used for sorting.
 weight = 1
 
-# [languages.zh]
-# title = "HttpRunner"
-# description = "一站式 HTTP(S) 测试解决方案"
-# languageName = "中文"
-# contentDir = "content/zh"
+[languages.zh]
+title = "HttpRunner"
+description = "一站式 HTTP(S) 测试解决方案"
+languageName = "中文"
+contentDir = "content/zh"
 
 [markup]
   [markup.goldmark]
@@ -115,7 +115,7 @@ privacy_policy = "https://policies.google.com/privacy"
 
 # Menu title if your navbar has a versions selector to access old versions of your site.
 # This menu appears only if you have at least one [params.versions] set.
-version_menu = "Releases"
+version_menu = "Versions"
 
 # Flag used in the "version-banner" partial to decide whether to display a
 # banner on every page indicating that this is an archived version of the docs.
@@ -125,11 +125,23 @@ archived_version = false
 # The version number for the version of the docs represented in this doc set.
 # Used in the "version-banner" partial to display a version number for the
 # current doc set.
-version = "0.0"
+version = "0.x"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
-url_latest_version = "https://example.com"
+url_latest_version = "https://httprunner.com"
+
+# [[params.versions]]
+#   version = "latest"
+#   url = "/"
+
+# [[params.versions]]
+#   version = "py-v1.x"
+#   url = "https://v1.httprunner.org"
+
+# [[params.versions]]
+#   version = "py-v2.x"
+#   url = "https://v2.httprunner.org"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
 github_repo = "https://github.com/httprunner/httprunner.github.io"
@@ -200,17 +212,22 @@ enable = false
 # 	url = "https://example.org/twitter"
 # 	icon = "fab fa-twitter"
 #         desc = "Follow us on Twitter to get the latest news!"
-[[params.links.user]]
-	name = "TesterHome"
-	url = "https://testerhome.com/topics/node138"
-	icon = "fab fa-stack-overflow"
-        desc = "TesterHome 社区上有较多话题讨论"
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
+[[params.links.developer]]
+	name = "DebugTalk"
+	url = "https://debugtalk.com"
+	icon = "fas fa-blog"
+        desc = "debugtalk's blog website"
 [[params.links.developer]]
 	name = "GitHub"
 	url = "https://github.com/httprunner"
 	icon = "fab fa-github"
         desc = "Development takes place here!"
+[[params.links.developer]]
+	name = "TesterHome"
+	url = "https://testerhome.com/topics/node138"
+	icon = "fas fa-bug"
+        desc = "TesterHome 社区上有较多话题讨论"
 # [[params.links.developer]]
 # 	name = "Slack"
 # 	url = "https://example.org/slack"

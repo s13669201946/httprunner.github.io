@@ -1,8 +1,8 @@
 ---
-title: "Overview"
+title: "整体概览"
 linkTitle: "Overview"
 weight: 1
-description: Including key features,
+description: 覆盖核心特性介绍
 ---
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/httprunner/hrp.svg)](https://pkg.go.dev/github.com/httprunner/hrp)
@@ -238,7 +238,6 @@ func TestCaseDemo(t *testing.T) {
 }
 ```
 </details>
-
 
 [HttpRunner]: https://github.com/httprunner/httprunner
 [Boomer]: https://github.com/myzhan/boomer
