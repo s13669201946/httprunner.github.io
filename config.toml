@@ -10,9 +10,8 @@ theme = ["docsy"]
 enableGitInfo = true
 
 # Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = true
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
@@ -81,6 +80,7 @@ id = "G-LNRMVFG5LL"
 title = "HttpRunner"
 description = "One-stop solution for HTTP(S) testing."
 languageName ="English"
+contentDir = "content/en"
 # Weight used for sorting.
 weight = 1
 
