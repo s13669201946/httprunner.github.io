@@ -1,6 +1,6 @@
 ---
 title: "整体概览"
-linkTitle: "Overview"
+linkTitle: "整体概览"
 weight: 1
 description: 覆盖核心特性介绍
 ---

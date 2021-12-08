@@ -1,6 +1,6 @@
 ---
 title: "核心概念"
-linkTitle: "Concepts"
+linkTitle: "核心概念"
 weight: 4
 description: The key concepts for HttpRunner.
 ---

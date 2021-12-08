@@ -1,6 +1,6 @@
 ---
-title: "Getting Started"
-linkTitle: "Getting Started"
+title: "快速上手"
+linkTitle: "快速上手"
 weight: 3
 description: >
   What does your user need to know to try your project?

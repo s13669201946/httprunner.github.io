@@ -1,6 +1,6 @@
 ---
-title: "Run load test"
-linkTitle: "Load Test"
+title: "压力测试"
+linkTitle: "压力测试"
 weight: 4
 description: How to run load test.
 ---

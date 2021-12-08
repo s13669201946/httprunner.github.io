@@ -1,6 +1,6 @@
 ---
-title: "Examples"
-linkTitle: "Examples"
+title: "示例展示"
+linkTitle: "示例展示"
 weight: 5
 description: >
   See your project in action!
