@@ -1,18 +1,71 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – 欢迎使用 HttpRunner+</title><link>https://httprunner.github.io/docs/</link><description>Recent content in 欢迎使用 HttpRunner+ on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.github.io/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 全球数字体验监测平台</title><link>https://httprunner.github.io/docs/services/dem/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/services/dem/</guid><description>
+&lt;h2 id="什么是数字体验监测dem">什么是数字体验监测（DEM）&lt;/h2>
+&lt;p>利⽤分布在全球各地的&lt;code>真实设备&lt;/code>和&lt;code>真实⽹络&lt;/code>，模拟⽤⼾的&lt;code>真实⾏为&lt;/code>，采集体验相关数据，提供&lt;code>体验问题发现&lt;/code>，&lt;code>智能归因&lt;/code>及&lt;code>报警&lt;/code>服务。&lt;/p>
+&lt;p>具体能⼒包括：&lt;/p>
+&lt;ul>
+&lt;li>接⼝拨测&lt;/li>
+&lt;li>流媒体拨测&lt;/li>
+&lt;li>⽹络拨测&lt;/li>
+&lt;li>H5 拨测&lt;/li>
+&lt;li>CDN 效果评测&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://httprunner.github.io/images/DEM.png" alt="">&lt;/p>
+&lt;blockquote>
+&lt;p>Gartner有关数字体验的预测：&lt;/p>
+&lt;p>“到 2023 年，60% 的数字业务创新需要通过基础设施和智能运维来报告⽤⼾的数字体验，⽽⽬前这种体验在基础设施和智能运维上的实现率还不到 15%。”&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="我们的优势">我们的优势&lt;/h2>
+&lt;h3 id="全球布局全球服务">全球布局、全球服务&lt;/h3>
+&lt;ul>
+&lt;li>全球基础设施：布局全球多个地理区域，服务覆盖亚太、⾮洲、拉美、中东等区域&lt;/li>
+&lt;li>服务50+ 个国家：服务全球 50 多个国家，150+ 地区&lt;/li>
+&lt;li>100+ 当地合作伙伴：多语⾔、当地认证实验室、当地资源&lt;/li>
+&lt;/ul>
+&lt;h3 id="全球监测节点部署">全球监测节点部署&lt;/h3>
+&lt;ul>
+&lt;li>全球设备机柜：3,000+&lt;/li>
+&lt;li>全球⽹络节点：2,000+&lt;/li>
+&lt;li>海外覆盖城市：110+&lt;/li>
+&lt;li>国内覆盖城市：40+&lt;/li>
+&lt;/ul>
 &lt;h2 id="核服务">核⼼服务&lt;/h2>
 &lt;ul>
-&lt;li>全球体验监测：全球真实设备真实⽹络、⾃动化模拟⽤⼾⾏为、采集体验相关的数据、发现体验问题、智能归因&lt;/li>
+&lt;li>全球体验监测：真实设备真实⽹络、⾃动模拟⽤⼾⾏为、采集体验数据、发现体验问题、智能归因分析&lt;/li>
 &lt;li>全球舆情监测：海量多语⾔数据挖掘、AI+地域化规则、舆情监测准确实时&lt;/li>
 &lt;li>全球真机租⽤：开放全球 100+ ⽹络节点、超过 500 台⼿机/PC/iPad、本地 WiFi/3G/4G/5G ⽹络、远程云端直接租⽤&lt;/li>
 &lt;li>安全合规监测：海量真实设备真实⽹络节点、丰富的地域化安全规则、GDPR 等安全合规保障&lt;/li>
 &lt;/ul>
-&lt;h2 id="全球监测节点部署">全球监测节点部署&lt;/h2>
+&lt;h2 id="解决方案">解决方案&lt;/h2>
+&lt;blockquote>
+&lt;p>关键词：非侵入式、自动化、深度学习&lt;/p>
+&lt;/blockquote>
 &lt;ul>
-&lt;li>全球设备机柜：1,000+&lt;/li>
-&lt;li>全球⽹络节点：300+&lt;/li>
-&lt;li>海外覆盖城市：110+&lt;/li>
-&lt;li>国内覆盖城市：40+&lt;/li>
+&lt;li>App：安装下载优化、安全合规准⼊、个⼈隐私保护&lt;/li>
+&lt;li>游戏：当地⽹速监测、当地⽀付习惯、舆情体验分析&lt;/li>
+&lt;li>网站：当地⽹络性能、⽹站本地体验、对标苹果⽹站&lt;/li>
+&lt;li>社交娱乐：⾳频质量评测、视频质量评测、舆情数据分析&lt;/li>
 &lt;/ul>
+&lt;h2 id="成功案例">成功案例&lt;/h2>
+&lt;h3 id="某头部大厂全球化短视频监测">某头部大厂：全球化短视频监测&lt;/h3>
+&lt;p>背景：某头部全球化短视频产品在某些地区进⾏激进的拉新和投放之后，核⼼指标趋于稳定，希望从客⼾端体验、播放体验、安全合规和⽹络性能等多个维度优化⽤⼾体验，从⽽进⼀步提升核⼼业务指标。&lt;/p>
+&lt;p>方案：&lt;/p>
+&lt;ul>
+&lt;li>通过在⽬标地区的设备（真实设备，真实地理位置，真实当地运营商）上发起探测任务，给出产品核⼼域名的访问情况和资源请求性能情况，并针对⽹络性能问题给出优化建议。&lt;/li>
+&lt;li>为产品提供特定地区的真实设备、真实⽹络环境，还原真实⽤⼾使⽤场景，使得客⼾更容易定位终端⽤⼾体验问题。&lt;/li>
+&lt;li>针对包⼤⼩和客⼾端性能等维度对客⼾端进⾏测试，发现安装包不合理资源、全局异常刷新、⻚⾯过度重绘等问题，提供优化建议，帮助产品性能⼤幅提升。&lt;/li>
+&lt;li>针对不同地区的安全合规规则，对产品进⾏动态、静态安全分析，定位了多个安全问题，保证产品在投放地区不存在安全合规⻛险。&lt;/li>
+&lt;/ul>
+&lt;p>价值收益：通过数字体验监测平台发现问题并智能归因，范围涉及⽹络、播放、客⼾端性能等多个⽅⾯，最终&lt;code>帮助客⼾留存类指标提升了 30%&lt;/code>。&lt;/p>
+&lt;h3 id="某头部大厂出海游戏体验测试">某头部大厂：出海游戏体验测试&lt;/h3>
+&lt;p>背景：某头部出海游戏在海外投放后，有几个国家的数据表现一直不理想，所以希望利用我们的出海能力，帮助他们发现数据不理想的原因，提升关键业务指标。&lt;/p>
+&lt;p>方案：&lt;/p>
+&lt;ul>
+&lt;li>通过在多个投放国家进⾏语⾔⽂化、设备⽹路、⽤⼾习惯的本地化评测，发现了产品存在的多个本地化问题（例如当地游戏⽹络延迟⾼、未翻译等），保证当地玩家的游戏体验。&lt;/li>
+&lt;li>针对游戏收⼊不符合预期的问题，利⽤当地主流⽹络环境及各主要⽅式在不同场景下的真实⽀付验证，发现了⽀付耗时⻓，失败率⾼等多个问题，增加了游戏收⼊。&lt;/li>
+&lt;li>针对海外活动效果差的情况，在活动上线前由本地测试专家提供体验评估测试，降低了时区、当地使⽤习惯、本地⼝⾳兼容等多个问题，提升了活动效果。&lt;/li>
+&lt;li>海外本⼟信息因为语⾔、⽂化等差异导致收集⼗分困难，通过海外专家语⾔及⽂化的本地优势来进⾏舆情信息收集，发现了多例海外⿊产及虚拟账号问题，保障了产品的安全，为业务决策提供了⽀持。&lt;/li>
+&lt;/ul>
+&lt;p>价值收益：通过数字体验监测平台进⾏本地化体验评测及落地优化建议，最终帮助客⼾在多个投放效果差的国家，&lt;code>平均提升了 40% 的⽇均流⽔&lt;/code>。&lt;/p>
 &lt;h2 id="联系方式">联系方式&lt;/h2>
 &lt;p>E-mail: &lt;a href="mailto:lilong.129@bytedance.com">lilong.129@bytedance.com&lt;/a>&lt;/p></description></item><item><title>Docs: 整体概览</title><link>https://httprunner.github.io/docs/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/overview/</guid><description>
 &lt;p>&lt;a href="https://pkg.go.dev/github.com/httprunner/hrp">&lt;img src="https://pkg.go.dev/badge/github.com/httprunner/hrp.svg" alt="Go Reference">&lt;/a>
@@ -205,7 +258,8 @@ Vary: Accept-Encoding
 &lt;span style="color:#000">t&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Fatalf&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;run testcase error: %v&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">err&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/details></description></item><item><title>Docs: 安装说明</title><link>https://httprunner.github.io/docs/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/installation/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/details></description></item><item><title>Docs: 全球数字体验咨询服务</title><link>https://httprunner.github.io/docs/services/consultation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/services/consultation/</guid><description>
+&lt;p>&lt;img src="https://httprunner.github.io/images/DEM_consultation.png" alt="">&lt;/p></description></item><item><title>Docs: 安装说明</title><link>https://httprunner.github.io/docs/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/installation/</guid><description>
 &lt;p>&lt;code>HttpRunner+&lt;/code> is developed with Golang, it supports Go &lt;code>1.13+&lt;/code> and most operating systems. Combination of Go &lt;code>1.13/1.14/1.15/1.16/1.17&lt;/code> and &lt;code>macOS/Linux/Windows&lt;/code> are tested continuously on &lt;a href="https://github.com/httprunner/hrp/actions">GitHub-Actions&lt;/a>.&lt;/p>
 &lt;h2 id="install-as-cli-tool">install as CLI tool&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp/hrp
