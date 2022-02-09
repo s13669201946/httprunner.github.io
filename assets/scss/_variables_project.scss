@@ -4,9 +4,24 @@ Add styles or override variables from the theme here.
 
 */
 
+// Configure Search
+// https://www.docsy.dev/docs/adding-content/navigation/
 // set the width of the local search results popover
 body {
     .popover.offline-search-result {
         max-width: 800px;
     }
 }
+
+
+// Configure Look and Feel
+// https://www.docsy.dev/docs/adding-content/lookandfeel/
+
+// set site colors, change the primary and secondary color
+// $primary: #390040;
+// $secondary: #A23B72;
+
+// toggle rounded corners and gradient backgrounds
+// $enable-gradients: true;
+// $enable-rounded: true;
+// $enable-shadows: true;
