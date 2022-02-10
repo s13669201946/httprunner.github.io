@@ -1,7 +1,6 @@
-
 ---
 title: "欢迎使用 HttpRunner+"
-linkTitle: "Docs"
+linkTitle: "文档"
 weight: 1
 menu:
   main:

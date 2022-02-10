@@ -1,0 +1,20 @@
+---
+title: "HttpRunner 核心用户招募中，你要加群么？"
+linkTitle: "HttpRunner 核心用户招募中，你要加群么？"
+slug: user-survey
+date: 2022-02-09
+description: 欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！
+---
+
+大家好！非常感谢大家一直以来对 HttpRunner 的关注和支持！
+
+在[我的 2021 年终总结][2021]中，我说过我今年将会重点投入到 HttpRunner 的开发迭代和用户社区运营，近期我也在梳理具体的工作计划，估计很快就会同步给大家。
+
+首先，我想先建立一个 HttpRunner 的核心用户交流群，这也是之前众多用户呼吁已久的想法。这个群谢绝吹水，仅限 HttpRunner 相关的技术交流，包括新版本发布同步、新特性规划设计、问题反馈、用法咨询、最佳实践分享等等。后续待我们基于 HttpRunner 研发的桌面客户端压测工具发布后，也会第一时间发布到该用户群供大家体验试用。
+
+那怎么提升交流群的质量呢？
+
+我想最好的方式还是设置一些门槛，虽然会麻烦些，但应该是值得的。如果你期望加群，请填写[用户调研问卷][survey]并留下你的微信号，作者会添加你的微信并拉你进群（填写不认真的将自动忽略哈）。
+
+[2021]: https://debugtalk.com/post/my-2021-summary/
+[survey]: https://wenjuan.feishu.cn/m/?t=sVRvigY12Szi-gbbo
