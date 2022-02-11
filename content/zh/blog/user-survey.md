@@ -17,4 +17,4 @@ description: 欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 
 我想最好的方式还是设置一些门槛，虽然会麻烦些，但应该是值得的。如果你期望加群，请填写[用户调研问卷][survey]并留下你的微信号，作者会添加你的微信并拉你进群（填写不认真的将自动忽略哈）。
 
 [2021]: https://debugtalk.com/post/my-2021-summary/
-[survey]: https://wenjuan.feishu.cn/m/?t=sVRvigY12Szi-gbbo
+[survey]: https://wj.qq.com/s2/9699514/0d19/
