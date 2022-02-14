@@ -75,7 +75,7 @@
 &lt;a href="https://app.fossa.com/reports/c2742455-c8ab-4b13-8fd7-4a35ba0b2840">&lt;img src="https://app.fossa.com/api/projects/custom%2B27856%2Fgithub.com%2Fhttprunner%2Fhrp.svg?type=shield" alt="FOSSA Status">&lt;/a>&lt;/p>
 &lt;p>&lt;code>hrp&lt;/code> is a golang implementation of &lt;a href="https://github.com/httprunner/httprunner">HttpRunner&lt;/a>. Ideally, hrp will be fully compatible with HttpRunner, including testcase format and usage. What&amp;rsquo;s more, hrp will integrate Boomer natively to be a better load generator for &lt;a href="https://github.com/locustio/locust">locust&lt;/a>.&lt;/p>
 &lt;h2 id="key-features">Key Features&lt;/h2>
-&lt;p>&lt;img src="https://httprunner.github.io/images/flow.jpg" alt="flow chart">&lt;/p>
+&lt;p>&lt;img src="https://httprunner.github.io/image/flow.jpg" alt="flow chart">&lt;/p>
 &lt;ul>
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> Full support for HTTP(S) requests, more protocols are also in the plan.&lt;/li>
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> Testcases can be described in multiple formats, &lt;code>YAML&lt;/code>/&lt;code>JSON&lt;/code>/&lt;code>Golang&lt;/code>, and they are interchangeable.&lt;/li>
@@ -259,7 +259,7 @@ Vary: Accept-Encoding
 &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/details></description></item><item><title>Docs: 全球数字体验咨询服务</title><link>https://httprunner.github.io/docs/services/consultation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/services/consultation/</guid><description>
-&lt;p>&lt;img src="https://httprunner.github.io/images/DEM_consultation.png" alt="">&lt;/p></description></item><item><title>Docs: 安装说明</title><link>https://httprunner.github.io/docs/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/installation/</guid><description>
+&lt;p>&lt;img src="https://httprunner.github.io/image/DEM_consultation.png" alt="">&lt;/p></description></item><item><title>Docs: 安装说明</title><link>https://httprunner.github.io/docs/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/installation/</guid><description>
 &lt;p>&lt;code>HttpRunner+&lt;/code> is developed with Golang, it supports Go &lt;code>1.13+&lt;/code> and most operating systems. Combination of Go &lt;code>1.13/1.14/1.15/1.16/1.17&lt;/code> and &lt;code>macOS/Linux/Windows&lt;/code> are tested continuously on &lt;a href="https://github.com/httprunner/hrp/actions">GitHub-Actions&lt;/a>.&lt;/p>
 &lt;h2 id="install-as-cli-tool">install as CLI tool&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">$ go get -u github.com/httprunner/hrp/hrp

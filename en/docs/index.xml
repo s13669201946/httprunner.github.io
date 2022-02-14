@@ -6,7 +6,7 @@
 &lt;a href="https://app.fossa.com/reports/c2742455-c8ab-4b13-8fd7-4a35ba0b2840">&lt;img src="https://app.fossa.com/api/projects/custom%2B27856%2Fgithub.com%2Fhttprunner%2Fhrp.svg?type=shield" alt="FOSSA Status">&lt;/a>&lt;/p>
 &lt;p>&lt;code>hrp&lt;/code> is a golang implementation of &lt;a href="https://github.com/httprunner/httprunner">HttpRunner&lt;/a>. Ideally, hrp will be fully compatible with HttpRunner, including testcase format and usage. What&amp;rsquo;s more, hrp will integrate Boomer natively to be a better load generator for &lt;a href="https://github.com/locustio/locust">locust&lt;/a>.&lt;/p>
 &lt;h2 id="key-features">Key Features&lt;/h2>
-&lt;p>&lt;img src="https://httprunner.github.io/images/flow.jpg" alt="flow chart">&lt;/p>
+&lt;p>&lt;img src="https://httprunner.github.io/image/flow.jpg" alt="flow chart">&lt;/p>
 &lt;ul>
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> Full support for HTTP(S) requests, more protocols are also in the plan.&lt;/li>
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> Testcases can be described in multiple formats, &lt;code>YAML&lt;/code>/&lt;code>JSON&lt;/code>/&lt;code>Golang&lt;/code>, and they are interchangeable.&lt;/li>
