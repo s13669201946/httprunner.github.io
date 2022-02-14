@@ -9,7 +9,7 @@
 &lt;li>H5 拨测&lt;/li>
 &lt;li>CDN 效果评测&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://httprunner.github.io/images/DEM.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://httprunner.github.io/image/DEM.png" alt="">&lt;/p>
 &lt;blockquote>
 &lt;p>Gartner有关数字体验的预测：&lt;/p>
 &lt;p>“到 2023 年，60% 的数字业务创新需要通过基础设施和智能运维来报告⽤⼾的数字体验，⽽⽬前这种体验在基础设施和智能运维上的实现率还不到 15%。”&lt;/p>
@@ -409,7 +409,7 @@ $ docker run -d -p 9091:9091 prom/pushgateway
 &lt;h2 id="extract">extract&lt;/h2>
 &lt;h2 id="validate">validate&lt;/h2></description></item><item><title>Docs: 赞助商</title><link>https://httprunner.github.io/docs/sponsors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://httprunner.github.io/docs/sponsors/</guid><description>
 &lt;h3 id="金牌赞助商">金牌赞助商&lt;/h3>
-&lt;p>&lt;a href="https://ceshiren.com/">&lt;img src="https://httprunner.github.io/images/hogwarts.jpeg" alt="霍格沃兹测试开发学社" width="400">&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://ceshiren.com/">&lt;img src="https://httprunner.github.io/image/hogwarts.jpeg" alt="霍格沃兹测试开发学社" width="400">&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://ceshiren.com">霍格沃兹测试开发学社&lt;/a>是业界领先的测试开发技术高端教育品牌，隶属于&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://www.testing-studio.com">测吧（北京）科技有限公司&lt;/a> 。学院课程由一线大厂测试经理与资深测试开发专家参与研发，实战驱动。课程涵盖 web/app 自动化测试、接口测试、性能测试、安全测试、持续集成/持续交付/DevOps，测试左移&amp;amp;右移、精准测试、测试平台开发、测试管理等内容，帮助测试工程师实现测试开发技术转型。通过优秀的学社制度（奖学金、内推返学费、行业竞赛等多种方式）来实现学员、学社及用人企业的三方共赢。&lt;/p>
 &lt;/blockquote>
@@ -417,7 +417,7 @@ $ docker run -d -p 9091:9091 prom/pushgateway
 &lt;p>&lt;a href="http://qrcode.testing-studio.com/f?from=httprunner&amp;amp;url=https://ceshiren.com/t/topic/14940">进入测试开发技术能力测评!&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="开源赞助商">开源赞助商&lt;/h3>
-&lt;p>&lt;a href="https://sentry.io/_/open-source/">&lt;img src="https://httprunner.github.io/images/sentry-logo-black.svg" alt="Sentry" width="150">&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://sentry.io/_/open-source/">&lt;img src="https://httprunner.github.io/image/sentry-logo-black.svg" alt="Sentry" width="150">&lt;/a>&lt;/p>
 &lt;p>HttpRunner is in Sentry Sponsored plan.&lt;/p>
 &lt;h2 id="成为赞助商">成为赞助商&lt;/h2>
 &lt;p>如果你所在的公司或个人也想对 HttpRunner 进行赞助，可参考如下方案，具体可联系&lt;a href="mailto:debugtalk@gmail.com">项目作者&lt;/a>。&lt;/p>
