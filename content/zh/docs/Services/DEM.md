@@ -18,7 +18,7 @@ hide_feedback: true
 - H5 拨测
 - CDN 效果评测
 
-![](/images/DEM.png)
+![](/image/DEM.png)
 
 > Gartner有关数字体验的预测：
 >

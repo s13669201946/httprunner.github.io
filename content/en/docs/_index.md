@@ -14,7 +14,7 @@ Welcome to the HttpRunner documentation! This guide helps you to understand the 
 
 关注 HttpRunner 的微信公众号，第一时间获得最新资讯。
 
-<img src="/images/qrcode.jpg" alt="HttpRunner" width="200">
+<img src="/image/qrcode.jpg" alt="HttpRunner" width="200">
 
 [HttpRunner]: https://github.com/httprunner/httprunner
 [Boomer]: https://github.com/myzhan/boomer
