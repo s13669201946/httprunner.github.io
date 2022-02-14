@@ -6,4 +6,4 @@ description: 依托于字节系产品的出海经验，助力您的出海产品�
 hide_feedback: true
 ---
 
-![](/images/DEM_consultation.png)
+![](/image/DEM_consultation.png)

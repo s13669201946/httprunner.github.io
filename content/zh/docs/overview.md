@@ -15,7 +15,7 @@ description: 覆盖核心特性介绍
 
 ## Key Features
 
-![flow chart](/images/flow.jpg)
+![flow chart](/image/flow.jpg)
 
 - [x] Full support for HTTP(S) requests, more protocols are also in the plan.
 - [x] Testcases can be described in multiple formats, `YAML`/`JSON`/`Golang`, and they are interchangeable.
