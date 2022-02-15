@@ -1,4 +1,4 @@
-baseURL = "https://httprunner.github.io"
+baseURL = "https://httprunner.com/"
 title = "HttpRunner"
 
 enableRobotsTXT = true
@@ -10,7 +10,7 @@ theme = ["docsy"]
 enableGitInfo = true
 
 # Language settings
-defaultContentLanguage = "zh"
+defaultContentLanguage = "zh-cn"
 defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
@@ -84,11 +84,11 @@ contentDir = "content/en"
 # Weight used for sorting.
 weight = 1
 
-[languages.zh]
+[languages.zh-cn]
 title = "HttpRunner"
 description = "一站式 HTTP(S) 测试解决方案"
 languageName = "中文"
-contentDir = "content/zh"
+contentDir = "content/zh-cn"
 
 [markup]
   [markup.goldmark]
@@ -104,7 +104,7 @@ contentDir = "content/zh"
 
 # Comment out if you don't want the "print entire section" link enabled.
 [outputs]
-section = ["HTML", "RSS"]
+section = ["HTML"]
 
 [params]
 copyright = "debugtalk"

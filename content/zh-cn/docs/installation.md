@@ -5,7 +5,7 @@ weight: 2
 description: How to install HttpRunner.
 ---
 
-`HttpRunner+` is developed with Golang, it supports Go `1.13+` and most operating systems. Combination of Go `1.13/1.14/1.15/1.16/1.17` and `macOS/Linux/Windows` are tested continuously on [GitHub-Actions][github-actions].
+`HttpRunner+` is developed with Golang, it supports Go `1.16+` and most operating systems. Combination of Go `1.13/1.14/1.15/1.16/1.17` and `macOS/Linux/Windows` are tested continuously on [GitHub-Actions][github-actions].
 
 ## install as CLI tool
 
