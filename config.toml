@@ -201,41 +201,36 @@ no = 'Sorry to hear that. Please <a href="https://github.com/httprunner/httprunn
 enable = false
 
 [params.links]
+# icon source: https://fontawesome.com/v5/search?m=free
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
-# [[params.links.user]]
-# 	name = "User mailing list"
-# 	url = "https://example.org/mail"
-# 	icon = "fa fa-envelope"
-#         desc = "Discussion and help from your fellow users"
-# [[params.links.user]]
-# 	name ="Twitter"
-# 	url = "https://example.org/twitter"
-# 	icon = "fab fa-twitter"
-#         desc = "Follow us on Twitter to get the latest news!"
-# Developer relevant links. These will show up on right side of footer and in the community page if you have one.
-[[params.links.developer]]
-	name = "DebugTalk"
+[[params.links.user]]
+	name = "微信公众号"
+	url = "https://httprunner.com/image/qrcode.jpg"
+	icon = "fab fa-weixin"
+        desc = "订阅 HttpRunner 的微信公众号，第一时间获取相关信息推送"
+[[params.links.user]]
+	name = "用户社区"
+	url = "https://github.com/httprunner/hrp/discussions"
+	icon = "fas fa-comments"
+        desc = "加入 HttpRunner 用户社区，交流使用经验，分享心得和想法"
+[[params.links.user]]
+	name = "作者个人博客"
 	url = "https://debugtalk.com"
 	icon = "fas fa-blog"
-        desc = "debugtalk's blog website"
-[[params.links.developer]]
-	name = "GitHub"
-	url = "https://github.com/httprunner"
-	icon = "fab fa-github"
-        desc = "Development takes place here!"
-[[params.links.developer]]
+        desc = "HttpRunner 项目作者 debugtalk 的个人博客"
+[[params.links.user]]
 	name = "TesterHome"
 	url = "https://testerhome.com/topics/node138"
 	icon = "fas fa-bug"
-        desc = "TesterHome 社区上有较多话题讨论"
-# [[params.links.developer]]
-# 	name = "Slack"
-# 	url = "https://example.org/slack"
-# 	icon = "fab fa-slack"
-#         desc = "Chat with other project developers"
-# [[params.links.developer]]
-# 	name = "Developer mailing list"
-# 	url = "https://example.org/mail"
-# 	icon = "fa fa-envelope"
-#         desc = "Discuss development issues around the project"
-
+        desc = "TesterHome 社区上开设的 HttpRunner 主题板块"
+# Developer relevant links. These will show up on right side of footer and in the community page if you have one.
+[[params.links.developer]]
+	name = "项目仓库"
+	url = "https://github.com/httprunner/hrp"
+	icon = "fab fa-github"
+        desc = "欢迎提交 PR，一起帮助 HttpRunner 变得更好！"
+[[params.links.developer]]
+	name = "用户社区"
+	url = "https://github.com/httprunner/hrp/discussions"
+	icon = "fas fa-comments"
+        desc = "加入 HttpRunner 用户社区，分享成功案例，讨论技术实现"
