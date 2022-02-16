@@ -1,6 +1,5 @@
 ---
 title: "安装说明"
-linkTitle: "安装说明"
 weight: 2
 description: How to install HttpRunner.
 ---

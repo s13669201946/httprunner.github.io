@@ -1,6 +1,5 @@
 ---
 title: "赞助商"
-linkTitle: "赞助商"
 weight: 20
 hide_feedback: true
 description: Thank you to all our sponsors! ✨🍰✨
