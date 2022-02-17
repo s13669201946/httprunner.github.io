@@ -1,6 +1,6 @@
 ---
 title: "安装说明"
-weight: 2
+weight: 3
 description: 本文介绍了 HttpRunner 的几种安装方式。
 ---
 

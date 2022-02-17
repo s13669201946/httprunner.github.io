@@ -1,6 +1,6 @@
 ---
 title: "快速上手"
-weight: 3
+weight: 2
 description: >
   What does your user need to know to try your project?
 ---
