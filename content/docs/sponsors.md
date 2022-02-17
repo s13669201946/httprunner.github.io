@@ -13,12 +13,6 @@ description: Thank you to all our sponsors! ✨🍰✨
 
 > [进入测试开发技术能力测评!](http://qrcode.testing-studio.com/f?from=httprunner&url=https://ceshiren.com/t/topic/14940)
 
-### 开源赞助商
-
-[<img src="/image/sentry-logo-black.svg" alt="Sentry" width="150">](https://sentry.io/_/open-source/)
-
-HttpRunner is in Sentry Sponsored plan.
-
 ## 成为赞助商
 
 如果你所在的公司或个人也想对 HttpRunner 进行赞助，可参考如下方案，具体可联系[项目作者](mailto:debugtalk@gmail.com)。
