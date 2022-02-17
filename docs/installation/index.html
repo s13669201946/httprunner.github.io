@@ -15,19 +15,19 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>安装说明 | HttpRunner</title>
-<meta name=description content="How to install HttpRunner.">
+<meta name=description content="本文介绍了 HttpRunner 的几种安装方式。">
 <meta property="og:title" content="安装说明">
-<meta property="og:description" content="How to install HttpRunner.">
+<meta property="og:description" content="本文介绍了 HttpRunner 的几种安装方式。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/installation/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-02-16T17:12:28+08:00">
+<meta property="article:modified_time" content="2022-02-17T12:00:10+08:00">
 <meta itemprop=name content="安装说明">
-<meta itemprop=description content="How to install HttpRunner.">
-<meta itemprop=dateModified content="2022-02-16T17:12:28+08:00">
-<meta itemprop=wordCount content="170">
+<meta itemprop=description content="本文介绍了 HttpRunner 的几种安装方式。">
+<meta itemprop=dateModified content="2022-02-17T12:00:10+08:00">
+<meta itemprop=wordCount content="275">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="安装说明">
-<meta name=twitter:description content="How to install HttpRunner.">
+<meta name=twitter:description content="本文介绍了 HttpRunner 的几种安装方式。">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -63,7 +63,7 @@
 </li>
 </ul>
 </div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.f600d9755d630982ba4e30f9868a8a19.json data-offline-search-base-href=/ data-offline-search-max-results=25>
+<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.45afa77689e35792166076ba7e9b1b92.json data-offline-search-base-href=/ data-offline-search-max-results=25>
 </div>
 </nav>
 </header>
@@ -73,7 +73,7 @@
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
 <div id=td-sidebar-menu class=td-sidebar__inner>
 <form class="td-sidebar__search d-flex align-items-center">
-<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.f600d9755d630982ba4e30f9868a8a19.json data-offline-search-base-href=/ data-offline-search-max-results=25>
+<input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.45afa77689e35792166076ba7e9b1b92.json data-offline-search-base-href=/ data-offline-search-max-results=25>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
 </form>
@@ -130,6 +130,18 @@
 <a href="https://github.com/httprunner/httprunner.github.io/issues/new?title=%e5%ae%89%e8%a3%85%e8%af%b4%e6%98%8e" class=td-page-meta--issue target=_blank rel=noopener><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
 <a href=https://github.com/httprunner/hrp/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a>
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#安装命令行工具>安装命令行工具</a>
+<ul>
+<li><a href=#一键部署推荐>一键部署（推荐）</a></li>
+<li><a href=#自行下载安装>自行下载安装</a></li>
+<li><a href=#检查安装结果>检查安装结果</a></li>
+</ul>
+</li>
+<li><a href=#安装依赖包开发者模式>安装依赖包（开发者模式）</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -144,13 +156,51 @@
 </nav>
 <div class=td-content>
 <h1>安装说明</h1>
-<div class=lead>How to install HttpRunner.</div>
+<div class=lead>本文介绍了 HttpRunner 的几种安装方式。</div>
 <header class=article-meta>
 </header>
-<p><code>HttpRunner+</code> is developed with Golang, it supports Go <code>1.16+</code> and most operating systems. Combination of Go <code>1.13/1.14/1.15/1.16/1.17</code> and <code>macOS/Linux/Windows</code> are tested continuously on <a href=https://github.com/httprunner/hrp/actions>GitHub-Actions</a>.</p>
-<h2 id=install-as-cli-tool>install as CLI tool</h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ go get -u github.com/httprunner/hrp/hrp
-</code></pre></div><p>Since installed, you will get a <code>hrp</code> command with multiple sub-commands.</p>
+<h2 id=安装命令行工具>安装命令行工具</h2>
+<p><code>HttpRunner+</code> 采用 Golang 开发，相比于之前的 Python 版本，最大的一个优势是可以编译生成二进制文件。在目标系统只需要下载到对应系统环境的二进制文件即可运行，无需安装任何运行时环境依赖（例如 Python、Java JDK、NodeJS 等）。</p>
+<h3 id=一键部署推荐>一键部署（推荐）</h3>
+<p>为了加速二进制包的下载速度，我们已经将编译产物上传到了阿里云 OSS，并且提供了一键安装部署的脚本。只需执行一条 shell 命令，即可完成 hrp 的下载和安装操作。</p>
+<blockquote>
+<p>注：大多数 Linux/macOS 系统中都会预置 curl/wget 命令行工具，如果你的系统中未安装，需自行解决。</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># install via curl</span>
+$ bash -c <span style=color:#4e9a06>&#34;</span><span style=color:#204a87;font-weight:700>$(</span>curl -ksSL https://httprunner.oss-cn-beijing.aliyuncs.com/install.sh<span style=color:#204a87;font-weight:700>)</span><span style=color:#4e9a06>&#34;</span>
+<span style=color:#8f5902;font-style:italic># install via wget</span>
+$ bash -c <span style=color:#4e9a06>&#34;</span><span style=color:#204a87;font-weight:700>$(</span>wget https://httprunner.oss-cn-beijing.aliyuncs.com/install.sh -O -<span style=color:#204a87;font-weight:700>)</span><span style=color:#4e9a06>&#34;</span>
+</code></pre></div><h3 id=自行下载安装>自行下载安装</h3>
+<p>同时，你也可以在 <a href=https://github.com/httprunner/hrp/releases>GitHub Releases</a> 页面中，自行选择版本进行下载。</p>
+<p>当前 HttpRunner+ 在每次发布版本时，会自动编译生成 5 个版本，覆盖的环境包括：</p>
+<ul>
+<li>macOS(darwin) + amd64(x86)</li>
+<li>macOS(darwin) + arm64(M1)</li>
+<li>linux + amd64(x86)</li>
+<li>linux + arm64</li>
+<li>windows + amd64(x86)</li>
+</ul>
+<p>如果你的系统环境不在这个范围内，那么你只能自行拉取源码进行编译了。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#8f5902;font-style:italic># 拉取 hrp 源码</span>
+$ git clone https://github.com/httprunner/hrp.git
+$ <span style=color:#204a87>cd</span> hrp
+<span style=color:#8f5902;font-style:italic># 通过 make 进行一键编译，生成的产物在 output 文件夹中</span>
+$ make build
+<span style=color:#ce5c00;font-weight:700>[</span>info<span style=color:#ce5c00;font-weight:700>]</span> build hrp cli tool
+++ mkdir -p output
+++ <span style=color:#000>bin_path</span><span style=color:#ce5c00;font-weight:700>=</span>output/hrp
+++ go build -ldflags <span style=color:#4e9a06>&#39;-s -w&#39;</span> -o output/hrp cli/hrp/main.go
+++ ls -lh output/hrp
+-rwxr-xr-x  <span style=color:#0000cf;font-weight:700>1</span> debugtalk  staff    16M Feb <span style=color:#0000cf;font-weight:700>17</span> 11:52 output/hrp
+++ chmod +x output/hrp
+++ ./output/hrp -v
+hrp version v0.6.0
+</code></pre></div><p>获取到编译产物后，你只需给 <code>hrp</code> 添加可运行权限即可。同时推荐将 <code>hrp</code> 移动到系统 bin 目录，方便全局调用。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ chmod +x hrp
+$ mv hrp /user/local/bin
+</code></pre></div><h3 id=检查安装结果>检查安装结果</h3>
+<p>完成安装操作后，你将获得一个 <code>hrp</code> 命令行工具。<code>hrp</code> 包含多个子命令，具体的使用方式可查看命令行帮助。</p>
+<p>在你的命令行终端中执行 <code>hrp -h</code> 命令，如果能正常打印帮助信息，则说明 <code>hrp</code> 已安装成功。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp -h
 hrp (HttpRunner+) is the next generation for HttpRunner. Enjoy! ✨ 🚀 ✨
 
@@ -175,10 +225,12 @@ Flags:
   -v, --version            version for hrp
 
 Use &#34;hrp [command] --help&#34; for more information about a command.
-</code></pre></div><h2 id=install-as-library>install as library</h2>
-<p>Beside using <code>hrp</code> as a CLI tool, you can also use it as golang library.</p>
+</code></pre></div><h2 id=安装依赖包开发者模式>安装依赖包（开发者模式）</h2>
+<p><code>HttpRunner+</code> 除了可以作为命令行工具提供给用户进行使用，还可以作为库函数，供开发者调用进行二次开发。</p>
+<p>当前 <code>HttpRunner+</code> 支持 Golang <code>1.16+</code> 和主流操作系统（Linux/macOS/Windows），我们通过在 <a href=https://github.com/httprunner/hrp/actions>GitHub-Actions</a> 配置 CI 进行了兼容性测试保障。</p>
+<p>通过如下命令可安装依赖包：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ go get -u github.com/httprunner/hrp
-</code></pre></div><p>Then you can import <code>github.com/httprunner/hrp</code> and write testcases in Golang.</p>
+</code></pre></div><p>然后你就可以在你的工程中导入 <code>github.com/httprunner/hrp</code> 进行 Golang 用例编写或者二次开发了。</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
@@ -195,7 +247,7 @@ Sorry to hear that. Please <a href=https://github.com/httprunner/httprunner.gith
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
 <div class="text-muted mt-5 pt-3 border-top">
-最后修改 February 16, 2022: <a href=https://github.com/httprunner/httprunner.github.io/commit/770806b25b7937c702177cfce25e62e0a08029d6>refactor structure (770806b)</a>
+最后修改 February 17, 2022: <a href=https://github.com/httprunner/httprunner.github.io/commit/5a3cc1d25ebe55a52c0124806221b3ba763dd999>add doc: installation (5a3cc1d)</a>
 </div>
 </div>
 </main>
