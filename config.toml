@@ -120,23 +120,19 @@ archived_version = false
 # The version number for the version of the docs represented in this doc set.
 # Used in the "version-banner" partial to display a version number for the
 # current doc set.
-version = "0.x"
+version = "hrp 0.x"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
 url_latest_version = "https://httprunner.com"
 
-# [[params.versions]]
-#   version = "latest"
-#   url = "/"
+[[params.versions]]
+  version = "hrp v0.x"
+  url = "/docs/"
 
-# [[params.versions]]
-#   version = "py-v1.x"
-#   url = "https://v1.httprunner.org"
-
-# [[params.versions]]
-#   version = "py-v2.x"
-#   url = "https://v2.httprunner.org"
+[[params.versions]]
+  version = "py-v3.x"
+  url = "https://httprunner.com/httprunner/"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
 github_repo = "https://github.com/httprunner/httprunner.github.io"
