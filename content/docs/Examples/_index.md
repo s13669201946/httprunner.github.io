@@ -1,7 +1,7 @@
 ---
 title: "示例展示"
 linkTitle: "示例展示"
-weight: 5
+weight: 50
 description: >
   See your project in action!
 ---

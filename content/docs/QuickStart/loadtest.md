@@ -1,6 +1,6 @@
 ---
 title: "压力测试"
-weight: 5
+weight: 25
 description: How to run load test.
 ---
 

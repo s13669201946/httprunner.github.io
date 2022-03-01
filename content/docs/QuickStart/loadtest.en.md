@@ -1,7 +1,7 @@
 ---
 title: "Run load test"
 linkTitle: "Load Test"
-weight: 5
+weight: 25
 description: How to run load test.
 ---
 

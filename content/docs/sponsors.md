@@ -1,6 +1,6 @@
 ---
 title: "赞助商"
-weight: 20
+weight: 80
 hide_feedback: true
 description: Thank you to all our sponsors! ✨🍰✨
 ---

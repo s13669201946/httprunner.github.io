@@ -1,7 +1,6 @@
 ---
 title: "Overview"
-linkTitle: "Overview"
-weight: 1
+weight: 11
 description: Including key features,
 ---
 
