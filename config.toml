@@ -120,14 +120,14 @@ archived_version = false
 # The version number for the version of the docs represented in this doc set.
 # Used in the "version-banner" partial to display a version number for the
 # current doc set.
-version = "hrp 0.x"
+version = "HttpRunner v4.x"
 
 # A link to latest version of the docs. Used in the "version-banner" partial to
 # point people to the main doc site.
 url_latest_version = "https://httprunner.com"
 
 [[params.versions]]
-  version = "hrp v0.x"
+  version = "HttpRunner v4.x"
   url = "/docs/"
 
 [[params.versions]]
@@ -137,7 +137,7 @@ url_latest_version = "https://httprunner.com"
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
 github_repo = "https://github.com/httprunner/httprunner.github.io"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-github_project_repo = "https://github.com/httprunner/hrp"
+github_project_repo = "https://github.com/httprunner/httprunner"
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
@@ -201,7 +201,7 @@ enable = false
         desc = "订阅 HttpRunner 的微信公众号，第一时间获取相关信息推送"
 [[params.links.user]]
 	name = "用户社区"
-	url = "https://github.com/httprunner/hrp/discussions"
+	url = "https://github.com/httprunner/httprunner/discussions"
 	icon = "fas fa-comments"
         desc = "加入 HttpRunner 用户社区，交流使用经验，分享心得和想法"
 [[params.links.user]]
@@ -217,11 +217,11 @@ enable = false
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "项目仓库"
-	url = "https://github.com/httprunner/hrp"
+	url = "https://github.com/httprunner/httprunner"
 	icon = "fab fa-github"
         desc = "欢迎提交 PR，包括但不限于开发新功能、bugfix、编写使用文档"
 [[params.links.developer]]
 	name = "用户社区"
-	url = "https://github.com/httprunner/hrp/discussions"
+	url = "https://github.com/httprunner/httprunner/discussions"
 	icon = "fas fa-comments"
         desc = "加入 HttpRunner 用户社区，分享成功案例，讨论技术实现"

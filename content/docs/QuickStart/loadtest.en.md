@@ -7,7 +7,7 @@ description: How to run load test.
 
 ## Start with CLI
 
-`HttpRunner+` supports running load test without extra work. You can use `hrp boom` command to run YAML/JSON testcases in load testing mode.
+`HttpRunner` supports running load test without extra work. You can use `hrp boom` command to run YAML/JSON testcases in load testing mode.
 
 By default, hrp will print load testing results in console output, refreshed every 3 seconds.
 

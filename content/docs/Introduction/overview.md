@@ -1,16 +1,16 @@
 ---
 title: "整体概览"
 weight: 11
-description: HttpRunner+ 是什么？
+description: HttpRunner 是什么？
 ---
 
-`HttpRunner+`（简称 `hrp`）是一个开源的网络协议测试工具，基于录制生成的一套脚本，可同时满足接口自动化测试、性能测试、数字体验监测、测试数据生成等多维度需求。简单易用、功能强大、数据精准永远是 `hrp` 最核心的目标。
+`HttpRunner` 是一个开源的网络协议测试工具，基于录制生成的一套脚本，可同时满足接口自动化测试、性能测试、数字体验监测、测试数据生成等多维度需求。简单易用、功能强大、数据精准永远是 `HttpRunner` 最核心的目标。
 
-当前 `hrp` 完整支持 HTTP/1.1，后续将逐步扩展支持更多网络协议。
+当前 `HttpRunner` 完整支持 HTTP/1.1，后续将逐步扩展支持更多网络协议。
 
 ## 设计理念
 
-相比于 JMeter 等其它测试工具，hrp 最大的不同在于设计理念。
+相比于 JMeter 等其它测试工具，HttpRunner 最大的不同在于设计理念。
 
 - 约定大于配置：测试用例是标准结构化的，格式统一，方便协作和维护；同时可与海量工具对接，易于实现用例生成和转换
 - 一次投入多处复用：回归协议测试的本质，一套脚本同时实现接口自动化、性能测试、数字体验监测、测试数据生成等多种需求
@@ -42,14 +42,3 @@ description: HttpRunner+ 是什么？
 - 设计理念：测试用例组织支持分层设计，格式统一，易于实现测试用例的维护和复用
 
 更多内容详见 [HttpRunner 首轮用户调研报告（2022.02）](/blog/user-survey-report)
-
-
-[HttpRunner]: https://github.com/httprunner/httprunner
-[Boomer]: https://github.com/myzhan/boomer
-[locust]: https://github.com/locustio/locust
-[jmespath]: https://jmespath.org/
-[allure]: https://docs.qameta.io/allure/
-[HAR]: http://httparchive.org/
-[plugin]: https://pkg.go.dev/plugin
-[demo.json]: https://github.com/httprunner/hrp/blob/main/examples/demo.json
-[examples]: https://github.com/httprunner/hrp/blob/main/examples/

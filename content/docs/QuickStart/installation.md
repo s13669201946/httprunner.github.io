@@ -6,7 +6,7 @@ description: 本文介绍了 HttpRunner 的几种安装方式。
 
 ## 安装命令行工具
 
-`HttpRunner+` 采用 Golang 开发，相比于之前的 Python 版本，最大的一个优势是可以编译生成二进制文件。在目标系统只需要下载到对应系统环境的二进制文件即可运行，无需安装任何运行时环境依赖（例如 Python、Java JDK、NodeJS 等）。
+`HttpRunner v4` 采用 Golang 开发，相比于之前的 Python 版本，最大的一个优势是可以编译生成二进制文件。在目标系统只需要下载到对应系统环境的二进制文件即可运行，无需安装任何运行时环境依赖（例如 Python、Java JDK、NodeJS 等）。
 
 ### 一键部署（推荐）
 
@@ -25,7 +25,7 @@ $ bash -c "$(wget https://httprunner.oss-cn-beijing.aliyuncs.com/install.sh -O -
 
 同时，你也可以在 [GitHub Releases][releases] 页面中，自行选择版本进行下载。
 
-当前 HttpRunner+ 在每次发布版本时，会自动编译生成 5 个版本，覆盖的环境包括：
+当前 HttpRunner v4 在每次发布版本时，会自动编译生成 5 个版本，覆盖的环境包括：
 
 - macOS(darwin) + amd64(x86)
 - macOS(darwin) + arm64(M1)
@@ -94,9 +94,9 @@ Use "hrp [command] --help" for more information about a command.
 
 ## 安装依赖包（开发者模式）
 
-`HttpRunner+` 除了可以作为命令行工具提供给用户进行使用，还可以作为库函数，供开发者调用进行二次开发。
+`HttpRunner` 除了可以作为命令行工具提供给用户进行使用，还可以作为库函数，供开发者调用进行二次开发。
 
-当前 `HttpRunner+` 支持 Golang `1.16+` 和主流操作系统（Linux/macOS/Windows），我们通过在 [GitHub-Actions][github-actions] 配置 CI 进行了兼容性测试保障。
+当前 `HttpRunner` 支持 Golang `1.16+` 和主流操作系统（Linux/macOS/Windows），我们通过在 [GitHub-Actions][github-actions] 配置 CI 进行了兼容性测试保障。
 
 通过如下命令可安装依赖包：
 
