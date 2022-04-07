@@ -190,7 +190,7 @@ Beside using `hrp` as a CLI tool, you can also use it as golang library.
 $ go get -u github.com/httprunner/hrp
 ```
 
-This is an example of `HttpRunner+` testcase. You can find more in the [`examples`][examples] directory.
+This is an example of `HttpRunner` testcase. You can find more in the [`examples`][examples] directory.
 
 
 <details>

@@ -1,6 +1,6 @@
 ---
-title: "What is HttpRunner+ ?"
+title: "What is HttpRunner ?"
 weight: 10
 hide_feedback: true
-description: An introduction to HttpRunner+
+description: An introduction to HttpRunner
 ---
