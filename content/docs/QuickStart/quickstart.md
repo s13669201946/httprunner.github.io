@@ -1,10 +1,10 @@
 ---
 title: "快速上手"
 weight: 22
-description: 一个实例带你快速上手 HttpRunner+
+description: 一个实例带你快速上手 HttpRunner
 ---
 
-本文将通过一个简单的示例来展示 HttpRunner+ 的核心功能使用方法。
+本文将通过一个简单的示例来展示 HttpRunner 的核心功能使用方法。
 
 ## 案例介绍
 
