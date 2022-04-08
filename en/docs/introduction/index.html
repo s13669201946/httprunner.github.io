@@ -14,27 +14,23 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>Concepts | HttpRunner</title>
-<meta name=description content="The key concepts for HttpRunner.">
-<meta property="og:title" content="Concepts">
-<meta property="og:description" content="The key concepts for HttpRunner.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://httprunner.com/en/docs/concepts/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-02-16T22:55:15+08:00">
-<meta itemprop=name content="Concepts">
-<meta itemprop=description content="The key concepts for HttpRunner.">
-<meta itemprop=dateModified content="2022-02-16T22:55:15+08:00">
-<meta itemprop=wordCount content="12">
-<meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Concepts">
-<meta name=twitter:description content="The key concepts for HttpRunner.">
+<title>What is HttpRunner ? | HttpRunner</title>
+<meta name=description content="An introduction to HttpRunner">
+<meta property="og:title" content="What is HttpRunner ?">
+<meta property="og:description" content="An introduction to HttpRunner">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://httprunner.com/en/docs/introduction/">
+<meta itemprop=name content="What is HttpRunner ?">
+<meta itemprop=description content="An introduction to HttpRunner"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="What is HttpRunner ?">
+<meta name=twitter:description content="An introduction to HttpRunner">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNRMVFG5LL"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-LNRMVFG5LL',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-page>
+<body class=td-section>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/en/>
@@ -50,7 +46,7 @@
 Versions
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/>hrp v0.x</a>
+<a class=dropdown-item href=/docs/>HttpRunner v4.x</a>
 <a class=dropdown-item href=https://httprunner.com/httprunner/>py-v3.x</a>
 </div>
 </li>
@@ -59,7 +55,7 @@ Versions
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/concepts/>中文</a>
+<a class=dropdown-item href=/docs/introduction/>中文</a>
 </div>
 </li>
 </ul>
@@ -82,25 +78,37 @@ English
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/concepts/>中文</a>
+<a class=dropdown-item href=/docs/introduction/>中文</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-endocs-li>
-<a href=/en/docs/ title="Welcome to HttpRunner+" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-endocs><span>Docs</span></a>
+<a href=/en/docs/ title="Welcome to HttpRunner" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-endocs><span>Docs</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsoverview-li>
-<a href=/en/docs/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsoverview><span>Overview</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsquickstart-li>
-<a href=/en/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsquickstart><span>Getting Started</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsinstallation-li>
-<a href=/en/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsinstallation><span>Installation</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-endocsconcepts-li>
-<a href=/en/docs/concepts/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-endocsconcepts><span class=td-sidebar-nav-active-item>Concepts</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-endocsintroduction-li>
+<a href=/en/docs/introduction/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-endocsintroduction><span class=td-sidebar-nav-active-item>What is HttpRunner ?</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsintroductionoverview-li>
+<a href=/en/docs/introduction/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsintroductionoverview><span>Overview</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsintroductionconcepts-li>
+<a href=/en/docs/introduction/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsintroductionconcepts><span>Concepts</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsintroductionfaq-li>
+<a href=/en/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsintroductionfaq><span>FAQ</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-endocsquickstart-li>
+<a href=/en/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsquickstart><span>QuickStart</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsquickstartinstallation-li>
+<a href=/en/docs/quickstart/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsquickstartinstallation><span>Installation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsquickstartquickstart-li>
+<a href=/en/docs/quickstart/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsquickstartquickstart><span>Getting Started</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsquickstartloadtest-li>
+<a href=/en/docs/quickstart/loadtest/ title="Run load test" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsquickstartloadtest><span>Load Test</span></a>
+</li>
+</ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsexamples-li>
 <a href=/en/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsexamples><span>Examples</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsloadtest-li>
-<a href=/en/docs/loadtest/ title="Run load test" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsloadtest><span>Load Test</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocscontribution-li>
 <a href=/en/docs/contribution/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocscontribution><span>Contribution Guidelines</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocssponsors-li>
@@ -115,17 +123,6 @@ English
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
-<div class=td-toc><nav id=TableOfContents>
-<ul>
-<li><a href=#testcase>TestCase</a></li>
-<li><a href=#teststep>TestStep</a></li>
-<li><a href=#testsuite>TestSuite</a></li>
-<li><a href=#functions>functions</a></li>
-<li><a href=#variables>variables</a></li>
-<li><a href=#extract>extract</a></li>
-<li><a href=#validate>validate</a></li>
-</ul>
-</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -134,39 +131,36 @@ English
 <a href=https://httprunner.com/en/docs/>Docs</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://httprunner.com/en/docs/concepts/>Concepts</a>
+<a href=https://httprunner.com/en/docs/introduction/>What is HttpRunner ?</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>Concepts</h1>
-<div class=lead>The key concepts for HttpRunner.</div>
+<h1>What is HttpRunner ?</h1>
+<div class=lead>An introduction to HttpRunner</div>
 <header class=article-meta>
 </header>
-<h2 id=testcase>TestCase</h2>
-<h2 id=teststep>TestStep</h2>
-<h2 id=testsuite>TestSuite</h2>
-<h2 id=functions>functions</h2>
-<pre tabindex=0><code>&quot;${func{$a, $b}}&quot;
-</code></pre><h2 id=variables>variables</h2>
-<p><code>$abc</code> or <code>${abc}</code></p>
-<h2 id=extract>extract</h2>
-<h2 id=validate>validate</h2>
-<style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
-<div class=d-print-none>
-<h2 class=feedback--title>Feedback</h2>
-<p class=feedback--question>Was this page helpful?</p>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
-<p class="feedback--response feedback--response-yes">
-Glad to hear it! Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
-<p class="feedback--response feedback--response-no">
-Sorry to hear that. Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
+<div class=section-index>
+<hr class=panel-line>
+<div class=entry>
+<h5>
+<a href=/en/docs/introduction/overview/>Overview</a>
+</h5>
+<p>Including key features,</p>
 </div>
-<script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
-<br>
+<div class=entry>
+<h5>
+<a href=/en/docs/introduction/concepts/>Concepts</a>
+</h5>
+<p>The key concepts for HttpRunner.</p>
+</div>
+<div class=entry>
+<h5>
+<a href=/en/docs/introduction/faq/>FAQ</a>
+</h5>
+<p>Frequent asked questions for HttpRunner</p>
+</div>
+</div>
 </div>
 </main>
 </div>
@@ -182,7 +176,7 @@ Sorry to hear that. Please <a href=https://github.com/httprunner/httprunner.gith
 </a>
 </li>
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=用户社区 aria-label=用户社区>
-<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/hrp/discussions aria-label=用户社区>
+<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/httprunner/discussions aria-label=用户社区>
 <i class="fas fa-comments"></i>
 </a>
 </li>
@@ -201,12 +195,12 @@ Sorry to hear that. Please <a href=https://github.com/httprunner/httprunner.gith
 <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
 <ul class="list-inline mb-0">
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=项目仓库 aria-label=项目仓库>
-<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/hrp aria-label=项目仓库>
+<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/httprunner aria-label=项目仓库>
 <i class="fab fa-github"></i>
 </a>
 </li>
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=用户社区 aria-label=用户社区>
-<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/hrp/discussions aria-label=用户社区>
+<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/httprunner/discussions aria-label=用户社区>
 <i class="fas fa-comments"></i>
 </a>
 </li>

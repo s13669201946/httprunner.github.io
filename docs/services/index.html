@@ -52,7 +52,7 @@
 Versions
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/>hrp v0.x</a>
+<a class=dropdown-item href=/docs/>HttpRunner v4.x</a>
 <a class=dropdown-item href=https://httprunner.com/httprunner/>py-v3.x</a>
 </div>
 </li>
@@ -89,18 +89,30 @@ Versions
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
-<a href=/docs/ title="欢迎使用 HttpRunner+" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>文档</span></a>
+<a href=/docs/ title="欢迎使用 HttpRunner" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>文档</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsoverview-li>
-<a href=/docs/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsoverview><span>整体概览</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstart-li>
-<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstart><span>快速上手</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsinstallation-li>
-<a href=/docs/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsinstallation><span>安装说明</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsconcepts-li>
-<a href=/docs/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsconcepts><span>核心概念</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsloadtest-li>
-<a href=/docs/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsloadtest><span>压力测试</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsintroduction-li>
+<a href=/docs/introduction/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsintroduction><span>HttpRunner 是什么？</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionoverview-li>
+<a href=/docs/introduction/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionoverview><span>整体概览</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionconcepts-li>
+<a href=/docs/introduction/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionconcepts><span>核心概念</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionfaq-li>
+<a href=/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionfaq><span>常见问题</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsquickstart-li>
+<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsquickstart><span>快速上手</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartinstallation-li>
+<a href=/docs/quickstart/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartinstallation><span>安装说明</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartquickstart-li>
+<a href=/docs/quickstart/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartquickstart><span>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartloadtest-li>
+<a href=/docs/quickstart/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartloadtest><span>压力测试</span></a>
+</li>
+</ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
 <a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>示例展示</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsservices-li>
@@ -185,7 +197,7 @@ Versions
 </a>
 </li>
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=用户社区 aria-label=用户社区>
-<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/hrp/discussions aria-label=用户社区>
+<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/httprunner/discussions aria-label=用户社区>
 <i class="fas fa-comments"></i>
 </a>
 </li>
@@ -204,12 +216,12 @@ Versions
 <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
 <ul class="list-inline mb-0">
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=项目仓库 aria-label=项目仓库>
-<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/hrp aria-label=项目仓库>
+<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/httprunner aria-label=项目仓库>
 <i class="fab fa-github"></i>
 </a>
 </li>
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=用户社区 aria-label=用户社区>
-<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/hrp/discussions aria-label=用户社区>
+<a class=text-white target=_blank rel=noopener href=https://github.com/httprunner/httprunner/discussions aria-label=用户社区>
 <i class="fas fa-comments"></i>
 </a>
 </li>
