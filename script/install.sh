@@ -1,6 +1,6 @@
 #!/bin/bash
 # install hrp with one shell command
-# bash -c "$(curl -ksSL https://httprunner.com/script/install)"
+# bash -c "$(curl -ksSL https://httprunner.com/script/install.sh)"
 
 set -e
 
