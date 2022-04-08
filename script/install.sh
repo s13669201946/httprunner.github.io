@@ -21,7 +21,7 @@ export -f echoError
 
 function get_latest_version() {
     #   <title>Release v0.4.0 · httprunner/hrp · GitHub</title>
-    curl -sL https://github.com/httprunner/hrp/releases/latest | grep '<title>Release' | cut -d" " -f4
+    curl -sL https://github.com/httprunner/httprunner/releases/latest | grep '<title>Release' | cut -d" " -f4
 }
 
 function get_os() {
@@ -71,7 +71,7 @@ function main() {
     url="https://httprunner.oss-cn-beijing.aliyuncs.com/$pkg"
     if ! curl --output /dev/null --silent --head --fail "$url"; then
         # aliyun OSS url is invalid, try to download from github
-        url="https://github.com/httprunner/hrp/releases/download/$version/$pkg"
+        url="https://github.com/httprunner/httprunner/releases/download/$version/$pkg"
     fi
 
     echo "Latest version: $version"
