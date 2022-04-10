@@ -1,6 +1,6 @@
 ---
 title: "GitHub Issues"
-weight: 61
+weight: 62
 description: 如何在 GitHub Issues 上管理 HttpRunner 的问题和需求？
 ---
 
