@@ -33,10 +33,10 @@ type TestCase struct {
 }
 ```
 
-重点包括两部分：
+包含且仅有两部分：
 
 - Config：测试用例的公共配置部分，包括用例名称、base_url、参数化数据源、是否开启 SSL 校验等
-- TestSteps：有序步骤的集合；采用了 `go interface` 的设计理念，支持进行任意拓展；步骤内容统一在 `Run` 方法中进行实现。
+- TestSteps：有序步骤的集合；采用了 `go interface` 的设计理念，支持进行任意协议和测试类型的拓展；步骤内容统一在 `Run` 方法中进行实现。
 
 ```go
 type IStep interface {
@@ -93,7 +93,7 @@ HttpRunner 用例的核心为 JSON 结构体，但很多测试场景中需要动
 
 ## 变量（variables）
 
-在 HttpRunner 的测试用例中，约定通过 `${}` 或 `$` 的形式来调用变量。
+在 HttpRunner 的测试用例中，约定通过 `${}` 或 `$` 的形式来引用变量。
 
 `$abc` or `${abc}`
 
