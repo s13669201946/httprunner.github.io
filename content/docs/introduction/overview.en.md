@@ -1,7 +1,7 @@
 ---
 title: "Overview"
 weight: 11
-description: Including key features,
+description: Overview for HttpRunner
 ---
 
 `hrp` is a golang implementation of [HttpRunner]. Ideally, hrp will be fully compatible with HttpRunner, including testcase format and usage. What's more, hrp will integrate Boomer natively to be a better load generator for [locust].

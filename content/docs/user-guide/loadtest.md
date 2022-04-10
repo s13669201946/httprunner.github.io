@@ -1,8 +1,7 @@
 ---
-title: "Run load test"
-linkTitle: "Load Test"
-weight: 25
-description: How to run load test.
+title: "压力测试"
+weight: 35
+description: 如何运行性能测试
 ---
 
 ## Start with CLI

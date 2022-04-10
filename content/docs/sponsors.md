@@ -2,7 +2,7 @@
 title: "赞助商"
 weight: 80
 hide_feedback: true
-description: Thank you to all our sponsors! ✨🍰✨
+description: 感谢赞助商助力 HttpRunner 的可持续发展！ ✨🍰✨
 ---
 
 ### 金牌赞助商

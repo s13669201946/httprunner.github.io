@@ -1,14 +1,29 @@
 ---
-title: "商业化服务"
+title: "增值服务"
 weight: 90
-hide_feedback: true
-description: HttpRunner 将永久保持开源免费，但也会探索一些商业化的增值服务，以此获得更长远的发展。
+description: HttpRunner 可能探索的商业化增值服务
 ---
 
-## Technical training
+HttpRunner 将永久保持开源免费，但也会探索一些商业化的增值服务，以此获得更长远的发展。
 
-## Technical support
+## 商业化工具平台
 
-## Privatization deployment
+- 桌面客户端工具
+- Web 平台 SaaS 服务
 
-## Customized development
+## HttpRunner 辅助插件
+
+## 技术培训
+
+- 企业内部培训（现场形式）
+- 个人自费培训（直播形式）
+
+## 技术教程
+
+- 出版书籍
+- 在线付费课程（图文、视频）
+
+## 技术咨询 & 解决方案 & 技术支持
+
+
+## 定制化开发（项目制）
