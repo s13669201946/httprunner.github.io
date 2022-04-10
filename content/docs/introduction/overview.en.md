@@ -4,12 +4,6 @@ weight: 11
 description: Including key features,
 ---
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/httprunner/hrp.svg)](https://pkg.go.dev/github.com/httprunner/hrp)
-[![Github Actions](https://github.com/httprunner/hrp/actions/workflows/unittest.yml/badge.svg)](https://github.com/httprunner/hrp/actions)
-[![codecov](https://codecov.io/gh/httprunner/hrp/branch/main/graph/badge.svg?token=HPCQWCD7KO)](https://codecov.io/gh/httprunner/hrp)
-[![Go Report Card](https://goreportcard.com/badge/github.com/httprunner/hrp)](https://goreportcard.com/report/github.com/httprunner/hrp)
-[![FOSSA Status](https://app.fossa.com/api/projects/custom%2B27856%2Fgithub.com%2Fhttprunner%2Fhrp.svg?type=shield)](https://app.fossa.com/reports/c2742455-c8ab-4b13-8fd7-4a35ba0b2840)
-
 `hrp` is a golang implementation of [HttpRunner]. Ideally, hrp will be fully compatible with HttpRunner, including testcase format and usage. What's more, hrp will integrate Boomer natively to be a better load generator for [locust].
 
 ## Key Features
@@ -57,7 +51,7 @@ You can also monitor online services for digital experience assessments.
 ### use as CLI tool
 
 ```bash
-$ go get -u github.com/httprunner/hrp/hrp
+$ go get -u github.com/httprunner/httprunner/hrp/cmd/cli@master
 ```
 
 Since installed, you will get a `hrp` command with multiple sub-commands.
@@ -187,7 +181,7 @@ Vary: Accept-Encoding
 Beside using `hrp` as a CLI tool, you can also use it as golang library.
 
 ```bash
-$ go get -u github.com/httprunner/hrp
+$ go get -u github.com/httprunner/httprunner
 ```
 
 This is an example of `HttpRunner` testcase. You can find more in the [`examples`][examples] directory.

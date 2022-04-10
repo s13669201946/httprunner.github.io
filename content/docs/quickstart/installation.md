@@ -8,6 +8,8 @@ description: 本文介绍了 HttpRunner 的几种安装方式。
 
 `HttpRunner v4` 采用 Golang 开发，相比于之前的 Python 版本，最大的一个优势是可以编译生成二进制文件。在目标系统只需要下载到对应系统环境的二进制文件即可运行，无需安装任何运行时环境依赖（例如 Python、Java JDK、NodeJS 等）。
 
+当前 HttpRunner v4 支持如下几种安装方式。
+
 ### 一键部署（推荐）
 
 为了加速二进制包的下载速度，我们已经将编译产物上传到了阿里云 OSS，并且提供了一键安装部署的脚本。只需执行一条 shell 命令，即可完成 hrp 的下载和安装操作。
@@ -21,7 +23,7 @@ $ bash -c "$(curl -ksSL https://httprunner.oss-cn-beijing.aliyuncs.com/install.s
 $ bash -c "$(wget https://httprunner.oss-cn-beijing.aliyuncs.com/install.sh -O -)"
 ```
 
-### 自行下载安装
+### 下载编译产物
 
 同时，你也可以在 [GitHub Releases][releases] 页面中，自行选择版本进行下载。
 
@@ -33,30 +35,40 @@ $ bash -c "$(wget https://httprunner.oss-cn-beijing.aliyuncs.com/install.sh -O -
 - linux + arm64
 - windows + amd64(x86)
 
-如果你的系统环境不在这个范围内，那么你只能自行拉取源码进行编译了。
-
-```bash
-# 拉取 hrp 源码
-$ git clone https://github.com/httprunner/hrp.git
-$ cd hrp
-# 通过 make 进行一键编译，生成的产物在 output 文件夹中
-$ make build
-[info] build hrp cli tool
-++ mkdir -p output
-++ bin_path=output/hrp
-++ go build -ldflags '-s -w' -o output/hrp cli/hrp/main.go
-++ ls -lh output/hrp
--rwxr-xr-x  1 debugtalk  staff    16M Feb 17 11:52 output/hrp
-++ chmod +x output/hrp
-++ ./output/hrp -v
-hrp version v0.6.0
-```
-
 获取到编译产物后，你只需给 `hrp` 添加可运行权限即可。同时推荐将 `hrp` 移动到系统 bin 目录，方便全局调用。
 
 ```bash
 $ chmod +x hrp
 $ mv hrp /user/local/bin
+```
+
+### 自行本地编译
+
+如果在上述已有的编译产物中没有包含你的系统类型，那么你可以自行拉取源码进行编译。
+
+```bash
+# 拉取 hrp 源码
+$ git clone https://github.com/httprunner/httprunner.git
+$ cd httprunner
+# 通过 make 进行一键编译，生成的产物在 output 文件夹中
+$ make build
+[info] build hrp cli tool
+++ mkdir -p output
+++ bin_path=output/hrp
+++ go build -ldflags '-s -w' -o output/hrp hrp/cmd/cli/main.go
+++ ls -lh output/hrp
+-rwxr-xr-x  1 debugtalk  staff    20M Apr 10 18:18 output/hrp
+++ chmod +x output/hrp
+++ ./output/hrp -v
+hrp version v4.0.0-alpha
+```
+
+### go install 安装
+
+如果你的系统有 Golang 环境，那么也可以通过 `go install` 命令从 GitHub 仓库中拉取最新代码进行安装。
+
+```bash
+$ go install github.com/httprunner/httprunner/hrp/cmd/cli@master
 ```
 
 ### 检查安装结果
@@ -67,21 +79,34 @@ $ mv hrp /user/local/bin
 
 ```text
 $ hrp -h
-hrp (HttpRunner+) is the next generation for HttpRunner. Enjoy! ✨ 🚀 ✨
+
+██╗  ██╗████████╗████████╗██████╗ ██████╗ ██╗   ██╗███╗   ██╗███╗   ██╗███████╗██████╗
+██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗██╔══██╗██║   ██║████╗  ██║████╗  ██║██╔════╝██╔══██╗
+███████║   ██║      ██║   ██████╔╝██████╔╝██║   ██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+██╔══██║   ██║      ██║   ██╔═══╝ ██╔══██╗██║   ██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+██║  ██║   ██║      ██║   ██║     ██║  ██║╚██████╔╝██║ ╚████║██║ ╚████║███████╗██║  ██║
+╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+
+HttpRunner is an open source API testing tool that supports HTTP(S)/HTTP2/WebSocket/RPC
+network protocols, covering API testing, performance testing and digital experience
+monitoring (DEM) test types. Enjoy! ✨ 🚀 ✨
 
 License: Apache-2.0
-Github: https://github.com/httprunner/hrp
+Website: https://httprunner.com
+Github: https://github.com/httprunner/httprunner
 Copyright 2021 debugtalk
 
 Usage:
   hrp [command]
 
 Available Commands:
-  boom        run load test with boomer
-  completion  generate the autocompletion script for the specified shell
-  har2case    Convert HAR to json/yaml testcase files
-  help        Help about any command
-  run         run API test
+  boom         run load test with boomer
+  completion   generate the autocompletion script for the specified shell
+  har2case     convert HAR to json/yaml testcase files
+  help         Help about any command
+  pytest       run API test with pytest
+  run          run API test with go engine
+  startproject create a scaffold project
 
 Flags:
   -h, --help               help for hrp
@@ -101,11 +126,11 @@ Use "hrp [command] --help" for more information about a command.
 通过如下命令可安装依赖包：
 
 ```bash
-$ go get -u github.com/httprunner/hrp
+$ go get -u github.com/httprunner/httprunner
 ```
 
-然后你就可以在你的工程中导入 `github.com/httprunner/hrp` 进行 Golang 用例编写或者二次开发了。
+然后你就可以在你的工程中导入 `github.com/httprunner/httprunner` 进行 Golang 用例编写或者二次开发了。
 
 
-[releases]: https://github.com/httprunner/hrp/releases
-[github-actions]: https://github.com/httprunner/hrp/actions
+[releases]: https://github.com/httprunner/httprunner/releases
+[github-actions]: https://github.com/httprunner/httprunner/actions
