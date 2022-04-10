@@ -1,7 +1,7 @@
 ---
 title: "整体概览"
 weight: 11
-description: HttpRunner 是什么？
+description: HttpRunner 的概述介绍、设计理念、特性特性
 ---
 
 `HttpRunner` 是一个开源的 API 测试工具，支持 HTTP(S)/HTTP2/WebSocket/RPC 等网络协议，涵盖接口测试、性能测试、数字体验监测等测试类型。简单易用，功能强大，具有丰富的插件化机制和高度的可扩展能力。

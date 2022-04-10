@@ -1,7 +1,7 @@
 ---
 title: "常见问题"
 weight: 13
-description: 关于 HttpRunner 的常见问题
+description: 关于 HttpRunner 的常见问题（持续补充中）
 ---
 
 ## HttpRunner 名字的由来？
