@@ -15,19 +15,19 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>核心概念 | HttpRunner</title>
-<meta name=description content="The key concepts for HttpRunner.">
+<meta name=description content="HttpRunner 仅有的几个核心概念">
 <meta property="og:title" content="核心概念">
-<meta property="og:description" content="The key concepts for HttpRunner.">
+<meta property="og:description" content="HttpRunner 仅有的几个核心概念">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/introduction/concepts/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-03-01T16:35:33+08:00">
+<meta property="article:modified_time" content="2022-04-10T23:58:28+08:00">
 <meta itemprop=name content="核心概念">
-<meta itemprop=description content="The key concepts for HttpRunner.">
-<meta itemprop=dateModified content="2022-03-01T16:35:33+08:00">
-<meta itemprop=wordCount content="146">
+<meta itemprop=description content="HttpRunner 仅有的几个核心概念">
+<meta itemprop=dateModified content="2022-04-10T23:58:28+08:00">
+<meta itemprop=wordCount content="249">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="核心概念">
-<meta name=twitter:description content="The key concepts for HttpRunner.">
+<meta name=twitter:description content="HttpRunner 仅有的几个核心概念">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -106,21 +106,40 @@ Versions
 <a href=/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionfaq><span>常见问题</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsquickstart-li>
-<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsquickstart><span>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstart-li>
+<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstart><span>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guide-li>
+<a href=/docs/user-guide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guide><span>用户指南</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartinstallation-li>
-<a href=/docs/quickstart/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartinstallation><span>安装说明</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartquickstart-li>
-<a href=/docs/quickstart/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartquickstart><span>快速上手</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartloadtest-li>
-<a href=/docs/quickstart/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartloadtest><span>压力测试</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideinstallation-li>
+<a href=/docs/user-guide/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideinstallation><span>安装说明</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidescaffold-li>
+<a href=/docs/user-guide/scaffold/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span>脚手架创建项目</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideproject-structure-li>
+<a href=/docs/user-guide/project-structure/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideproject-structure><span>测试工程目录结构</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideloadtest-li>
+<a href=/docs/user-guide/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideloadtest><span>压力测试</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
 <a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>示例展示</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docscontribution-guidelines-li>
+<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docscontribution-guidelines><span>协作共建</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesversion-li>
+<a href=/docs/contribution-guidelines/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesversion><span>版本号机制</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesissues-li>
+<a href=/docs/contribution-guidelines/issues/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesissues><span>GitHub Issues</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinescommunity-li>
+<a href=/docs/contribution-guidelines/community/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinescommunity><span>用户社区</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesmilestones-li>
+<a href=/docs/contribution-guidelines/milestones/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesmilestones><span>版本规划</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
+<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li>
-<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>商业化服务</span></a>
+<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>增值服务</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesdem-li>
 <a href=/docs/services/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdem><span>全球数字体验监测平台</span></a>
@@ -128,10 +147,6 @@ Versions
 <a href=/docs/services/consultation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesconsultation><span>全球数字体验咨询服务</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docscontribution-guidelines-li>
-<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelines><span>贡献指南</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
-<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li>
 </ul>
 </li>
@@ -145,14 +160,11 @@ Versions
 <div class=td-toc><nav id=TableOfContents>
 <ul>
 <li><a href=#测试用例testcase>测试用例（TestCase）</a></li>
-<li><a href=#测试步骤teststep>测试步骤（TestStep）</a></li>
-<li><a href=#测试用例集testsuite>测试用例集（TestSuite）</a></li>
-<li><a href=#测试场景>测试场景</a></li>
+<li><a href=#插件化机制plugin>插件化机制（plugin）</a></li>
 <li><a href=#项目根目录>项目根目录</a></li>
-<li><a href=#functions>functions</a></li>
-<li><a href=#variables>variables</a></li>
-<li><a href=#extract>extract</a></li>
-<li><a href=#validate>validate</a></li>
+<li><a href=#函数functions>函数（functions）</a></li>
+<li><a href=#变量variables>变量（variables）</a></li>
+<li><a href=#变量优先级>变量优先级</a></li>
 </ul>
 </nav></div>
 </aside>
@@ -172,7 +184,7 @@ Versions
 </nav>
 <div class=td-content>
 <h1>核心概念</h1>
-<div class=lead>The key concepts for HttpRunner.</div>
+<div class=lead>HttpRunner 仅有的几个核心概念</div>
 <header class=article-meta>
 </header>
 <h2 id=测试用例testcase>测试用例（TestCase）</h2>
@@ -190,68 +202,71 @@ Versions
 </ul>
 <p>对应地，HttpRunner 的测试用例描述方式进行如下设计：</p>
 <ul>
-<li>测试用例应该是完整且独立的，每条测试用例应该是都可以独立运行的；在 HttpRunner 中，每个 <code>YAML/JSON</code> 文件对应一条测试用例。</li>
-<li>测试用例包含 <code>测试脚本</code> 和 <code>测试数据</code> 两部分：
+<li>测试用例应该是完整且独立的，每条测试用例应该是都可以独立运行的</li>
+<li>在 HttpRunner 中，每个 <code>YAML/JSON/pytest/go test</code> 文件对应一条测试用例</li>
+<li>HttpRunner 以 <code>TestCase</code> 为核心，将任意测试场景抽象为<code>有序</code>步骤的集合</li>
+</ul>
+<p>数据结构示例如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>TestCase</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#000>Config</span>    <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>TConfig</span>
+	<span style=color:#000>TestSteps</span> <span style=color:#000;font-weight:700>[]</span><span style=color:#000>IStep</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>包含且仅有两部分：</p>
 <ul>
-<li><code>测试用例 = 测试脚本 + 测试数据</code></li>
-<li><code>测试脚本</code> 重点是描述测试的 <code>业务功能逻辑</code>，包括预置条件、测试步骤、预期结果等，并且可以结合辅助函数（debugtalk.py）实现复杂的运算逻辑；可以将 <code>测试脚本</code> 理解为编程语言中的 <code>类（class）</code>；</li>
-<li><code>测试数据</code> 重点是对应测试的 <code>业务数据逻辑</code>，可以理解为类的实例化数据；</li>
-<li><code>测试数据</code> 和 <code>测试脚本</code> 分离后，就可以比较方便地实现数据驱动测试，通过对测试脚本传入一组数据，实现同一业务功能在不同数据逻辑下的测试验证。</li>
+<li>Config：测试用例的公共配置部分，包括用例名称、base_url、参数化数据源、是否开启 SSL 校验等</li>
+<li>TestSteps：有序步骤的集合；采用了 <code>go interface</code> 的设计理念，支持进行任意协议和测试类型的拓展；步骤内容统一在 <code>Run</code> 方法中进行实现。</li>
 </ul>
-</li>
-</ul>
-<h2 id=测试步骤teststep>测试步骤（TestStep）</h2>
-<p>测试用例是测试步骤的 <code>有序</code> 集合，而对于接口测试来说，每一个测试步骤应该就对应一个 API 的请求描述。</p>
-<h2 id=测试用例集testsuite>测试用例集（TestSuite）</h2>
-<p><code>测试用例集</code> 是 <code>测试用例</code> 的 <code>无序</code> 集合，集合中的测试用例应该都是相互独立，不存在先后依赖关系的。</p>
-<p>如果确实存在先后依赖关系怎么办，例如登录功能和下单功能。正确的做法应该是，在下单测试用例的前置步骤中执行登录操作。</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>- <span style=color:#204a87;font-weight:700>config</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>order product</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>test</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>login</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>testcase</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>testcases/login.yml</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>test</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>add to cart</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>api</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>api/add_cart.yml</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>test</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>make order</span><span style=color:#f8f8f8;text-decoration:underline>
-</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>api</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>api/make_order.yml</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><h2 id=测试场景>测试场景</h2>
-<p><code>测试场景</code> 和 <code>测试用例集</code> 是同一概念，都是 <code>测试用例</code> 的 <code>无序</code> 集合。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>IStep</span> <span style=color:#204a87;font-weight:700>interface</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#000>Name</span><span style=color:#000;font-weight:700>()</span> <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>Type</span><span style=color:#000;font-weight:700>()</span> <span style=color:#000>StepType</span>
+	<span style=color:#000>Struct</span><span style=color:#000;font-weight:700>()</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>TStep</span>
+	<span style=color:#000>Run</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>SessionRunner</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>StepResult</span><span style=color:#000;font-weight:700>,</span> <span style=color:#204a87;font-weight:700>error</span><span style=color:#000;font-weight:700>)</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><blockquote>
+<p>这里仅以 go 代码作为示意，实际使用 HttpRunner 时对 golang 基础没有要求。<br>
+详细数据结构可参考：</p>
+</blockquote>
+<h2 id=插件化机制plugin>插件化机制（plugin）</h2>
+<p>HttpRunner 用例的核心为 JSON 结构体，但很多测试场景中需要动态运算逻辑，例如计算签名 MD5、生成随机数据等。</p>
+<p>为了解决该问题，HttpRunner 引入了动态函数运算的能力，即在执行测试用例的过程中，会从文本中解析出变量和函数，调用执行后再将结果拼接回文本字符串。</p>
+<p>这里的动态函数运算就是通过插件化机制（plugin）来实现的。</p>
+<p>在 v4 版本中，HttpRunner 的 golang 执行引擎支持如下 4 种插件方案：</p>
 <ul>
-<li>接口</li>
-<li>测试用例集</li>
-<li>参数</li>
-<li>变量</li>
-<li>测试脚本（YAML/JSON）</li>
-<li>debugtalk.py</li>
-<li>环境变量</li>
+<li>Golang plugin over gRPC：Go 代码编写，要求编译为 <code>debugtalk.bin</code> 文件</li>
+<li>Golang plugin over net/rpc：同上</li>
+<li>Python plugin over gRPC：Python 代码编写，无需编译，要求命名为 <code>debugtalk.py</code> 文件</li>
+<li>Golang official plugin：Go 代码编写，要求编译为 <code>debugtalk.so</code> 文件</li>
 </ul>
+<p>这部分能力已经单独抽离出了一个基础组件，详见 <a href=https://github.com/httprunner/funplugin>httprunner/funplugin</a>。</p>
+<p>针对 v4 版本的 pytest 执行引擎，以及 v4 之前的 Python 版本，支持解析调用 Python 函数的形式：</p>
+<ul>
+<li>Python 代码编写，无需编译，要求命名为 <code>debugtalk.py</code> 文件</li>
+</ul>
+<p>需要特别强调的是，上述插件文件 <code>debugtalk.xx</code> 要求必须放在项目根目录中。</p>
 <h2 id=项目根目录>项目根目录</h2>
-<h2 id=functions>functions</h2>
+<p>在 HttpRunner 的测试用例中，有时候需要引用其它测试用例或者数据文件（csv）。考虑到脚本的简洁些和可移植性，引用路径需要使用相对路径。</p>
+<p>基于约定大于配置的思路，HttpRunner 通过定位插件文件的位置来确定项目的根目录，以此作为相对路径的基准。同时，定位插件文件存在优先级，如下文件的优先级从上到下依次降低。</p>
+<ul>
+<li>debugtalk.bin</li>
+<li>debugtalk.py</li>
+<li>debugtalk.so</li>
+</ul>
+<h2 id=函数functions>函数（functions）</h2>
+<p>在 HttpRunner 的测试用例中，约定通过 <code>${}</code> 的形式来调用插件函数。</p>
 <pre tabindex=0><code>&quot;${func{$a, $b}}&quot;
-</code></pre><h2 id=variables>variables</h2>
+</code></pre><h2 id=变量variables>变量（variables）</h2>
+<p>在 HttpRunner 的测试用例中，约定通过 <code>${}</code> 或 <code>$</code> 的形式来引用变量。</p>
 <p><code>$abc</code> or <code>${abc}</code></p>
-<h2 id=extract>extract</h2>
-<h2 id=validate>validate</h2>
-<style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
-<div class=d-print-none>
-<h2 class=feedback--title>Feedback</h2>
-<p class=feedback--question>Was this page helpful?</p>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
-<p class="feedback--response feedback--response-yes">
-Glad to hear it! Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
-<p class="feedback--response feedback--response-no">
-Sorry to hear that. Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
-</div>
-<script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
-<br>
+<p>如果在测试用例中本身就存在 <code>$</code> 符号，那么可以通过 <code>$$</code> 进行转义。</p>
+<p>例如，测试用例中某个字段的原始内容为 <code>$m</code>，那么为了避免将其解析为变量，则需要将其写为 <code>$$m</code>。</p>
+<h2 id=变量优先级>变量优先级</h2>
+<p>在 HttpRunner 测试用例中，变量类型有 3 种：</p>
+<ul>
+<li>config variables：在 config 中定义的变量</li>
+<li>step variables：在 test step 中定义的变量</li>
+<li>session variables：在测试用例运行时，从前置 step 提取（extract）的变量</li>
+</ul>
+<p>这 3 种变量的优先级从高到低依次为：step variables > session variables > config variables</p>
 </div>
 </main>
 </div>

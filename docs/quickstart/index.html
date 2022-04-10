@@ -15,22 +15,26 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>快速上手 | HttpRunner</title>
-<meta name=description content>
+<meta name=description content="10 分钟内快速上手 HttpRunner">
 <meta property="og:title" content="快速上手">
-<meta property="og:description" content="一站式 HTTP(S) 测试解决方案">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://httprunner.com/docs/quickstart/">
+<meta property="og:description" content="10 分钟内快速上手 HttpRunner">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://httprunner.com/docs/quickstart/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-04-10T23:58:28+08:00">
 <meta itemprop=name content="快速上手">
-<meta itemprop=description content="一站式 HTTP(S) 测试解决方案"><meta name=twitter:card content="summary">
+<meta itemprop=description content="10 分钟内快速上手 HttpRunner">
+<meta itemprop=dateModified content="2022-04-10T23:58:28+08:00">
+<meta itemprop=wordCount content="1067">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="快速上手">
-<meta name=twitter:description content="一站式 HTTP(S) 测试解决方案">
+<meta name=twitter:description content="10 分钟内快速上手 HttpRunner">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNRMVFG5LL"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-LNRMVFG5LL',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-section>
+<body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -61,7 +65,7 @@ Versions
 中文
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/en/docs/quickstart/>English</a>
+<a class=dropdown-item href=/en/>English</a>
 </div>
 </li>
 </ul>
@@ -84,7 +88,7 @@ Versions
 中文
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/en/docs/quickstart/>English</a>
+<a class=dropdown-item href=/en/>English</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
@@ -102,21 +106,40 @@ Versions
 <a href=/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionfaq><span>常见问题</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsquickstart-li>
-<a href=/docs/quickstart/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsquickstart><span class=td-sidebar-nav-active-item>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsquickstart-li>
+<a href=/docs/quickstart/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsquickstart><span class=td-sidebar-nav-active-item>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guide-li>
+<a href=/docs/user-guide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guide><span>用户指南</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstartinstallation-li>
-<a href=/docs/quickstart/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartinstallation><span>安装说明</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstartquickstart-li>
-<a href=/docs/quickstart/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartquickstart><span>快速上手</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstartloadtest-li>
-<a href=/docs/quickstart/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartloadtest><span>压力测试</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideinstallation-li>
+<a href=/docs/user-guide/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideinstallation><span>安装说明</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidescaffold-li>
+<a href=/docs/user-guide/scaffold/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span>脚手架创建项目</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideproject-structure-li>
+<a href=/docs/user-guide/project-structure/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideproject-structure><span>测试工程目录结构</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideloadtest-li>
+<a href=/docs/user-guide/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideloadtest><span>压力测试</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
 <a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>示例展示</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docscontribution-guidelines-li>
+<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docscontribution-guidelines><span>协作共建</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesversion-li>
+<a href=/docs/contribution-guidelines/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesversion><span>版本号机制</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesissues-li>
+<a href=/docs/contribution-guidelines/issues/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesissues><span>GitHub Issues</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinescommunity-li>
+<a href=/docs/contribution-guidelines/community/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinescommunity><span>用户社区</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesmilestones-li>
+<a href=/docs/contribution-guidelines/milestones/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesmilestones><span>版本规划</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
+<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li>
-<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>商业化服务</span></a>
+<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>增值服务</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesdem-li>
 <a href=/docs/services/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdem><span>全球数字体验监测平台</span></a>
@@ -124,10 +147,6 @@ Versions
 <a href=/docs/services/consultation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesconsultation><span>全球数字体验咨询服务</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docscontribution-guidelines-li>
-<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelines><span>贡献指南</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
-<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li>
 </ul>
 </li>
@@ -138,6 +157,16 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#安装部署>安装部署</a></li>
+<li><a href=#脚手架创建项目>脚手架创建项目</a></li>
+<li><a href=#初览测试用例>初览测试用例</a></li>
+<li><a href=#运行接口测试>运行接口测试</a></li>
+<li><a href=#运行性能测试>运行性能测试</a></li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -152,29 +181,307 @@ Versions
 </nav>
 <div class=td-content>
 <h1>快速上手</h1>
+<div class=lead>10 分钟内快速上手 HttpRunner</div>
 <header class=article-meta>
 </header>
-<div class=section-index>
-<hr class=panel-line>
-<div class=entry>
-<h5>
-<a href=/docs/quickstart/installation/>安装说明</a>
-</h5>
-<p>本文介绍了 HttpRunner 的几种安装方式。</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/quickstart/quickstart/>快速上手</a>
-</h5>
-<p>一个实例带你快速上手 HttpRunner+</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/quickstart/loadtest/>压力测试</a>
-</h5>
-<p>How to run load test.</p>
-</div>
-</div>
+<p>HttpRunner 的首要核心目标就是「简单易用」，即使你是新用户，你也可以在 10 分钟之内快速上手 HttpRunner。</p>
+<p>那我们计时开始吧！🚀</p>
+<h2 id=安装部署>安装部署</h2>
+<p><code>HttpRunner v4</code> 采用 Golang 开发，已针对主流操作系统预编译了二进制文件，只需在系统终端中执行一条命令即可完成安装部署。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ bash -c <span style=color:#4e9a06>&#34;</span><span style=color:#204a87;font-weight:700>$(</span>curl -ksSL https://httprunner.com/script/install.sh<span style=color:#204a87;font-weight:700>)</span><span style=color:#4e9a06>&#34;</span>
+</code></pre></div><p>安装成功后，你将获得一个 <code>hrp</code> 命令行工具，执行 <code>hrp -h</code> 即可查看到参数帮助说明。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp -h
+
+██╗  ██╗████████╗████████╗██████╗ ██████╗ ██╗   ██╗███╗   ██╗███╗   ██╗███████╗██████╗
+██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗██╔══██╗██║   ██║████╗  ██║████╗  ██║██╔════╝██╔══██╗
+███████║   ██║      ██║   ██████╔╝██████╔╝██║   ██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+██╔══██║   ██║      ██║   ██╔═══╝ ██╔══██╗██║   ██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+██║  ██║   ██║      ██║   ██║     ██║  ██║╚██████╔╝██║ ╚████║██║ ╚████║███████╗██║  ██║
+╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+
+HttpRunner is an open source API testing tool that supports HTTP(S)/HTTP2/WebSocket/RPC
+network protocols, covering API testing, performance testing and digital experience
+monitoring (DEM) test types. Enjoy! ✨ 🚀 ✨
+
+License: Apache-2.0
+Website: https://httprunner.com
+Github: https://github.com/httprunner/httprunner
+Copyright 2021 debugtalk
+
+Usage:
+  hrp [command]
+
+Available Commands:
+  boom         run load test with boomer
+  completion   generate the autocompletion script for the specified shell
+  har2case     convert HAR to json/yaml testcase files
+  help         Help about any command
+  pytest       run API test with pytest
+  run          run API test with go engine
+  startproject create a scaffold project
+
+Flags:
+  -h, --help               help for hrp
+      --log-json           set log to json format
+  -l, --log-level string   set log level (default &#34;INFO&#34;)
+  -v, --version            version for hrp
+
+Use &#34;hrp [command] --help&#34; for more information about a command.
+</code></pre></div><p>HttpRunner 还支持多种安装部署方式，详见用户指南的<a href=/docs/user-guide/installation/>安装说明</a>部分。</p>
+<h2 id=脚手架创建项目>脚手架创建项目</h2>
+<p>HttpRunner 支持使用脚手架创建示例项目。</p>
+<p>执行 <code>hrp startproject</code> 命令，即可初始化指定名称的项目工程。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp startproject demo
+10:39PM INF Set log to color console other than JSON format.
+10:39PM ??? Set log level
+10:39PM INF create new scaffold project <span style=color:#000>pluginType</span><span style=color:#ce5c00;font-weight:700>=</span>py <span style=color:#000>projectName</span><span style=color:#ce5c00;font-weight:700>=</span>demo
+10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo
+10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/har
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/har/.keep
+10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases
+10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/reports
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/reports/.keep
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/.gitignore
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/.env
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_with_funplugin.json
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_requests.yml
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_ref_testcase.yml
+10:39PM INF start to create hashicorp python plugin
+10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/debugtalk.py
+10:39PM INF python3 venv is ready <span style=color:#000>funppyVersion</span><span style=color:#ce5c00;font-weight:700>=</span>0.4.2 <span style=color:#000>venvDir</span><span style=color:#ce5c00;font-weight:700>=</span>/Users/debugtalk/.hrp/venv
+10:39PM INF create scaffold success <span style=color:#000>projectName</span><span style=color:#ce5c00;font-weight:700>=</span>demo
+</code></pre></div><p>如下是项目工程的目录结构：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ tree demo -a
+demo
+├── .env
+├── .gitignore
+├── debugtalk.py
+├── har
+│   └── .keep
+├── reports
+│   └── .keep
+└── testcases
+    ├── demo_ref_testcase.yml
+    ├── demo_requests.yml
+    └── demo_with_funplugin.json
+
+3 directories, 8 files
+</code></pre></div><p>其中，testcases 文件夹中包含了多个示例测试用例。关于 HttpRunner 测试工程的目录结构说明，可查看用户指南的<a href=/docs/user-guide/project-structure/>测试工程目录结构</a>部分。</p>
+<p>HttpRunner 创建脚手架项目时默认选择 Python 插件模式（兼容 v4 以前的版本），但同时还支持多种其它模式，可查看用户指南的<a href=/docs/user-guide/scaffold/>脚手架创建项目</a>部分了解更多详情。</p>
+<h2 id=初览测试用例>初览测试用例</h2>
+<p>接下来我们以 <code>demo_requests.yml</code> 为例，初步预览下 HttpRunner 的测试用例结构。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>config</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;request methods testcase with functions&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>variables</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>config_bar1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo2</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>config_bar2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>expect_foo1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>config_bar1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>expect_foo2</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>config_bar2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>base_url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;https://postman-echo.com&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>verify</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>False</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>export</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;foo3&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>teststeps</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>-<span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>get with params</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>variables</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>bar11</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo2</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>bar21</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>sum_v</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;${sum_two(1, 2)}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>request</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>GET</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>/get</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>params</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>foo1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>$foo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>foo2</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>$foo2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>sum_v</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>$sum_v</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>User-Agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HttpRunner/${get_httprunner_version()}</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>extract</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo3</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;body.args.foo2&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>validate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;body.args.foo1&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;bar11&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;body.args.sum_v&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;3&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;body.args.foo2&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;bar21&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>-<span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>post raw text</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>variables</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;bar12&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo3</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;bar32&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>request</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>POST</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>/post</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>User-Agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HttpRunner/${get_httprunner_version()}</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>Content-Type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;text/plain&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body: $foo1-$foo2-$foo3.&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>validate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;body.data&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body: bar12-$expect_foo2-bar32.&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>-<span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>post form data</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>variables</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>foo2</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>bar23</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>request</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>POST</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>/post</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>User-Agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HttpRunner/${get_httprunner_version()}</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>            </span><span style=color:#204a87;font-weight:700>Content-Type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;application/x-www-form-urlencoded&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>data</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;foo1=$foo1&amp;foo2=$foo2&amp;foo3=$foo3&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>validate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;body.form.foo1&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;$expect_foo1&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;body.form.foo2&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;bar23&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span>- <span style=color:#204a87;font-weight:700>eq</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#34;body.form.foo3&#34;</span><span style=color:#000;font-weight:700>,</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;bar21&#34;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>HttpRunner 测试用例包括且仅有两部分：</p>
+<ul>
+<li>config：测试用例的公共配置部分，包括用例名称、base_url、参数化数据源、是否开启 SSL 校验等</li>
+<li>teststeps：有序步骤的集合；采用了 <code>go interface</code> 的设计理念，支持进行任意协议和测试类型的拓展（甚至包括 UI 自动化）</li>
+</ul>
+<p>在上面的案例中，每个 step 都是一个 HTTP 请求；可以看到，描述信息仅包含了 HTTP 请求和结果校验的核心要素，没有任何累赘的内容。</p>
+<p>同时，需要重点关注的是，虽然上面的用例是 YAML 文本，但同样支持引用变量和调用函数。</p>
+<ul>
+<li>变量引用：约定通过 <code>${}</code> 或 <code>$</code> 的形式来引用变量，例如 <code>$foo1</code> 或 <code>${foo1}</code></li>
+<li>函数调用：约定通过 <code>${}</code> 的形式来调用插件函数，例如 <code>${sum_two(1, 2)}</code></li>
+</ul>
+<p>变量的申明定义在 step 或 config 的 <code>variables</code> 中，并且遵循优先级的要求。</p>
+<p>函数的申明定义在项目根目录的 <code>debugtalk.py</code> 中，基于「约定大于配置」的设计理念，我们无需在测试用例中进行配置。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#204a87;font-weight:700>import</span> <span style=color:#000>funppy</span>
+
+
+<span style=color:#204a87;font-weight:700>def</span> <span style=color:#000>get_httprunner_version</span><span style=color:#000;font-weight:700>():</span>
+    <span style=color:#204a87;font-weight:700>return</span> <span style=color:#4e9a06>&#34;v4.0.0-alpha&#34;</span>
+
+
+<span style=color:#204a87;font-weight:700>def</span> <span style=color:#000>sum_two_int</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>a</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87>int</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>b</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87>int</span><span style=color:#000;font-weight:700>)</span> <span style=color:#ce5c00;font-weight:700>-&gt;</span> <span style=color:#204a87>int</span><span style=color:#000;font-weight:700>:</span>
+    <span style=color:#204a87;font-weight:700>return</span> <span style=color:#000>a</span> <span style=color:#ce5c00;font-weight:700>+</span> <span style=color:#000>b</span>
+
+
+<span style=color:#204a87;font-weight:700>if</span> <span style=color:#000>__name__</span> <span style=color:#ce5c00;font-weight:700>==</span> <span style=color:#4e9a06>&#39;__main__&#39;</span><span style=color:#000;font-weight:700>:</span>
+    <span style=color:#000>funppy</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>register</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;get_httprunner_version&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>get_httprunner_version</span><span style=color:#000;font-weight:700>)</span>
+    <span style=color:#000>funppy</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>register</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;sum_two&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>sum_two_int</span><span style=color:#000;font-weight:700>)</span>
+    <span style=color:#000>funppy</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>serve</span><span style=color:#000;font-weight:700>()</span>
+</code></pre></div><p>在 <code>debugtalk.py</code> 中，我们可以编写实现任意自定义逻辑的函数，只需通过 <code>funppy</code> 进行 <code>register</code> 和 <code>serve()</code> 即可。</p>
+<p>关于变量、函数、插件等概念，可详细阅读<a href=/docs/introduction/concepts/>核心概念</a>。</p>
+<h2 id=运行接口测试>运行接口测试</h2>
+<p>测试用例就绪后，通过 <code>hrp run</code> 命令即可执行指定的测试用例；如需生成 HTML 测试报告，可附带 <code>--gen-html-report</code> 参数。</p>
+<details>
+<summary>$ hrp run testcases/demo_requests.yml testcases/demo_ref_testcase.yml --gen-html-report</summary>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ cd demo/
+$ hrp run testcases/demo_requests.yml testcases/demo_ref_testcase.yml --gen-html-report
+11:28PM INF Set log to color console other than JSON format.
+11:28PM ??? Set log level
+11:28PM INF [init] SetFailfast failfast=true
+11:28PM INF [init] SetSaveTests saveTests=false
+11:28PM INF [init] SetgenHTMLReport genHTMLReport=true
+11:28PM INF [init] SetRequestsLogOn
+11:28PM INF load file path=testcases/demo_requests.yml
+11:28PM INF load testcases successfully count=1
+11:28PM INF init session runner
+11:28PM INF run testcase start testcase=&#34;request methods testcase with functions&#34;
+11:28PM INF init session runner
+11:28PM INF python3 venv is ready funppyVersion=0.4.2 venvDir=/Users/debugtalk/.hrp/venv
+11:28PM INF load hashicorp go plugin success path=/Users/debugtalk/MyProjects/HttpRunner-dev/httprunner.github.io/demo/debugtalk.py
+11:28PM INF run step start step=&#34;get with params&#34; type=request-GET
+11:28PM INF function GetNames called on host side
+11:28PM INF call function via gRPC funcArgs=[1,2] funcName=sum_two
+11:28PM INF call function success arguments=[1,2] funcName=sum_two output=3
+11:28PM INF function GetNames called on host side
+11:28PM INF call function via gRPC funcArgs=[] funcName=get_httprunner_version
+11:28PM INF call function success arguments=[] funcName=get_httprunner_version output=v4.0.0-alpha
+-------------------- request --------------------
+GET /get?foo1=bar11&amp;foo2=bar21&amp;sum_v=3 HTTP/1.1
+Host: postman-echo.com
+User-Agent: HttpRunner/v4.0.0-alpha
+
+
+==================== response ===================
+HTTP/1.1 200 OK
+Content-Length: 335
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Sun, 10 Apr 2022 15:28:26 GMT
+Etag: W/&#34;14f-7Gzvv7hBEzQUyUYoNokC4etN280&#34;
+Set-Cookie: sails.sid=s%3ArupBebwxLVsoyG0nCfHMNjM-4u_aPEYs.tfgPzcR7kRyd2zuJqv7Vb%2FxlUJKFilYWoOtxXu7QsxA; Path=/; HttpOnly
+Vary: Accept-Encoding
+
+{&#34;args&#34;:{&#34;foo1&#34;:&#34;bar11&#34;,&#34;foo2&#34;:&#34;bar21&#34;,&#34;sum_v&#34;:&#34;3&#34;},&#34;headers&#34;:{&#34;x-forwarded-proto&#34;:&#34;https&#34;,&#34;x-forwarded-port&#34;:&#34;443&#34;,&#34;host&#34;:&#34;postman-echo.com&#34;,&#34;x-amzn-trace-id&#34;:&#34;Root=1-6252f79a-0e1cf4283dee310914d69da1&#34;,&#34;user-agent&#34;:&#34;HttpRunner/v4.0.0-alpha&#34;,&#34;accept-encoding&#34;:&#34;gzip&#34;},&#34;url&#34;:&#34;https://postman-echo.com/get?foo1=bar11&amp;foo2=bar21&amp;sum_v=3&#34;}
+--------------------------------------------------
+11:28PM INF extract value from=body.args.foo2 value=bar21
+11:28PM INF set variable value=bar21 variable=foo3
+11:28PM INF validate status_code assertMethod=eq checkExpr=status_code checkValue=200 expectValue=200 result=true
+11:28PM INF validate body.args.foo1 assertMethod=eq checkExpr=body.args.foo1 checkValue=bar11 expectValue=bar11 result=true
+11:28PM INF validate body.args.sum_v assertMethod=eq checkExpr=body.args.sum_v checkValue=3 expectValue=3 result=true
+11:28PM INF validate body.args.foo2 assertMethod=eq checkExpr=body.args.foo2 checkValue=bar21 expectValue=bar21 result=true
+11:28PM INF run step end exportVars={&#34;foo3&#34;:&#34;bar21&#34;} step=&#34;get with params&#34; success=true type=request
+11:28PM INF run step start step=&#34;post raw text&#34; type=request-POST
+11:28PM INF call function via gRPC funcArgs=[] funcName=get_httprunner_version
+11:28PM INF call function success arguments=[] funcName=get_httprunner_version output=v4.0.0-alpha
+-------------------- request --------------------
+POST /post HTTP/1.1
+Host: postman-echo.com
+Content-Type: text/plain
+User-Agent: HttpRunner/v4.0.0-alpha
+
+This is expected to be sent back as part of response body: bar12-config_bar2-bar32.
+==================== response ===================
+HTTP/1.1 200 OK
+Content-Length: 441
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Sun, 10 Apr 2022 15:28:26 GMT
+Etag: W/&#34;1b9-biNClRDBTZ3yYGizMLRqBbpZaqc&#34;
+Set-Cookie: sails.sid=s%3AShiSgikIS1udNVe0IOdEVNf9rL_125st.D6%2Fw%2BIyKg5jeiOs6xwL8wsEht4tcO%2BpwXNqNWoFZQ3o; Path=/; HttpOnly
+Vary: Accept-Encoding
+
+{&#34;args&#34;:{},&#34;data&#34;:&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34;,&#34;files&#34;:{},&#34;form&#34;:{},&#34;headers&#34;:{&#34;x-forwarded-proto&#34;:&#34;https&#34;,&#34;x-forwarded-port&#34;:&#34;443&#34;,&#34;host&#34;:&#34;postman-echo.com&#34;,&#34;x-amzn-trace-id&#34;:&#34;Root=1-6252f79a-75965ac66ae0074d0f1df200&#34;,&#34;content-length&#34;:&#34;83&#34;,&#34;user-agent&#34;:&#34;HttpRunner/v4.0.0-alpha&#34;,&#34;content-type&#34;:&#34;text/plain&#34;,&#34;accept-encoding&#34;:&#34;gzip&#34;},&#34;json&#34;:null,&#34;url&#34;:&#34;https://postman-echo.com/post&#34;}
+--------------------------------------------------
+11:28PM INF validate status_code assertMethod=eq checkExpr=status_code checkValue=200 expectValue=200 result=true
+11:28PM INF validate body.data assertMethod=eq checkExpr=body.data checkValue=&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34; expectValue=&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34; result=true
+11:28PM INF run step end exportVars=null step=&#34;post raw text&#34; success=true type=request
+11:28PM INF run step start step=&#34;post form data&#34; type=request-POST
+11:28PM INF call function via gRPC funcArgs=[] funcName=get_httprunner_version
+11:28PM INF call function success arguments=[] funcName=get_httprunner_version output=v4.0.0-alpha
+-------------------- request --------------------
+POST /post HTTP/1.1
+Host: postman-echo.com
+Content-Type: application/x-www-form-urlencoded
+User-Agent: HttpRunner/v4.0.0-alpha
+
+foo1=config_bar1&amp;foo2=bar23&amp;foo3=bar21
+==================== response ===================
+HTTP/1.1 200 OK
+Content-Length: 479
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Sun, 10 Apr 2022 15:28:27 GMT
+Etag: W/&#34;1df-+YTOdiT8pYPlN+1k+z3s4LiSJJw&#34;
+Set-Cookie: sails.sid=s%3A5E7k9yIyZQq2qk-So2GS_h2eCMGeosyg.rmNVhBKq49FZm%2BXaH33KdzEqlPwwveKMO5rxh2%2F%2FvFo; Path=/; HttpOnly
+Vary: Accept-Encoding
+
+{&#34;args&#34;:{},&#34;data&#34;:&#34;&#34;,&#34;files&#34;:{},&#34;form&#34;:{&#34;foo1&#34;:&#34;config_bar1&#34;,&#34;foo2&#34;:&#34;bar23&#34;,&#34;foo3&#34;:&#34;bar21&#34;},&#34;headers&#34;:{&#34;x-forwarded-proto&#34;:&#34;https&#34;,&#34;x-forwarded-port&#34;:&#34;443&#34;,&#34;host&#34;:&#34;postman-echo.com&#34;,&#34;x-amzn-trace-id&#34;:&#34;Root=1-6252f79b-3c6359e66dad26597ece3881&#34;,&#34;content-length&#34;:&#34;38&#34;,&#34;user-agent&#34;:&#34;HttpRunner/v4.0.0-alpha&#34;,&#34;content-type&#34;:&#34;application/x-www-form-urlencoded&#34;,&#34;accept-encoding&#34;:&#34;gzip&#34;},&#34;json&#34;:{&#34;foo1&#34;:&#34;config_bar1&#34;,&#34;foo2&#34;:&#34;bar23&#34;,&#34;foo3&#34;:&#34;bar21&#34;},&#34;url&#34;:&#34;https://postman-echo.com/post&#34;}
+--------------------------------------------------
+11:28PM INF validate status_code assertMethod=eq checkExpr=status_code checkValue=200 expectValue=200 result=true
+11:28PM INF validate body.form.foo1 assertMethod=eq checkExpr=body.form.foo1 checkValue=config_bar1 expectValue=config_bar1 result=true
+11:28PM INF validate body.form.foo2 assertMethod=eq checkExpr=body.form.foo2 checkValue=bar23 expectValue=bar23 result=true
+11:28PM INF validate body.form.foo3 assertMethod=eq checkExpr=body.form.foo3 checkValue=bar21 expectValue=bar21 result=true
+11:28PM INF run step end exportVars=null step=&#34;post form data&#34; success=true type=request
+11:28PM INF run testcase end testcase=&#34;request methods testcase with functions&#34;
+11:28PM INF quit hashicorp plugin process
+</code></pre></div></details>
+<p>测试生成的 HTML 报告如下所示。</p>
+<img src=/image/demo-html-report.png alt="HttpRunner html report" width=600>
+<p>在 HTML 测试报告中，可以点击查看到详细的请求内容和响应结果，详见 <a href=/reports/demo-report.html>demo-html-report</a>。</p>
+<h2 id=运行性能测试>运行性能测试</h2>
+<p>针对已有的接口测试用例，HttpRunner 无需任何额外的工作，即可通过 <code>hrp boom</code> 命令运行性能测试；通过 <code>--spawn-count</code> 参数可指定并发用户数，通过 <code>--spawn-rate</code> 可指定起始发压斜率。</p>
+<details>
+<summary>$ hrp boom testcases/demo_requests.yml --spawn-count 100 --spawn-rate 10</summary>
+</details>
+<h2 id=总结>总结</h2>
+<p>通过上述演示，相信大家已经对 HttpRunner 有了一个初步的印象，并且应该可以初步将 HttpRunner 上手跑起来了。</p>
+<p>限于篇幅，本文仅展示了 HttpRunner 最基础的功能，大家可以通过进一步阅读<a href=/docs/user-guide/>用户指南</a>探索 HttpRunner 的全部功能特性。</p>
 </div>
 </main>
 </div>

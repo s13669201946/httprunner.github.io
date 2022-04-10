@@ -14,24 +14,27 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>Welcome to HttpRunner | HttpRunner</title>
-<meta name=description content="Welcome to the HttpRunner documentation! This guide helps you to understand the key points of HttpRunner and get started quickly.
-Subscribe …">
-<meta property="og:title" content="Welcome to HttpRunner">
-<meta property="og:description" content="One-stop solution for HTTP(S) testing.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://httprunner.com/en/docs/">
-<meta itemprop=name content="Welcome to HttpRunner">
-<meta itemprop=description content="One-stop solution for HTTP(S) testing."><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Welcome to HttpRunner">
-<meta name=twitter:description content="One-stop solution for HTTP(S) testing.">
+<title>Run load test | HttpRunner</title>
+<meta name=description content="How to run load test.">
+<meta property="og:title" content="Run load test">
+<meta property="og:description" content="How to run load test.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://httprunner.com/en/docs/user-guide/loadtest/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-04-10T21:54:07+08:00">
+<meta itemprop=name content="Run load test">
+<meta itemprop=description content="How to run load test.">
+<meta itemprop=dateModified content="2022-04-10T21:54:07+08:00">
+<meta itemprop=wordCount content="500">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Run load test">
+<meta name=twitter:description content="How to run load test.">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNRMVFG5LL"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-LNRMVFG5LL',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-section>
+<body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/en/>
@@ -56,7 +59,7 @@ Versions
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/>中文</a>
+<a class=dropdown-item href=/docs/user-guide/loadtest/>中文</a>
 </div>
 </li>
 </ul>
@@ -79,12 +82,12 @@ English
 English
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/docs/>中文</a>
+<a class=dropdown-item href=/docs/user-guide/loadtest/>中文</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-endocs-li>
-<a href=/en/docs/ title="Welcome to HttpRunner" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section tree-root" id=m-endocs><span class=td-sidebar-nav-active-item>Docs</span></a>
+<a href=/en/docs/ title="Welcome to HttpRunner" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-endocs><span>Docs</span></a>
 <ul class=ul-1>
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-endocsintroduction-li>
 <a href=/en/docs/introduction/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsintroduction><span>What is HttpRunner ?</span></a>
@@ -97,13 +100,13 @@ English
 <a href=/en/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsintroductionfaq><span>FAQ</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-endocsuser-guide-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-endocsuser-guide-li>
 <a href=/en/docs/user-guide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsuser-guide><span>User Guide</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsuser-guideinstallation-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsuser-guideinstallation-li>
 <a href=/en/docs/user-guide/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsuser-guideinstallation><span>Installation</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsuser-guideloadtest-li>
-<a href=/en/docs/user-guide/loadtest/ title="Run load test" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsuser-guideloadtest><span>Load Test</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-endocsuser-guideloadtest-li>
+<a href=/en/docs/user-guide/loadtest/ title="Run load test" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-endocsuser-guideloadtest><span class=td-sidebar-nav-active-item>Load Test</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocssponsors-li>
@@ -118,44 +121,75 @@ English
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#start-with-cli>Start with CLI</a></li>
+<li><a href=#report-metrics-to-prometheus-pushgateway>Report metrics to Prometheus Pushgateway</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
-<nav aria-label=breadcrumb class="td-breadcrumbs td-breadcrumbs__single">
+<nav aria-label=breadcrumb class=td-breadcrumbs>
 <ol class=breadcrumb>
-<li class="breadcrumb-item active" aria-current=page>
+<li class=breadcrumb-item>
 <a href=https://httprunner.com/en/docs/>Docs</a>
+</li>
+<li class=breadcrumb-item>
+<a href=https://httprunner.com/en/docs/user-guide/>User Guide</a>
+</li>
+<li class="breadcrumb-item active" aria-current=page>
+<a href=https://httprunner.com/en/docs/user-guide/loadtest/>Load Test</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>Welcome to HttpRunner</h1>
+<h1>Run load test</h1>
+<div class=lead>How to run load test.</div>
 <header class=article-meta>
 </header>
-<p>Welcome to the HttpRunner documentation! This guide helps you to understand the key points of HttpRunner and get started quickly.</p>
-<h2 id=subscribe>Subscribe</h2>
-<p>关注 HttpRunner 的微信公众号，第一时间获得最新资讯。</p>
-<img src=/image/qrcode.jpg alt=HttpRunner width=200>
-<div class=section-index>
-<hr class=panel-line>
-<div class=entry>
-<h5>
-<a href=/en/docs/introduction/>What is HttpRunner ?</a>
-</h5>
-<p>An introduction to HttpRunner</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/en/docs/user-guide/>User Guide</a>
-</h5>
-<p>HttpRunner user guide</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/en/docs/sponsors/>Sponsors</a>
-</h5>
-<p>Thank you to all our sponsors! ✨🍰✨</p>
-</div>
-</div>
+<h2 id=start-with-cli>Start with CLI</h2>
+<p><code>HttpRunner</code> supports running load test without extra work. You can use <code>hrp boom</code> command to run YAML/JSON testcases in load testing mode.</p>
+<p>By default, hrp will print load testing results in console output, refreshed every 3 seconds.</p>
+<pre tabindex=0><code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1
+6:09PM INF Set log to pretty console
+6:09PM INF Set log level to INFO
+6:09PM INF Set log level to WARN
+2021/12/02 18:09:48 Spawning 10 clients immediately
+Current time: 2021/12/02 18:09:51, Users: 10, Total RPS: 20, Total Fail Ratio: 0.0%
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |         10 |       0 |   2400 | 2423.00 | 2422 | 2424 |          300 |         10 |           0 |
+| request-POST | post json data  |         10 |       0 |    310 |  304.50 |  301 |  307 |          420 |         10 |           0 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2021/12/02 18:09:54, Users: 10, Total RPS: 16, Total Fail Ratio: 0.0%
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |         18 |       0 |   1200 | 1157.39 | 1083 | 1367 |          300 |          9 |           0 |
+| request-POST | post json data  |         10 |       0 |    290 |  290.20 |  287 |  293 |          420 |         10 |           0 |
+| request-POST | post form data  |         20 |       0 |    310 |  300.00 |  287 |  311 |          441 |         10 |           0 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2021/12/02 18:09:57, Users: 10, Total RPS: 17, Total Fail Ratio: 0.0%
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |         12 |       0 |   1100 | 1153.92 | 1081 | 1464 |          300 |          6 |           0 |
+| request-POST | post json data  |         20 |       0 |    270 |  279.70 |  269 |  337 |          420 |          6 |           0 |
+| request-POST | post form data  |         20 |       0 |    270 |  272.85 |  269 |  279 |          441 |         10 |           0 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+</code></pre><p>If you want to disable console output, you can add a <code>--disable-console-output</code> flag.</p>
+<pre tabindex=0><code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --disable-console-output
+</code></pre><p>You can reference this <a href=cmd/hrp_boom.md>doc</a> for all command arguments.</p>
+<h2 id=report-metrics-to-prometheus-pushgateway>Report metrics to Prometheus Pushgateway</h2>
+<p>Besides printing load testing results in console, you can also push metrics to <a href=https://github.com/prometheus/pushgateway>Prometheus Pushgateway</a>, and then you can configure pretty graphs on <a href=https://grafana.com/>Grafana</a>.</p>
+<pre tabindex=0><code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --prometheus-gateway http://127.0.0.1:9091
+</code></pre><p>You can deploy the Pushgateway using the <a href=https://hub.docker.com/r/prom/pushgateway>prom/pushgateway</a> Docker image at ease.</p>
+<pre tabindex=0><code>$ docker pull prom/pushgateway
+$ docker run -d -p 9091:9091 prom/pushgateway
+</code></pre>
 </div>
 </main>
 </div>

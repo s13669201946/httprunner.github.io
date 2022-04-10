@@ -15,19 +15,19 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>整体概览 | HttpRunner</title>
-<meta name=description content="HttpRunner 是什么？">
+<meta name=description content="HttpRunner 的概述介绍、设计理念、特性特性">
 <meta property="og:title" content="整体概览">
-<meta property="og:description" content="HttpRunner 是什么？">
+<meta property="og:description" content="HttpRunner 的概述介绍、设计理念、特性特性">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/introduction/overview/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-04-08T23:14:39+08:00">
+<meta property="article:modified_time" content="2022-04-10T18:13:42+08:00">
 <meta itemprop=name content="整体概览">
-<meta itemprop=description content="HttpRunner 是什么？">
-<meta itemprop=dateModified content="2022-04-08T23:14:39+08:00">
+<meta itemprop=description content="HttpRunner 的概述介绍、设计理念、特性特性">
+<meta itemprop=dateModified content="2022-04-10T18:13:42+08:00">
 <meta itemprop=wordCount content="72">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="整体概览">
-<meta name=twitter:description content="HttpRunner 是什么？">
+<meta name=twitter:description content="HttpRunner 的概述介绍、设计理念、特性特性">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -106,21 +106,40 @@ Versions
 <a href=/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionfaq><span>常见问题</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsquickstart-li>
-<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsquickstart><span>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstart-li>
+<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstart><span>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guide-li>
+<a href=/docs/user-guide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guide><span>用户指南</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartinstallation-li>
-<a href=/docs/quickstart/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartinstallation><span>安装说明</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartquickstart-li>
-<a href=/docs/quickstart/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartquickstart><span>快速上手</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsquickstartloadtest-li>
-<a href=/docs/quickstart/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartloadtest><span>压力测试</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideinstallation-li>
+<a href=/docs/user-guide/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideinstallation><span>安装说明</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidescaffold-li>
+<a href=/docs/user-guide/scaffold/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span>脚手架创建项目</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideproject-structure-li>
+<a href=/docs/user-guide/project-structure/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideproject-structure><span>测试工程目录结构</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideloadtest-li>
+<a href=/docs/user-guide/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideloadtest><span>压力测试</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
 <a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>示例展示</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docscontribution-guidelines-li>
+<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docscontribution-guidelines><span>协作共建</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesversion-li>
+<a href=/docs/contribution-guidelines/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesversion><span>版本号机制</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesissues-li>
+<a href=/docs/contribution-guidelines/issues/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesissues><span>GitHub Issues</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinescommunity-li>
+<a href=/docs/contribution-guidelines/community/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinescommunity><span>用户社区</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesmilestones-li>
+<a href=/docs/contribution-guidelines/milestones/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesmilestones><span>版本规划</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
+<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li>
-<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>商业化服务</span></a>
+<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>增值服务</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesdem-li>
 <a href=/docs/services/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdem><span>全球数字体验监测平台</span></a>
@@ -128,10 +147,6 @@ Versions
 <a href=/docs/services/consultation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesconsultation><span>全球数字体验咨询服务</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docscontribution-guidelines-li>
-<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelines><span>贡献指南</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
-<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li>
 </ul>
 </li>
@@ -166,7 +181,7 @@ Versions
 </nav>
 <div class=td-content>
 <h1>整体概览</h1>
-<div class=lead>HttpRunner 是什么？</div>
+<div class=lead>HttpRunner 的概述介绍、设计理念、特性特性</div>
 <header class=article-meta>
 </header>
 <p><code>HttpRunner</code> 是一个开源的 API 测试工具，支持 HTTP(S)/HTTP2/WebSocket/RPC 等网络协议，涵盖接口测试、性能测试、数字体验监测等测试类型。简单易用，功能强大，具有丰富的插件化机制和高度的可扩展能力。</p>
@@ -199,21 +214,6 @@ Versions
 <li>设计理念：测试用例组织支持分层设计，格式统一，易于实现测试用例的维护和复用</li>
 </ul>
 <p>更多内容详见 <a href=/blog/user-survey-report>HttpRunner 首轮用户调研报告（2022.02）</a></p>
-<style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
-<div class=d-print-none>
-<h2 class=feedback--title>Feedback</h2>
-<p class=feedback--question>Was this page helpful?</p>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
-<p class="feedback--response feedback--response-yes">
-Glad to hear it! Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
-<p class="feedback--response feedback--response-no">
-Sorry to hear that. Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
-</div>
-<script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
-<br>
 </div>
 </main>
 </div>

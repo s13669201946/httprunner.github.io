@@ -14,20 +14,20 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>压力测试 | HttpRunner</title>
-<meta name=description content="How to run load test.">
-<meta property="og:title" content="压力测试">
-<meta property="og:description" content="How to run load test.">
+<title>测试工程目录结构 | HttpRunner</title>
+<meta name=description content="介绍 HttpRunner 测试工程的目录结构">
+<meta property="og:title" content="测试工程目录结构">
+<meta property="og:description" content="介绍 HttpRunner 测试工程的目录结构">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://httprunner.com/docs/quickstart/loadtest/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-04-07T19:19:08+08:00">
-<meta itemprop=name content="压力测试">
-<meta itemprop=description content="How to run load test.">
-<meta itemprop=dateModified content="2022-04-07T19:19:08+08:00">
-<meta itemprop=wordCount content="500">
+<meta property="og:url" content="https://httprunner.com/docs/user-guide/project-structure/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-04-10T23:58:28+08:00">
+<meta itemprop=name content="测试工程目录结构">
+<meta itemprop=description content="介绍 HttpRunner 测试工程的目录结构">
+<meta itemprop=dateModified content="2022-04-10T23:58:28+08:00">
+<meta itemprop=wordCount content="0">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="压力测试">
-<meta name=twitter:description content="How to run load test.">
+<meta name=twitter:title content="测试工程目录结构">
+<meta name=twitter:description content="介绍 HttpRunner 测试工程的目录结构">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -65,7 +65,7 @@ Versions
 中文
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/en/docs/quickstart/loadtest/>English</a>
+<a class=dropdown-item href=/en/>English</a>
 </div>
 </li>
 </ul>
@@ -88,7 +88,7 @@ Versions
 中文
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
-<a class=dropdown-item href=/en/docs/quickstart/loadtest/>English</a>
+<a class=dropdown-item href=/en/>English</a>
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
@@ -106,21 +106,40 @@ Versions
 <a href=/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionfaq><span>常见问题</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsquickstart-li>
-<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsquickstart><span>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstart-li>
+<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstart><span>快速上手</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guide-li>
+<a href=/docs/user-guide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guide><span>用户指南</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstartinstallation-li>
-<a href=/docs/quickstart/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartinstallation><span>安装说明</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstartquickstart-li>
-<a href=/docs/quickstart/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstartquickstart><span>快速上手</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsquickstartloadtest-li>
-<a href=/docs/quickstart/loadtest/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsquickstartloadtest><span class=td-sidebar-nav-active-item>压力测试</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideinstallation-li>
+<a href=/docs/user-guide/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideinstallation><span>安装说明</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidescaffold-li>
+<a href=/docs/user-guide/scaffold/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span>脚手架创建项目</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guideproject-structure-li>
+<a href=/docs/user-guide/project-structure/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideproject-structure><span class=td-sidebar-nav-active-item>测试工程目录结构</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideloadtest-li>
+<a href=/docs/user-guide/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideloadtest><span>压力测试</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
 <a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>示例展示</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docscontribution-guidelines-li>
+<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docscontribution-guidelines><span>协作共建</span></a>
+<ul class="ul-2 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesversion-li>
+<a href=/docs/contribution-guidelines/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesversion><span>版本号机制</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesissues-li>
+<a href=/docs/contribution-guidelines/issues/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesissues><span>GitHub Issues</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinescommunity-li>
+<a href=/docs/contribution-guidelines/community/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinescommunity><span>用户社区</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesmilestones-li>
+<a href=/docs/contribution-guidelines/milestones/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesmilestones><span>版本规划</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
+<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li>
-<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>商业化服务</span></a>
+<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>增值服务</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesdem-li>
 <a href=/docs/services/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdem><span>全球数字体验监测平台</span></a>
@@ -128,10 +147,6 @@ Versions
 <a href=/docs/services/consultation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesconsultation><span>全球数字体验咨询服务</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docscontribution-guidelines-li>
-<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelines><span>贡献指南</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
-<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
 </li>
 </ul>
 </li>
@@ -142,12 +157,6 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
-<div class=td-toc><nav id=TableOfContents>
-<ul>
-<li><a href=#start-with-cli>Start with CLI</a></li>
-<li><a href=#report-metrics-to-prometheus-pushgateway>Report metrics to Prometheus Pushgateway</a></li>
-</ul>
-</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -156,76 +165,18 @@ Versions
 <a href=https://httprunner.com/docs/>文档</a>
 </li>
 <li class=breadcrumb-item>
-<a href=https://httprunner.com/docs/quickstart/>快速上手</a>
+<a href=https://httprunner.com/docs/user-guide/>用户指南</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://httprunner.com/docs/quickstart/loadtest/>压力测试</a>
+<a href=https://httprunner.com/docs/user-guide/project-structure/>测试工程目录结构</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>压力测试</h1>
-<div class=lead>How to run load test.</div>
+<h1>测试工程目录结构</h1>
+<div class=lead>介绍 HttpRunner 测试工程的目录结构</div>
 <header class=article-meta>
 </header>
-<h2 id=start-with-cli>Start with CLI</h2>
-<p><code>HttpRunner</code> supports running load test without extra work. You can use <code>hrp boom</code> command to run YAML/JSON testcases in load testing mode.</p>
-<p>By default, hrp will print load testing results in console output, refreshed every 3 seconds.</p>
-<pre tabindex=0><code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1
-6:09PM INF Set log to pretty console
-6:09PM INF Set log level to INFO
-6:09PM INF Set log level to WARN
-2021/12/02 18:09:48 Spawning 10 clients immediately
-Current time: 2021/12/02 18:09:51, Users: 10, Total RPS: 20, Total Fail Ratio: 0.0%
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-| request-GET  | get with params |         10 |       0 |   2400 | 2423.00 | 2422 | 2424 |          300 |         10 |           0 |
-| request-POST | post json data  |         10 |       0 |    310 |  304.50 |  301 |  307 |          420 |         10 |           0 |
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-
-Current time: 2021/12/02 18:09:54, Users: 10, Total RPS: 16, Total Fail Ratio: 0.0%
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-| request-GET  | get with params |         18 |       0 |   1200 | 1157.39 | 1083 | 1367 |          300 |          9 |           0 |
-| request-POST | post json data  |         10 |       0 |    290 |  290.20 |  287 |  293 |          420 |         10 |           0 |
-| request-POST | post form data  |         20 |       0 |    310 |  300.00 |  287 |  311 |          441 |         10 |           0 |
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-
-Current time: 2021/12/02 18:09:57, Users: 10, Total RPS: 17, Total Fail Ratio: 0.0%
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-| request-GET  | get with params |         12 |       0 |   1100 | 1153.92 | 1081 | 1464 |          300 |          6 |           0 |
-| request-POST | post json data  |         20 |       0 |    270 |  279.70 |  269 |  337 |          420 |          6 |           0 |
-| request-POST | post form data  |         20 |       0 |    270 |  272.85 |  269 |  279 |          441 |         10 |           0 |
-+--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
-</code></pre><p>If you want to disable console output, you can add a <code>--disable-console-output</code> flag.</p>
-<pre tabindex=0><code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --disable-console-output
-</code></pre><p>You can reference this <a href=cmd/hrp_boom.md>doc</a> for all command arguments.</p>
-<h2 id=report-metrics-to-prometheus-pushgateway>Report metrics to Prometheus Pushgateway</h2>
-<p>Besides printing load testing results in console, you can also push metrics to <a href=https://github.com/prometheus/pushgateway>Prometheus Pushgateway</a>, and then you can configure pretty graphs on <a href=https://grafana.com/>Grafana</a>.</p>
-<pre tabindex=0><code>$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --prometheus-gateway http://127.0.0.1:9091
-</code></pre><p>You can deploy the Pushgateway using the <a href=https://hub.docker.com/r/prom/pushgateway>prom/pushgateway</a> Docker image at ease.</p>
-<pre tabindex=0><code>$ docker pull prom/pushgateway
-$ docker run -d -p 9091:9091 prom/pushgateway
-</code></pre>
-<style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
-<div class=d-print-none>
-<h2 class=feedback--title>Feedback</h2>
-<p class=feedback--question>Was this page helpful?</p>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
-<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
-<p class="feedback--response feedback--response-yes">
-Glad to hear it! Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
-<p class="feedback--response feedback--response-no">
-Sorry to hear that. Please <a href=https://github.com/httprunner/httprunner.github.io/issues/new>tell us how we can improve</a>.
-</p>
-</div>
-<script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
-<br>
 </div>
 </main>
 </div>

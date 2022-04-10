@@ -20,7 +20,7 @@ function echoWarn() {
 export -f echoError
 
 function get_latest_version() {
-    #   <title>Release v0.4.0 · httprunner/hrp · GitHub</title>
+    #   <title>Release v0.4.0 · httprunner/httprunner · GitHub</title>
     curl -sL https://github.com/httprunner/httprunner/releases/latest | grep '<title>Release' | cut -d" " -f4
 }
 
