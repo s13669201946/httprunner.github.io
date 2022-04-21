@@ -50,4 +50,17 @@ HttpRunner 的 Logo 如下所示：
 
 HttpRunner 采用了非常宽松的开源协议 Apache-2.0，商业友好，可以永久免费使用无任何限制。
 
+## Go 版本与 Python 版本的差异？
+
+## 使用 HttpRunner v4.0 必须要学习 Go 语言么？
+
+先说结论，HttpRunner v4.0 不需要用户具有 Golang 基础。
+
+HttpRunner v4.0 支持 JSON/YAML 格式的测试用例，动态运算逻辑（plugin）支持多种编程语言，因此使用的方式和体验可以做到基本和 v2.x 一致。
+
+同时，HttpRunner v4.0 具有双引擎，完整支持 pytest 格式的脚本，因此在使用体验上也可以做到和 v3.x 基本一致。
+
+但如果你是期望使用 HttpRunner v4.0 做专业的性能测试，那么最好还是选择使用 golang 编写插件，单机发压性能（QPS）可以达到 2w 以上，这是 Python 插件远远无法达到的。
+
+
 [httprunner/funplugin]: https://github.com/httprunner/funplugin
