@@ -3,7 +3,7 @@ title: HttpRunner 首轮用户调研报告（2022.02）
 linkTitle: HttpRunner 首轮用户调研报告（2022.02）
 slug: user-survey-report
 date: 2022-02-13
-description: 感谢你的 HttpRunner 的关注和支持！
+description: 感谢你对 HttpRunner 的关注和支持！
 ---
 
 2022.02.09，我发起了首轮面向 HttpRunner 用户的[调研问卷](/blog/user-survey)，截至当前，共收集到 252 份有效问卷。在此非常感谢所有填写问卷的朋友们，感谢你们的认可和建议！
