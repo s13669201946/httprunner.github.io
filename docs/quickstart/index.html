@@ -20,11 +20,11 @@
 <meta property="og:description" content="10 分钟内快速上手 HttpRunner">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/quickstart/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-04-10T23:58:28+08:00">
+<meta property="article:modified_time" content="2022-04-24T22:31:46+08:00">
 <meta itemprop=name content="快速上手">
 <meta itemprop=description content="10 分钟内快速上手 HttpRunner">
-<meta itemprop=dateModified content="2022-04-10T23:58:28+08:00">
-<meta itemprop=wordCount content="1067">
+<meta itemprop=dateModified content="2022-04-24T22:31:46+08:00">
+<meta itemprop=wordCount content="2678">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="快速上手">
 <meta name=twitter:description content="10 分钟内快速上手 HttpRunner">
@@ -206,7 +206,7 @@ monitoring (DEM) test types. Enjoy! ✨ 🚀 ✨
 License: Apache-2.0
 Website: https://httprunner.com
 Github: https://github.com/httprunner/httprunner
-Copyright 2021 debugtalk
+Copyright 2017 debugtalk
 
 Usage:
   hrp [command]
@@ -214,6 +214,7 @@ Usage:
 Available Commands:
   boom         run load test with boomer
   completion   generate the autocompletion script for the specified shell
+  convert      convert JSON/YAML testcases to pytest/gotest scripts
   har2case     convert HAR to json/yaml testcase files
   help         Help about any command
   pytest       run API test with pytest
@@ -232,24 +233,25 @@ Use &#34;hrp [command] --help&#34; for more information about a command.
 <p>HttpRunner 支持使用脚手架创建示例项目。</p>
 <p>执行 <code>hrp startproject</code> 命令，即可初始化指定名称的项目工程。</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp startproject demo
-10:39PM INF Set log to color console other than JSON format.
-10:39PM ??? Set log level
-10:39PM INF create new scaffold project <span style=color:#000>pluginType</span><span style=color:#ce5c00;font-weight:700>=</span>py <span style=color:#000>projectName</span><span style=color:#ce5c00;font-weight:700>=</span>demo
-10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo
-10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/har
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/har/.keep
-10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases
-10:39PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/reports
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/reports/.keep
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/.gitignore
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/.env
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_with_funplugin.json
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_requests.yml
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_ref_testcase.yml
-10:39PM INF start to create hashicorp python plugin
-10:39PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/debugtalk.py
-10:39PM INF python3 venv is ready <span style=color:#000>funppyVersion</span><span style=color:#ce5c00;font-weight:700>=</span>0.4.2 <span style=color:#000>venvDir</span><span style=color:#ce5c00;font-weight:700>=</span>/Users/debugtalk/.hrp/venv
-10:39PM INF create scaffold success <span style=color:#000>projectName</span><span style=color:#ce5c00;font-weight:700>=</span>demo
+10:13PM INF Set log to color console other than JSON format.
+10:13PM ??? Set log level
+10:13PM INF create new scaffold project <span style=color:#000>force</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#204a87>false</span> <span style=color:#000>pluginType</span><span style=color:#ce5c00;font-weight:700>=</span>py <span style=color:#000>projectName</span><span style=color:#ce5c00;font-weight:700>=</span>demo
+10:13PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo
+10:13PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/har
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/har/.keep
+10:13PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases
+10:13PM INF create folder <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/reports
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/reports/.keep
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/.gitignore
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/.env
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_with_funplugin.json
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_requests.yml
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/testcases/demo_ref_testcase.yml
+10:13PM INF start to create hashicorp python plugin
+10:13PM INF create file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>demo/debugtalk.py
+10:13PM INF ensure python3 venv <span style=color:#000>packages</span><span style=color:#ce5c00;font-weight:700>=[</span><span style=color:#4e9a06>&#34;funppy==v0.4.3&#34;</span><span style=color:#ce5c00;font-weight:700>]</span> <span style=color:#000>python</span><span style=color:#ce5c00;font-weight:700>=</span>/Users/debugtalk/.hrp/venv/bin/python
+10:13PM INF python package is ready <span style=color:#000>name</span><span style=color:#ce5c00;font-weight:700>=</span>funppy <span style=color:#000>version</span><span style=color:#ce5c00;font-weight:700>=</span>0.4.3
+10:13PM INF create scaffold success <span style=color:#000>projectName</span><span style=color:#ce5c00;font-weight:700>=</span>demo
 </code></pre></div><p>如下是项目工程的目录结构：</p>
 <div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ tree demo -a
 demo
@@ -367,10 +369,10 @@ demo
 <p>关于变量、函数、插件等概念，可详细阅读<a href=/docs/introduction/concepts/>核心概念</a>。</p>
 <h2 id=运行接口测试>运行接口测试</h2>
 <p>测试用例就绪后，通过 <code>hrp run</code> 命令即可执行指定的测试用例；如需生成 HTML 测试报告，可附带 <code>--gen-html-report</code> 参数。</p>
-<details>
-<summary>$ hrp run testcases/demo_requests.yml testcases/demo_ref_testcase.yml --gen-html-report</summary>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ cd demo/
-$ hrp run testcases/demo_requests.yml testcases/demo_ref_testcase.yml --gen-html-report
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp run demo/testcases/demo_requests.yml demo/testcases/demo_ref_testcase.yml --gen-html-report
+</code></pre></div><details>
+<summary>查看运行日志</summary>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp run demo/testcases/demo_requests.yml demo/testcases/demo_ref_testcase.yml --gen-html-report
 11:28PM INF Set log to color console other than JSON format.
 11:28PM ??? Set log level
 11:28PM INF [init] SetFailfast failfast=true
@@ -469,6 +471,8 @@ Vary: Accept-Encoding
 11:28PM INF validate body.form.foo3 assertMethod=eq checkExpr=body.form.foo3 checkValue=bar21 expectValue=bar21 result=true
 11:28PM INF run step end exportVars=null step=&#34;post form data&#34; success=true type=request
 11:28PM INF run testcase end testcase=&#34;request methods testcase with functions&#34;
+11:28PM INF create folder path=reports
+11:28PM INF generate HTML report path=reports/report-1650809917.html
 11:28PM INF quit hashicorp plugin process
 </code></pre></div></details>
 <p>测试生成的 HTML 报告如下所示。</p>
@@ -476,9 +480,130 @@ Vary: Accept-Encoding
 <p>在 HTML 测试报告中，可以点击查看到详细的请求内容和响应结果，详见 <a href=/reports/demo-report.html>demo-html-report</a>。</p>
 <h2 id=运行性能测试>运行性能测试</h2>
 <p>针对已有的接口测试用例，HttpRunner 无需任何额外的工作，即可通过 <code>hrp boom</code> 命令运行性能测试；通过 <code>--spawn-count</code> 参数可指定并发用户数，通过 <code>--spawn-rate</code> 可指定起始发压斜率。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp boom testcases/demo_requests.yml --spawn-count <span style=color:#0000cf;font-weight:700>100</span> --spawn-rate <span style=color:#0000cf;font-weight:700>10</span>
+</code></pre></div><p>在压测运行过程中，每隔 3 秒打印一次性能汇总数据；通过 <code>CTRL + C</code> 终止测试后，会打印整个压测过程的汇总数据（Statistics Summary）。</p>
 <details>
-<summary>$ hrp boom testcases/demo_requests.yml --spawn-count 100 --spawn-rate 10</summary>
-</details>
+<summary>查看运行日志</summary>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ cd demo/
+$ hrp boom testcases/demo_requests.yml --spawn-count 100 --spawn-rate 10
+10:19PM INF Set log to color console other than JSON format.
+10:19PM INF get current ulimit limit=1048575
+10:19PM ??? Set log level
+Current time: 2022/04/24 22:19:40, Users: 29, State: spawning, Total RPS: 5.0, Total Average Response Time: 1868.9ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 0 Passed, 0 Failed
++-------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|    TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++-------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET | get with params |         15 |       0 |   1800 | 1868.93 | 1278 | 2778 |          334 |       5.00 |        0.00 |
++-------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:19:43, Users: 59, State: spawning, Total RPS: 18.8, Total Average Response Time: 1068.4ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 21 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |         37 |       0 |    890 |  943.57 |  511 | 2283 |          334 |      12.33 |        0.00 |
+| request-POST | post raw text   |         40 |       0 |    890 |  979.08 |  510 | 2225 |          440 |      13.33 |        0.00 |
+| request-POST | post form data  |         21 |       0 |    830 |  886.43 |  486 | 1439 |          478 |       7.00 |        0.00 |
+| transaction  | Action          |         21 |       0 |   3500 | 3613.71 | 2346 | 5448 |            0 |       7.00 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:19:46, Users: 89, State: spawning, Total RPS: 36.8, Total Average Response Time: 1036.6ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 79 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |         90 |       0 |    770 | 1036.70 |  385 | 2643 |          334 |      30.00 |        0.00 |
+| request-POST | post form data  |         58 |       0 |    760 | 1052.45 |  386 | 2867 |          478 |      19.33 |        0.00 |
+| request-POST | post raw text   |         70 |       0 |    730 |  972.26 |  334 | 2454 |          440 |      23.33 |        0.00 |
+| transaction  | Action          |         58 |       0 |   3100 | 3175.78 | 1798 | 5490 |            0 |      19.33 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:19:49, Users: 100, State: running, Total RPS: 49.3, Total Average Response Time: 989.6ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 167 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |         91 |       0 |    700 |  940.93 |  385 | 4030 |          334 |      30.33 |        0.00 |
+| request-POST | post raw text   |         82 |       0 |    790 |  959.46 |  348 | 2990 |          440 |      27.33 |        0.00 |
+| request-POST | post form data  |         88 |       0 |    680 |  891.30 |  359 | 2826 |          478 |      29.33 |        0.00 |
+| transaction  | Action          |         88 |       0 |   2900 | 3092.40 | 1494 | 6534 |            0 |      29.33 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:19:52, Users: 100, State: running, Total RPS: 66.5, Total Average Response Time: 862.9ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 300 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |        130 |       0 |    570 |  632.65 |  336 | 2651 |          334 |      43.33 |        0.00 |
+| request-POST | post raw text   |        143 |       0 |    540 |  692.20 |  288 | 5288 |          440 |      47.67 |        0.00 |
+| request-POST | post form data  |        133 |       0 |    560 |  707.69 |  289 | 5225 |          478 |      44.33 |        0.00 |
+| transaction  | Action          |        133 |       0 |   1800 | 2364.09 | 1287 | 6991 |            0 |      44.33 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:19:55, Users: 100, State: running, Total RPS: 79.6, Total Average Response Time: 805.1ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 445 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+| request-GET  | get with params |        143 |       0 |    560 |  743.29 | 284 | 3582 |          334 |      47.67 |        0.00 |
+| request-POST | post raw text   |        147 |       0 |    430 |  635.65 | 294 | 4109 |          440 |      49.00 |        0.00 |
+| request-POST | post form data  |        145 |       0 |    480 |  639.61 | 287 | 2945 |          478 |      48.33 |        0.00 |
+| transaction  | Action          |        145 |       0 |   2100 | 2214.16 | 997 | 7045 |            0 |      48.33 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:19:58, Users: 100, State: running, Total RPS: 85.4, Total Average Response Time: 781.9ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 566 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |        122 |       0 |    690 |  821.39 |  289 | 2697 |          334 |      40.67 |        0.00 |
+| request-POST | post raw text   |        118 |       0 |    440 |  570.67 |  284 | 1886 |          440 |      39.33 |        0.00 |
+| request-POST | post form data  |        121 |       0 |    570 |  674.20 |  281 | 1956 |          478 |      40.33 |        0.00 |
+| transaction  | Action          |        121 |       0 |   1900 | 2184.42 | 1085 | 5591 |            0 |      40.33 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:20:01, Users: 100, State: running, Total RPS: 89.8, Total Average Response Time: 772.1ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 686 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+| request-GET  | get with params |        121 |       0 |    450 |  692.89 | 277 | 4343 |          334 |      40.33 |        0.00 |
+| request-POST | post raw text   |        120 |       0 |    450 |  766.39 | 289 | 2768 |          440 |      40.00 |        0.00 |
+| request-POST | post form data  |        120 |       0 |    390 |  710.49 | 281 | 2358 |          478 |      40.00 |        0.00 |
+| transaction  | Action          |        120 |       0 |   2300 | 2387.42 | 944 | 6530 |            0 |      40.00 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:20:04, Users: 100, State: running, Total RPS: 92.2, Total Average Response Time: 771.1ms, Total Fail Ratio: 0.0%
+Accumulated Transactions: 794 Passed, 0 Failed
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN  | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+| request-GET  | get with params |        117 |       0 |    420 |  820.98 |  288 | 9068 |          334 |      39.00 |        0.00 |
+| request-POST | post raw text   |        109 |       0 |    420 |  696.28 |  285 | 3644 |          440 |      36.33 |        0.00 |
+| request-POST | post form data  |        108 |       0 |    420 |  773.34 |  277 | 4349 |          478 |      36.00 |        0.00 |
+| transaction  | Action          |        108 |       0 |   1700 | 2283.30 | 1023 | 5632 |            0 |      36.00 |        0.00 |
++--------------+-----------------+------------+---------+--------+---------+------+------+--------------+------------+-------------+
+
+Current time: 2022/04/24 22:20:07, Users: 100, State: quitting, Total RPS: 92.9, Total Average Response Time: 772.6ms, Total Fail Ratio: 1.9%
+Accumulated Transactions: 882 Passed, 54 Failed
++--------------+-----------------+------------+---------+--------+---------+-----+-------+--------------+------------+-------------+
+|     TYPE     |      NAME       | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN |  MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++--------------+-----------------+------------+---------+--------+---------+-----+-------+--------------+------------+-------------+
+| request-GET  | get with params |         75 |       0 |    410 |  967.80 | 268 |  7825 |          334 |      25.00 |        0.00 |
+| request-POST | post raw text   |        110 |      28 |    360 |  682.74 | 410 |  4683 |          328 |      36.67 |        9.33 |
+| request-POST | post form data  |        114 |      26 |    360 |  764.04 | 437 |  8487 |          368 |      38.00 |        8.67 |
+| transaction  | Action          |        142 |      54 |   2100 | 2593.81 | 317 | 11008 |            0 |      47.33 |       18.00 |
++--------------+-----------------+------------+---------+--------+---------+-----+-------+--------------+------------+-------------+
+
+=========================================== Statistics Summary ==========================================
+Current time: 2022/04/24 22:20:07, Users: 100, Duration: 30s, Accumulated Transactions: 882 Passed, 54 Failed
++-------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+| NAME  | # REQUESTS | # FAILS | MEDIAN | AVERAGE | MIN | MAX  | CONTENT SIZE | # REQS/SEC | # FAILS/SEC |
++-------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+| Total |       2788 |      54 |    590 |  772.65 | 437 | 9068 |          407 |      92.93 |        1.80 |
++-------+------------+---------+--------+---------+-----+------+--------------+------------+-------------+
+</code></pre></div></details>
 <h2 id=总结>总结</h2>
 <p>通过上述演示，相信大家已经对 HttpRunner 有了一个初步的印象，并且应该可以初步将 HttpRunner 上手跑起来了。</p>
 <p>限于篇幅，本文仅展示了 HttpRunner 最基础的功能，大家可以通过进一步阅读<a href=/docs/user-guide/>用户指南</a>探索 HttpRunner 的全部功能特性。</p>
