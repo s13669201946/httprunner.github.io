@@ -56,7 +56,7 @@ HttpRunner 采用了非常宽松的开源协议 Apache-2.0，商业友好，可�
 
 先说结论，HttpRunner v4.0 不需要用户具有 Golang 基础。
 
-HttpRunner v4.0 支持 JSON/YAML 格式的测试用例，动态运算逻辑（plugin）支持多种编程语言，因此使用的方式和体验可以做到基本和 v2.x 一致。
+HttpRunner v4.0 支持 JSON/YAML 格式的测试用例，动态运算逻辑（plugin）支持多种编程语言（包括 Python），因此使用的方式和体验可以做到基本和 v2.x 一致。
 
 同时，HttpRunner v4.0 具有双引擎，完整支持 pytest 格式的脚本，因此在使用体验上也可以做到和 v3.x 基本一致。
 
