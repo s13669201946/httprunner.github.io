@@ -20,8 +20,7 @@ function echoWarn() {
 export -f echoError
 
 function get_latest_version() {
-    #   <title>Release v0.4.0 · httprunner/httprunner · GitHub</title>
-    curl -sL https://github.com/httprunner/httprunner/releases/latest | grep '<title>Release' | cut -d" " -f4
+    curl -ksSL https://httprunner.oss-cn-beijing.aliyuncs.com/VERSION
 }
 
 function get_os() {
@@ -60,6 +59,12 @@ function extract_pkg() {
 function main() {
     echoInfo "Detect target hrp package..."
     version=$(get_latest_version)
+    if [[ $version != v* ]]; then
+        echo "get hrp latest version failed:"
+        echo "$version"
+        exit 1
+    fi
+
     os=$(get_os)
     echo "Current OS: $os"
     arch=$(get_arch)
@@ -71,6 +76,8 @@ function main() {
     url="https://httprunner.oss-cn-beijing.aliyuncs.com/$pkg"
     if ! curl --output /dev/null --silent --head --fail "$url"; then
         # aliyun OSS url is invalid, try to download from github
+        version=$(get_latest_version)
+        pkg="hrp-$version-$os-$arch$pkg_suffix"
         url="https://github.com/httprunner/httprunner/releases/download/$version/$pkg"
     fi
 
