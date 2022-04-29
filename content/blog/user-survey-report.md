@@ -1,6 +1,5 @@
 ---
 title: HttpRunner 首轮用户调研报告（2022.02）
-linkTitle: HttpRunner 首轮用户调研报告（2022.02）
 slug: user-survey-report
 date: 2022-02-13
 description: 感谢你对 HttpRunner 的关注和支持！

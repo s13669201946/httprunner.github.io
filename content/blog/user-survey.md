@@ -1,6 +1,5 @@
 ---
 title: "HttpRunner 核心用户招募中，你要加群么？"
-linkTitle: "HttpRunner 核心用户招募中，你要加群么？"
 slug: user-survey
 date: 2022-02-09
 description: 欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！

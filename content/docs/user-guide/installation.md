@@ -18,9 +18,9 @@ description: 本文介绍了 HttpRunner 的几种安装方式。
 
 ```bash
 # install via curl
-$ bash -c "$(curl -ksSL https://httprunner.oss-cn-beijing.aliyuncs.com/install.sh)"
+$ bash -c "$(curl -ksSL https://httprunner.com/script/install.sh)"
 # install via wget
-$ bash -c "$(wget https://httprunner.oss-cn-beijing.aliyuncs.com/install.sh -O -)"
+$ bash -c "$(wget https://httprunner.com/script/install.sh -O -)"
 ```
 
 ### 下载编译产物
