@@ -1,5 +1,5 @@
 ---
-title: "核心概念"
+title: 核心概念
 weight: 12
 description: HttpRunner 仅有的几个核心概念
 ---

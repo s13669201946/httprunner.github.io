@@ -1,5 +1,5 @@
 ---
-title: "Concepts"
+title: Concepts
 weight: 12
 description: The key concepts for HttpRunner.
 ---
