@@ -137,6 +137,14 @@ Versions
 <a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsextract-li>
 <a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span>参数提取（extract）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsdebugtalk-li>
+<a href=/docs/user-guide/enhance-tests/debugtalk/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsdebugtalk><span>自定义函数（debugtalk.xx）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsparameterize-li>
+<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span>参数化数据驱动（parameterize）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testshooks-li>
+<a href=/docs/user-guide/enhance-tests/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testshooks><span>Hook 机制（hooks）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvalidate-li>
+<a href=/docs/user-guide/enhance-tests/validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvalidate><span>结果校验（validate）</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-docsuser-guideprotocols-li>
@@ -146,6 +154,10 @@ Versions
 <a href=/docs/user-guide/protocols/h2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsh2><span>HTTP/2</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolswebsocket-li>
 <a href=/docs/user-guide/protocols/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolswebsocket><span>WebSocket</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolssql-li>
+<a href=/docs/user-guide/protocols/sql/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolssql><span>SQL</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsthrift-li>
+<a href=/docs/user-guide/protocols/thrift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsthrift><span>Thrift RPC</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-docsuser-guideapi-test-li>
@@ -323,7 +335,7 @@ demo
     └── demo_with_funplugin.json
 
 3 directories, 8 files
-</code></pre></div><p>其中，testcases 文件夹中包含了多个示例测试用例。关于 HttpRunner 测试工程的目录结构说明，可查看用户指南的<a href=/docs/user-guide/project-structure/>测试工程目录结构</a>部分。</p>
+</code></pre></div><p>其中，testcases 文件夹中包含了多个示例测试用例。关于 HttpRunner 测试工程的目录结构说明，可查看用户指南的<a href=http://localhost:1313/docs/introduction/concepts/#%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84>测试工程目录结构</a>部分。</p>
 <p>HttpRunner 创建脚手架项目时默认选择 Python 插件模式（兼容 v4 以前的版本），但同时还支持多种其它模式，可查看用户指南的<a href=/docs/user-guide/scaffold/>脚手架创建项目</a>部分了解更多详情。</p>
 <h2 id=初览测试用例>初览测试用例</h2>
 <p>接下来我们以 <code>demo_requests.yml</code> 为例，初步预览下 HttpRunner 的测试用例结构。</p>

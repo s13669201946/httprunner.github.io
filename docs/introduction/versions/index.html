@@ -15,19 +15,19 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>版本对比 | HttpRunner</title>
-<meta name=description content="HttpRunner v4 与历史版本 v1/v2/v3/hrp 的对比">
+<meta name=description content="HttpRunner 各版本的功能特性详细对比">
 <meta property="og:title" content="版本对比">
-<meta property="og:description" content="HttpRunner v4 与历史版本 v1/v2/v3/hrp 的对比">
+<meta property="og:description" content="HttpRunner 各版本的功能特性详细对比">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/introduction/versions/"><meta property="article:section" content="docs">
 <meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
 <meta itemprop=name content="版本对比">
-<meta itemprop=description content="HttpRunner v4 与历史版本 v1/v2/v3/hrp 的对比">
+<meta itemprop=description content="HttpRunner 各版本的功能特性详细对比">
 <meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
-<meta itemprop=wordCount content="201">
+<meta itemprop=wordCount content="278">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="版本对比">
-<meta name=twitter:description content="HttpRunner v4 与历史版本 v1/v2/v3/hrp 的对比">
+<meta name=twitter:description content="HttpRunner 各版本的功能特性详细对比">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -137,6 +137,14 @@ Versions
 <a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsextract-li>
 <a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span>参数提取（extract）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsdebugtalk-li>
+<a href=/docs/user-guide/enhance-tests/debugtalk/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsdebugtalk><span>自定义函数（debugtalk.xx）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsparameterize-li>
+<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span>参数化数据驱动（parameterize）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testshooks-li>
+<a href=/docs/user-guide/enhance-tests/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testshooks><span>Hook 机制（hooks）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvalidate-li>
+<a href=/docs/user-guide/enhance-tests/validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvalidate><span>结果校验（validate）</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-docsuser-guideprotocols-li>
@@ -146,6 +154,10 @@ Versions
 <a href=/docs/user-guide/protocols/h2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsh2><span>HTTP/2</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolswebsocket-li>
 <a href=/docs/user-guide/protocols/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolswebsocket><span>WebSocket</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolssql-li>
+<a href=/docs/user-guide/protocols/sql/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolssql><span>SQL</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsthrift-li>
+<a href=/docs/user-guide/protocols/thrift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsthrift><span>Thrift RPC</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-docsuser-guideapi-test-li>
@@ -212,6 +224,12 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#v4-与历史版本的对比>v4 与历史版本的对比</a></li>
+<li><a href=#v4-版本的-go--python-功能对比>v4 版本的 Go & Python 功能对比</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -229,10 +247,12 @@ Versions
 </nav>
 <div class=td-content>
 <h1>版本对比</h1>
-<div class=lead>HttpRunner v4 与历史版本 v1/v2/v3/hrp 的对比</div>
+<div class=lead>HttpRunner 各版本的功能特性详细对比</div>
 <header class=article-meta>
 </header>
-<p>为了让你感观更加清晰，我整理出了如下表格，详细对比了各个版本间的关键差异点。</p>
+<p>HttpRunner 经过近 5 年的迭代，已经进入到 v4.0 版本了。</p>
+<h2 id=v4-与历史版本的对比>v4 与历史版本的对比</h2>
+<p>通过如下表格，可详细了解各个版本间的关键差异点。</p>
 <table>
 <thead>
 <tr>
@@ -411,6 +431,80 @@ Versions
 <p>从上面的表格可以看出，HttpRunner v4 颇有点<strong>金刚葫芦娃</strong>的意思，囊括了之前所有版本的功能，并且增加了很多新特性。</p>
 <pre tabindex=0><code>HttpRunner v4 = v2 + v3 + hrp + ...
 </code></pre><p>在使用体验和用例格式兼容性方面，v4 也会与之前的 v2/v3/hrp 做到兼容，因此后续 HttpRunner 的维护工作都将转到 v4 版本，之前的版本将不再单独维护。</p>
+<h2 id=v4-版本的-go--python-功能对比>v4 版本的 Go & Python 功能对比</h2>
+<p>HttpRunner v4.0 同时采用了 Golang/Python 两种编程语言，底层会有两套相对独立的执行引擎，目标是兼具 Golang 的高性能和 pytest 的丰富生态。</p>
+<p>关键差异点对比如下：</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:center>引擎</th>
+<th style=text-align:center>Go</th>
+<th style=text-align:center>Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:center>脚本类型</td>
+<td style=text-align:center>YAML/JSON/gotest</td>
+<td style=text-align:center>YAML/JSON/pytest</td>
+</tr>
+<tr>
+<td style=text-align:center>网络协议</td>
+<td style=text-align:center><strong>多协议</strong> HTTP(S)/HTTP2/WebSocket/<em>TCP/RPC</em></td>
+<td style=text-align:center>HTTP(S)</td>
+</tr>
+<tr>
+<td style=text-align:center>脚手架工具</td>
+<td style=text-align:center>hrp startproject</td>
+<td style=text-align:center>/</td>
+</tr>
+<tr>
+<td style=text-align:center>用例生成工具</td>
+<td style=text-align:center>hrp har2case</td>
+<td style=text-align:center>/</td>
+</tr>
+<tr>
+<td style=text-align:center>脚本转换工具</td>
+<td style=text-align:center>hrp convert</td>
+<td style=text-align:center>/</td>
+</tr>
+<tr>
+<td style=text-align:center>插件化语言</td>
+<td style=text-align:center><strong>多语言</strong>（Go/Python/<em>Java/etc.</em>）</td>
+<td style=text-align:center>Python</td>
+</tr>
+<tr>
+<td style=text-align:center>运行环境依赖</td>
+<td style=text-align:center>与插件语言相关，详见<a href=http://localhost:1313/docs/user-guide/installation/#%E4%BE%9D%E8%B5%96%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E>依赖环境说明</a></td>
+<td style=text-align:center>Python 3.7+</td>
+</tr>
+<tr>
+<td style=text-align:center>脚本编写语法提示</td>
+<td style=text-align:center>gotest 链式调用</td>
+<td style=text-align:center>pytest 链式调用</td>
+</tr>
+<tr>
+<td style=text-align:center>运行接口测试</td>
+<td style=text-align:center>hrp run</td>
+<td style=text-align:center>hrp pytest</td>
+</tr>
+<tr>
+<td style=text-align:center>运行性能测试</td>
+<td style=text-align:center>hrp boom</td>
+<td style=text-align:center>/</td>
+</tr>
+<tr>
+<td style=text-align:center>网络性能采集</td>
+<td style=text-align:center>hrp run &ndash;http-stat</td>
+<td style=text-align:center>/</td>
+</tr>
+<tr>
+<td style=text-align:center>接口测试报告</td>
+<td style=text-align:center>html 自研（Go template）</td>
+<td style=text-align:center>pytest-html/allure</td>
+</tr>
+</tbody>
+</table>
 </div>
 </main>
 </div>

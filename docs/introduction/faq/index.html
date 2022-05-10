@@ -24,7 +24,7 @@
 <meta itemprop=name content="常见问题">
 <meta itemprop=description content="关于 HttpRunner 的常见问题（持续补充中）">
 <meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
-<meta itemprop=wordCount content="119">
+<meta itemprop=wordCount content="115">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="常见问题">
 <meta name=twitter:description content="关于 HttpRunner 的常见问题（持续补充中）">
@@ -137,6 +137,14 @@ Versions
 <a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsextract-li>
 <a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span>参数提取（extract）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsdebugtalk-li>
+<a href=/docs/user-guide/enhance-tests/debugtalk/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsdebugtalk><span>自定义函数（debugtalk.xx）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsparameterize-li>
+<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span>参数化数据驱动（parameterize）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testshooks-li>
+<a href=/docs/user-guide/enhance-tests/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testshooks><span>Hook 机制（hooks）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvalidate-li>
+<a href=/docs/user-guide/enhance-tests/validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvalidate><span>结果校验（validate）</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-docsuser-guideprotocols-li>
@@ -146,6 +154,10 @@ Versions
 <a href=/docs/user-guide/protocols/h2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsh2><span>HTTP/2</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolswebsocket-li>
 <a href=/docs/user-guide/protocols/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolswebsocket><span>WebSocket</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolssql-li>
+<a href=/docs/user-guide/protocols/sql/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolssql><span>SQL</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsthrift-li>
+<a href=/docs/user-guide/protocols/thrift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsthrift><span>Thrift RPC</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-docsuser-guideapi-test-li>
@@ -218,7 +230,6 @@ Versions
 <li><a href=#httprunner-支持的语言有哪些>HttpRunner 支持的语言有哪些？</a></li>
 <li><a href=#httprunner-logo-的含义>HttpRunner logo 的含义</a></li>
 <li><a href=#httprunner-的开源协议>HttpRunner 的开源协议？</a></li>
-<li><a href=#go-版本与-python-版本的差异>Go 版本与 Python 版本的差异？</a></li>
 <li><a href=#使用-httprunner-v40-必须要学习-go-语言么>使用 HttpRunner v4.0 必须要学习 Go 语言么？</a></li>
 </ul>
 </nav></div>
@@ -278,7 +289,6 @@ Versions
 </ul>
 <h2 id=httprunner-的开源协议>HttpRunner 的开源协议？</h2>
 <p>HttpRunner 采用了非常宽松的开源协议 Apache-2.0，商业友好，可以永久免费使用无任何限制。</p>
-<h2 id=go-版本与-python-版本的差异>Go 版本与 Python 版本的差异？</h2>
 <h2 id=使用-httprunner-v40-必须要学习-go-语言么>使用 HttpRunner v4.0 必须要学习 Go 语言么？</h2>
 <p>先说结论，HttpRunner v4.0 不需要用户具有 Golang 基础。</p>
 <p>HttpRunner v4.0 支持 JSON/YAML 格式的测试用例，动态运算逻辑（plugin）支持多种编程语言（包括 Python），因此使用的方式和体验可以做到基本和 v2.x 一致。</p>

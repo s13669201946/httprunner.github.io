@@ -14,20 +14,20 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>手工编写 | HttpRunner</title>
-<meta name=description content="手工编写 YAML/JSON/pytest/gotest 测试用例">
-<meta property="og:title" content="手工编写">
-<meta property="og:description" content="手工编写 YAML/JSON/pytest/gotest 测试用例">
+<title>参数化数据驱动（parameterize） | HttpRunner</title>
+<meta name=description content="基于参数化数据驱动可实现多组数据驱动测试执行">
+<meta property="og:title" content="参数化数据驱动（parameterize）">
+<meta property="og:description" content="基于参数化数据驱动可实现多组数据驱动测试执行">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://httprunner.com/docs/user-guide/gen-tests/write-cases/"><meta property="article:section" content="docs">
+<meta property="og:url" content="https://httprunner.com/docs/user-guide/enhance-tests/parameterize/"><meta property="article:section" content="docs">
 <meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
-<meta itemprop=name content="手工编写">
-<meta itemprop=description content="手工编写 YAML/JSON/pytest/gotest 测试用例">
+<meta itemprop=name content="参数化数据驱动（parameterize）">
+<meta itemprop=description content="基于参数化数据驱动可实现多组数据驱动测试执行">
 <meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
 <meta itemprop=wordCount content="0">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="手工编写">
-<meta name=twitter:description content="手工编写 YAML/JSON/pytest/gotest 测试用例">
+<meta name=twitter:title content="参数化数据驱动（parameterize）">
+<meta name=twitter:description content="基于参数化数据驱动可实现多组数据驱动测试执行">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -119,31 +119,31 @@ Versions
 <a href=/docs/user-guide/cli/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidecli><span>命令行工具</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidescaffold-li>
 <a href=/docs/user-guide/scaffold/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span>脚手架创建项目</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guidegen-tests-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guidegen-tests-li>
 <a href=/docs/user-guide/gen-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidegen-tests><span>准备测试用例</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidegen-testsrecord-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testsrecord-li>
 <a href=/docs/user-guide/gen-tests/record/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsrecord><span>录制生成</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidegen-testsconvert-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testsconvert-li>
 <a href=/docs/user-guide/gen-tests/convert/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsconvert><span>转换生成</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guidegen-testswrite-cases-li>
-<a href=/docs/user-guide/gen-tests/write-cases/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testswrite-cases><span class=td-sidebar-nav-active-item>手工编写</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testswrite-cases-li>
+<a href=/docs/user-guide/gen-tests/write-cases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testswrite-cases><span>手工编写</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideenhance-tests-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guideenhance-tests-li>
 <a href=/docs/user-guide/enhance-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideenhance-tests><span>增强测试用例</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvariables-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testsvariables-li>
 <a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsextract-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testsextract-li>
 <a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span>参数提取（extract）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsdebugtalk-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testsdebugtalk-li>
 <a href=/docs/user-guide/enhance-tests/debugtalk/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsdebugtalk><span>自定义函数（debugtalk.xx）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsparameterize-li>
-<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span>参数化数据驱动（parameterize）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testshooks-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guideenhance-testsparameterize-li>
+<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span class=td-sidebar-nav-active-item>参数化数据驱动（parameterize）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testshooks-li>
 <a href=/docs/user-guide/enhance-tests/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testshooks><span>Hook 机制（hooks）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvalidate-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testsvalidate-li>
 <a href=/docs/user-guide/enhance-tests/validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvalidate><span>结果校验（validate）</span></a>
 </li>
 </ul>
@@ -235,16 +235,16 @@ Versions
 <a href=https://httprunner.com/docs/user-guide/>用户指南</a>
 </li>
 <li class=breadcrumb-item>
-<a href=https://httprunner.com/docs/user-guide/gen-tests/>准备测试用例</a>
+<a href=https://httprunner.com/docs/user-guide/enhance-tests/>增强测试用例</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://httprunner.com/docs/user-guide/gen-tests/write-cases/>手工编写</a>
+<a href=https://httprunner.com/docs/user-guide/enhance-tests/parameterize/>参数化数据驱动（parameterize）</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>手工编写</h1>
-<div class=lead>手工编写 YAML/JSON/pytest/gotest 测试用例</div>
+<h1>参数化数据驱动（parameterize）</h1>
+<div class=lead>基于参数化数据驱动可实现多组数据驱动测试执行</div>
 <header class=article-meta>
 </header>
 </div>

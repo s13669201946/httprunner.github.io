@@ -15,19 +15,19 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>参数提取（extract） | HttpRunner</title>
-<meta name=description content="测试用例的参数提取机制，用于参数关联">
+<meta name=description content="基于参数提取机制实现响应结果字段提取和参数关联">
 <meta property="og:title" content="参数提取（extract）">
-<meta property="og:description" content="测试用例的参数提取机制，用于参数关联">
+<meta property="og:description" content="基于参数提取机制实现响应结果字段提取和参数关联">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/user-guide/enhance-tests/extract/"><meta property="article:section" content="docs">
 <meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
 <meta itemprop=name content="参数提取（extract）">
-<meta itemprop=description content="测试用例的参数提取机制，用于参数关联">
+<meta itemprop=description content="基于参数提取机制实现响应结果字段提取和参数关联">
 <meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
 <meta itemprop=wordCount content="0">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="参数提取（extract）">
-<meta name=twitter:description content="测试用例的参数提取机制，用于参数关联">
+<meta name=twitter:description content="基于参数提取机制实现响应结果字段提取和参数关联">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -137,6 +137,14 @@ Versions
 <a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guideenhance-testsextract-li>
 <a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span class=td-sidebar-nav-active-item>参数提取（extract）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testsdebugtalk-li>
+<a href=/docs/user-guide/enhance-tests/debugtalk/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsdebugtalk><span>自定义函数（debugtalk.xx）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testsparameterize-li>
+<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span>参数化数据驱动（parameterize）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testshooks-li>
+<a href=/docs/user-guide/enhance-tests/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testshooks><span>Hook 机制（hooks）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideenhance-testsvalidate-li>
+<a href=/docs/user-guide/enhance-tests/validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvalidate><span>结果校验（validate）</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideprotocols-li>
@@ -146,6 +154,10 @@ Versions
 <a href=/docs/user-guide/protocols/h2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsh2><span>HTTP/2</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolswebsocket-li>
 <a href=/docs/user-guide/protocols/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolswebsocket><span>WebSocket</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolssql-li>
+<a href=/docs/user-guide/protocols/sql/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolssql><span>SQL</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsthrift-li>
+<a href=/docs/user-guide/protocols/thrift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsthrift><span>Thrift RPC</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideapi-test-li>
@@ -232,7 +244,7 @@ Versions
 </nav>
 <div class=td-content>
 <h1>参数提取（extract）</h1>
-<div class=lead>测试用例的参数提取机制，用于参数关联</div>
+<div class=lead>基于参数提取机制实现响应结果字段提取和参数关联</div>
 <header class=article-meta>
 </header>
 </div>
