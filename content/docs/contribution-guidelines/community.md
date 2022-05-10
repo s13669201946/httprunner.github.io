@@ -1,6 +1,6 @@
 ---
-title: "用户社区"
-weight: 63
+title: 用户社区
+weight: 3
 description: HttpRunner 的用户交流途径有哪些？
 ---
 

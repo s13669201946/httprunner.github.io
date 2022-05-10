@@ -1,7 +1,6 @@
 ---
-title: "Sponsors"
-linkTitle: "Sponsors"
-weight: 80
+title: Sponsors
+weight: 8
 hide_feedback: true
 description: Thank you to all our sponsors! ✨🍰✨
 ---

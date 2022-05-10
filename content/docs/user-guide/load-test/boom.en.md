@@ -1,11 +1,8 @@
 ---
-title: "Run load test"
-linkTitle: "Load Test"
-weight: 35
-description: How to run load test.
+title: hrp boom
+weight: 1
+description: 通过 hrp boom 命令行工具启动性能测试
 ---
-
-## Start with CLI
 
 `HttpRunner` supports running load test without extra work. You can use `hrp boom` command to run YAML/JSON testcases in load testing mode.
 
@@ -50,23 +47,6 @@ If you want to disable console output, you can add a `--disable-console-output` 
 $ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --disable-console-output
 ```
 
-You can reference this [doc](cmd/hrp_boom.md) for all command arguments.
+You can reference this [doc][hrp_boom] for all command arguments.
 
-## Report metrics to Prometheus Pushgateway
-
-Besides printing load testing results in console, you can also push metrics to [Prometheus Pushgateway][pushgateway_github], and then you can configure pretty graphs on [Grafana][Grafana].
-
-```
-$ hrp boom examples/demo.json --spawn-count 10 --spawn-rate 1 --prometheus-gateway http://127.0.0.1:9091
-```
-
-You can deploy the Pushgateway using the [prom/pushgateway][pushgateway_docker] Docker image at ease.
-
-```
-$ docker pull prom/pushgateway
-$ docker run -d -p 9091:9091 prom/pushgateway
-```
-
-[pushgateway_github]: https://github.com/prometheus/pushgateway
-[pushgateway_docker]: https://hub.docker.com/r/prom/pushgateway
-[Grafana]: https://grafana.com/
+[hrp_boom]: https://github.com/httprunner/httprunner/blob/master/docs/cmd/hrp_boom.md

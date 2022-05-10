@@ -1,10 +1,14 @@
 ---
 title: 版本对比
-weight: 14
-description: HttpRunner v4 与历史版本 v1/v2/v3/hrp 的对比
+weight: 4
+description: HttpRunner 各版本的功能特性详细对比
 ---
 
-为了让你感观更加清晰，我整理出了如下表格，详细对比了各个版本间的关键差异点。
+HttpRunner 经过近 5 年的迭代，已经进入到 v4.0 版本了。
+
+## v4 与历史版本的对比
+
+通过如下表格，可详细了解各个版本间的关键差异点。
 
 | 版本 | v1 | v2 | v3 | HttpRunner+ | v4 |
 | :--: | :--: | :--: | :--: | :--: | :--: |
@@ -39,4 +43,27 @@ HttpRunner v4 = v2 + v3 + hrp + ...
 
 在使用体验和用例格式兼容性方面，v4 也会与之前的 v2/v3/hrp 做到兼容，因此后续 HttpRunner 的维护工作都将转到 v4 版本，之前的版本将不再单独维护。
 
+## v4 版本的 Go & Python 功能对比
+
+HttpRunner v4.0 同时采用了 Golang/Python 两种编程语言，底层会有两套相对独立的执行引擎，目标是兼具 Golang 的高性能和 pytest 的丰富生态。
+
+关键差异点对比如下：
+
+| 引擎 | Go | Python |
+| :--: | :--: | :--: |
+| 脚本类型 | YAML/JSON/gotest | YAML/JSON/pytest |
+| 网络协议 | **多协议** HTTP(S)/HTTP2/WebSocket/_TCP/RPC_ | HTTP(S) |
+| 脚手架工具 | hrp startproject | / |
+| 用例生成工具 | hrp har2case | / |
+| 脚本转换工具 | hrp convert | / |
+| 插件化语言 | **多语言**（Go/Python/_Java/etc._） | Python |
+| 运行环境依赖 | 与插件语言相关，详见[依赖环境说明] | Python 3.7+ |
+| 脚本编写语法提示 | gotest 链式调用 | pytest 链式调用 |
+| 运行接口测试 | hrp run | hrp pytest |
+| 运行性能测试 | hrp boom | / |
+| 网络性能采集 | hrp run --http-stat | / |
+| 接口测试报告 | html 自研（Go template） | pytest-html/allure |
+
+
 [jsonschema]: https://github.com/python-jsonschema/jsonschema
+[依赖环境说明]: http://localhost:1313/docs/user-guide/installation/#%E4%BE%9D%E8%B5%96%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E

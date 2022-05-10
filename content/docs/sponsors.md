@@ -1,6 +1,6 @@
 ---
-title: "赞助商"
-weight: 80
+title: 赞助商
+weight: 8
 hide_feedback: true
 description: 感谢赞助商助力 HttpRunner 的可持续发展！ ✨🍰✨
 ---

@@ -1,6 +1,6 @@
 ---
-title: "版本号机制"
-weight: 61
+title: 版本号机制
+weight: 1
 description: HttpRunner 的版本号机制规范
 ---
 

@@ -1,6 +1,5 @@
-
 ---
-title: "Welcome to HttpRunner"
+title: Welcome to HttpRunner
 linkTitle: "Docs"
 menu:
   main:

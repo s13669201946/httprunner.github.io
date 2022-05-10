@@ -1,6 +1,6 @@
 ---
-title: "快速上手"
-weight: 20
+title: 快速上手
+weight: 2
 description: 10 分钟内快速上手 HttpRunner
 ---
 
@@ -492,7 +492,7 @@ Current time: 2022/04/24 22:20:07, Users: 100, Duration: 30s, Accumulated Transa
 
 
 [安装说明]: /docs/user-guide/installation/
-[测试工程目录结构]: /docs/user-guide/project-structure/
+[测试工程目录结构]: http://localhost:1313/docs/introduction/concepts/#%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84
 [脚手架创建项目]: /docs/user-guide/scaffold/
 [核心概念]: /docs/introduction/concepts/
 [demo-html-report]: /reports/demo-report.html

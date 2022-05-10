@@ -1,6 +1,6 @@
 ---
-title: "全球数字体验监测平台"
-weight: 61
+title: 全球数字体验监测平台
+weight: 1
 description: 覆盖全球 150 地区/国家，为您的出海产品保驾护航！
 hide_feedback: true
 ---
@@ -84,4 +84,5 @@ hide_feedback: true
 
 ## 联系方式
 
-E-mail: lilong.129@bytedance.com
+- 微信: leolee023（请注明商务合作需求）
+- E-mail: lilong.129@bytedance.com

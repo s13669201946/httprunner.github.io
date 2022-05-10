@@ -1,6 +1,6 @@
 ---
-title: "安装说明"
-weight: 31
+title: 安装说明
+weight: 1
 description: 本文介绍了 HttpRunner 的几种安装方式。
 ---
 
@@ -126,10 +126,65 @@ Use "hrp [command] --help" for more information about a command.
 通过如下命令可安装依赖包：
 
 ```bash
-$ go get -u github.com/httprunner/httprunner
+$ go get -u github.com/httprunner/httprunner/v4
 ```
 
-然后你就可以在你的工程中导入 `github.com/httprunner/httprunner` 进行 Golang 用例编写或者二次开发了。
+然后你就可以在你的工程中导入 `github.com/httprunner/httprunner/v4/hrp` 进行 Golang 用例编写或者二次开发了。
+
+```go
+package tests
+
+import (
+	"testing"
+
+	"github.com/httprunner/httprunner/v4/hrp"
+)
+
+func TestCaseCallFunction(t *testing.T) {
+	testcase := &hrp.TestCase{
+		Config: hrp.NewConfig("run request with functions").
+			SetBaseURL("https://postman-echo.com").
+			WithVariables(map[string]interface{}{
+				"n": 5,
+				"a": 12.3,
+				"b": 3.45,
+			}).
+			SetVerifySSL(false),
+		TestSteps: []hrp.IStep{
+			hrp.NewStep("get with params").
+				GET("/get").
+				WithParams(map[string]interface{}{"foo1": "${gen_random_string($n)}", "foo2": "${max($a, $b)}", "foo3": "Foo3"}).
+				WithHeaders(map[string]string{"User-Agent": "HttpRunnerPlus"}).
+				Extract().
+				WithJmesPath("body.args.foo1", "varFoo1").
+				Validate().
+				AssertEqual("status_code", 200, "check status code").
+				AssertLengthEqual("body.args.foo1", 5, "check args foo1").
+				AssertEqual("body.args.foo2", "12.3", "check args foo2").
+				AssertTypeMatch("body.args.foo3", "str", "check args foo3 is type string").
+				AssertStringEqual("body.args.foo3", "foo3", "check args foo3 case-insensitivity").
+				AssertContains("body.args.foo3", "Foo", "check contains ").
+				AssertContainedBy("body.args.foo3", "this is Foo3 test", "check contained by"), // notice: request params value will be converted to string
+			hrp.NewStep("post json data with functions").
+				POST("/post").
+				WithHeaders(map[string]string{"User-Agent": "HttpRunnerPlus"}).
+				WithBody(map[string]interface{}{"foo1": "${gen_random_string($n)}", "foo2": "${max($a, $b)}"}).
+				Validate().
+				AssertEqual("status_code", 200, "check status code").
+				AssertLengthEqual("body.json.foo1", 5, "check args foo1").
+				AssertEqual("body.json.foo2", 12.3, "check args foo2"),
+		},
+	}
+
+	err := hrp.NewRunner(t).Run(testcase)
+	if err != nil {
+		t.Fatalf("run testcase error: %v", err)
+	}
+}
+```
+
+## 依赖环境说明
+
 
 
 [releases]: https://github.com/httprunner/httprunner/releases

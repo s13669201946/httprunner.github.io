@@ -1,6 +1,6 @@
 ---
-title: "脚手架创建项目"
-weight: 32
+title: 脚手架创建项目
+weight: 3
 description: 介绍 HttpRunner 创建脚手架项目的几种模式
 ---
 

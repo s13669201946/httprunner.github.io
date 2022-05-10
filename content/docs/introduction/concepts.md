@@ -1,6 +1,6 @@
 ---
 title: 核心概念
-weight: 12
+weight: 2
 description: HttpRunner 仅有的几个核心概念
 ---
 
@@ -72,6 +72,9 @@ HttpRunner 用例的核心为 JSON 结构体，但很多测试场景中需要动
 - Python 代码编写，无需编译，要求命名为 `debugtalk.py` 文件
 
 需要特别强调的是，上述插件文件 `debugtalk.xx` 要求必须放在项目根目录中。
+
+## 测试工程目录结构
+
 
 ## 项目根目录
 

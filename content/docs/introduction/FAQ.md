@@ -1,6 +1,6 @@
 ---
 title: 常见问题
-weight: 13
+weight: 3
 description: 关于 HttpRunner 的常见问题（持续补充中）
 ---
 
@@ -49,8 +49,6 @@ HttpRunner 的 Logo 如下所示：
 ## HttpRunner 的开源协议？
 
 HttpRunner 采用了非常宽松的开源协议 Apache-2.0，商业友好，可以永久免费使用无任何限制。
-
-## Go 版本与 Python 版本的差异？
 
 ## 使用 HttpRunner v4.0 必须要学习 Go 语言么？
 

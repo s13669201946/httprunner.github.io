@@ -1,5 +1,5 @@
 ---
-title: "欢迎使用 HttpRunner"
+title: 欢迎使用 HttpRunner
 linkTitle: "文档"
 menu:
   main:

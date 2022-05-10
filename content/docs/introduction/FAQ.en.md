@@ -1,5 +1,5 @@
 ---
 title: FAQ
-weight: 13
+weight: 3
 description: Frequent asked questions for HttpRunner
 ---

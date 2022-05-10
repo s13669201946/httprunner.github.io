@@ -1,7 +1,6 @@
 ---
-title: "Installation"
-linkTitle: "Installation"
-weight: 31
+title: Installation
+weight: 1
 description: How to install HttpRunner.
 ---
 
