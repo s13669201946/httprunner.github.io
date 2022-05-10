@@ -20,11 +20,11 @@
 <meta property="og:description" content="本文介绍了 HttpRunner 的几种安装方式。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/user-guide/installation/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-04-30T00:00:39+08:00">
+<meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
 <meta itemprop=name content="安装说明">
 <meta itemprop=description content="本文介绍了 HttpRunner 的几种安装方式。">
-<meta itemprop=dateModified content="2022-04-30T00:00:39+08:00">
-<meta itemprop=wordCount content="379">
+<meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
+<meta itemprop=wordCount content="526">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="安装说明">
 <meta name=twitter:description content="本文介绍了 HttpRunner 的几种安装方式。">
@@ -115,16 +115,69 @@ Versions
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guideinstallation-li>
 <a href=/docs/user-guide/installation/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideinstallation><span class=td-sidebar-nav-active-item>安装说明</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidecli-li>
+<a href=/docs/user-guide/cli/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidecli><span>命令行工具</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidescaffold-li>
 <a href=/docs/user-guide/scaffold/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span>脚手架创建项目</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideproject-structure-li>
-<a href=/docs/user-guide/project-structure/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideproject-structure><span>测试工程目录结构</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideloadtest-li>
-<a href=/docs/user-guide/loadtest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideloadtest><span>压力测试</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guidegen-tests-li>
+<a href=/docs/user-guide/gen-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidegen-tests><span>准备测试用例</span></a>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testsrecord-li>
+<a href=/docs/user-guide/gen-tests/record/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsrecord><span>录制生成</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testsconvert-li>
+<a href=/docs/user-guide/gen-tests/convert/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsconvert><span>转换生成</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testswrite-cases-li>
+<a href=/docs/user-guide/gen-tests/write-cases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testswrite-cases><span>手工编写</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideenhance-tests-li>
+<a href=/docs/user-guide/enhance-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideenhance-tests><span>增强测试用例</span></a>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvariables-li>
+<a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsextract-li>
+<a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span>参数提取（extract）</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideprotocols-li>
+<a href=/docs/user-guide/protocols/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideprotocols><span>多协议拓展</span></a>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsh2-li>
+<a href=/docs/user-guide/protocols/h2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsh2><span>HTTP/2</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolswebsocket-li>
+<a href=/docs/user-guide/protocols/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolswebsocket><span>WebSocket</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideapi-test-li>
+<a href=/docs/user-guide/api-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideapi-test><span>运行接口测试</span></a>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testrun-li>
+<a href=/docs/user-guide/api-test/run/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testrun><span>hrp run</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testpytest-li>
+<a href=/docs/user-guide/api-test/pytest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testpytest><span>hrp pytest</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testreport-li>
+<a href=/docs/user-guide/api-test/report/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testreport><span>测试报告</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideload-test-li>
+<a href=/docs/user-guide/load-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideload-test><span>运行性能测试</span></a>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testboom-li>
+<a href=/docs/user-guide/load-test/boom/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testboom><span>hrp boom</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testmonitor-li>
+<a href=/docs/user-guide/load-test/monitor/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testmonitor><span>性能监控</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testmaster-slave-li>
+<a href=/docs/user-guide/load-test/master-slave/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testmaster-slave><span>多机负载</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testreport--li>
+<a href=/docs/user-guide/load-test/report-/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testreport-><span>测试报告</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidedem-li>
+<a href=/docs/user-guide/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidedem><span>网络性能采集</span></a>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
-<a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>示例展示</span></a>
+<a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>案例实践</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docscontribution-guidelines-li>
 <a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docscontribution-guidelines><span>协作共建</span></a>
 <ul class="ul-2 foldable">
@@ -171,6 +224,7 @@ Versions
 </ul>
 </li>
 <li><a href=#安装依赖包开发者模式>安装依赖包（开发者模式）</a></li>
+<li><a href=#依赖环境说明>依赖环境说明</a></li>
 </ul>
 </nav></div>
 </aside>
@@ -281,8 +335,58 @@ Use &#34;hrp [command] --help&#34; for more information about a command.
 <p><code>HttpRunner</code> 除了可以作为命令行工具提供给用户进行使用，还可以作为库函数，供开发者调用进行二次开发。</p>
 <p>当前 <code>HttpRunner</code> 支持 Golang <code>1.16+</code> 和主流操作系统（Linux/macOS/Windows），我们通过在 <a href=https://github.com/httprunner/httprunner/actions>GitHub-Actions</a> 配置 CI 进行了兼容性测试保障。</p>
 <p>通过如下命令可安装依赖包：</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ go get -u github.com/httprunner/httprunner
-</code></pre></div><p>然后你就可以在你的工程中导入 <code>github.com/httprunner/httprunner</code> 进行 Golang 用例编写或者二次开发了。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ go get -u github.com/httprunner/httprunner/v4
+</code></pre></div><p>然后你就可以在你的工程中导入 <code>github.com/httprunner/httprunner/v4/hrp</code> 进行 Golang 用例编写或者二次开发了。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>tests</span>
+
+<span style=color:#204a87;font-weight:700>import</span> <span style=color:#000;font-weight:700>(</span>
+	<span style=color:#4e9a06>&#34;testing&#34;</span>
+
+	<span style=color:#4e9a06>&#34;github.com/httprunner/httprunner/v4/hrp&#34;</span>
+<span style=color:#000;font-weight:700>)</span>
+
+<span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>TestCaseCallFunction</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>testing</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>T</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#000>testcase</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#ce5c00;font-weight:700>&amp;</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>TestCase</span><span style=color:#000;font-weight:700>{</span>
+		<span style=color:#000>Config</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewConfig</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run request with functions&#34;</span><span style=color:#000;font-weight:700>).</span>
+			<span style=color:#000>SetBaseURL</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com&#34;</span><span style=color:#000;font-weight:700>).</span>
+			<span style=color:#000>WithVariables</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span>
+				<span style=color:#4e9a06>&#34;n&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span>
+				<span style=color:#4e9a06>&#34;a&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>12.3</span><span style=color:#000;font-weight:700>,</span>
+				<span style=color:#4e9a06>&#34;b&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3.45</span><span style=color:#000;font-weight:700>,</span>
+			<span style=color:#000;font-weight:700>}).</span>
+			<span style=color:#000>SetVerifySSL</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>false</span><span style=color:#000;font-weight:700>),</span>
+		<span style=color:#000>TestSteps</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[]</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>IStep</span><span style=color:#000;font-weight:700>{</span>
+			<span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;get with params&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>GET</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/get&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>WithParams</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${gen_random_string($n)}&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${max($a, $b)}&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo3&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Foo3&#34;</span><span style=color:#000;font-weight:700>}).</span>
+				<span style=color:#000>WithHeaders</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span><span style=color:#000;font-weight:700>}).</span>
+				<span style=color:#000>Extract</span><span style=color:#000;font-weight:700>().</span>
+				<span style=color:#000>WithJmesPath</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;varFoo1&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+				<span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check args foo1&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo2&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;12.3&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check args foo2&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertTypeMatch</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo3&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;str&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check args foo3 is type string&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertStringEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo3&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo3&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check args foo3 case-insensitivity&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertContains</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo3&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;Foo&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check contains &#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertContainedBy</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo3&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;this is Foo3 test&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check contained by&#34;</span><span style=color:#000;font-weight:700>),</span> <span style=color:#8f5902;font-style:italic>// notice: request params value will be converted to string
+</span><span style=color:#8f5902;font-style:italic></span>			<span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;post json data with functions&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>POST</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/post&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>WithHeaders</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span><span style=color:#000;font-weight:700>}).</span>
+				<span style=color:#000>WithBody</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${gen_random_string($n)}&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${max($a, $b)}&#34;</span><span style=color:#000;font-weight:700>}).</span>
+				<span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+				<span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.json.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check args foo1&#34;</span><span style=color:#000;font-weight:700>).</span>
+				<span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.json.foo2&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>12.3</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check args foo2&#34;</span><span style=color:#000;font-weight:700>),</span>
+		<span style=color:#000;font-weight:700>},</span>
+	<span style=color:#000;font-weight:700>}</span>
+
+	<span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewRunner</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span><span style=color:#000;font-weight:700>).</span><span style=color:#000>Run</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>testcase</span><span style=color:#000;font-weight:700>)</span>
+	<span style=color:#204a87;font-weight:700>if</span> <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>!=</span> <span style=color:#204a87;font-weight:700>nil</span> <span style=color:#000;font-weight:700>{</span>
+		<span style=color:#000>t</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Fatalf</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run testcase error: %v&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>err</span><span style=color:#000;font-weight:700>)</span>
+	<span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><h2 id=依赖环境说明>依赖环境说明</h2>
 </div>
 </main>
 </div>
