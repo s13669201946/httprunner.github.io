@@ -4,6 +4,39 @@ weight: 1
 description: 通过 hrp boom 命令行工具启动性能测试
 ---
 
+```text
+$ hrp boom -h
+run yaml/json testcase files for load test
+
+Usage:
+  hrp boom [flags]
+
+Examples:
+  $ hrp boom demo.json  # run specified json testcase file
+  $ hrp boom demo.yaml  # run specified yaml testcase file
+  $ hrp boom examples/  # run testcases in specified folder
+
+Flags:
+      --cpu-profile string              Enable CPU profiling.
+      --cpu-profile-duration duration   CPU profile duration. (default 30s)
+      --disable-compression             Disable compression
+      --disable-console-output          Disable console output.
+      --disable-keepalive               Disable keepalive
+  -h, --help                            help for boom
+      --loop-count int                  The specify running cycles for load testing (default -1)
+      --max-rps int                     Max RPS that boomer can generate, disabled by default.
+      --mem-profile string              Enable memory profiling.
+      --mem-profile-duration duration   Memory profile duration. (default 30s)
+      --prometheus-gateway string       Prometheus Pushgateway url.
+      --request-increase-rate string    Request increase rate, disabled by default. (default "-1")
+      --spawn-count int                 The number of users to spawn for load testing (default 1)
+      --spawn-rate float                The rate for spawning users (default 1)
+
+Global Flags:
+      --log-json           set log to json format
+  -l, --log-level string   set log level (default "INFO")
+```
+
 `HttpRunner` supports running load test without extra work. You can use `hrp boom` command to run YAML/JSON testcases in load testing mode.
 
 By default, hrp will print load testing results in console output, refreshed every 3 seconds.

@@ -1,7 +1,7 @@
 ---
 title: 脚手架创建项目
 weight: 3
-description: 介绍 HttpRunner 创建脚手架项目的几种模式
+description: HttpRunner 创建脚手架项目的几种模式
 ---
 
 ## 参数概览
@@ -14,6 +14,7 @@ Usage:
   hrp startproject $project_name [flags]
 
 Flags:
+  -f, --force           force to overwrite existing project
       --go              generate hashicorp go plugin
   -h, --help            help for startproject
       --ignore-plugin   ignore function plugin

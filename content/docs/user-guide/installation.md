@@ -1,7 +1,7 @@
 ---
 title: 安装说明
 weight: 1
-description: 本文介绍了 HttpRunner 的几种安装方式。
+description: HttpRunner 的几种安装方式
 ---
 
 ## 安装命令行工具
