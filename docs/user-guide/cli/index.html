@@ -15,19 +15,19 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>命令行工具 | HttpRunner</title>
-<meta name=description content="介绍 HttpRunner 命令行工具及参数">
+<meta name=description content="HttpRunner 的命令行工具及参数说明">
 <meta property="og:title" content="命令行工具">
-<meta property="og:description" content="介绍 HttpRunner 命令行工具及参数">
+<meta property="og:description" content="HttpRunner 的命令行工具及参数说明">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/user-guide/cli/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
+<meta property="article:modified_time" content="2022-05-11T16:33:18+08:00">
 <meta itemprop=name content="命令行工具">
-<meta itemprop=description content="介绍 HttpRunner 命令行工具及参数">
-<meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
-<meta itemprop=wordCount content="0">
+<meta itemprop=description content="HttpRunner 的命令行工具及参数说明">
+<meta itemprop=dateModified content="2022-05-11T16:33:18+08:00">
+<meta itemprop=wordCount content="191">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="命令行工具">
-<meta name=twitter:description content="介绍 HttpRunner 命令行工具及参数">
+<meta name=twitter:description content="HttpRunner 的命令行工具及参数说明">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -241,9 +241,49 @@ Versions
 </nav>
 <div class=td-content>
 <h1>命令行工具</h1>
-<div class=lead>介绍 HttpRunner 命令行工具及参数</div>
+<div class=lead>HttpRunner 的命令行工具及参数说明</div>
 <header class=article-meta>
 </header>
+<p>HttpRunner v4.0 安装成功后，你将获得一个 <code>hrp</code> 命令行工具，执行 <code>hrp -h</code> 即可查看到参数帮助说明。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp -h
+
+██╗  ██╗████████╗████████╗██████╗ ██████╗ ██╗   ██╗███╗   ██╗███╗   ██╗███████╗██████╗
+██║  ██║╚══██╔══╝╚══██╔══╝██╔══██╗██╔══██╗██║   ██║████╗  ██║████╗  ██║██╔════╝██╔══██╗
+███████║   ██║      ██║   ██████╔╝██████╔╝██║   ██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
+██╔══██║   ██║      ██║   ██╔═══╝ ██╔══██╗██║   ██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+██║  ██║   ██║      ██║   ██║     ██║  ██║╚██████╔╝██║ ╚████║██║ ╚████║███████╗██║  ██║
+╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
+
+HttpRunner is an open source API testing tool that supports HTTP(S)/HTTP2/WebSocket/RPC
+network protocols, covering API testing, performance testing and digital experience
+monitoring (DEM) test types. Enjoy! ✨ 🚀 ✨
+
+License: Apache-2.0
+Website: https://httprunner.com
+Github: https://github.com/httprunner/httprunner
+Copyright 2017 debugtalk
+
+Usage:
+  hrp [command]
+
+Available Commands:
+  boom         run load test with boomer
+  completion   generate the autocompletion script for the specified shell
+  convert      convert JSON/YAML testcases to pytest/gotest scripts
+  har2case     convert HAR to json/yaml testcase files
+  help         Help about any command
+  pytest       run API test with pytest
+  run          run API test with go engine
+  startproject create a scaffold project
+
+Flags:
+  -h, --help               help for hrp
+      --log-json           set log to json format
+  -l, --log-level string   set log level (default &#34;INFO&#34;)
+  -v, --version            version for hrp
+
+Use &#34;hrp [command] --help&#34; for more information about a command.
+</code></pre></div><p><a href=https://github.com/httprunner/httprunner/blob/master/docs/cmd/hrp.md>详细命令行及参数说明</a></p>
 </div>
 </main>
 </div>

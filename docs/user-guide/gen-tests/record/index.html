@@ -20,11 +20,11 @@
 <meta property="og:description" content="基于 HAR 生成测试用例">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/user-guide/gen-tests/record/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
+<meta property="article:modified_time" content="2022-05-11T16:33:18+08:00">
 <meta itemprop=name content="录制生成">
 <meta itemprop=description content="基于 HAR 生成测试用例">
-<meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
-<meta itemprop=wordCount content="0">
+<meta itemprop=dateModified content="2022-05-11T16:33:18+08:00">
+<meta itemprop=wordCount content="76">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="录制生成">
 <meta name=twitter:description content="基于 HAR 生成测试用例">
@@ -247,6 +247,23 @@ Versions
 <div class=lead>基于 HAR 生成测试用例</div>
 <header class=article-meta>
 </header>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp har2case -h
+convert HAR to json/yaml testcase files
+
+Usage:
+  hrp har2case $har_path... [flags]
+
+Flags:
+  -h, --help                help for har2case
+  -d, --output-dir string   specify output directory, default to the same dir with har file
+  -p, --profile string      specify profile path to override headers and cookies
+  -j, --to-json             convert to JSON format (default true)
+  -y, --to-yaml             convert to YAML format
+
+Global Flags:
+      --log-json           set log to json format
+  -l, --log-level string   set log level (default &#34;INFO&#34;)
+</code></pre></div>
 </div>
 </main>
 </div>

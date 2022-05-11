@@ -20,11 +20,11 @@
 <meta property="og:description" content="通过 hrp run 命令行工具启动接口测试">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/user-guide/api-test/run/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
+<meta property="article:modified_time" content="2022-05-11T16:33:18+08:00">
 <meta itemprop=name content="hrp run">
 <meta itemprop=description content="通过 hrp run 命令行工具启动接口测试">
-<meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
-<meta itemprop=wordCount content="0">
+<meta itemprop=dateModified content="2022-05-11T16:33:18+08:00">
+<meta itemprop=wordCount content="117">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="hrp run">
 <meta name=twitter:description content="通过 hrp run 命令行工具启动接口测试">
@@ -247,6 +247,31 @@ Versions
 <div class=lead>通过 hrp run 命令行工具启动接口测试</div>
 <header class=article-meta>
 </header>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp run -h
+run yaml/json testcase files for API test
+
+Usage:
+  hrp run $path... [flags]
+
+Examples:
+  $ hrp run demo.json   # run specified json testcase file
+  $ hrp run demo.yaml   # run specified yaml testcase file
+  $ hrp run examples/   # run testcases in specified folder
+
+Flags:
+  -c, --continue-on-failure   continue running next step when failure occurs
+  -g, --gen-html-report       generate html report
+  -h, --help                  help for run
+      --http-stat             turn on HTTP latency stat (DNSLookup, TCP Connection, etc.)
+      --log-plugin            turn on plugin logging
+      --log-requests-off      turn off request &amp; response details logging
+  -p, --proxy-url string      set proxy url
+  -s, --save-tests            save tests summary
+
+Global Flags:
+      --log-json           set log to json format
+  -l, --log-level string   set log level (default &#34;INFO&#34;)
+</code></pre></div>
 </div>
 </main>
 </div>

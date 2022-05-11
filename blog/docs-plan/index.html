@@ -14,27 +14,28 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>脚手架创建项目 | HttpRunner</title>
-<meta name=description content="HttpRunner 创建脚手架项目的几种模式">
-<meta property="og:title" content="脚手架创建项目">
-<meta property="og:description" content="HttpRunner 创建脚手架项目的几种模式">
+<title>HttpRunner v4.0 用户文档 & 博客规划 | HttpRunner</title>
+<meta name=description content="介绍 HttpRunner v4.0 后续关于用户文档和博客的规划">
+<meta property="og:title" content="HttpRunner v4.0 用户文档 & 博客规划">
+<meta property="og:description" content="介绍 HttpRunner v4.0 后续关于用户文档和博客的规划">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://httprunner.com/docs/user-guide/scaffold/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-11T16:33:18+08:00">
-<meta itemprop=name content="脚手架创建项目">
-<meta itemprop=description content="HttpRunner 创建脚手架项目的几种模式">
-<meta itemprop=dateModified content="2022-05-11T16:33:18+08:00">
-<meta itemprop=wordCount content="81">
+<meta property="og:url" content="https://httprunner.com/blog/docs-plan/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-05-11T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-05-11T22:33:15+08:00">
+<meta itemprop=name content="HttpRunner v4.0 用户文档 & 博客规划">
+<meta itemprop=description content="介绍 HttpRunner v4.0 后续关于用户文档和博客的规划"><meta itemprop=datePublished content="2022-05-11T00:00:00+00:00">
+<meta itemprop=dateModified content="2022-05-11T22:33:15+08:00">
+<meta itemprop=wordCount content="73">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="脚手架创建项目">
-<meta name=twitter:description content="HttpRunner 创建脚手架项目的几种模式">
+<meta name=twitter:title content="HttpRunner v4.0 用户文档 & 博客规划">
+<meta name=twitter:description content="介绍 HttpRunner v4.0 后续关于用户文档和博客的规划">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNRMVFG5LL"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-LNRMVFG5LL',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-page>
+<body class="td-page td-blog">
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -43,10 +44,10 @@
 <div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
 <ul class="navbar-nav mt-2 mt-lg-0">
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class="nav-link active" href=/docs/><span class=active>文档</span></a>
+<a class=nav-link href=/docs/><span>文档</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/blog/><span>博客</span></a>
+<a class="nav-link active" href=/blog/><span class=active>博客</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/community/><span>社区</span></a>
@@ -92,128 +93,17 @@ Versions
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
-<a href=/docs/ title="欢迎使用 HttpRunner" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>文档</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li>
+<a href=/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>博客</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsintroduction-li>
-<a href=/docs/introduction/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsintroduction><span>HttpRunner 是什么？</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionoverview-li>
-<a href=/docs/introduction/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionoverview><span>整体概览</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionconcepts-li>
-<a href=/docs/introduction/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionconcepts><span>核心概念</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionfaq-li>
-<a href=/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionfaq><span>常见问题</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionversions-li>
-<a href=/docs/introduction/versions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionversions><span>版本对比</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstart-li>
-<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstart><span>快速上手</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guide-li>
-<a href=/docs/user-guide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guide><span>用户指南</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideinstallation-li>
-<a href=/docs/user-guide/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideinstallation><span>安装说明</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidecli-li>
-<a href=/docs/user-guide/cli/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidecli><span>命令行工具</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guidescaffold-li>
-<a href=/docs/user-guide/scaffold/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span class=td-sidebar-nav-active-item>脚手架创建项目</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guidegen-tests-li>
-<a href=/docs/user-guide/gen-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidegen-tests><span>准备测试用例</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testsrecord-li>
-<a href=/docs/user-guide/gen-tests/record/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsrecord><span>录制生成</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testsconvert-li>
-<a href=/docs/user-guide/gen-tests/convert/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsconvert><span>转换生成</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guidegen-testswrite-cases-li>
-<a href=/docs/user-guide/gen-tests/write-cases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testswrite-cases><span>手工编写</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideenhance-tests-li>
-<a href=/docs/user-guide/enhance-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideenhance-tests><span>增强测试用例</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvariables-li>
-<a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsextract-li>
-<a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span>参数提取（extract）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsdebugtalk-li>
-<a href=/docs/user-guide/enhance-tests/debugtalk/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsdebugtalk><span>自定义函数（debugtalk.xx）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsparameterize-li>
-<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span>参数化数据驱动（parameterize）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testshooks-li>
-<a href=/docs/user-guide/enhance-tests/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testshooks><span>Hook 机制（hooks）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvalidate-li>
-<a href=/docs/user-guide/enhance-tests/validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvalidate><span>结果校验（validate）</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideprotocols-li>
-<a href=/docs/user-guide/protocols/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideprotocols><span>多协议拓展</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsh2-li>
-<a href=/docs/user-guide/protocols/h2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsh2><span>HTTP/2</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolswebsocket-li>
-<a href=/docs/user-guide/protocols/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolswebsocket><span>WebSocket</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolssql-li>
-<a href=/docs/user-guide/protocols/sql/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolssql><span>SQL</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsthrift-li>
-<a href=/docs/user-guide/protocols/thrift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsthrift><span>Thrift RPC</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideapi-test-li>
-<a href=/docs/user-guide/api-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideapi-test><span>运行接口测试</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testrun-li>
-<a href=/docs/user-guide/api-test/run/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testrun><span>hrp run</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testpytest-li>
-<a href=/docs/user-guide/api-test/pytest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testpytest><span>hrp pytest</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testreport-li>
-<a href=/docs/user-guide/api-test/report/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testreport><span>测试报告</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideload-test-li>
-<a href=/docs/user-guide/load-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideload-test><span>运行性能测试</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testboom-li>
-<a href=/docs/user-guide/load-test/boom/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testboom><span>hrp boom</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testmonitor-li>
-<a href=/docs/user-guide/load-test/monitor/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testmonitor><span>性能监控</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testmaster-slave-li>
-<a href=/docs/user-guide/load-test/master-slave/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testmaster-slave><span>多机负载</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testreport--li>
-<a href=/docs/user-guide/load-test/report-/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testreport-><span>测试报告</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidedem-li>
-<a href=/docs/user-guide/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidedem><span>网络性能采集</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
-<a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>案例实践</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docscontribution-guidelines-li>
-<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docscontribution-guidelines><span>协作共建</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesversion-li>
-<a href=/docs/contribution-guidelines/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesversion><span>版本号机制</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesissues-li>
-<a href=/docs/contribution-guidelines/issues/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesissues><span>GitHub Issues</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinescommunity-li>
-<a href=/docs/contribution-guidelines/community/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinescommunity><span>用户社区</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesmilestones-li>
-<a href=/docs/contribution-guidelines/milestones/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesmilestones><span>版本规划</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
-<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>赞助商</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li>
-<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>增值服务</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesdem-li>
-<a href=/docs/services/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdem><span>全球数字体验监测平台</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesconsultation-li>
-<a href=/docs/services/consultation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesconsultation><span>全球数字体验咨询服务</span></a>
-</li>
-</ul>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-blogdocs-plan-li>
+<a href=/blog/docs-plan/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-blogdocs-plan><span class=td-sidebar-nav-active-item>HttpRunner v4.0 用户文档 & 博客规划</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blogrelease-v4-li>
+<a href=/blog/release-v4/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blogrelease-v4><span>HttpRunner v4.0 全新发布</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-report-li>
+<a href=/blog/user-survey-report/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey-report><span>HttpRunner 首轮用户调研报告（2022.02）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-li>
+<a href=/blog/user-survey/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey><span>HttpRunner 核心用户招募中，你要加群么？</span></a>
 </li>
 </ul>
 </li>
@@ -226,56 +116,62 @@ Versions
 </div>
 <div class=td-toc><nav id=TableOfContents>
 <ul>
-<li><a href=#参数概览>参数概览</a></li>
-<li><a href=#选择-go-插件>选择 go 插件</a></li>
-<li><a href=#选择-python-插件>选择 python 插件</a></li>
-<li><a href=#忽略插件>忽略插件</a></li>
+<li><a href=#用户文档>用户文档</a></li>
+<li><a href=#博客文章>博客文章</a></li>
+<li><a href=#进度查阅>进度查阅</a></li>
 </ul>
 </nav></div>
 </aside>
-<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
-<nav aria-label=breadcrumb class=td-breadcrumbs>
-<ol class=breadcrumb>
-<li class=breadcrumb-item>
-<a href=https://httprunner.com/docs/>文档</a>
-</li>
-<li class=breadcrumb-item>
-<a href=https://httprunner.com/docs/user-guide/>用户指南</a>
-</li>
-<li class="breadcrumb-item active" aria-current=page>
-<a href=https://httprunner.com/docs/user-guide/scaffold/>脚手架创建项目</a>
-</li>
-</ol>
-</nav>
+<main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
 <div class=td-content>
-<h1>脚手架创建项目</h1>
-<div class=lead>HttpRunner 创建脚手架项目的几种模式</div>
+<h1>HttpRunner v4.0 用户文档 & 博客规划</h1>
+<div class=lead>介绍 HttpRunner v4.0 后续关于用户文档和博客的规划</div>
+<div class="td-byline mb-4">
+<time datetime=2022-05-11 class=text-muted>Wednesday, May 11, 2022</time>
+</div>
 <header class=article-meta>
 </header>
-<h2 id=参数概览>参数概览</h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp startproject -h
-create a scaffold project
-
-Usage:
-  hrp startproject $project_name [flags]
-
-Flags:
-  -f, --force           force to overwrite existing project
-      --go              generate hashicorp go plugin
-  -h, --help            help for startproject
-      --ignore-plugin   ignore function plugin
-      --py              generate hashicorp python plugin (default true)
-
-Global Flags:
-      --log-json           set log to json format
-  -l, --log-level string   set log level (default &#34;INFO&#34;)
-</code></pre></div><h2 id=选择-go-插件>选择 go 插件</h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp startproject demo --go
-</code></pre></div><h2 id=选择-python-插件>选择 python 插件</h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp startproject demo --py
-</code></pre></div><h2 id=忽略插件>忽略插件</h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp startproject demo --ignore-plugin
-</code></pre></div>
+<p>终于，被大家吐槽最多的 HttpRunner 文档问题要解决啦！！！</p>
+<p>在 HttpRunner v4.0 <a href=/blog/release-v4/#%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3>发布介绍</a>中有提到，用户文档会作为 HttpRunner 开源项目运营的重点工作，本文就具体介绍下后续关于 HttpRunner 用户文档和博客文章的规划。</p>
+<h2 id=用户文档>用户文档</h2>
+<p>首先是用户使用文档部分。这部分对应 HttpRunner 的使用手册，可以帮助用户快速整体了解 HttpRunner，并且作为用户在实际使用过程中的参考指引。</p>
+<p>基于该定位，用户文档会写得非常详尽，覆盖 HttpRunner 的所有功能和使用细节。</p>
+<p>当前阶段，我们已经完成了对 HttpRunner v4.0 用户文档的大纲规划和部分内容的编写，整体预计在 5 月底完成所有内容。</p>
+<p>大家可以通过如下地址进行查看：</p>
+<p><strong>HttpRunner 用户文档永久地址</strong>: <a href=https://httprunner.com/docs/>https://httprunner.com/docs/</a></p>
+<p>如果你发现当前大纲中有遗漏的内容，非常欢迎通过各种渠道及时反馈给我们。</p>
+<h2 id=博客文章>博客文章</h2>
+<p>除了用户使用文档，我们还会<strong>高频</strong>推送一些博客文章，期待能跟大家有更多的交流互动。</p>
+<p>博客文章计划分为 4 类主题：</p>
+<ul>
+<li>特性发布：针对重要功能特性进行介绍，帮助用户及时获知 HttpRunner 项目动态</li>
+<li>案例实践：基于真实案例场景，演示工具的主要功能特性和使用方法，帮助用户更快地上手使用 HttpRunner</li>
+<li>工具比对：与主流 API 测试工具在功能和性能层面进行全方位对比，帮助用户更全面地了解 HttpRunner</li>
+<li>原理解析：深入介绍 HttpRunner 的底层机制和原理，帮助用户彻底掌握 HttpRunner 的设计和实现</li>
+</ul>
+<p>在内容渠道方面，大家可以通过如下 3 种途径进行阅读：</p>
+<ul>
+<li>HttpRunner 项目官网博客: <a href=https://httprunner.com/blog/>https://httprunner.com/blog/</a></li>
+<li>TesterHome 社区: <a href=https://testerhome.com/httprunner>https://testerhome.com/httprunner</a></li>
+<li>HttpRunner 微信公众号（欢迎关注，第一时间获得最新资讯）</li>
+</ul>
+<img src=/image/qrcode.png alt=HttpRunner width=400>
+<h2 id=进度查阅>进度查阅</h2>
+<p>说了这么多，那后续的项目文档和博客文章的具体发布计划是什么？如何获知最新动态呢？</p>
+<p>为了帮助大家更好地查阅进度（监工），我们特地将 HttpRunner 核心开发者内部协作的飞书文档对外开放了权限，大家可以随时通过该文档了解我们的进展。</p>
+<p><a href=https://bytedance.feishu.cn/docx/doxcnD4iKnIyGoH2IOUbFcM3hJg>https://bytedance.feishu.cn/docx/doxcnD4iKnIyGoH2IOUbFcM3hJg</a></p>
+<p>还是那句话，如果你发现你期望了解的内容没有出现在计划清单中，或者排期比较靠后，非常欢迎通过各种渠道及时反馈给我们。</p>
+<blockquote>
+<p>开源不易，要是 HttpRunner 对你有过帮助，麻烦帮忙给个 ⭐️star⭐️ 鼓励下吧。<br>
+<a href=https://github.com/httprunner/httprunner>https://github.com/httprunner/httprunner</a></p>
+</blockquote>
+<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+<li>
+<a href=/blog/release-v4/ aria-label="上一页 - HttpRunner v4.0 全新发布" class="btn btn-primary"><span class=mr-1>←</span>上一页</a>
+</li>
+<a class="btn btn-primary disabled">下一页<span class=ml-1>→</span></a>
+</li>
+</ul>
 </div>
 </main>
 </div>
