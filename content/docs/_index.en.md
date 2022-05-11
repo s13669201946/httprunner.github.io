@@ -10,6 +10,6 @@ Welcome to the HttpRunner documentation! This guide helps you to understand the 
 
 ## Subscribe
 
-关注 HttpRunner 的微信公众号，第一时间获得最新资讯。
+欢迎关注 HttpRunner 官方公众号，你可以在此查阅用户文档，第一时间获得最新资讯。
 
-<img src="/image/qrcode.jpg" alt="HttpRunner" width="200">
+<img src="/image/qrcode.png" alt="HttpRunner" width="300">
