@@ -14,21 +14,28 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>HttpRunner 核心用户招募中，你要加群么？ | HttpRunner</title>
-<meta name=description content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！">
-<meta property="og:title" content="HttpRunner 核心用户招募中，你要加群么？">
-<meta property="og:description" content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！">
+<title>使用 HttpRunner v4.0 实现 HTTP/2 的测试 | HttpRunner</title>
+<meta name=description content="前言回顾
+此前的文章 HttpRunner v4.0 正式发布 中提到，HttpRunner v4.0 已不再局限于 HTTP 协议，而是会拓展支持更多种类的网络协议，截至当前，HttpRunner v4.0 中 go 引擎已经新增支持了 HTTP/2 协议 和 WebSocket 协 …">
+<meta property="og:title" content="使用 HttpRunner v4.0 实现 HTTP/2 的测试">
+<meta property="og:description" content="前言回顾 此前的文章 HttpRunner v4.0 正式发布 中提到，HttpRunner v4.0 已不再局限于 HTTP 协议，而是会拓展支持更多种类的网络协议，截至当前，HttpRunner v4.0 中 go 引擎已经新增支持了 HTTP/2 协议 和 WebSocket 协议，python 引擎也已经新增支持了 SQL 操作和 Thrift RPC 协议。本期文章将对支持 HTTP/2 的新特性进行介绍，对于 HttpRunner v4.0 的其他新特性，之后也将会陆续进行介绍，敬请期待。
+特性介绍 对于原有的包含 HTTP/1.1 请求的测试脚本，将协议类型升级为 HTTP/2 的修改成本非常低，在添加请求参数、请求头和请求体等操作方面，HTTP/2 的测试用例与 HTTP/1.1 的风格基本保持一致，同时也继承了 HttpRunner 强大的参数关联和结果断言等功能。下面介绍将测试用例中的协议类型由 HTTP/1.1 升级为 HTTP/2 的具体修改方式。
+JSON/YAML 形态的测试用例 对于 JSON/YAML 形态的测试用例，只需要在 request 对象中添加一个新字段 http2 并且指定为 true。另外，新版本 HttpRunner 也支持对协议类型的断言（&ldquo;check&rdquo;: &ldquo;proto&rdquo;），这对于判断服务端是否支持 HTTP/2 的场景来说是非常实用的，因为有些时候服务端不支持 HTTP/2 并且会自动降级为 HTTP/1.1，这时就有必要对协议类型进行断言。如下是一个 HTTP 协议升级之后的 JSON 测试用例，在原来的基础上，只增加了一行代码 &#34;http2&#34;: true 即可将 HTTP/1.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://httprunner.com/blog/user-survey/"><meta property="article:section" content="blog">
-<meta property="article:published_time" content="2022-02-09T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-04-30T00:00:39+08:00">
-<meta itemprop=name content="HttpRunner 核心用户招募中，你要加群么？">
-<meta itemprop=description content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！"><meta itemprop=datePublished content="2022-02-09T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-04-30T00:00:39+08:00">
-<meta itemprop=wordCount content="17">
+<meta property="og:url" content="https://httprunner.com/blog/how-to-test-http2/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-05-12T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-05-12T20:42:32+08:00">
+<meta itemprop=name content="使用 HttpRunner v4.0 实现 HTTP/2 的测试">
+<meta itemprop=description content="前言回顾 此前的文章 HttpRunner v4.0 正式发布 中提到，HttpRunner v4.0 已不再局限于 HTTP 协议，而是会拓展支持更多种类的网络协议，截至当前，HttpRunner v4.0 中 go 引擎已经新增支持了 HTTP/2 协议 和 WebSocket 协议，python 引擎也已经新增支持了 SQL 操作和 Thrift RPC 协议。本期文章将对支持 HTTP/2 的新特性进行介绍，对于 HttpRunner v4.0 的其他新特性，之后也将会陆续进行介绍，敬请期待。
+特性介绍 对于原有的包含 HTTP/1.1 请求的测试脚本，将协议类型升级为 HTTP/2 的修改成本非常低，在添加请求参数、请求头和请求体等操作方面，HTTP/2 的测试用例与 HTTP/1.1 的风格基本保持一致，同时也继承了 HttpRunner 强大的参数关联和结果断言等功能。下面介绍将测试用例中的协议类型由 HTTP/1.1 升级为 HTTP/2 的具体修改方式。
+JSON/YAML 形态的测试用例 对于 JSON/YAML 形态的测试用例，只需要在 request 对象中添加一个新字段 http2 并且指定为 true。另外，新版本 HttpRunner 也支持对协议类型的断言（&ldquo;check&rdquo;: &ldquo;proto&rdquo;），这对于判断服务端是否支持 HTTP/2 的场景来说是非常实用的，因为有些时候服务端不支持 HTTP/2 并且会自动降级为 HTTP/1.1，这时就有必要对协议类型进行断言。如下是一个 HTTP 协议升级之后的 JSON 测试用例，在原来的基础上，只增加了一行代码 &#34;http2&#34;: true 即可将 HTTP/1."><meta itemprop=datePublished content="2022-05-12T00:00:00+00:00">
+<meta itemprop=dateModified content="2022-05-12T20:42:32+08:00">
+<meta itemprop=wordCount content="330">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="HttpRunner 核心用户招募中，你要加群么？">
-<meta name=twitter:description content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！">
+<meta name=twitter:title content="使用 HttpRunner v4.0 实现 HTTP/2 的测试">
+<meta name=twitter:description content="前言回顾 此前的文章 HttpRunner v4.0 正式发布 中提到，HttpRunner v4.0 已不再局限于 HTTP 协议，而是会拓展支持更多种类的网络协议，截至当前，HttpRunner v4.0 中 go 引擎已经新增支持了 HTTP/2 协议 和 WebSocket 协议，python 引擎也已经新增支持了 SQL 操作和 Thrift RPC 协议。本期文章将对支持 HTTP/2 的新特性进行介绍，对于 HttpRunner v4.0 的其他新特性，之后也将会陆续进行介绍，敬请期待。
+特性介绍 对于原有的包含 HTTP/1.1 请求的测试脚本，将协议类型升级为 HTTP/2 的修改成本非常低，在添加请求参数、请求头和请求体等操作方面，HTTP/2 的测试用例与 HTTP/1.1 的风格基本保持一致，同时也继承了 HttpRunner 强大的参数关联和结果断言等功能。下面介绍将测试用例中的协议类型由 HTTP/1.1 升级为 HTTP/2 的具体修改方式。
+JSON/YAML 形态的测试用例 对于 JSON/YAML 形态的测试用例，只需要在 request 对象中添加一个新字段 http2 并且指定为 true。另外，新版本 HttpRunner 也支持对协议类型的断言（&ldquo;check&rdquo;: &ldquo;proto&rdquo;），这对于判断服务端是否支持 HTTP/2 的场景来说是非常实用的，因为有些时候服务端不支持 HTTP/2 并且会自动降级为 HTTP/1.1，这时就有必要对协议类型进行断言。如下是一个 HTTP 协议升级之后的 JSON 测试用例，在原来的基础上，只增加了一行代码 &#34;http2&#34;: true 即可将 HTTP/1.">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -96,16 +103,16 @@ Versions
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li>
 <a href=/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>博客</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-test-http2-li>
-<a href=/blog/how-to-test-http2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-test-http2><span>使用 HttpRunner v4.0 实现 HTTP/2 的测试</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-bloghow-to-test-http2-li>
+<a href=/blog/how-to-test-http2/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-test-http2><span class=td-sidebar-nav-active-item>使用 HttpRunner v4.0 实现 HTTP/2 的测试</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blogdocs-plan-li>
 <a href=/blog/docs-plan/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blogdocs-plan><span>HttpRunner v4.0 用户文档 & 博客规划</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blogrelease-v4-li>
 <a href=/blog/release-v4/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blogrelease-v4><span>HttpRunner v4.0 全新发布</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-report-li>
 <a href=/blog/user-survey-report/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey-report><span>HttpRunner 首轮用户调研报告（2022.02）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-bloguser-survey-li>
-<a href=/blog/user-survey/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey><span class=td-sidebar-nav-active-item>HttpRunner 核心用户招募中，你要加群么？</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-li>
+<a href=/blog/user-survey/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey><span>HttpRunner 核心用户招募中，你要加群么？</span></a>
 </li>
 </ul>
 </li>
@@ -116,26 +123,136 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#前言回顾>前言回顾</a></li>
+<li><a href=#特性介绍>特性介绍</a>
+<ul>
+<li><a href=#jsonyaml-形态的测试用例>JSON/YAML 形态的测试用例</a></li>
+<li><a href=#go-test-形态的测试用例>go test 形态的测试用例</a></li>
+</ul>
+</li>
+<li><a href=#注意事项>注意事项</a></li>
+<li><a href=#whats-next>What&rsquo;s next</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
 <div class=td-content>
-<h1>HttpRunner 核心用户招募中，你要加群么？</h1>
-<div class=lead>欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！</div>
+<h1>使用 HttpRunner v4.0 实现 HTTP/2 的测试</h1>
 <div class="td-byline mb-4">
-<time datetime=2022-02-09 class=text-muted>Wednesday, February 09, 2022</time>
+<time datetime=2022-05-12 class=text-muted>Thursday, May 12, 2022</time>
 </div>
 <header class=article-meta>
 </header>
-<p>大家好！非常感谢大家一直以来对 HttpRunner 的关注和支持！</p>
-<p>在<a href=https://debugtalk.com/post/my-2021-summary/>我的 2021 年终总结</a>中，我说过我今年将会重点投入到 HttpRunner 的开发迭代和用户社区运营，近期我也在梳理具体的工作计划，估计很快就会同步给大家。</p>
-<p>首先，我想先建立一个 HttpRunner 的核心用户交流群，这也是之前众多用户呼吁已久的想法。这个群谢绝吹水，仅限 HttpRunner 相关的技术交流，包括新版本发布同步、新特性规划设计、问题反馈、用法咨询、最佳实践分享等等。后续待我们基于 HttpRunner 研发的桌面客户端压测工具发布后，也会第一时间发布到该用户群供大家体验试用。</p>
-<p>那怎么提升交流群的质量呢？</p>
-<p>我想最好的方式还是设置一些门槛，虽然会麻烦些，但应该是值得的。如果你期望加群，请填写<a href=https://wj.qq.com/s2/9699514/0d19/>用户调研问卷</a>并留下你的微信号，作者会添加你的微信并拉你进群（填写不认真的将自动忽略哈）。</p>
+<h2 id=前言回顾>前言回顾</h2>
+<p>此前的文章 <a href=/blog/release-v4/>HttpRunner v4.0 正式发布</a> 中提到，HttpRunner v4.0 已不再局限于 HTTP 协议，而是会拓展支持更多种类的网络协议，截至当前，HttpRunner v4.0 中 go 引擎已经新增支持了 HTTP/2 协议 和 WebSocket 协议，python 引擎也已经新增支持了 SQL 操作和 Thrift RPC 协议。本期文章将对支持 HTTP/2 的新特性进行介绍，对于 HttpRunner v4.0 的其他新特性，之后也将会陆续进行介绍，敬请期待。</p>
+<h2 id=特性介绍>特性介绍</h2>
+<p>对于原有的包含 HTTP/1.1 请求的测试脚本，将协议类型升级为 HTTP/2 的修改成本非常低，在添加请求参数、请求头和请求体等操作方面，HTTP/2 的测试用例与 HTTP/1.1 的风格基本保持一致，同时也继承了 HttpRunner 强大的参数关联和结果断言等功能。下面介绍将测试用例中的协议类型由 HTTP/1.1 升级为 HTTP/2 的具体修改方式。</p>
+<h3 id=jsonyaml-形态的测试用例>JSON/YAML 形态的测试用例</h3>
+<p>对于 JSON/YAML 形态的测试用例，只需要在 <code>request</code> 对象中添加一个新字段 <code>http2</code> 并且指定为 <code>true</code>。另外，新版本 HttpRunner 也支持对协议类型的断言（&ldquo;check&rdquo;: &ldquo;proto&rdquo;），这对于判断服务端是否支持 HTTP/2 的场景来说是非常实用的，因为有些时候服务端不支持 HTTP/2 并且会自动降级为 HTTP/1.1，这时就有必要对协议类型进行断言。如下是一个 HTTP 协议升级之后的 JSON 测试用例，在原来的基础上，只增加了一行代码 <code>"http2": true</code> 即可将 HTTP/1.1 升级为 HTTP/2，YAML 脚本同理，此处不再赘述。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;config&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+        <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;run request with HTTP/2&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;base_url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;https://postman-echo.com&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#204a87;font-weight:700>&#34;teststeps&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HTTP/2 get&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;request&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;method&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;GET&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/get&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;http2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;params&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo2&#34;</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;validate&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check status code&#34;</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;proto&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HTTP/2.0&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check protocol type&#34;</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.args.foo1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;length_equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>4</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check param foo1&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>]</span>
+        <span style=color:#000;font-weight:700>}</span>
+    <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><h3 id=go-test-形态的测试用例>go test 形态的测试用例</h3>
+<p>对于 go test 形态的测试用例，将 HTTP/1.1 升级为 HTTP/2 的方式同样非常简单，只需要在调用链中的 GET、POST 等请求方法之前先调用 HTTP2() 即可。如下是一个 HTTP 协议升级之后的 go test 测试用例，请注意 hrp.NewStep 方法与 GET、POST 请求方法之间新增的 HTTP2() 调用。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>tests</span>
+
+<span style=color:#204a87;font-weight:700>import</span> <span style=color:#000;font-weight:700>(</span>
+   <span style=color:#4e9a06>&#34;testing&#34;</span>
+
+   <span style=color:#4e9a06>&#34;github.com/httprunner/httprunner/hrp&#34;</span>
+<span style=color:#000;font-weight:700>)</span>
+
+<span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>TestHTTPProtocol</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>testing</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>T</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>testcase</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#ce5c00;font-weight:700>&amp;</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>TestCase</span><span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>Config</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewConfig</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run request with HTTP/1.1 and HTTP/2&#34;</span><span style=color:#000;font-weight:700>).</span>
+         <span style=color:#000>SetBaseURL</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com&#34;</span><span style=color:#000;font-weight:700>),</span>
+      <span style=color:#000>TestSteps</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[]</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>IStep</span><span style=color:#000;font-weight:700>{</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;HTTP/2 get&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>HTTP2</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>GET</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/get&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithParams</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>WithHeaders</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;proto&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;HTTP/2.0&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check protocol type&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>4</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check param foo1&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;HTTP/2 post&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>HTTP2</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>POST</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/post&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithHeaders</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>WithBody</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;proto&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;HTTP/2.0&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check protocol type&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.json.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>4</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check body foo1&#34;</span><span style=color:#000;font-weight:700>),</span>
+      <span style=color:#000;font-weight:700>},</span>
+   <span style=color:#000;font-weight:700>}</span>
+   <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewRunner</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span><span style=color:#000;font-weight:700>).</span><span style=color:#000>Run</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>testcase</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#204a87;font-weight:700>if</span> <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>!=</span> <span style=color:#204a87;font-weight:700>nil</span> <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>t</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Fatalf</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run testcase error: %v&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>err</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><h2 id=注意事项>注意事项</h2>
+<ul>
+<li>在使用 <code>hrp run</code> 进行接口测试时，通过命令行选项 <code>--proxy-url</code> 设置的代理 URL 对于 HTTP/2 协议的请求不会生效，原因是底层依赖不支持设置代理 URL</li>
+<li>在使用 <code>hrp boom</code> 进行性能测试时，通过命令行选项 <code>--disable-keepalive</code> 设置的打开/关闭长连接对于 HTTP/2 协议的请求不会生效，原因是底层依赖不支持设置改参数，另外 HTTP/2 协议支持多路复用，可以天然地达到类似长连接的效果</li>
+<li>虽然 RFC 文档中没有强制规定，不过目前大部分 HTTP/2 服务是建立在 SSL/TLS 之上的，因此建议在 URL 中使用 HTTPS</li>
+</ul>
+<h2 id=whats-next>What&rsquo;s next</h2>
+<p>目前 <code>hrp har2case</code> 命令还不支持将包含 HTTP/2 请求的 har 包转换为 JSON/YAML 测试用例，HttpRunner v4.0 之后的版本中将会对该特性进行支持</p>
+<blockquote>
+<p>本文作者：卜卜星（HttpRunner 核心开发者）<br>
+HttpRunner 项目官网: <a href=https://httprunner.com/>https://httprunner.com/</a><br>
+如果 HttpRunner 对你有过帮助，麻烦帮忙给个 ⭐️star⭐️ 鼓励下吧<br>
+<a href=https://github.com/httprunner/httprunner>https://github.com/httprunner/httprunner</a></p>
+</blockquote>
 <ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
 <li>
-<a class="btn btn-primary disabled"><span class=mr-1>←</span>上一页</a>
+<a href=/blog/docs-plan/ aria-label="上一页 - HttpRunner v4.0 用户文档 & 博客规划" class="btn btn-primary"><span class=mr-1>←</span>上一页</a>
 </li>
-<a href=/blog/user-survey-report/ aria-label="下一页 - HttpRunner 首轮用户调研报告（2022.02）" class="btn btn-primary">下一页<span class=ml-1>→</span></a>
+<a class="btn btn-primary disabled">下一页<span class=ml-1>→</span></a>
 </li>
 </ul>
 </div>
