@@ -311,8 +311,8 @@
 &lt;li>单独维护一个 WebSocket 消息缓冲区，将 ping 操作的执行过程由异步调整为同步，从而可以对 pong 响应的结果进行参数提取和断言&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>本文作者：卜卜星（HttpRunner 开发者之一）&lt;br/>
-HttpRunner 项目官网：https://httprunner.com/&lt;br/>
+&lt;p>本文作者：卜卜星，HttpRunner 核心开发者，贡献了本文介绍的 WebSocket 协议测试能力&lt;br/>
+HttpRunner 项目官网: &lt;a href="https://httprunner.com/">https://httprunner.com/&lt;/a>&lt;br/>
 如果 HttpRunner 对你有过帮助，麻烦帮忙给个 ⭐️star⭐️ 鼓励下吧&lt;br/>
 &lt;a href="https://github.com/httprunner/httprunner">https://github.com/httprunner/httprunner&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Blog: 使用 HttpRunner v4.0 实现 HTTP/2 的测试</title><link>https://httprunner.com/blog/how-to-test-http2/</link><pubDate>Thu, 12 May 2022 00:00:00 +0000</pubDate><guid>https://httprunner.com/blog/how-to-test-http2/</guid><description>

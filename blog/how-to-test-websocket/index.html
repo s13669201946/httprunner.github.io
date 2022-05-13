@@ -40,7 +40,7 @@
 测试用例总共包含了如下的 10 个步骤：
  建立一个新的连接并携带请求头 &ldquo;User-Agent&rdquo;: &ldquo;HttpRunnerPlus&rdquo;，并且对响应状态码 status_code 和响应头 headers.Connection 的内容进行断言 进行一次 ping pong 连接测试，超时时间设为 5 秒 读取建立连接之后，服务端主动推送的赞助消息 &ldquo;echo.websocket.events sponsored by Lob."><meta itemprop=datePublished content="2022-05-13T00:00:00+00:00">
 <meta itemprop=dateModified content="2022-05-13T23:36:03+08:00">
-<meta itemprop=wordCount content="569">
+<meta itemprop=wordCount content="572">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用 HttpRunner v4.0 实现 WebSocket 的测试">
 <meta name=twitter:description content="HttpRunner 从 v4.0 开始新增支持 WebSocket 协议。
@@ -473,8 +473,8 @@ Versions
 <li>单独维护一个 WebSocket 消息缓冲区，将 ping 操作的执行过程由异步调整为同步，从而可以对 pong 响应的结果进行参数提取和断言</li>
 </ul>
 <blockquote>
-<p>本文作者：卜卜星（HttpRunner 开发者之一）<br>
-HttpRunner 项目官网：https://httprunner.com/<br>
+<p>本文作者：卜卜星，HttpRunner 核心开发者，贡献了本文介绍的 WebSocket 协议测试能力<br>
+HttpRunner 项目官网: <a href=https://httprunner.com/>https://httprunner.com/</a><br>
 如果 HttpRunner 对你有过帮助，麻烦帮忙给个 ⭐️star⭐️ 鼓励下吧<br>
 <a href=https://github.com/httprunner/httprunner>https://github.com/httprunner/httprunner</a></p>
 </blockquote>
