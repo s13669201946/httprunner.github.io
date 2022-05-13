@@ -1,4 +1,376 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – HttpRunner</title><link>https://httprunner.com/</link><description>Recent content on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 使用 HttpRunner v4.0 实现 HTTP/2 的测试</title><link>https://httprunner.com/blog/how-to-test-http2/</link><pubDate>Thu, 12 May 2022 00:00:00 +0000</pubDate><guid>https://httprunner.com/blog/how-to-test-http2/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – HttpRunner</title><link>https://httprunner.com/</link><description>Recent content on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 使用 HttpRunner v4.0 实现 WebSocket 的测试</title><link>https://httprunner.com/blog/how-to-test-websocket/</link><pubDate>Fri, 13 May 2022 00:00:00 +0000</pubDate><guid>https://httprunner.com/blog/how-to-test-websocket/</guid><description>
+&lt;h2 id="功能概览">功能概览&lt;/h2>
+&lt;ul>
+&lt;li>提供了 6 种不同的 WebSocket 操作类型，覆盖了 Websocket 接口/性能测试的常见使用场景&lt;/li>
+&lt;li>建立连接阶段支持设置请求参数和请求头&lt;/li>
+&lt;li>支持发送文本/二进制两种类型的消息，支持从本地文件导入的方式来加载二进制消息&lt;/li>
+&lt;li>发送 ping 和 close 控制消息时，同样支持发送文本/二进制消息&lt;/li>
+&lt;li>通知 close 操作通知服务端断开当前连接之前，会自动丢弃现有连接中的冗余消息&lt;/li>
+&lt;li>支持设置代理 URL&lt;/li>
+&lt;li>继承了 HttpRunner 强大的参数关联和结果断言能力&lt;/li>
+&lt;/ul>
+&lt;h2 id="案例演示">案例演示&lt;/h2>
+&lt;p>实践出真知，首先我们来看一个完整的测试用例，该测试用例使用的被测服务是一个类似于 httpbin 的回显服务，只是使用的协议类型是 WebSocket 协议：ws://echo.websocket.events，无论客户端发送了什么消息，服务端都会原封不动地返回，具体效果可以参考&lt;a href="https://echo.websocket.events/.ws">链接&lt;/a>。
+测试用例总共包含了如下的 10 个步骤：&lt;/p>
+&lt;ol>
+&lt;li>建立一个新的连接并携带请求头 &amp;ldquo;User-Agent&amp;rdquo;: &amp;ldquo;HttpRunnerPlus&amp;rdquo;，并且对响应状态码 &lt;code>status_code&lt;/code> 和响应头 &lt;code>headers.Connection&lt;/code> 的内容进行断言&lt;/li>
+&lt;li>进行一次 ping pong 连接测试，超时时间设为 5 秒&lt;/li>
+&lt;li>读取建立连接之后，服务端主动推送的赞助消息 &amp;ldquo;echo.websocket.events sponsored by Lob.com&amp;rdquo;，并对 &lt;code>body&lt;/code> 中包含的字符串内容进行断言，超时时间设为 5 秒&lt;/li>
+&lt;li>写消息，指定消息类型为文本类型，消息内容为 JSON 格式：&lt;code>{&amp;quot;foo1&amp;quot;: &amp;quot;${gen_random_string($n)}&amp;quot;, &amp;quot;foo2&amp;quot;: &amp;quot;${max($a, $b)}&amp;quot;}&lt;/code>，注意该消息内容中用到了 HttpRunner 的内置函数 &lt;code>gen_random_string&lt;/code> 和 &lt;code>max&lt;/code>&lt;/li>
+&lt;li>读消息，不需要指定消息类型，对 body.foo1 进行参数提取，保存为新的变量 &lt;code>varFoo1&lt;/code>，随后再对 &lt;code>body.foo1&lt;/code> 的长度和 &lt;code>body.foo2&lt;/code> 的值进行断言&lt;/li>
+&lt;li>读写消息，写消息的类型为文本类型，消息内容为上一步中提取的 &lt;code>varFoo1&lt;/code>，并对服务端返回的消息进行读取，并且对 body 的长度进行断言&lt;/li>
+&lt;li>读写消息，写消息的类型为二进制类型，消息内容为从本地文件导入的二进制数据，并对服务端返回的消息进行读取，但不进行任何参数提取和结果断言操作&lt;/li>
+&lt;li>写一段冗余的消息 &amp;ldquo;have a nice day!&amp;quot;，用于测试断开连接前冗余消息的自动舍弃&lt;/li>
+&lt;li>写一段冗余的消息 &amp;ldquo;balabala &amp;hellip;&amp;quot;，用于测试断开连接前冗余消息的自动舍弃&lt;/li>
+&lt;li>通知服务端断开当前连接，超时时间设为 30 秒，指定状态码为 1000（说明客户端是正常断开连接），并且对服务端返回的响应状态码进行断言&lt;/li>
+&lt;/ol>
+&lt;p>下面给出上述测试用例对应的代码实现：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">tests&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;testing&amp;#34;&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;github.com/httprunner/httprunner/v4/hrp&amp;#34;&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;github.com/httprunner/httprunner/v4/hrp/internal/builtin&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">func&lt;/span> &lt;span style="color:#000">TestWebSocketProtocol&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">t&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">*&lt;/span>&lt;span style="color:#000">testing&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">testcase&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">TestCase&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">Config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewConfig&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;run request with WebSocket protocol&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">SetBaseURL&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ws://echo.websocket.events&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithVariables&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">interface&lt;/span>&lt;span style="color:#000;font-weight:bold">{}{&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;n&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;a&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12.3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;b&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3.45&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#4e9a06">&amp;#34;file&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;./demo_file_load_ws_message.txt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}),&lt;/span>
+&lt;span style="color:#000">TestSteps&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[]&lt;/span>&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">IStep&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;open connection&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">OpenConnection&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithHeaders&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;User-Agent&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HttpRunnerPlus&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}).&lt;/span>
+&lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">101&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check open status code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;headers.Connection&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Upgrade&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check headers&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ping pong test&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">PingPong&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5000&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;read sponsor info&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">Read&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5000&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertContains&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Lob.com&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check sponsor message&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;write json&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">Write&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithTextMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">map&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#204a87;font-weight:bold">interface&lt;/span>&lt;span style="color:#000;font-weight:bold">{}{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${gen_random_string($n)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${max($a, $b)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;read json&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">Read&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">Extract&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">WithJmesPath&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertLengthEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check json foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body.foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12.3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check json foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;write and read text&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">WriteAndRead&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithTextMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;$varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertLengthEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;body&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check length equal&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;write and read binary file&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">WriteAndRead&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithBinaryMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;${load_ws_message($file)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;write something redundant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">Write&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithTextMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;have a nice day!&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;write something redundant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">Write&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithTextMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;balabala ...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewStep&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;close connection&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WebSocket&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">CloseConnection&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30000&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">WithCloseStatus&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>
+&lt;span style="color:#000">Validate&lt;/span>&lt;span style="color:#000;font-weight:bold">().&lt;/span>
+&lt;span style="color:#000">AssertEqual&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check close status code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">),&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// dump to JSON testcase
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">err&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">:=&lt;/span> &lt;span style="color:#000">builtin&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Dump2JSON&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">testcase&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ToTCase&lt;/span>&lt;span style="color:#000;font-weight:bold">(),&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;websocket_test.json&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000">err&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">!=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">nil&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">t&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Fatalf&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;dump testcase error: %v&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">err&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#8f5902;font-style:italic">// run testcase
+&lt;/span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">err&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hrp&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">NewRunner&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">t&lt;/span>&lt;span style="color:#000;font-weight:bold">).&lt;/span>&lt;span style="color:#000">Run&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">testcase&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000">err&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">!=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">nil&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#000">t&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Fatalf&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;run testcase error: %v&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">err&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>需要说明的是，该测试用例中的示例文件需要由用户自己来指定，文件路径填写有效的绝对路径或相对路径即可，这里的示例文件 &lt;code>demo_file_load_ws_message.txt&lt;/code> 只是以 txt 文件为例，实际上该文件可以为任意类型，最终导入之后都为二进制类型。&lt;/p>
+&lt;p>下面给出程序执行之后，对应生成的 JSON 测试用例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;config&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;run request with WebSocket protocol&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;base_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ws://echo.websocket.events&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;variables&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;a&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12.3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;b&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3.45&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;file&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;./demo_file_load_ws_message.txt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;n&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;teststeps&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;open connection&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;open&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;headers&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;User-Agent&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HttpRunnerPlus&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;validate&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;check&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;assert&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;equals&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;expect&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">101&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;msg&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check open status code&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;check&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;headers.Connection&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;assert&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;equals&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;expect&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Upgrade&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;msg&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check headers&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ping pong test&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ping&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;timeout&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5000&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;read sponsor info&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;r&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;timeout&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5000&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;validate&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;check&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;body&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;assert&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;contains&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;expect&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Lob.com&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;msg&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check sponsor message&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;write json&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;w&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;text&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${gen_random_string($n)}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${max($a, $b)}&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;read json&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;r&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;extract&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;varFoo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;body.foo1&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;validate&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;check&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;body.foo1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;assert&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;length_equals&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;expect&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;msg&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check json foo1&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;check&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;body.foo2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;assert&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;equals&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;expect&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12.3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;msg&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check json foo2&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;write and read text&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;wr&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;text&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;$varFoo1&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;validate&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;check&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;body&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;assert&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;length_equals&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;expect&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;msg&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check length equal&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;write and read binary file&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;wr&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;binary&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;${load_ws_message($file)}&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;write something redundant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;w&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;text&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;have a nice day!&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;write something redundant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;w&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;text&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;balabala ...&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;close connection&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;websocket&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;close&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;/&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;close_status&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;timeout&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30000&lt;/span>
+&lt;span style="color:#000;font-weight:bold">},&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;validate&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;check&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;assert&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;equals&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;expect&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;span style="color:#204a87;font-weight:bold">&amp;#34;msg&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;check close status code&amp;#34;&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="操作类型介绍">操作类型介绍&lt;/h2>
+&lt;p>下面对各个操作类型进行介绍：&lt;/p>
+&lt;ul>
+&lt;li>open：创建一个新的 WebSocket 连接，创建连接是进行通信的第一步，如果在进行后续操作之前不先创建连接，则执行时会因为当前无可用连接而报错。WebSocket 的全双工连接最初是客户端发起 HTTP 请求，并进行协议升级而得来的，所以在建立连接的阶段是可以像常规的 HTTP 请求一样设置请求参数和请求头的，HttpRunner 支持在创建连接阶段设置请求参数和请求头，从而可以满足更加灵活的测试场景。需要注意的是，进行协议升级时的请求方法只限于 GET 方法，如果为 POST 方法，则请求会被 HTTP 服务而不是 WebSocket 服务处理。open 操作除了支持设置请求参数和请求头之外，还支持设置超时时间，这里的超时时间可以理解为是握手阶段的超时时间&lt;/li>
+&lt;li>ping：客户端发送一个 ping 控制消息，并且期待服务端返回的 pong 控制消息。WebSocket 建立的连接会占用客户端和服务端双方的网络资源，因此服务端一般会在无新操作之后的一段时间自动关闭当前连接，例如上面例子中用到的 echo.websocket.events 服务就会在双方无操作 60 秒之后自动关闭连接。如果客户端希望保持当前连接处于不断开的状态，又不希望发送具体的文本/二进制消息，则可以定时发送一个 ping 控制消息来维持当前连接，服务端会在收到 ping 控制消息之后向客户端回传一个 pong 控制消息，客户端接受到 pong 控制消息则可以确认服务端会继续保持当前连接的状态。上述的过程又称为 WebSocket 心跳机制，HttpRunner 支持在 ping 操作的同时发送文本/二进制消息，同时接收 pong 的过程是异步进行的，不会阻塞后续步骤的进行的，然而也正是由于接收 pong 的过程是异步进行的，暂不支持对服务端的 pong 响应进行参数提取和结果断言&lt;/li>
+&lt;li>w：客户端尝试向服务端进行一次写消息，适用于性能测试中单独测试上行通信的场景，该操作暂不支持设置超时时间。写消息的内容可以为文本/二进制消息，如果为二进制消息则可以通过 HttpRunner 的内置函数 &lt;code>load_ws_message&lt;/code> 来导入消息内容。由于写消息的过程是客户端向服务端的单向通信过程，不存在接收响应的过程，因此也不支持响应的参数提取和结果断言&lt;/li>
+&lt;li>r：客户端尝试对服务端发来的消息进行一次读取，适用于性能测试中单独测试下行通信的场景，需要注意读取消息的内容仅限于文本/二进制消息，控制消息是在 ping / close 操作中单独来接收和处理的&lt;/li>
+&lt;li>wr：进行一次消息读写，可以理解为是 w 和 r 两个操作的顺序组合，其过程类似于 HTTP 协议中发送请求和接收响应的过程，是 WebSocket 接口测试中较为常见的一类操作&lt;/li>
+&lt;li>close：通知服务端断开当前的 WebSocket 连接，并且在断开前，当前连接中的冗余消息会被舍弃。与 ping 操作类似，在发送 close 控制消息的同时也支持发送文本/二进制消息，此外还支持指定断开连接的状态码，该状态码可以用于说明断开连接的原因，不同状态码的含义可以参考 &lt;a href="https://www.rfc-editor.org/rfc/rfc6455.html#section-11.7">RFC 6455&lt;/a> 中的详细介绍&lt;/li>
+&lt;/ul>
+&lt;p>下面对各个操作的限制进行对比总结：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">操作类型&lt;/th>
+&lt;th style="text-align:center">open&lt;/th>
+&lt;th style="text-align:center">ping&lt;/th>
+&lt;th style="text-align:center">w&lt;/th>
+&lt;th style="text-align:center">r&lt;/th>
+&lt;th style="text-align:center">wr&lt;/th>
+&lt;th style="text-align:center">close&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">支持设置超时时间&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">支持设置请求参数和请求头&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">是否为阻塞操作&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">支持发送消息&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">支持设置状态码&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">支持参数提取和结果断言&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">❌&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;td style="text-align:center">✅&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="注意事项">注意事项&lt;/h2>
+&lt;ul>
+&lt;li>在参数未填写或者非法的情况下，所有操作的超时时间默认为 30 秒，close 操作的状态码默认为 1000（正常断开）&lt;/li>
+&lt;li>不同类型的 WebSocket 操作支持的参数提取和结果断言的对象类型也是不同的：
+&lt;ul>
+&lt;li>open 操作支持的参数提取和结果断言的对象类型与 HTTP 协议支持的相同，包括 proto、status_code、headers、cookies 和 body&lt;/li>
+&lt;li>r 和 wr 操作支持的参数提取和结果断言的对象类型只有 body&lt;/li>
+&lt;li>close 操作支持的参数提取和结果断言的对象类型包括 status_code 和 body，并且 body 的类型一定为字符串&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>发送二进制消息时，建议使用内置函数 &lt;code>load_ws_message&lt;/code> 从本地文件导入的方式来加载二进制消息，因为通过 JSON/YAML 脚本的方式无法直接指定二进制消息的内容（采用 go test 的方式来编写测试用例时，也可以通过 &lt;code>bytes.Buffer&lt;/code> 的方式来指定二进制消息内容）&lt;/li>
+&lt;li>如果测试用例的最后一步没有指定 close 操作，当前会话结束时也会自动断开当前连接，但是断开前不会丢弃当前连接中的冗余消息，也不会通知服务端断开连接，而是从客户端直接断开连接。&lt;/li>
+&lt;/ul>
+&lt;h2 id="whats-next">What&amp;rsquo;s next&lt;/h2>
+&lt;ul>
+&lt;li>目前 hrp har2case 命令还不支持将包含 WebSocket 请求的 har 包转换为 JSON/YAML 测试用例，HttpRunner v4.0 之后的版本中将会对该特性进行支持&lt;/li>
+&lt;li>目前暂不支持自动重连机制，之后版本将支持在服务端主动断开连接后进行自动重连，并支持指定自动重连的间隔时间和最大重试次数&lt;/li>
+&lt;li>目前二进制消息会转为字符串或者程序内部变量的形式来进行参数提取和结果断言的，后续计划支持二进制消息的单独参数提取和结果断言机制&lt;/li>
+&lt;li>单独维护一个 WebSocket 消息缓冲区，将 ping 操作的执行过程由异步调整为同步，从而可以对 pong 响应的结果进行参数提取和断言&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>本文作者：卜卜星（HttpRunner 开发者之一）
+HttpRunner 项目官网：https://httprunner.com/
+如果 HttpRunner 对你有过帮助，麻烦帮忙给个 ⭐️star⭐️ 鼓励下吧
+&lt;a href="https://github.com/httprunner/httprunner">https://github.com/httprunner/httprunner&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Blog: 使用 HttpRunner v4.0 实现 HTTP/2 的测试</title><link>https://httprunner.com/blog/how-to-test-http2/</link><pubDate>Thu, 12 May 2022 00:00:00 +0000</pubDate><guid>https://httprunner.com/blog/how-to-test-http2/</guid><description>
 &lt;h2 id="前言回顾">前言回顾&lt;/h2>
 &lt;p>此前的文章 &lt;a href="https://httprunner.com/blog/release-v4/">HttpRunner v4.0 正式发布&lt;/a> 中提到，HttpRunner v4.0 已不再局限于 HTTP 协议，而是会拓展支持更多种类的网络协议，截至当前，HttpRunner v4.0 中 go 引擎已经新增支持了 HTTP/2 协议 和 WebSocket 协议，python 引擎也已经新增支持了 SQL 操作和 Thrift RPC 协议。本期文章将对支持 HTTP/2 的新特性进行介绍，对于 HttpRunner v4.0 的其他新特性，之后也将会陆续进行介绍，敬请期待。&lt;/p>
 &lt;h2 id="特性介绍">特性介绍&lt;/h2>

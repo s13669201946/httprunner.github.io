@@ -14,21 +14,29 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>HttpRunner 核心用户招募中，你要加群么？ | HttpRunner</title>
-<meta name=description content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！">
-<meta property="og:title" content="HttpRunner 核心用户招募中，你要加群么？">
-<meta property="og:description" content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！">
+<title>使用 HttpRunner v4.0 实现 WebSocket 的测试 | HttpRunner</title>
+<meta name=description content="功能概览
+
+提供了 6 种不同的 WebSocket 操作类型，覆盖了 Websocket 接口/性能测试的常见使用场景
+建立连接阶段支持设置请求参数和请求头
+支持发送文本/二进制两种类型的消息，支持从本地文件导入的方式来加载二进制消息
+发送 ping 和 close 控制消息时，同样支持发送文本/ …">
+<meta property="og:title" content="使用 HttpRunner v4.0 实现 WebSocket 的测试">
+<meta property="og:description" content="功能概览  提供了 6 种不同的 WebSocket 操作类型，覆盖了 Websocket 接口/性能测试的常见使用场景 建立连接阶段支持设置请求参数和请求头 支持发送文本/二进制两种类型的消息，支持从本地文件导入的方式来加载二进制消息 发送 ping 和 close 控制消息时，同样支持发送文本/二进制消息 通知 close 操作通知服务端断开当前连接之前，会自动丢弃现有连接中的冗余消息 支持设置代理 URL 继承了 HttpRunner 强大的参数关联和结果断言能力  案例演示 实践出真知，首先我们来看一个完整的测试用例，该测试用例使用的被测服务是一个类似于 httpbin 的回显服务，只是使用的协议类型是 WebSocket 协议：ws://echo.websocket.events，无论客户端发送了什么消息，服务端都会原封不动地返回，具体效果可以参考链接。 测试用例总共包含了如下的 10 个步骤：
+ 建立一个新的连接并携带请求头 &ldquo;User-Agent&rdquo;: &ldquo;HttpRunnerPlus&rdquo;，并且对响应状态码 status_code 和响应头 headers.Connection 的内容进行断言 进行一次 ping pong 连接测试，超时时间设为 5 秒 读取建立连接之后，服务端主动推送的赞助消息 &ldquo;echo.websocket.events sponsored by Lob.com&rdquo;，并对 body 中包含的字符串内容进行断言，超时时间设为 5 秒 写消息，指定消息类型为文本类型，消息内容为 JSON 格式：{&#34;foo1&#34;: &#34;${gen_random_string($n)}&#34;, &#34;foo2&#34;: &#34;${max($a, $b)}&#34;}，注意该消息内容中用到了 HttpRunner 的内置函数 gen_random_string 和 max 读消息，不需要指定消息类型，对 body.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://httprunner.com/blog/user-survey/"><meta property="article:section" content="blog">
-<meta property="article:published_time" content="2022-02-09T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-04-30T00:00:39+08:00">
-<meta itemprop=name content="HttpRunner 核心用户招募中，你要加群么？">
-<meta itemprop=description content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！"><meta itemprop=datePublished content="2022-02-09T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-04-30T00:00:39+08:00">
-<meta itemprop=wordCount content="17">
+<meta property="og:url" content="https://httprunner.com/blog/how-to-test-websocket/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-05-13T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-05-13T21:31:18+08:00">
+<meta itemprop=name content="使用 HttpRunner v4.0 实现 WebSocket 的测试">
+<meta itemprop=description content="功能概览  提供了 6 种不同的 WebSocket 操作类型，覆盖了 Websocket 接口/性能测试的常见使用场景 建立连接阶段支持设置请求参数和请求头 支持发送文本/二进制两种类型的消息，支持从本地文件导入的方式来加载二进制消息 发送 ping 和 close 控制消息时，同样支持发送文本/二进制消息 通知 close 操作通知服务端断开当前连接之前，会自动丢弃现有连接中的冗余消息 支持设置代理 URL 继承了 HttpRunner 强大的参数关联和结果断言能力  案例演示 实践出真知，首先我们来看一个完整的测试用例，该测试用例使用的被测服务是一个类似于 httpbin 的回显服务，只是使用的协议类型是 WebSocket 协议：ws://echo.websocket.events，无论客户端发送了什么消息，服务端都会原封不动地返回，具体效果可以参考链接。 测试用例总共包含了如下的 10 个步骤：
+ 建立一个新的连接并携带请求头 &ldquo;User-Agent&rdquo;: &ldquo;HttpRunnerPlus&rdquo;，并且对响应状态码 status_code 和响应头 headers.Connection 的内容进行断言 进行一次 ping pong 连接测试，超时时间设为 5 秒 读取建立连接之后，服务端主动推送的赞助消息 &ldquo;echo.websocket.events sponsored by Lob.com&rdquo;，并对 body 中包含的字符串内容进行断言，超时时间设为 5 秒 写消息，指定消息类型为文本类型，消息内容为 JSON 格式：{&#34;foo1&#34;: &#34;${gen_random_string($n)}&#34;, &#34;foo2&#34;: &#34;${max($a, $b)}&#34;}，注意该消息内容中用到了 HttpRunner 的内置函数 gen_random_string 和 max 读消息，不需要指定消息类型，对 body."><meta itemprop=datePublished content="2022-05-13T00:00:00+00:00">
+<meta itemprop=dateModified content="2022-05-13T21:31:18+08:00">
+<meta itemprop=wordCount content="782">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="HttpRunner 核心用户招募中，你要加群么？">
-<meta name=twitter:description content="欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！">
+<meta name=twitter:title content="使用 HttpRunner v4.0 实现 WebSocket 的测试">
+<meta name=twitter:description content="功能概览  提供了 6 种不同的 WebSocket 操作类型，覆盖了 Websocket 接口/性能测试的常见使用场景 建立连接阶段支持设置请求参数和请求头 支持发送文本/二进制两种类型的消息，支持从本地文件导入的方式来加载二进制消息 发送 ping 和 close 控制消息时，同样支持发送文本/二进制消息 通知 close 操作通知服务端断开当前连接之前，会自动丢弃现有连接中的冗余消息 支持设置代理 URL 继承了 HttpRunner 强大的参数关联和结果断言能力  案例演示 实践出真知，首先我们来看一个完整的测试用例，该测试用例使用的被测服务是一个类似于 httpbin 的回显服务，只是使用的协议类型是 WebSocket 协议：ws://echo.websocket.events，无论客户端发送了什么消息，服务端都会原封不动地返回，具体效果可以参考链接。 测试用例总共包含了如下的 10 个步骤：
+ 建立一个新的连接并携带请求头 &ldquo;User-Agent&rdquo;: &ldquo;HttpRunnerPlus&rdquo;，并且对响应状态码 status_code 和响应头 headers.Connection 的内容进行断言 进行一次 ping pong 连接测试，超时时间设为 5 秒 读取建立连接之后，服务端主动推送的赞助消息 &ldquo;echo.websocket.events sponsored by Lob.com&rdquo;，并对 body 中包含的字符串内容进行断言，超时时间设为 5 秒 写消息，指定消息类型为文本类型，消息内容为 JSON 格式：{&#34;foo1&#34;: &#34;${gen_random_string($n)}&#34;, &#34;foo2&#34;: &#34;${max($a, $b)}&#34;}，注意该消息内容中用到了 HttpRunner 的内置函数 gen_random_string 和 max 读消息，不需要指定消息类型，对 body.">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -96,8 +104,8 @@ Versions
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li>
 <a href=/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>博客</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-test-websocket-li>
-<a href=/blog/how-to-test-websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-test-websocket><span>使用 HttpRunner v4.0 实现 WebSocket 的测试</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-bloghow-to-test-websocket-li>
+<a href=/blog/how-to-test-websocket/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-test-websocket><span class=td-sidebar-nav-active-item>使用 HttpRunner v4.0 实现 WebSocket 的测试</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-test-http2-li>
 <a href=/blog/how-to-test-http2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-test-http2><span>使用 HttpRunner v4.0 实现 HTTP/2 的测试</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blogdocs-plan-li>
@@ -106,8 +114,8 @@ Versions
 <a href=/blog/release-v4/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blogrelease-v4><span>HttpRunner v4.0 全新发布</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-report-li>
 <a href=/blog/user-survey-report/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey-report><span>HttpRunner 首轮用户调研报告（2022.02）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-bloguser-survey-li>
-<a href=/blog/user-survey/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey><span class=td-sidebar-nav-active-item>HttpRunner 核心用户招募中，你要加群么？</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-li>
+<a href=/blog/user-survey/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey><span>HttpRunner 核心用户招募中，你要加群么？</span></a>
 </li>
 </ul>
 </li>
@@ -118,26 +126,404 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#功能概览>功能概览</a></li>
+<li><a href=#案例演示>案例演示</a></li>
+<li><a href=#操作类型介绍>操作类型介绍</a></li>
+<li><a href=#注意事项>注意事项</a></li>
+<li><a href=#whats-next>What&rsquo;s next</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
 <div class=td-content>
-<h1>HttpRunner 核心用户招募中，你要加群么？</h1>
-<div class=lead>欢迎参加 HttpRunner 用户调研问卷，你的反馈将帮助 HttpRunner 更好地成长！</div>
+<h1>使用 HttpRunner v4.0 实现 WebSocket 的测试</h1>
 <div class="td-byline mb-4">
-<time datetime=2022-02-09 class=text-muted>Wednesday, February 09, 2022</time>
+<time datetime=2022-05-13 class=text-muted>Friday, May 13, 2022</time>
 </div>
 <header class=article-meta>
 </header>
-<p>大家好！非常感谢大家一直以来对 HttpRunner 的关注和支持！</p>
-<p>在<a href=https://debugtalk.com/post/my-2021-summary/>我的 2021 年终总结</a>中，我说过我今年将会重点投入到 HttpRunner 的开发迭代和用户社区运营，近期我也在梳理具体的工作计划，估计很快就会同步给大家。</p>
-<p>首先，我想先建立一个 HttpRunner 的核心用户交流群，这也是之前众多用户呼吁已久的想法。这个群谢绝吹水，仅限 HttpRunner 相关的技术交流，包括新版本发布同步、新特性规划设计、问题反馈、用法咨询、最佳实践分享等等。后续待我们基于 HttpRunner 研发的桌面客户端压测工具发布后，也会第一时间发布到该用户群供大家体验试用。</p>
-<p>那怎么提升交流群的质量呢？</p>
-<p>我想最好的方式还是设置一些门槛，虽然会麻烦些，但应该是值得的。如果你期望加群，请填写<a href=https://wj.qq.com/s2/9699514/0d19/>用户调研问卷</a>并留下你的微信号，作者会添加你的微信并拉你进群（填写不认真的将自动忽略哈）。</p>
+<h2 id=功能概览>功能概览</h2>
+<ul>
+<li>提供了 6 种不同的 WebSocket 操作类型，覆盖了 Websocket 接口/性能测试的常见使用场景</li>
+<li>建立连接阶段支持设置请求参数和请求头</li>
+<li>支持发送文本/二进制两种类型的消息，支持从本地文件导入的方式来加载二进制消息</li>
+<li>发送 ping 和 close 控制消息时，同样支持发送文本/二进制消息</li>
+<li>通知 close 操作通知服务端断开当前连接之前，会自动丢弃现有连接中的冗余消息</li>
+<li>支持设置代理 URL</li>
+<li>继承了 HttpRunner 强大的参数关联和结果断言能力</li>
+</ul>
+<h2 id=案例演示>案例演示</h2>
+<p>实践出真知，首先我们来看一个完整的测试用例，该测试用例使用的被测服务是一个类似于 httpbin 的回显服务，只是使用的协议类型是 WebSocket 协议：ws://echo.websocket.events，无论客户端发送了什么消息，服务端都会原封不动地返回，具体效果可以参考<a href=https://echo.websocket.events/.ws>链接</a>。
+测试用例总共包含了如下的 10 个步骤：</p>
+<ol>
+<li>建立一个新的连接并携带请求头 &ldquo;User-Agent&rdquo;: &ldquo;HttpRunnerPlus&rdquo;，并且对响应状态码 <code>status_code</code> 和响应头 <code>headers.Connection</code> 的内容进行断言</li>
+<li>进行一次 ping pong 连接测试，超时时间设为 5 秒</li>
+<li>读取建立连接之后，服务端主动推送的赞助消息 &ldquo;echo.websocket.events sponsored by Lob.com&rdquo;，并对 <code>body</code> 中包含的字符串内容进行断言，超时时间设为 5 秒</li>
+<li>写消息，指定消息类型为文本类型，消息内容为 JSON 格式：<code>{"foo1": "${gen_random_string($n)}", "foo2": "${max($a, $b)}"}</code>，注意该消息内容中用到了 HttpRunner 的内置函数 <code>gen_random_string</code> 和 <code>max</code></li>
+<li>读消息，不需要指定消息类型，对 body.foo1 进行参数提取，保存为新的变量 <code>varFoo1</code>，随后再对 <code>body.foo1</code> 的长度和 <code>body.foo2</code> 的值进行断言</li>
+<li>读写消息，写消息的类型为文本类型，消息内容为上一步中提取的 <code>varFoo1</code>，并对服务端返回的消息进行读取，并且对 body 的长度进行断言</li>
+<li>读写消息，写消息的类型为二进制类型，消息内容为从本地文件导入的二进制数据，并对服务端返回的消息进行读取，但不进行任何参数提取和结果断言操作</li>
+<li>写一段冗余的消息 &ldquo;have a nice day!"，用于测试断开连接前冗余消息的自动舍弃</li>
+<li>写一段冗余的消息 &ldquo;balabala &mldr;"，用于测试断开连接前冗余消息的自动舍弃</li>
+<li>通知服务端断开当前连接，超时时间设为 30 秒，指定状态码为 1000（说明客户端是正常断开连接），并且对服务端返回的响应状态码进行断言</li>
+</ol>
+<p>下面给出上述测试用例对应的代码实现：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>tests</span>
+
+<span style=color:#204a87;font-weight:700>import</span> <span style=color:#000;font-weight:700>(</span>
+   <span style=color:#4e9a06>&#34;testing&#34;</span>
+
+   <span style=color:#4e9a06>&#34;github.com/httprunner/httprunner/v4/hrp&#34;</span>
+   <span style=color:#4e9a06>&#34;github.com/httprunner/httprunner/v4/hrp/internal/builtin&#34;</span>
+<span style=color:#000;font-weight:700>)</span>
+
+<span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>TestWebSocketProtocol</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>testing</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>T</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>testcase</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#ce5c00;font-weight:700>&amp;</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>TestCase</span><span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>Config</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewConfig</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run request with WebSocket protocol&#34;</span><span style=color:#000;font-weight:700>).</span>
+         <span style=color:#000>SetBaseURL</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;ws://echo.websocket.events&#34;</span><span style=color:#000;font-weight:700>).</span>
+         <span style=color:#000>WithVariables</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span>
+            <span style=color:#4e9a06>&#34;n&#34;</span><span style=color:#000;font-weight:700>:</span>    <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#4e9a06>&#34;a&#34;</span><span style=color:#000;font-weight:700>:</span>    <span style=color:#0000cf;font-weight:700>12.3</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#4e9a06>&#34;b&#34;</span><span style=color:#000;font-weight:700>:</span>    <span style=color:#0000cf;font-weight:700>3.45</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#4e9a06>&#34;file&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;./demo_file_load_ws_message.txt&#34;</span><span style=color:#000;font-weight:700>,</span>
+         <span style=color:#000;font-weight:700>}),</span>
+      <span style=color:#000>TestSteps</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[]</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>IStep</span><span style=color:#000;font-weight:700>{</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;open connection&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>OpenConnection</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithHeaders</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>101</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check open status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;headers.Connection&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;Upgrade&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check headers&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;ping pong test&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>PingPong</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTimeout</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>5000</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;read sponsor info&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>Read</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTimeout</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>5000</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertContains</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;Lob.com&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check sponsor message&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;write json&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>Write</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTextMessage</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${gen_random_string($n)}&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${max($a, $b)}&#34;</span><span style=color:#000;font-weight:700>}),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;read json&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>Read</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>Extract</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>WithJmesPath</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;varFoo1&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check json foo1&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.foo2&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>12.3</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check json foo2&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;write and read text&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>WriteAndRead</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTextMessage</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;$varFoo1&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check length equal&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;write and read binary file&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>WriteAndRead</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithBinaryMessage</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;${load_ws_message($file)}&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;write something redundant&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>Write</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTextMessage</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;have a nice day!&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;write something redundant&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>Write</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTextMessage</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;balabala ...&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;close connection&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WebSocket</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>CloseConnection</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTimeout</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>30000</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithCloseStatus</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>1000</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>1000</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check close status code&#34;</span><span style=color:#000;font-weight:700>),</span>
+      <span style=color:#000;font-weight:700>},</span>
+   <span style=color:#000;font-weight:700>}</span>
+   <span style=color:#8f5902;font-style:italic>// dump to JSON testcase
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#000>builtin</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Dump2JSON</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>testcase</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>ToTCase</span><span style=color:#000;font-weight:700>(),</span> <span style=color:#4e9a06>&#34;websocket_test.json&#34;</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#204a87;font-weight:700>if</span> <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>!=</span> <span style=color:#204a87;font-weight:700>nil</span> <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>t</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Fatalf</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;dump testcase error: %v&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>err</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#000;font-weight:700>}</span>
+   <span style=color:#8f5902;font-style:italic>// run testcase
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#000>err</span> <span style=color:#000;font-weight:700>=</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewRunner</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span><span style=color:#000;font-weight:700>).</span><span style=color:#000>Run</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>testcase</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#204a87;font-weight:700>if</span> <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>!=</span> <span style=color:#204a87;font-weight:700>nil</span> <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>t</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Fatalf</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run testcase error: %v&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>err</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>需要说明的是，该测试用例中的示例文件需要由用户自己来指定，文件路径填写有效的绝对路径或相对路径即可，这里的示例文件 <code>demo_file_load_ws_message.txt</code> 只是以 txt 文件为例，实际上该文件可以为任意类型，最终导入之后都为二进制类型。</p>
+<p>下面给出程序执行之后，对应生成的 JSON 测试用例：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;config&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+        <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;run request with WebSocket protocol&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;base_url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;ws://echo.websocket.events&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;variables&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;a&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>12.3</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;b&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3.45</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;file&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;./demo_file_load_ws_message.txt&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;n&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>5</span>
+        <span style=color:#000;font-weight:700>}</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#204a87;font-weight:700>&#34;teststeps&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;open connection&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;open&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;validate&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>101</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check open status code&#34;</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;headers.Connection&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Upgrade&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check headers&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>]</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;ping pong test&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;ping&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;timeout&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>5000</span>
+            <span style=color:#000;font-weight:700>}</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;read sponsor info&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;r&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;timeout&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>5000</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;validate&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;contains&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Lob.com&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check sponsor message&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>]</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;write json&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;w&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;text&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${gen_random_string($n)}&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${max($a, $b)}&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>}</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;read json&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;r&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;extract&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;varFoo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.foo1&#34;</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;validate&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.foo1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;length_equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check json foo1&#34;</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.foo2&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>12.3</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check json foo2&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>]</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;write and read text&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;wr&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;text&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;$varFoo1&#34;</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;validate&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;length_equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>5</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check length equal&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>]</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;write and read binary file&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;wr&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;binary&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;${load_ws_message($file)}&#34;</span>
+            <span style=color:#000;font-weight:700>}</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;write something redundant&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;w&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;text&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;have a nice day!&#34;</span>
+            <span style=color:#000;font-weight:700>}</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;write something redundant&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;w&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;text&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;balabala ...&#34;</span>
+            <span style=color:#000;font-weight:700>}</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;close connection&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;websocket&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;close&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;close_status&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1000</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;timeout&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>30000</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;validate&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;equals&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1000</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;msg&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;check close status code&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>]</span>
+        <span style=color:#000;font-weight:700>}</span>
+    <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><h2 id=操作类型介绍>操作类型介绍</h2>
+<p>下面对各个操作类型进行介绍：</p>
+<ul>
+<li>open：创建一个新的 WebSocket 连接，创建连接是进行通信的第一步，如果在进行后续操作之前不先创建连接，则执行时会因为当前无可用连接而报错。WebSocket 的全双工连接最初是客户端发起 HTTP 请求，并进行协议升级而得来的，所以在建立连接的阶段是可以像常规的 HTTP 请求一样设置请求参数和请求头的，HttpRunner 支持在创建连接阶段设置请求参数和请求头，从而可以满足更加灵活的测试场景。需要注意的是，进行协议升级时的请求方法只限于 GET 方法，如果为 POST 方法，则请求会被 HTTP 服务而不是 WebSocket 服务处理。open 操作除了支持设置请求参数和请求头之外，还支持设置超时时间，这里的超时时间可以理解为是握手阶段的超时时间</li>
+<li>ping：客户端发送一个 ping 控制消息，并且期待服务端返回的 pong 控制消息。WebSocket 建立的连接会占用客户端和服务端双方的网络资源，因此服务端一般会在无新操作之后的一段时间自动关闭当前连接，例如上面例子中用到的 echo.websocket.events 服务就会在双方无操作 60 秒之后自动关闭连接。如果客户端希望保持当前连接处于不断开的状态，又不希望发送具体的文本/二进制消息，则可以定时发送一个 ping 控制消息来维持当前连接，服务端会在收到 ping 控制消息之后向客户端回传一个 pong 控制消息，客户端接受到 pong 控制消息则可以确认服务端会继续保持当前连接的状态。上述的过程又称为 WebSocket 心跳机制，HttpRunner 支持在 ping 操作的同时发送文本/二进制消息，同时接收 pong 的过程是异步进行的，不会阻塞后续步骤的进行的，然而也正是由于接收 pong 的过程是异步进行的，暂不支持对服务端的 pong 响应进行参数提取和结果断言</li>
+<li>w：客户端尝试向服务端进行一次写消息，适用于性能测试中单独测试上行通信的场景，该操作暂不支持设置超时时间。写消息的内容可以为文本/二进制消息，如果为二进制消息则可以通过 HttpRunner 的内置函数 <code>load_ws_message</code> 来导入消息内容。由于写消息的过程是客户端向服务端的单向通信过程，不存在接收响应的过程，因此也不支持响应的参数提取和结果断言</li>
+<li>r：客户端尝试对服务端发来的消息进行一次读取，适用于性能测试中单独测试下行通信的场景，需要注意读取消息的内容仅限于文本/二进制消息，控制消息是在 ping / close 操作中单独来接收和处理的</li>
+<li>wr：进行一次消息读写，可以理解为是 w 和 r 两个操作的顺序组合，其过程类似于 HTTP 协议中发送请求和接收响应的过程，是 WebSocket 接口测试中较为常见的一类操作</li>
+<li>close：通知服务端断开当前的 WebSocket 连接，并且在断开前，当前连接中的冗余消息会被舍弃。与 ping 操作类似，在发送 close 控制消息的同时也支持发送文本/二进制消息，此外还支持指定断开连接的状态码，该状态码可以用于说明断开连接的原因，不同状态码的含义可以参考 <a href=https://www.rfc-editor.org/rfc/rfc6455.html#section-11.7>RFC 6455</a> 中的详细介绍</li>
+</ul>
+<p>下面对各个操作的限制进行对比总结：</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:center>操作类型</th>
+<th style=text-align:center>open</th>
+<th style=text-align:center>ping</th>
+<th style=text-align:center>w</th>
+<th style=text-align:center>r</th>
+<th style=text-align:center>wr</th>
+<th style=text-align:center>close</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:center>支持设置超时时间</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+</tr>
+<tr>
+<td style=text-align:center>支持设置请求参数和请求头</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+</tr>
+<tr>
+<td style=text-align:center>是否为阻塞操作</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+</tr>
+<tr>
+<td style=text-align:center>支持发送消息</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+</tr>
+<tr>
+<td style=text-align:center>支持设置状态码</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>✅</td>
+</tr>
+<tr>
+<td style=text-align:center>支持参数提取和结果断言</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>❌</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+<td style=text-align:center>✅</td>
+</tr>
+</tbody>
+</table>
+<h2 id=注意事项>注意事项</h2>
+<ul>
+<li>在参数未填写或者非法的情况下，所有操作的超时时间默认为 30 秒，close 操作的状态码默认为 1000（正常断开）</li>
+<li>不同类型的 WebSocket 操作支持的参数提取和结果断言的对象类型也是不同的：
+<ul>
+<li>open 操作支持的参数提取和结果断言的对象类型与 HTTP 协议支持的相同，包括 proto、status_code、headers、cookies 和 body</li>
+<li>r 和 wr 操作支持的参数提取和结果断言的对象类型只有 body</li>
+<li>close 操作支持的参数提取和结果断言的对象类型包括 status_code 和 body，并且 body 的类型一定为字符串</li>
+</ul>
+</li>
+<li>发送二进制消息时，建议使用内置函数 <code>load_ws_message</code> 从本地文件导入的方式来加载二进制消息，因为通过 JSON/YAML 脚本的方式无法直接指定二进制消息的内容（采用 go test 的方式来编写测试用例时，也可以通过 <code>bytes.Buffer</code> 的方式来指定二进制消息内容）</li>
+<li>如果测试用例的最后一步没有指定 close 操作，当前会话结束时也会自动断开当前连接，但是断开前不会丢弃当前连接中的冗余消息，也不会通知服务端断开连接，而是从客户端直接断开连接。</li>
+</ul>
+<h2 id=whats-next>What&rsquo;s next</h2>
+<ul>
+<li>目前 hrp har2case 命令还不支持将包含 WebSocket 请求的 har 包转换为 JSON/YAML 测试用例，HttpRunner v4.0 之后的版本中将会对该特性进行支持</li>
+<li>目前暂不支持自动重连机制，之后版本将支持在服务端主动断开连接后进行自动重连，并支持指定自动重连的间隔时间和最大重试次数</li>
+<li>目前二进制消息会转为字符串或者程序内部变量的形式来进行参数提取和结果断言的，后续计划支持二进制消息的单独参数提取和结果断言机制</li>
+<li>单独维护一个 WebSocket 消息缓冲区，将 ping 操作的执行过程由异步调整为同步，从而可以对 pong 响应的结果进行参数提取和断言</li>
+</ul>
+<blockquote>
+<p>本文作者：卜卜星（HttpRunner 开发者之一）
+HttpRunner 项目官网：https://httprunner.com/
+如果 HttpRunner 对你有过帮助，麻烦帮忙给个 ⭐️star⭐️ 鼓励下吧
+<a href=https://github.com/httprunner/httprunner>https://github.com/httprunner/httprunner</a></p>
+</blockquote>
 <ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
 <li>
-<a class="btn btn-primary disabled"><span class=mr-1>←</span>上一页</a>
+<a href=/blog/how-to-test-http2/ aria-label="上一页 - 使用 HttpRunner v4.0 实现 HTTP/2 的测试" class="btn btn-primary"><span class=mr-1>←</span>上一页</a>
 </li>
-<a href=/blog/user-survey-report/ aria-label="下一页 - HttpRunner 首轮用户调研报告（2022.02）" class="btn btn-primary">下一页<span class=ml-1>→</span></a>
+<a class="btn btn-primary disabled">下一页<span class=ml-1>→</span></a>
 </li>
 </ul>
 </div>
