@@ -14,16 +14,16 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>网络性能采集 | HttpRunner</title>
-<meta name=description content="使用 HttpRunner 实现网络性能采集">
-<meta property="og:title" content="网络性能采集">
-<meta property="og:description" content="使用 HttpRunner 实现网络性能采集">
+<title>二次开发 | HttpRunner</title>
+<meta name=description content="基于 HttpRunner 实现框架能力扩展和测试平台集成">
+<meta property="og:title" content="二次开发">
+<meta property="og:description" content="基于 HttpRunner 实现框架能力扩展和测试平台集成">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://httprunner.com/docs/user-guide/dem/">
-<meta itemprop=name content="网络性能采集">
-<meta itemprop=description content="使用 HttpRunner 实现网络性能采集"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="网络性能采集">
-<meta name=twitter:description content="使用 HttpRunner 实现网络性能采集">
+<meta property="og:url" content="https://httprunner.com/docs/user-guide/integrate/">
+<meta itemprop=name content="二次开发">
+<meta itemprop=description content="基于 HttpRunner 实现框架能力扩展和测试平台集成"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="二次开发">
+<meta name=twitter:description content="基于 HttpRunner 实现框架能力扩展和测试平台集成">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -180,14 +180,14 @@ Versions
 <a href=/docs/user-guide/load-test/report-/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testreport-><span>测试报告</span></a>
 </li>
 </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guidedem-li>
-<a href=/docs/user-guide/dem/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidedem><span class=td-sidebar-nav-active-item>网络性能采集</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideintegrate-li>
-<a href=/docs/user-guide/integrate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideintegrate><span>二次开发</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidedem-li>
+<a href=/docs/user-guide/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidedem><span>网络性能采集</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guideintegrate-li>
+<a href=/docs/user-guide/integrate/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideintegrate><span class=td-sidebar-nav-active-item>二次开发</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideintegrateextend-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideintegrateextend-li>
 <a href=/docs/user-guide/integrate/extend/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideintegrateextend><span>框架能力扩展</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideintegrateintegrate-li>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideintegrateintegrate-li>
 <a href=/docs/user-guide/integrate/integrate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideintegrateintegrate><span>测试平台集成</span></a>
 </li>
 </ul>
@@ -240,16 +240,30 @@ Versions
 <a href=https://httprunner.com/docs/user-guide/>用户指南</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://httprunner.com/docs/user-guide/dem/>网络性能采集</a>
+<a href=https://httprunner.com/docs/user-guide/integrate/>二次开发</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>网络性能采集</h1>
-<div class=lead>使用 HttpRunner 实现网络性能采集</div>
+<h1>二次开发</h1>
+<div class=lead>基于 HttpRunner 实现框架能力扩展和测试平台集成</div>
 <header class=article-meta>
 </header>
+<p>HttpRunner 不仅仅是一款功能强大的测试工具和框架，你还可以在不改动 HttpRunner 源码的情况下，轻松通过二次开发实现定制化需求，包括框架能力扩展和测试平台集成。</p>
 <div class=section-index>
+<hr class=panel-line>
+<div class=entry>
+<h5>
+<a href=/docs/user-guide/integrate/extend/>框架能力扩展</a>
+</h5>
+<p>基于 HttpRunner 实现框架能力扩展</p>
+</div>
+<div class=entry>
+<h5>
+<a href=/docs/user-guide/integrate/integrate/>测试平台集成</a>
+</h5>
+<p>基于 HttpRunner 实现测试平台集成</p>
+</div>
 </div>
 </div>
 </main>
