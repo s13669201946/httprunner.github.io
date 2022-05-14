@@ -1,5 +1,5 @@
 ---
-title: 快速上手
+title: 🚀 快速上手
 weight: 2
 description: 10 分钟内快速上手 HttpRunner
 ---

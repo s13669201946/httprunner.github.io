@@ -1,5 +1,5 @@
 ---
-title: Sponsors
+title: 💖 Sponsors
 weight: 8
 hide_feedback: true
 description: Thank you to all our sponsors! ✨🍰✨
