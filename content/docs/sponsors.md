@@ -17,7 +17,15 @@ description: 感谢赞助商助力 HttpRunner 的可持续发展！ ✨🍰✨
 
 ### 个人赞赏
 
-## 成为赞助商
+<img src="/image/sponsors/人间小青醒.jpeg" title="人间小青醒" width="32">
+<a href="https://www.lematech.vip">
+  <img src="/image/sponsors/乐马技术.jpeg" title="乐马 | lematech.vip" width="32">
+</a>
+<img src="/image/sponsors/归一.jpeg" title="归一" width="32">
+<img src="/image/sponsors/王健.jpeg" title="王健" width="32">
+<img src="/image/sponsors/许立.jpeg" title="许立" width="32">
+
+### 成为赞助商
 
 如果你所在的公司或个人也想对 HttpRunner 进行赞助，可参考如下方案，具体可联系项目作者（微信 leolee023）。
 
