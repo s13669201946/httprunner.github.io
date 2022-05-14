@@ -13,11 +13,20 @@ description: Thank you to all our sponsors! ✨🍰✨
 
 > [进入测试开发技术能力测评!](http://qrcode.testing-studio.com/f?from=httprunner&url=https://ceshiren.com/t/topic/14940)
 
+### 银牌赞助商
+
+### 个人赞赏
+
 ## 成为赞助商
 
-如果你所在的公司或个人也想对 HttpRunner 进行赞助，可参考如下方案，具体可联系[项目作者](mailto:debugtalk@gmail.com)。
+如果你所在的公司或个人也想对 HttpRunner 进行赞助，可参考如下方案，具体可联系项目作者（微信 leolee023）。
 
 | 等级 | 金牌赞助商<br/>（Gold Sponsor） | 银牌赞助商<br/>（Silver Sponsor）| 个人赞赏<br/>（Personal Sponsor） |
 |:---:|:---:|:---:|:---:|
-| 金额 |  ￥20000/年 | ￥8000/年 | ￥10+ 任意 |
-| 权益 |  公司 logo（大）和链接展示在 README.md<br/>200 字的宣传文案 | 公司 logo（中）和链接展示在 README.md<br/>80 字的宣传文案| 个人 ID 和链接展示在 sponsors.md |
+| 金额 |  ￥20000/年 | ￥10000/年 | ￥16+ 任意 |
+| 权益 |  公司 logo（大）和链接展示在[项目首页]<br/>200 字的宣传文案 | 公司 logo（中）和链接展示在[项目首页]<br/>100 字的宣传文案| 个人 ID 和链接展示在[赞助商页] |
+
+> 说明：个人赞赏同样适用于在 [HttpRunner 公众号](/image/qrcode.png)赞赏的用户，累积超过￥16 即可
+
+[项目首页]: https://github.com/httprunner/httprunner
+[赞助商页]: https://httprunner.com/docs/sponsors/
