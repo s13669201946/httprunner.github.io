@@ -13,7 +13,7 @@ date: 2022-05-16
 - 对压测结果进行了严格的 benchmark 测试和数据校准，确保测试结果真实可靠
 - 集成了 Prometheus 性能采集能力，配合 Grafana 可实现丰富的性能指标看板
 
-涉及的内容比较多，因此我们针对 HttpRunner v4.0 的性能测试能力规划一系列专题文章，包括性能测试工具使用、监控配置、benchmark 数据比对、竞品工具对比、原理解析等等。
+涉及的内容比较多，因此我们针对 HttpRunner v4.0 的性能测试能力规划了一系列专题文章，包括性能测试工具使用、多机负载分布式加压、监控配置、benchmark 数据比对、竞品工具对比、原理解析等等。
 
 本文作为性能测试专题的第一篇文章，将结合一个简单的案例整体介绍如何使用 HttpRunner v4.0 开展性能测试，帮助大家快速上手使用工具。
 
@@ -84,7 +84,7 @@ teststeps:
 
 需要说明的是：
 
-- HttpRunner v4.0 做性能测试时，测试用例格式只能选择 YAML/JSON/GoTest；PyTest 格式的底层引擎基于 pytest 执行引擎，不再支持性能测试；
+- HttpRunner v4.0 做性能测试时，测试用例格式只能选择 YAML/JSON/GoTest；PyTest 格式的底层引擎基于 pytest 执行引擎，不支持性能测试；
 - 如果我们在性能测试中期望实现「事务」、「集合点」、「思考时间」等机制，需要在接口测试用例基础上添加特定的步骤。
 
 ### 添加「事务」机制
@@ -174,6 +174,8 @@ teststeps:
 - number 和 percent 参数需要二选一并且保证合法；如果没有指定参数、同时指定了两个参数、或者参数不合法，则默认为需要全部虚拟用户到达集合点。
 - 集合点仅在虚拟用户全部加载完之后的稳定阶段生效。
 
+可以看出，HttpRunner v4.0 的「集合点」机制也跟 LoadRunner 保持了一致，功能特性和参数配置方法完全相同。
+
 ### 添加「思考时间」机制
 
 思考时间可以模拟用户在不同操作间的停顿时间，最大程度还原用户真实的操作行为。
@@ -207,7 +209,7 @@ type ThinkTime struct {
 
 `ThinkTime` 作为具体步骤间的「思考时间」配置，以单独的 step 存在，参数说明如下：
 
-- time: 不同测试步间的思考时间，单位: 秒
+- time: 不同测试步间的思考时间，单位为秒（second）
 
 思考时间使用示例如下：
 
@@ -233,7 +235,7 @@ teststeps:
   ...
 ```
 
-在该示例中，思考时间策略为随机比例（`random_percentage`），介于 100% ~ 150% 之间；limit 设置为 4。经过换算，测试步骤中的 `think time 1` 的最终值在 [2, 3] 之间，`think time 2` 的最终值在 [3, 4] 之间。
+在该示例中，思考时间策略为随机比例（`random_percentage`），介于 100% ~ 150% 之间；limit 设置为 4s。经过换算，测试步骤中的 `think time 1` 的最终值在 [2, 3]s 之间，`think time 2` 的最终值在 [3, 4]s 之间。
 
 ### 用例格式示例
 
@@ -401,6 +403,8 @@ Global Flags:
   -l, --log-level string   set log level (default "INFO")
 ```
 
+如果你之前使用过 Locust/Boomer，你会发现参数名称很眼熟。是的，我们直接复用了 Locust/Boomer 的参数名称，虽然底层实现进行了比较大的改造，但用法基本保持了一致，你可以对比查看下 Boomer 的[参数文档]。
+
 参数看上去比较多，接下来对其按照用途进行分组介绍。
 
 ### 设置并发用户数
@@ -416,20 +420,26 @@ Global Flags:
 $ hrp boom testcase.yml --spawn-count 1000 --spawn-rate 100
 ```
 
-在这种模式下，性能测试不会自动结束；当我们期望结束压测时，可以通过 kill 命令杀死进程，或者 `ctrl+c` 来结束性能测试，结束时终端会打印整体测试数据。
+在该示例中，我们指定了 1000 并发用户，按照每秒 100 个的速率初始化用户，预计在 10s 后可完成初始化。
+
+在这种模式下，性能测试不会自动结束（后面我们会再新增支持指定压测时长的参数）；当我们期望结束压测时，可以通过 kill 命令杀死进程，或者 `ctrl+c` 来结束性能测试，结束时终端会打印整体测试数据。
 
 ### 设置 RateLimiter
 
 有时我们需要在性能测试时对发压流量进行限流，例如期望设置最大 RPS，或者在初始化并发用户时限定增加数率。这就需要使用到 `--max-rps` 和 `--request-increase-rate`。
 
-- max-rps：限制最大 rps，默认不限制
-- request-increase-rate：限制每秒的请求增加速率，默认不开启，支持两种格式："1"、"1/1s"
+- max-rps：限制 hrp 发压的最大 rps，默认不限制
+- request-increase-rate：限制 hrp 每秒的请求增加速率，默认不开启，支持两种格式："1"、"1/1s"
 
 具体示例如下所示：
 
 ```bash
 $ hrp boom testcase.yml --spawn-count 100 --spawn-rate 100 --max-rps 1000 --request-increase-rate 100
 ```
+
+在该示例中，我们指定了 100 并发用户，按照每秒 100 个的速率初始化用户，预计在 1s 后可完成初始化。同时，我们限制在整个压测过程中，hrp 最高只能发压 1000 RPS，同时限定每秒增加的速率为 100 RPS。
+
+如果你对这块儿感到比较懵，没有关系，你暂时只需要知道这里使用了「令牌桶」的算法对发压流量实现了限流处理。后面我们会专门写一篇文章详细介绍这部分的使用方法和机制原理。
 
 ### 设置循环次数
 
@@ -440,8 +450,10 @@ $ hrp boom testcase.yml --spawn-count 100 --spawn-rate 100 --max-rps 1000 --requ
 执行如下命令，执行完指定循环次数后，HttpRunner 将结束运行并打印整体测试数据。
 
 ```bash
-$ hrp boom testcase.yml --spawn-count 1000 --spawn-rate 100 --loop-count 10000
+$ hrp boom testcase.yml --spawn-count 100 --spawn-rate 10 --loop-count 1000
 ```
+
+在该示例中，我们指定了 100 个并发用户，每个用户循序运行 1000 次，预计总共运行 100*1000=10w 次。
 
 ## 执行性能测试
 
@@ -533,4 +545,5 @@ Current time: 2022/05/16 03:33:38, Users: 1000, Duration: 57s, Accumulated Trans
 
 [HttpRunner v4.0 全新发布]: https://httprunner.com/blog/release-v4/
 [Boomer]: https://github.com/myzhan/boomer
+[参数文档]: https://boomer.readthedocs.io/en/latest/options.html
 [xucong053]: https://github.com/xucong053
