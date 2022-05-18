@@ -20,11 +20,11 @@
 <meta property="og:description" content="如何测试 HTTP/2 协议">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/docs/user-guide/protocols/h2/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-05-10T18:47:41+08:00">
+<meta property="article:modified_time" content="2022-05-18T16:21:28+08:00">
 <meta itemprop=name content="HTTP/2">
 <meta itemprop=description content="如何测试 HTTP/2 协议">
-<meta itemprop=dateModified content="2022-05-10T18:47:41+08:00">
-<meta itemprop=wordCount content="0">
+<meta itemprop=dateModified content="2022-05-18T16:21:28+08:00">
+<meta itemprop=wordCount content="214">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="HTTP/2">
 <meta name=twitter:description content="如何测试 HTTP/2 协议">
@@ -235,6 +235,18 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#http2-协议介绍>HTTP/2 协议介绍</a></li>
+<li><a href=#脚本准备>脚本准备</a>
+<ul>
+<li><a href=#yaml-脚本格式示例>YAML 脚本格式示例</a></li>
+<li><a href=#gotest-脚本格式示例>GoTest 脚本格式示例</a></li>
+</ul>
+</li>
+<li><a href=#注意事项>注意事项</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -258,6 +270,89 @@ Versions
 <div class=lead>如何测试 HTTP/2 协议</div>
 <header class=article-meta>
 </header>
+<h2 id=http2-协议介绍>HTTP/2 协议介绍</h2>
+<p>HTTP/2 相比于 HTTP/1.1，在完全兼容语义的基础上，新增支持了多路复用、二进制分帧、首部压缩、服务端推送等特性，大幅提升了 Web 性能，当前已经进行了较为广泛的应用。</p>
+<p>HttpRunner 从 v4.0 开始新增实现了对 HTTP/2 协议的测试支持。</p>
+<h2 id=脚本准备>脚本准备</h2>
+<p>虽然 HTTP/2 协议跟 HTTP/1.1 具有非常大的差异，但从测试脚本的角度，将已有的 HTTP/1.1 脚本升级为 HTTP/2 非常容易，只需要新增一个 <code>http2</code> 描述字段即可；而在请求参数描述、参数关联、结果断言等使用方法方面跟之前的 HTTP/1.1 基本保持了一致。</p>
+<p>下面将通过实际的测试用例展示 HTTP/2 脚本的修改方法。</p>
+<h3 id=yaml-脚本格式示例>YAML 脚本格式示例</h3>
+<p>对于 JSON/YAML 形态的测试用例，只需要在 <code>request</code> 对象中添加一个新字段 <code>http2</code> 并且指定为 <code>true</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>config</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>run request with HTTP/2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>base_url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>https://postman-echo.com</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>teststeps</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HTTP/2 get</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>request</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>GET</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;/get&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>http2</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#8f5902;font-style:italic># 只需指定 http2 字段为 true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>params</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>foo1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>foo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>foo2</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>foo2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>User-Agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HttpRunnerPlus</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>validate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>check</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>status_code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>assert</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>equals</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>expect</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>200</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>msg</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>check status code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>check</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>proto   </span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#8f5902;font-style:italic># 支持对协议类型进行断言</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>assert</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>equals</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>expect</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HTTP/2.0</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>msg</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>check protocol type</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>check</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>body.args.foo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>assert</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>length_equals</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>expect</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>4</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>msg</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>check param foo1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>另外，HttpRunner v4.0 也新增支持了对协议类型的断言（&ldquo;check&rdquo;: &ldquo;proto&rdquo;），这对于判断服务端是否支持 HTTP/2 的场景来说是非常实用的，因为有时候服务端不支持 HTTP/2 并且会自动降级为 HTTP/1.1，这时就有必要对协议类型进行断言。</p>
+<h3 id=gotest-脚本格式示例>GoTest 脚本格式示例</h3>
+<p>对于 go test 形态的测试用例，将 HTTP/1.1 升级为 HTTP/2 的方式同样非常简单，只需要在调用链中的 GET、POST 等请求方法之前先调用 HTTP2() 即可。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>tests</span>
+
+<span style=color:#204a87;font-weight:700>import</span> <span style=color:#000;font-weight:700>(</span>
+   <span style=color:#4e9a06>&#34;testing&#34;</span>
+
+   <span style=color:#4e9a06>&#34;github.com/httprunner/httprunner/hrp&#34;</span>
+<span style=color:#000;font-weight:700>)</span>
+
+<span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>TestHTTPProtocol</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>testing</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>T</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>testcase</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#ce5c00;font-weight:700>&amp;</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>TestCase</span><span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>Config</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewConfig</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run request with HTTP/1.1 and HTTP/2&#34;</span><span style=color:#000;font-weight:700>).</span>
+         <span style=color:#000>SetBaseURL</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com&#34;</span><span style=color:#000;font-weight:700>),</span>
+      <span style=color:#000>TestSteps</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[]</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>IStep</span><span style=color:#000;font-weight:700>{</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;HTTP/2 get&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>HTTP2</span><span style=color:#000;font-weight:700>().</span>    <span style=color:#8f5902;font-style:italic>// 只需新增调用 HTTP2() 方法
+</span><span style=color:#8f5902;font-style:italic></span>            <span style=color:#000>GET</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/get&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithParams</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>WithHeaders</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;proto&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;HTTP/2.0&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check protocol type&#34;</span><span style=color:#000;font-weight:700>).</span>    <span style=color:#8f5902;font-style:italic>// 支持对协议类型进行断言
+</span><span style=color:#8f5902;font-style:italic></span>            <span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.args.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>4</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check param foo1&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;HTTP/2 post&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>HTTP2</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>POST</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/post&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithHeaders</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HttpRunnerPlus&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>WithBody</span><span style=color:#000;font-weight:700>(</span><span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>}).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;proto&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;HTTP/2.0&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check protocol type&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertLengthEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;body.json.foo1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>4</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check body foo1&#34;</span><span style=color:#000;font-weight:700>),</span>
+      <span style=color:#000;font-weight:700>},</span>
+   <span style=color:#000;font-weight:700>}</span>
+   <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewRunner</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span><span style=color:#000;font-weight:700>).</span><span style=color:#000>Run</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>testcase</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#204a87;font-weight:700>if</span> <span style=color:#000>err</span> <span style=color:#ce5c00;font-weight:700>!=</span> <span style=color:#204a87;font-weight:700>nil</span> <span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>t</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Fatalf</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;run testcase error: %v&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>err</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><h2 id=注意事项>注意事项</h2>
+<ul>
+<li>在使用 <code>hrp run</code> 进行接口测试时，通过命令行选项 <code>--proxy-url</code> 设置的代理 URL 对于 HTTP/2 协议的请求不会生效，原因是底层依赖不支持设置代理 URL</li>
+<li>在使用 <code>hrp boom</code> 进行性能测试时，通过命令行选项 <code>--disable-keepalive</code> 设置的打开/关闭长连接对于 HTTP/2 协议的请求不会生效，原因是 HTTP/2 协议支持多路复用，天然地达到类似长连接的效果</li>
+<li>虽然 RFC 文档中没有强制规定，不过目前大部分 HTTP/2 服务是建立在 SSL/TLS 之上的，因此建议在 URL 中使用 HTTPS</li>
+</ul>
 </div>
 </main>
 </div>
