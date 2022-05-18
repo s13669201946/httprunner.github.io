@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – HttpRunner</title><link>https://httprunner.com/</link><description>Recent content on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 如何使用 HttpRunner v4.0 开展性能监控</title><link>https://httprunner.com/blog/how-to-load-monitoring/</link><pubDate>Wed, 18 May 2022 00:00:00 +0000</pubDate><guid>https://httprunner.com/blog/how-to-load-monitoring/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HttpRunner – HttpRunner</title><link>https://httprunner.com/</link><description>Recent content on HttpRunner</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://httprunner.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: HttpRunner 如何基于 Prometheus + Grafana 实现性能监控</title><link>https://httprunner.com/blog/how-to-load-monitoring/</link><pubDate>Wed, 18 May 2022 00:00:00 +0000</pubDate><guid>https://httprunner.com/blog/how-to-load-monitoring/</guid><description>
 &lt;h2 id="前言">前言&lt;/h2>
 &lt;p>在 &lt;a href="https://httprunner.com/blog/how-to-load-test/">如何使用 HttpRunner v4.0 开展性能测试&lt;/a> 中已经介绍过，HttpRunner v4.0 集成了 Prometheus 性能采集能力。也就是说，HttpRunner 可以充分将性能测试数据扩展到 Prometheus 生态，实现更丰富的数据应用场景，开展性能监控。&lt;/p>
 &lt;p>本文将会从 Prometheus 监控系统作为切入点，帮助大家快速理解 HttpRunner 性能监控链路，并提供快速上手帮助大家快速实现性能监控。&lt;/p>
@@ -67,11 +67,15 @@
 &lt;/code>&lt;/pre>&lt;h3 id="配置httprunner">配置HttpRunner&lt;/h3>
 &lt;p>配置 HttpRunner 就比较简单了，在使用 hrp boom 启动性能测试时通过 prometheus-gateway 参数设置 Pushgateway 地址即可，如 &lt;code>--prometheus-gateway=&amp;quot;:9091&amp;quot;&lt;/code>。在性能过程中，HttpRunner 会以 3s 的数据上报间隔将性能测试指标上报到 Pushgateway。&lt;/p>
 &lt;h3 id="配置grafana">配置Grafana&lt;/h3>
-&lt;p>Grafana 的快速上手可以参考：&lt;a href="https://prometheus.io/docs/visualization/grafana/">Grafana | Prometheus&lt;/a> ，不再赘述。本文提供 hrp boom 单机模式的 Dashboard 模板，大家可以关注 HttpRunner 公众号，回复 Grafana 获取最新模板下载地址，下载后导入 Grafana 中即可使用。&lt;/p>
-&lt;p>备注：分布式场景的 Dashboard 模板，待 HttpRunner 上线分布式性能测试能力后提供。&lt;/p>
+&lt;p>Grafana 的快速上手可以参考：&lt;a href="https://prometheus.io/docs/visualization/grafana/">Grafana | Prometheus&lt;/a> ，不再赘述。&lt;/p>
+&lt;p>本文提供 &lt;code>hrp boom&lt;/code> 单机模式的 Dashboard 模板，大家在 HttpRunner 公众号回复「Grafana」获取模板下载地址，然后导入 Grafana 中即可使用。&lt;/p>
+&lt;blockquote>
+&lt;p>注：分布式场景的 Grafana Dashboard 模板，待 HttpRunner 上线分布式性能测试能力后再提供。&lt;/p>
+&lt;/blockquote>
+&lt;img src="https://httprunner.com/image/qrcode.png" alt="HttpRunner" width="300">
 &lt;p>模板最终效果如下:&lt;/p>
 &lt;p>&lt;img src="https://httprunner.com/image/demo-grafana.png" alt="Grafana Dashboard 1">&lt;/p>
-&lt;p>&lt;img src="image/demo-grafana-2.png" alt="Grafana Dashboard 2">&lt;/p>
+&lt;p>&lt;img src="https://httprunner.com/image/demo-grafana-2.png" alt="Grafana Dashboard 2">&lt;/p>
 &lt;h2 id="指标说明">指标说明&lt;/h2>
 &lt;p>本节将介绍 HttpRunner 上报的指标说明，大家可以根据需要再丰富本文提供的 Grafana Dashboard 模板。&lt;/p>
 &lt;p>httprunner 上报至 Prometheus 指标具体可分为两大类：&lt;/p>
