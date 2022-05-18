@@ -29,7 +29,7 @@ Prometheus 的系统架构图如下：
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/blog/how-to-load-monitoring/"><meta property="article:section" content="blog">
 <meta property="article:published_time" content="2022-05-18T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-05-18T17:37:41+08:00">
+<meta property="article:modified_time" content="2022-05-18T18:14:41+08:00">
 <meta itemprop=name content="HttpRunner 如何基于 Prometheus + Grafana 实现性能监控">
 <meta itemprop=description content="前言 在 如何使用 HttpRunner v4.0 开展性能测试 中已经介绍过，HttpRunner v4.0 集成了 Prometheus 性能采集能力。也就是说，HttpRunner 可以充分将性能测试数据扩展到 Prometheus 生态，实现更丰富的数据应用场景，开展性能监控。
 本文将会从 Prometheus 监控系统作为切入点，帮助大家快速理解 HttpRunner 性能监控链路，并提供快速上手帮助大家快速实现性能监控。
@@ -39,7 +39,7 @@ Prometheus 的系统架构图如下：
  Server：提供指标汇总、存储、查询能力 Exporter：提供指标采集能力 Data Visualization：提供指标数据可视化能力 Alerting：提供告警能力  如上可知，Prometheus 打通了从指标采集、汇总、存储、查询、可视化、告警链路，实现了完备的监控告警系统。针对 HttpRunner 性能监控场景，本文仅提供最小链路 Server、Exporter、Data Visualization 部分能力的快速上手，Alerting 等功能大家可以根据实际需求进行配置。
 在 Prometheus 系统框架中，HttpRunner 实现了指标采集的能力，其本身就是一个 Exporter。因此，我们仅需要将指标上报至 Prometheus Server 链路打通即可实现性能监控。Prometheus 提供的两种指标收集方式：
  Exporter 会启动一个 http server，将采集的指标以固定的文本格式返回给请求方，Prometheus Server直接拉取； 将指标直接 push 到 Prometheus 提供的数据网关 pushgateway 中，Prometheus Server 再从 pushgateway 中拉取指标数据。  两种方式中，HttpRunner 仅提供第二种方式的支持，即在使用 hrp boom 运行性能测试过程中主动 push 性能测试数据到 Pushgateway 的方式。这样做的原因有如下几点："><meta itemprop=datePublished content="2022-05-18T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-05-18T17:37:41+08:00">
+<meta itemprop=dateModified content="2022-05-18T18:14:41+08:00">
 <meta itemprop=wordCount content="528">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="HttpRunner 如何基于 Prometheus + Grafana 实现性能监控">
@@ -230,7 +230,7 @@ Versions
 </span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>targets</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[</span><span style=color:#4e9a06>&#39;localhost:9091&#39;</span><span style=color:#000;font-weight:700>]</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>labels</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
 </span><span style=color:#f8f8f8;text-decoration:underline>          </span><span style=color:#204a87;font-weight:700>instance</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>httprunner</span><span style=color:#f8f8f8;text-decoration:underline>
-</span></code></pre></div><p>注意：Pushgateway 的 scrape_interval 需要与 HttpRunner 上报指数据频率保持一致，即设置为 3s。</p>
+</span></code></pre></div><p>注意：Pushgateway 的 scrape_interval 需要与 HttpRunner 上报数据频率保持一致，即设置为 3s。</p>
 <p>启动 Prometheus Server：</p>
 <pre tabindex=0><code>./prometheus --config.file=prometheus.yml
 </code></pre><h3 id=配置httprunner>配置HttpRunner</h3>
@@ -247,7 +247,7 @@ Versions
 <p><img src=/image/demo-grafana-2.png alt="Grafana Dashboard 2"></p>
 <h2 id=指标说明>指标说明</h2>
 <p>本节将介绍 HttpRunner 上报的指标说明，大家可以根据需要再丰富本文提供的 Grafana Dashboard 模板。</p>
-<p>httprunner 上报至 Prometheus 指标具体可分为两大类：</p>
+<p>HttpRunner 上报至 Prometheus 指标具体可分为两大类：</p>
 <ul>
 <li>3s统计间隔内的性能测试指标，可实时监控最新性能数据详情</li>
 <li>整体性能测试指标，可实时监控测试过程的整体性能指标</li>

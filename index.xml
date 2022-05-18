@@ -61,7 +61,7 @@
 &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">targets&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;localhost:9091&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">labels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">instance&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">httprunner&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：Pushgateway 的 scrape_interval 需要与 HttpRunner 上报指数据频率保持一致，即设置为 3s。&lt;/p>
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：Pushgateway 的 scrape_interval 需要与 HttpRunner 上报数据频率保持一致，即设置为 3s。&lt;/p>
 &lt;p>启动 Prometheus Server：&lt;/p>
 &lt;pre tabindex="0">&lt;code>./prometheus --config.file=prometheus.yml
 &lt;/code>&lt;/pre>&lt;h3 id="配置httprunner">配置HttpRunner&lt;/h3>
@@ -78,7 +78,7 @@
 &lt;p>&lt;img src="https://httprunner.com/image/demo-grafana-2.png" alt="Grafana Dashboard 2">&lt;/p>
 &lt;h2 id="指标说明">指标说明&lt;/h2>
 &lt;p>本节将介绍 HttpRunner 上报的指标说明，大家可以根据需要再丰富本文提供的 Grafana Dashboard 模板。&lt;/p>
-&lt;p>httprunner 上报至 Prometheus 指标具体可分为两大类：&lt;/p>
+&lt;p>HttpRunner 上报至 Prometheus 指标具体可分为两大类：&lt;/p>
 &lt;ul>
 &lt;li>3s统计间隔内的性能测试指标，可实时监控最新性能数据详情&lt;/li>
 &lt;li>整体性能测试指标，可实时监控测试过程的整体性能指标&lt;/li>
