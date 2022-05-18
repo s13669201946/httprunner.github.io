@@ -1,6 +1,6 @@
 ---
 title: 性能监控
-weight: 2
+weight: 3
 description: 使用 Prometheus 实现性能监控
 ---
 
