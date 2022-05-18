@@ -91,7 +91,7 @@ scrape_configs:
           instance: httprunner
 ```
 
-注意：Pushgateway 的 scrape_interval 需要与 HttpRunner 上报指数据频率保持一致，即设置为 3s。
+注意：Pushgateway 的 scrape_interval 需要与 HttpRunner 上报数据频率保持一致，即设置为 3s。
 
 启动 Prometheus Server：
 
@@ -123,7 +123,7 @@ Grafana 的快速上手可以参考：[Grafana | Prometheus] ，不再赘述。
 
 本节将介绍 HttpRunner 上报的指标说明，大家可以根据需要再丰富本文提供的 Grafana Dashboard 模板。
 
-httprunner 上报至 Prometheus 指标具体可分为两大类：
+HttpRunner 上报至 Prometheus 指标具体可分为两大类：
 
 - 3s统计间隔内的性能测试指标，可实时监控最新性能数据详情
 - 整体性能测试指标，可实时监控测试过程的整体性能指标
