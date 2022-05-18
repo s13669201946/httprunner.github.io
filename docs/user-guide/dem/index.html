@@ -14,16 +14,16 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>网络性能采集 | HttpRunner</title>
-<meta name=description content="使用 HttpRunner 实现网络性能采集">
-<meta property="og:title" content="网络性能采集">
-<meta property="og:description" content="使用 HttpRunner 实现网络性能采集">
+<title>接口耗时分析 | HttpRunner</title>
+<meta name=description content="使用 HttpRunner 实现 HTTP(S) 接口耗时分析">
+<meta property="og:title" content="接口耗时分析">
+<meta property="og:description" content="使用 HttpRunner 实现 HTTP(S) 接口耗时分析">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://httprunner.com/docs/user-guide/dem/">
-<meta itemprop=name content="网络性能采集">
-<meta itemprop=description content="使用 HttpRunner 实现网络性能采集"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="网络性能采集">
-<meta name=twitter:description content="使用 HttpRunner 实现网络性能采集">
+<meta itemprop=name content="接口耗时分析">
+<meta itemprop=description content="使用 HttpRunner 实现 HTTP(S) 接口耗时分析"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="接口耗时分析">
+<meta name=twitter:description content="使用 HttpRunner 实现 HTTP(S) 接口耗时分析">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
@@ -183,7 +183,7 @@ Versions
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guidedem-li>
-<a href=/docs/user-guide/dem/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidedem><span class=td-sidebar-nav-active-item>网络性能采集</span></a>
+<a href=/docs/user-guide/dem/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidedem><span class=td-sidebar-nav-active-item>接口耗时分析</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideintegrate-li>
 <a href=/docs/user-guide/integrate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideintegrate><span>二次开发</span></a>
 <ul class="ul-3 foldable">
@@ -231,6 +231,13 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#采集耗时详情>采集耗时详情</a></li>
+<li><a href=#查看耗时详情>查看耗时详情</a></li>
+<li><a href=#生成-summary-文件>生成 summary 文件</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -242,15 +249,478 @@ Versions
 <a href=https://httprunner.com/docs/user-guide/>📚 用户指南</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://httprunner.com/docs/user-guide/dem/>网络性能采集</a>
+<a href=https://httprunner.com/docs/user-guide/dem/>接口耗时分析</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>网络性能采集</h1>
-<div class=lead>使用 HttpRunner 实现网络性能采集</div>
+<h1>接口耗时分析</h1>
+<div class=lead>使用 HttpRunner 实现 HTTP(S) 接口耗时分析</div>
 <header class=article-meta>
 </header>
+<p>在对 HTTP 接口做测试时，大多数时候我们只需要关注接口的整体耗时。那如果测试发现接口整体耗时较长，我们是否可以更进一步地分析原因呢？</p>
+<p>实际上，单次 HTTP(S) 请求是会包含多个步骤的，依次包括 DNS 解析、TCP 连接、TLS 握手、服务端处理、数据传输 5 个环节；如果是 HTTP 协议，由于少了 TLS 握手环节，因此会包含 4 个环节。</p>
+<p>HttpRunner 从 v4.0 版本开始，新增支持了 HTTP 接口耗时详情的采集能力，我们可以通过该能力实现对接口整体耗时的诊断分析。</p>
+<h2 id=采集耗时详情>采集耗时详情</h2>
+<p>默认情况下，通过 <code>hrp run</code> 执行接口测试时，接口耗时详情信息是不会采集的。如果要开启，只需要增加一个参数 <code>--http-stat</code> 即可。</p>
+<p>示例如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp run demo/testcases/demo_requests.yml --http-stat
+</code></pre></div><details>
+<summary>查看运行日志</summary>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp startproject demo
+$ hrp run demo/testcases/demo_requests.yml --http-stat
+4:40PM INF Set log to color console other than JSON format.
+4:40PM ??? Set log level
+4:40PM INF [init] SetFailfast failfast=true
+4:40PM INF [init] SetSaveTests saveTests=false
+4:40PM INF [init] SetRequestsLogOn
+4:40PM INF [init] SetHTTPStatOn
+4:40PM INF load file path=demo/testcases/demo_requests.yml
+4:40PM INF load testcases successfully count=1
+4:40PM INF ensure python3 venv packages=[&#34;funppy&#34;] python3=/Users/debugtalk/.hrp/venv/bin/python3
+4:40PM INF python package is ready name=funppy version=0.4.3
+4:40PM INF load hashicorp go plugin success path=/Users/debugtalk/MyProjects/HttpRunner-dev/httprunner/demo/debugtalk.py
+4:40PM INF reset session runner
+4:40PM INF run testcase start testcase=&#34;request methods testcase with functions&#34;
+4:40PM INF reset session runner
+4:40PM INF run step start step=&#34;get with params&#34; type=request-GET
+4:40PM INF function GetNames called on host side
+4:40PM INF call function via gRPC funcArgs=[1,2] funcName=sum_two_int
+4:40PM INF call function success arguments=[1,2] funcName=sum_two_int output=3
+4:40PM INF function GetNames called on host side
+4:40PM INF call function via gRPC funcArgs=[] funcName=get_version
+4:40PM INF call function success arguments=[] funcName=get_version output=0.4.3
+-------------------- request --------------------
+GET /get?foo1=bar11&amp;foo2=bar21&amp;sum_v=3 HTTP/1.1
+Host: postman-echo.com
+User-Agent: funplugin/0.4.3
+
+
+==================== response ====================
+Connected via TLSv1.2
+HTTP/1.1 200 OK
+Content-Length: 327
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Wed, 18 May 2022 08:40:45 GMT
+Etag: W/&#34;147-DFCO30rOwPI+4rpOE3phvU5pr+g&#34;
+Set-Cookie: sails.sid=s%3AkBCJ7WYvEkqRbTv2pC-gpM0rJQAYQ-6k.xYX5y2I%2B2pLRBkYF%2BBcfbo8V%2F8kMyTJM2ZxqqBSn1MM; Path=/; HttpOnly
+Vary: Accept-Encoding
+
+{&#34;args&#34;:{&#34;foo1&#34;:&#34;bar11&#34;,&#34;foo2&#34;:&#34;bar21&#34;,&#34;sum_v&#34;:&#34;3&#34;},&#34;headers&#34;:{&#34;x-forwarded-proto&#34;:&#34;https&#34;,&#34;x-forwarded-port&#34;:&#34;443&#34;,&#34;host&#34;:&#34;postman-echo.com&#34;,&#34;x-amzn-trace-id&#34;:&#34;Root=1-6284b10d-2636c23a45cb846420f8983f&#34;,&#34;user-agent&#34;:&#34;funplugin/0.4.3&#34;,&#34;accept-encoding&#34;:&#34;gzip&#34;},&#34;url&#34;:&#34;https://postman-echo.com/get?foo1=bar11&amp;foo2=bar21&amp;sum_v=3&#34;}
+--------------------------------------------------
+
+Connected to tcp: 34.205.194.84:443
+
+  DNS Lookup   TCP Connection   TLS Handshake   Server Processing   Content Transfer
+[     40ms  |         284ms  |        579ms  |            359ms  |             0ms  ]
+            |                |               |                   |                  |
+   namelookup:40ms           |               |                   |                  |
+                       connect:325ms         |                   |                  |
+                                   pretransfer:905ms             |                  |
+                                                     starttransfer:1264ms           |
+                                                                                total:1264ms
+
+4:40PM INF HTTP latency statistics httpstat(ms)={&#34;Connect&#34;:325,&#34;ContentTransfer&#34;:0,&#34;DNSLookup&#34;:40,&#34;NameLookup&#34;:40,&#34;Pretransfer&#34;:905,&#34;ServerProcessing&#34;:359,&#34;StartTransfer&#34;:1264,&#34;TCPConnection&#34;:284,&#34;TLSHandshake&#34;:579,&#34;Total&#34;:1264}
+4:40PM INF extract value from=body.args.foo2 value=bar21
+4:40PM INF set variable value=bar21 variable=foo3
+4:40PM INF validate status_code assertMethod=eq checkExpr=status_code checkValue=200 checkValueType=int64 expectValue=200 expectValueType=int64 result=true
+4:40PM INF validate body.args.foo1 assertMethod=eq checkExpr=body.args.foo1 checkValue=bar11 checkValueType=string expectValue=bar11 expectValueType=string result=true
+4:40PM INF validate body.args.sum_v assertMethod=eq checkExpr=body.args.sum_v checkValue=3 checkValueType=string expectValue=3 expectValueType=string result=true
+4:40PM INF validate body.args.foo2 assertMethod=eq checkExpr=body.args.foo2 checkValue=bar21 checkValueType=string expectValue=bar21 expectValueType=string result=true
+4:40PM INF run step end exportVars={&#34;foo3&#34;:&#34;bar21&#34;} step=&#34;get with params&#34; success=true type=request
+4:40PM INF run step start step=&#34;post raw text&#34; type=request-POST
+4:40PM INF call function via gRPC funcArgs=[] funcName=get_version
+4:40PM INF call function success arguments=[] funcName=get_version output=0.4.3
+-------------------- request --------------------
+POST /post HTTP/1.1
+Host: postman-echo.com
+Content-Type: text/plain
+User-Agent: funplugin/0.4.3
+
+This is expected to be sent back as part of response body: bar12-config_bar2-bar32.
+==================== response ====================
+Connected via TLSv1.2
+HTTP/1.1 200 OK
+Content-Length: 433
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Wed, 18 May 2022 08:40:46 GMT
+Etag: W/&#34;1b1-5kSLP1LVtSRaFElEIXrDWLjtj/Q&#34;
+Set-Cookie: sails.sid=s%3A977L0stmdaA5kpweNYd-7xxMItFdhEDX.XYOoDmmav6hi1OJn6L1SAAlKg%2B8Y2XRnx4rShvgGoLc; Path=/; HttpOnly
+Vary: Accept-Encoding
+
+{&#34;args&#34;:{},&#34;data&#34;:&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34;,&#34;files&#34;:{},&#34;form&#34;:{},&#34;headers&#34;:{&#34;x-forwarded-proto&#34;:&#34;https&#34;,&#34;x-forwarded-port&#34;:&#34;443&#34;,&#34;host&#34;:&#34;postman-echo.com&#34;,&#34;x-amzn-trace-id&#34;:&#34;Root=1-6284b10e-556c7d5c1aebb6d87ef2715b&#34;,&#34;content-length&#34;:&#34;83&#34;,&#34;user-agent&#34;:&#34;funplugin/0.4.3&#34;,&#34;content-type&#34;:&#34;text/plain&#34;,&#34;accept-encoding&#34;:&#34;gzip&#34;},&#34;json&#34;:null,&#34;url&#34;:&#34;https://postman-echo.com/post&#34;}
+--------------------------------------------------
+
+  DNS Lookup   TCP Connection   TLS Handshake   Server Processing   Content Transfer
+[      0ms  |           0ms  |          0ms  |            296ms  |             0ms  ]
+            |                |               |                   |                  |
+   namelookup:0ms            |               |                   |                  |
+                       connect:0ms           |                   |                  |
+                                   pretransfer:0ms               |                  |
+                                                     starttransfer:296ms            |
+                                                                                total:296ms
+
+4:40PM INF HTTP latency statistics httpstat(ms)={&#34;Connect&#34;:0,&#34;ContentTransfer&#34;:0,&#34;DNSLookup&#34;:0,&#34;NameLookup&#34;:0,&#34;Pretransfer&#34;:0,&#34;ServerProcessing&#34;:296,&#34;StartTransfer&#34;:296,&#34;TCPConnection&#34;:0,&#34;TLSHandshake&#34;:0,&#34;Total&#34;:296}
+4:40PM INF validate status_code assertMethod=eq checkExpr=status_code checkValue=200 checkValueType=int64 expectValue=200 expectValueType=int64 result=true
+4:40PM INF validate body.data assertMethod=eq checkExpr=body.data checkValue=&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34; checkValueType=string expectValue=&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34; expectValueType=string result=true
+4:40PM INF run step end exportVars=null step=&#34;post raw text&#34; success=true type=request
+4:40PM INF run step start step=&#34;post form data&#34; type=request-POST
+4:40PM INF call function via gRPC funcArgs=[] funcName=get_version
+4:40PM INF call function success arguments=[] funcName=get_version output=0.4.3
+-------------------- request --------------------
+POST /post HTTP/1.1
+Host: postman-echo.com
+Content-Type: application/x-www-form-urlencoded
+User-Agent: funplugin/0.4.3
+
+foo1=config_bar1&amp;foo2=bar23&amp;foo3=bar21
+==================== response ====================
+Connected via TLSv1.2
+HTTP/1.1 200 OK
+Content-Length: 471
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Wed, 18 May 2022 08:40:46 GMT
+Etag: W/&#34;1d7-Q1SNpWmnmggpXlXx7yOS+xlhpp8&#34;
+Set-Cookie: sails.sid=s%3AFc8Du4G-VTCrgjl3A-rqp5_bP8dns2OQ.bSxaAM07Nl%2FIg7mLzqFYzhGy1EtlaXrj4Y3d9aNQ%2FJM; Path=/; HttpOnly
+Vary: Accept-Encoding
+
+{&#34;args&#34;:{},&#34;data&#34;:&#34;&#34;,&#34;files&#34;:{},&#34;form&#34;:{&#34;foo1&#34;:&#34;config_bar1&#34;,&#34;foo2&#34;:&#34;bar23&#34;,&#34;foo3&#34;:&#34;bar21&#34;},&#34;headers&#34;:{&#34;x-forwarded-proto&#34;:&#34;https&#34;,&#34;x-forwarded-port&#34;:&#34;443&#34;,&#34;host&#34;:&#34;postman-echo.com&#34;,&#34;x-amzn-trace-id&#34;:&#34;Root=1-6284b10e-3c2749a8025fdf4d3eb177b2&#34;,&#34;content-length&#34;:&#34;38&#34;,&#34;user-agent&#34;:&#34;funplugin/0.4.3&#34;,&#34;content-type&#34;:&#34;application/x-www-form-urlencoded&#34;,&#34;accept-encoding&#34;:&#34;gzip&#34;},&#34;json&#34;:{&#34;foo1&#34;:&#34;config_bar1&#34;,&#34;foo2&#34;:&#34;bar23&#34;,&#34;foo3&#34;:&#34;bar21&#34;},&#34;url&#34;:&#34;https://postman-echo.com/post&#34;}
+--------------------------------------------------
+
+  DNS Lookup   TCP Connection   TLS Handshake   Server Processing   Content Transfer
+[      0ms  |           0ms  |          0ms  |            346ms  |             3ms  ]
+            |                |               |                   |                  |
+   namelookup:0ms            |               |                   |                  |
+                       connect:0ms           |                   |                  |
+                                   pretransfer:0ms               |                  |
+                                                     starttransfer:346ms            |
+                                                                                total:349ms
+
+4:40PM INF HTTP latency statistics httpstat(ms)={&#34;Connect&#34;:0,&#34;ContentTransfer&#34;:3,&#34;DNSLookup&#34;:0,&#34;NameLookup&#34;:0,&#34;Pretransfer&#34;:0,&#34;ServerProcessing&#34;:346,&#34;StartTransfer&#34;:346,&#34;TCPConnection&#34;:0,&#34;TLSHandshake&#34;:0,&#34;Total&#34;:349}
+4:40PM INF validate status_code assertMethod=eq checkExpr=status_code checkValue=200 checkValueType=int64 expectValue=200 expectValueType=int64 result=true
+4:40PM INF validate body.form.foo1 assertMethod=eq checkExpr=body.form.foo1 checkValue=config_bar1 checkValueType=string expectValue=config_bar1 expectValueType=string result=true
+4:40PM INF validate body.form.foo2 assertMethod=eq checkExpr=body.form.foo2 checkValue=bar23 checkValueType=string expectValue=bar23 expectValueType=string result=true
+4:40PM INF validate body.form.foo3 assertMethod=eq checkExpr=body.form.foo3 checkValue=bar21 checkValueType=string expectValue=bar21 expectValueType=string result=true
+4:40PM INF run step end exportVars=null step=&#34;post form data&#34; success=true type=request
+4:40PM INF run testcase end testcase=&#34;request methods testcase with functions&#34;
+4:40PM INF quit hashicorp plugin process
+</code></pre></div></details>
+<h2 id=查看耗时详情>查看耗时详情</h2>
+<p>在上面的运行日志中，可以在接口的响应中看到如下信息：</p>
+<ul>
+<li>当次 HTTP 请求连接的服务器 <code>IP:Port</code></li>
+<li>当次 HTTP 请求的详细耗时</li>
+</ul>
+<p><img src=/image/httpstat.png alt></p>
+<h2 id=生成-summary-文件>生成 summary 文件</h2>
+<p>如果我们还想将 HTTP 接口耗时详情数据保存为结构化的数据，那我们可以再额外指定 <code>-s</code> 或 <code>--save-tests</code> 参数，即可存储到 <code>summary.json</code> 文件。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ hrp run demo/testcases/demo_requests.yml --http-stat
+</code></pre></div><p>在生成的 <code>summary.json</code> 文件中，会新增一个 <code>httpstat</code> 字段。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#4e9a06>&#34;httpstat&#34;</span><span style=color:#a40000>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;Connect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>313</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;ContentTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;DNSLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>10</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;NameLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>10</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;Pretransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>868</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;ServerProcessing&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>487</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;StartTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1355</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;TCPConnection&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>302</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;TLSHandshake&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>554</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;Total&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1356</span>
+<span style=color:#000;font-weight:700>}</span><span style=color:#a40000>,</span>
+</code></pre></div><details>
+<summary>查看完整 summary.json</summary>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;stat&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+        <span style=color:#204a87;font-weight:700>&#34;testcases&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;total&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;fail&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span>
+        <span style=color:#000;font-weight:700>},</span>
+        <span style=color:#204a87;font-weight:700>&#34;teststeps&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;total&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;successes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;failures&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span>
+        <span style=color:#000;font-weight:700>}</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#204a87;font-weight:700>&#34;time&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+        <span style=color:#204a87;font-weight:700>&#34;start_at&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2022-05-18T17:48:11.302224+08:00&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;duration&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3.017276084</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#204a87;font-weight:700>&#34;platform&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+        <span style=color:#204a87;font-weight:700>&#34;httprunner_version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;v4.1.0-alpha&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;go_version&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;go1.16.3&#34;</span><span style=color:#000;font-weight:700>,</span>
+        <span style=color:#204a87;font-weight:700>&#34;platform&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;darwin-amd64&#34;</span>
+    <span style=color:#000;font-weight:700>},</span>
+    <span style=color:#204a87;font-weight:700>&#34;details&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+        <span style=color:#000;font-weight:700>{</span>
+            <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;request methods testcase with functions&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>&#34;stat&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;total&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;successes&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;failures&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;time&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;start_at&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2022-05-18T17:48:12.393419+08:00&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#204a87;font-weight:700>&#34;duration&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1.9261071140000001</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;in_out&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                <span style=color:#204a87;font-weight:700>&#34;config_vars&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect_foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;config_bar1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;expect_foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;config_bar2&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;config_bar1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;config_bar2&#34;</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#204a87;font-weight:700>&#34;export_vars&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;foo3&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar21&#34;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>},</span>
+            <span style=color:#204a87;font-weight:700>&#34;records&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;get with params&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;step_type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;request&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;elapsed_ms&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1356</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;httpstat&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Connect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>313</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;ContentTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;DNSLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>10</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;NameLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>10</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Pretransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>868</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;ServerProcessing&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>487</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;StartTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1355</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;TCPConnection&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>302</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;TLSHandshake&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>554</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Total&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1356</span>
+                    <span style=color:#000;font-weight:700>},</span>
+                    <span style=color:#204a87;font-weight:700>&#34;data&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                        <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;req_resps&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                            <span style=color:#204a87;font-weight:700>&#34;request&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;funplugin/0.4.3&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;method&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;GET&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;params&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar11&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar21&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;sum_v&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>3</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/get&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#204a87;font-weight:700>&#34;response&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;body&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;{\n    \&#34;args\&#34;: {\n    \&#34;foo1\&#34;: \&#34;bar11\&#34;,\n    \&#34;foo2\&#34;: \&#34;bar21\&#34;,\n    \&#34;sum_v\&#34;: \&#34;3\&#34;\n},\n    \&#34;headers\&#34;: {\n    \&#34;accept-encoding\&#34;: \&#34;gzip\&#34;,\n    \&#34;host\&#34;: \&#34;postman-echo.com\&#34;,\n    \&#34;user-agent\&#34;: \&#34;funplugin/0.4.3\&#34;,\n    \&#34;x-amzn-trace-id\&#34;: \&#34;Root=1-6284c0dd-5979be0b353e154c3c196ef6\&#34;,\n    \&#34;x-forwarded-port\&#34;: \&#34;443\&#34;,\n    \&#34;x-forwarded-proto\&#34;: \&#34;https\&#34;\n},\n    \&#34;url\&#34;: \&#34;https://postman-echo.com/get?foo1=bar11\\u0026foo2=bar21\\u0026sum_v=3\&#34;\n}&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;cookies&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;sails.sid&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;s%3APe-sKLKTurWDcSqQs5K1xq_k0f2yjA04.ow4l8OLzWTQrhFZ0XqvFjvhiFNW2CdJitQs6w9Xdf9g&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Connection&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;keep-alive&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Length&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;327&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;application/json; charset=utf-8&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Date&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Wed, 18 May 2022 09:48:13 GMT&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Etag&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;W/\&#34;147-FN1NxFZ5B4Vt2onH1Pi1CRYRsMw\&#34;&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Set-Cookie&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;sails.sid=s%3APe-sKLKTurWDcSqQs5K1xq_k0f2yjA04.ow4l8OLzWTQrhFZ0XqvFjvhiFNW2CdJitQs6w9Xdf9g; Path=/; HttpOnly&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Vary&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Accept-Encoding&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;proto&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HTTP/1.1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span>
+                            <span style=color:#000;font-weight:700>}</span>
+                        <span style=color:#000;font-weight:700>},</span>
+                        <span style=color:#204a87;font-weight:700>&#34;validators&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.args.foo1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar11&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar11&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.args.sum_v&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;3&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;3&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.args.foo2&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar21&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar21&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>}</span>
+                        <span style=color:#000;font-weight:700>]</span>
+                    <span style=color:#000;font-weight:700>},</span>
+                    <span style=color:#204a87;font-weight:700>&#34;content_size&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>327</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;export_vars&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                        <span style=color:#204a87;font-weight:700>&#34;foo3&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar21&#34;</span>
+                    <span style=color:#000;font-weight:700>}</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;post raw text&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;step_type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;request&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;elapsed_ms&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>279</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;httpstat&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Connect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;ContentTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;DNSLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;NameLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Pretransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;ServerProcessing&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>278</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;StartTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>278</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;TCPConnection&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;TLSHandshake&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Total&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>279</span>
+                    <span style=color:#000;font-weight:700>},</span>
+                    <span style=color:#204a87;font-weight:700>&#34;data&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                        <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;req_resps&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                            <span style=color:#204a87;font-weight:700>&#34;request&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;body&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;data&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body: $foo1-$foo2-$foo3.&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;text/plain&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;funplugin/0.4.3&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;method&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;POST&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/post&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#204a87;font-weight:700>&#34;response&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;body&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;{\n    \&#34;args\&#34;: {\n    \n},\n    \&#34;data\&#34;: \&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.\&#34;,\n    \&#34;files\&#34;: {\n    \n},\n    \&#34;form\&#34;: {\n    \n},\n    \&#34;headers\&#34;: {\n    \&#34;accept-encoding\&#34;: \&#34;gzip\&#34;,\n    \&#34;content-length\&#34;: \&#34;83\&#34;,\n    \&#34;content-type\&#34;: \&#34;text/plain\&#34;,\n    \&#34;host\&#34;: \&#34;postman-echo.com\&#34;,\n    \&#34;user-agent\&#34;: \&#34;funplugin/0.4.3\&#34;,\n    \&#34;x-amzn-trace-id\&#34;: \&#34;Root=1-6284c0dd-1b706c817978b13925ac792f\&#34;,\n    \&#34;x-forwarded-port\&#34;: \&#34;443\&#34;,\n    \&#34;x-forwarded-proto\&#34;: \&#34;https\&#34;\n},\n    \&#34;json\&#34;: null,\n    \&#34;url\&#34;: \&#34;https://postman-echo.com/post\&#34;\n}&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;cookies&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;sails.sid&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;s%3AoGlPJKhkyFGgMNO6dRTrnUQXkOFcDV7J.rWIbyDkCGdPUTVbwUfY3FOXaM2cpB2UqTD3WeJoysYM&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Connection&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;keep-alive&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Length&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;433&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;application/json; charset=utf-8&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Date&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Wed, 18 May 2022 09:48:13 GMT&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Etag&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;W/\&#34;1b1-WQ+Yr/smdfmnFbXNXSAqoNA3NEE\&#34;&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Set-Cookie&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;sails.sid=s%3AoGlPJKhkyFGgMNO6dRTrnUQXkOFcDV7J.rWIbyDkCGdPUTVbwUfY3FOXaM2cpB2UqTD3WeJoysYM; Path=/; HttpOnly&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Vary&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Accept-Encoding&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;proto&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HTTP/1.1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span>
+                            <span style=color:#000;font-weight:700>}</span>
+                        <span style=color:#000;font-weight:700>},</span>
+                        <span style=color:#204a87;font-weight:700>&#34;validators&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.data&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body: bar12-config_bar2-bar32.&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>}</span>
+                        <span style=color:#000;font-weight:700>]</span>
+                    <span style=color:#000;font-weight:700>},</span>
+                    <span style=color:#204a87;font-weight:700>&#34;content_size&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>433</span>
+                <span style=color:#000;font-weight:700>},</span>
+                <span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#204a87;font-weight:700>&#34;name&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;post form data&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;step_type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;request&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;elapsed_ms&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>281</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#204a87;font-weight:700>&#34;httpstat&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Connect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;ContentTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>2</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;DNSLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;NameLookup&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Pretransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;ServerProcessing&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>278</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;StartTransfer&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>278</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;TCPConnection&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;TLSHandshake&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>0</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;Total&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>281</span>
+                    <span style=color:#000;font-weight:700>},</span>
+                    <span style=color:#204a87;font-weight:700>&#34;data&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                        <span style=color:#204a87;font-weight:700>&#34;success&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span><span style=color:#000;font-weight:700>,</span>
+                        <span style=color:#204a87;font-weight:700>&#34;req_resps&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                            <span style=color:#204a87;font-weight:700>&#34;request&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;body&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo1=config_bar1&amp;foo2=bar23&amp;foo3=bar21&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;data&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;foo1=$foo1&amp;foo2=$foo2&amp;foo3=$foo3&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;application/x-www-form-urlencoded&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;User-Agent&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;funplugin/0.4.3&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;method&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;POST&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;url&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;/post&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#204a87;font-weight:700>&#34;response&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;body&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;{\n    \&#34;args\&#34;: {\n    \n},\n    \&#34;data\&#34;: \&#34;\&#34;,\n    \&#34;files\&#34;: {\n    \n},\n    \&#34;form\&#34;: {\n    \&#34;foo1\&#34;: \&#34;config_bar1\&#34;,\n    \&#34;foo2\&#34;: \&#34;bar23\&#34;,\n    \&#34;foo3\&#34;: \&#34;bar21\&#34;\n},\n    \&#34;headers\&#34;: {\n    \&#34;accept-encoding\&#34;: \&#34;gzip\&#34;,\n    \&#34;content-length\&#34;: \&#34;38\&#34;,\n    \&#34;content-type\&#34;: \&#34;application/x-www-form-urlencoded\&#34;,\n    \&#34;host\&#34;: \&#34;postman-echo.com\&#34;,\n    \&#34;user-agent\&#34;: \&#34;funplugin/0.4.3\&#34;,\n    \&#34;x-amzn-trace-id\&#34;: \&#34;Root=1-6284c0de-7f630abf452e3ed902142dbb\&#34;,\n    \&#34;x-forwarded-port\&#34;: \&#34;443\&#34;,\n    \&#34;x-forwarded-proto\&#34;: \&#34;https\&#34;\n},\n    \&#34;json\&#34;: {\n    \&#34;foo1\&#34;: \&#34;config_bar1\&#34;,\n    \&#34;foo2\&#34;: \&#34;bar23\&#34;,\n    \&#34;foo3\&#34;: \&#34;bar21\&#34;\n},\n    \&#34;url\&#34;: \&#34;https://postman-echo.com/post\&#34;\n}&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;cookies&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;sails.sid&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;s%3Ad4GCMWZYweUHgfRn3NuhmVbnuXWPu5ZB.4huCHJKsnJdJmcPO06Xbm%2BethQarbyuFJ%2ByGJedYEfo&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;headers&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Connection&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;keep-alive&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Length&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;471&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;application/json; charset=utf-8&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Date&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Wed, 18 May 2022 09:48:14 GMT&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Etag&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;W/\&#34;1d7-vanGqEJBDhXGImIQEVhDyL56LlQ\&#34;&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Set-Cookie&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;sails.sid=s%3Ad4GCMWZYweUHgfRn3NuhmVbnuXWPu5ZB.4huCHJKsnJdJmcPO06Xbm%2BethQarbyuFJ%2ByGJedYEfo; Path=/; HttpOnly&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                    <span style=color:#204a87;font-weight:700>&#34;Vary&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Accept-Encoding&#34;</span>
+                                <span style=color:#000;font-weight:700>},</span>
+                                <span style=color:#204a87;font-weight:700>&#34;proto&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;HTTP/1.1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span>
+                            <span style=color:#000;font-weight:700>}</span>
+                        <span style=color:#000;font-weight:700>},</span>
+                        <span style=color:#204a87;font-weight:700>&#34;validators&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.form.foo1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;config_bar1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;config_bar1&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.form.foo2&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar23&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar23&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>},</span>
+                            <span style=color:#000;font-weight:700>{</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;body.form.foo3&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;assert&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;eq&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;expect&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar21&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_value&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar21&#34;</span><span style=color:#000;font-weight:700>,</span>
+                                <span style=color:#204a87;font-weight:700>&#34;check_result&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;pass&#34;</span>
+                            <span style=color:#000;font-weight:700>}</span>
+                        <span style=color:#000;font-weight:700>]</span>
+                    <span style=color:#000;font-weight:700>},</span>
+                    <span style=color:#204a87;font-weight:700>&#34;content_size&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>471</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>],</span>
+            <span style=color:#204a87;font-weight:700>&#34;root_dir&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;&#34;</span>
+        <span style=color:#000;font-weight:700>}</span>
+    <span style=color:#000;font-weight:700>]</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div></details>
 <div class=section-index>
 </div>
 </div>
