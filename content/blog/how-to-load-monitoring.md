@@ -1,5 +1,5 @@
 ---
-title: 如何使用 HttpRunner v4.0 开展性能监控
+title: HttpRunner 如何基于 Prometheus + Grafana 实现性能监控
 slug: how-to-load-monitoring
 date: 2022-05-18
 ---
@@ -82,7 +82,7 @@ scrape_configs:
 
     static_configs:
       - targets: ['localhost:9090']
-  
+
   - job_name: 'pushgateway'  # metrics_path defaults to '/metrics'  # scheme defaults to 'http'.
     scrape_interval: 3s
     static_configs:
@@ -105,15 +105,19 @@ scrape_configs:
 
 ### 配置Grafana
 
-Grafana 的快速上手可以参考：[Grafana | Prometheus] ，不再赘述。本文提供 hrp boom 单机模式的 Dashboard 模板，大家可以关注 HttpRunner 公众号，回复 Grafana 获取最新模板下载地址，下载后导入 Grafana 中即可使用。
+Grafana 的快速上手可以参考：[Grafana | Prometheus] ，不再赘述。
 
-备注：分布式场景的 Dashboard 模板，待 HttpRunner 上线分布式性能测试能力后提供。
+本文提供 `hrp boom` 单机模式的 Dashboard 模板，大家在 HttpRunner 公众号回复「Grafana」获取模板下载地址，然后导入 Grafana 中即可使用。
+
+> 注：分布式场景的 Grafana Dashboard 模板，待 HttpRunner 上线分布式性能测试能力后再提供。
+
+<img src="/image/qrcode.png" alt="HttpRunner" width="300">
 
 模板最终效果如下:
 
 ![Grafana Dashboard 1](/image/demo-grafana.png)
 
-![Grafana Dashboard 2](image/demo-grafana-2.png)
+![Grafana Dashboard 2](/image/demo-grafana-2.png)
 
 ## 指标说明
 
