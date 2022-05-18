@@ -14,23 +14,27 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>运行性能测试 | HttpRunner</title>
-<meta name=description content="使用 HttpRunner 运行性能测试">
-<meta property="og:title" content="运行性能测试">
-<meta property="og:description" content="使用 HttpRunner 运行性能测试">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://httprunner.com/docs/user-guide/load-test/">
-<meta itemprop=name content="运行性能测试">
-<meta itemprop=description content="使用 HttpRunner 运行性能测试"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="运行性能测试">
-<meta name=twitter:description content="使用 HttpRunner 运行性能测试">
+<title>用例增强 | HttpRunner</title>
+<meta name=description content="在性能测试脚本中支持添加事务、集合点、思考时间等机制">
+<meta property="og:title" content="用例增强">
+<meta property="og:description" content="在性能测试脚本中支持添加事务、集合点、思考时间等机制">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://httprunner.com/docs/user-guide/load-test/concepts/"><meta property="article:section" content="docs">
+<meta property="article:modified_time" content="2022-05-18T13:45:11+08:00">
+<meta itemprop=name content="用例增强">
+<meta itemprop=description content="在性能测试脚本中支持添加事务、集合点、思考时间等机制">
+<meta itemprop=dateModified content="2022-05-18T13:45:11+08:00">
+<meta itemprop=wordCount content="347">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="用例增强">
+<meta name=twitter:description content="在性能测试脚本中支持添加事务、集合点、思考时间等机制">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNRMVFG5LL"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-LNRMVFG5LL',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-section>
+<body class=td-page>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -168,10 +172,10 @@ Versions
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guideload-test-li>
-<a href=/docs/user-guide/load-test/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideload-test><span class=td-sidebar-nav-active-item>运行性能测试</span></a>
+<a href=/docs/user-guide/load-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideload-test><span>运行性能测试</span></a>
 <ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideload-testconcepts-li>
-<a href=/docs/user-guide/load-test/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testconcepts><span>用例增强</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guideload-testconcepts-li>
+<a href=/docs/user-guide/load-test/concepts/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testconcepts><span class=td-sidebar-nav-active-item>用例增强</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideload-testboom-li>
 <a href=/docs/user-guide/load-test/boom/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testboom><span>hrp boom</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideload-testmonitor-li>
@@ -231,6 +235,14 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#事务transaction>事务（transaction）</a></li>
+<li><a href=#集合点rendezvous>集合点（rendezvous）</a></li>
+<li><a href=#思考时间think_time>思考时间（think_time）</a></li>
+<li><a href=#用例格式示例>用例格式示例</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class=td-breadcrumbs>
@@ -241,49 +253,275 @@ Versions
 <li class=breadcrumb-item>
 <a href=https://httprunner.com/docs/user-guide/>📚 用户指南</a>
 </li>
-<li class="breadcrumb-item active" aria-current=page>
+<li class=breadcrumb-item>
 <a href=https://httprunner.com/docs/user-guide/load-test/>运行性能测试</a>
+</li>
+<li class="breadcrumb-item active" aria-current=page>
+<a href=https://httprunner.com/docs/user-guide/load-test/concepts/>用例增强</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>运行性能测试</h1>
-<div class=lead>使用 HttpRunner 运行性能测试</div>
+<h1>用例增强</h1>
+<div class=lead>在性能测试脚本中支持添加事务、集合点、思考时间等机制</div>
 <header class=article-meta>
 </header>
-<div class=section-index>
-<hr class=panel-line>
-<div class=entry>
-<h5>
-<a href=/docs/user-guide/load-test/concepts/>用例增强</a>
-</h5>
-<p>在性能测试脚本中支持添加事务、集合点、思考时间等机制</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/user-guide/load-test/boom/>hrp boom</a>
-</h5>
-<p>通过 hrp boom 命令行工具启动性能测试</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/user-guide/load-test/monitor/>性能监控</a>
-</h5>
-<p>使用 Prometheus 实现性能监控</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/user-guide/load-test/master-slave/>多机负载</a>
-</h5>
-<p>通过多机负载扩展支持海量压力</p>
-</div>
-<div class=entry>
-<h5>
-<a href=/docs/user-guide/load-test/report-/>测试报告</a>
-</h5>
-<p>生成 HTML 性能测试报告（TODO）</p>
-</div>
-</div>
+<p>在性能测试之前，我们需要先准备好性能测试用例。</p>
+<p>在 HttpRunner 中，得益于「一体化」的特性优势，我们可以在无需对已有接口测试用例做任何修改的情况下，将测试命令从 <code>hrp run</code> 改为 <code>hrp boom</code>，即可启动性能测试。具体的参数配置详见<a href=/docs/user-guide/load-test/boom/>参数介绍</a>。</p>
+<p>需要说明的是，性能测试的测试用例格式只能选择 <code>YAML/JSON/GoTest</code>；PyTest 格式底层基于 Python 执行引擎，考虑到性能和数据准确性问题，已不再支持性能测试。</p>
+<p>另外，HttpRunner v4.0 对标 LoadRunner 新增实现了丰富的性能测试机制，包括「事务」、「集合点」、「思考时间」等，可以在已有的接口测试用例基础上添加特定的步骤进行用例增强。</p>
+<h2 id=事务transaction>事务（transaction）</h2>
+<blockquote>
+<p>事务可以将多个接口的测试结果进行聚合统计，性能指标更加贴合真实业务场景。</p>
+</blockquote>
+<p>事务的数据结构如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>Transaction</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>Name</span> <span style=color:#204a87;font-weight:700>string</span>          <span style=color:#4e9a06>`json:&#34;name&#34; yaml:&#34;name&#34;`</span> <span style=color:#8f5902;font-style:italic>// 事务名称，可定义为任意字符串
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#000>Type</span> <span style=color:#000>transactionType</span> <span style=color:#4e9a06>`json:&#34;type&#34; yaml:&#34;type&#34;`</span> <span style=color:#8f5902;font-style:italic>// 事务类型，仅包括 2 种类型，start（事务开始）和 end（结束事务）
+</span><span style=color:#8f5902;font-style:italic></span><span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>事务使用示例：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>config</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>teststeps</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>transaction 1 start</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>transaction</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>tran1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>start</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>transaction 1 end</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>transaction</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>tran1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>end</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>针对「事务」机制，有 2 个需要特别注意的点：</p>
+<ul>
+<li>使用 HttpRunner v4.0 执行性能测试时，会自动添加名称为 Action 的事务，该事务包含整个测试用例的所有测试步骤（参考了 LoadRunner 的做法）</li>
+<li>在测试用例中，transaction 应该成对出现，即必须同时定义 start 和 end；如果存在配对缺失的情况，会按照如下逻辑进行处理：
+<ul>
+<li>仅设置开始事务，则会在测试用例最后一个测试步后添加结束事务</li>
+<li>仅设置结束事务，则会在测试用例第一个测试步前添加开始事务</li>
+</ul>
+</li>
+</ul>
+<h2 id=集合点rendezvous>集合点（rendezvous）</h2>
+<blockquote>
+<p>集合点可以确保指定的虚拟用户在同一时刻发起请求，实现类似「秒杀」的真实业务场景。</p>
+</blockquote>
+<p>集合点的数据结构如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>Rendezvous</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>Name</span>           <span style=color:#204a87;font-weight:700>string</span>  <span style=color:#4e9a06>`json:&#34;name&#34; yaml:&#34;name&#34;`</span>
+   <span style=color:#000>Percent</span>        <span style=color:#204a87;font-weight:700>float32</span> <span style=color:#4e9a06>`json:&#34;percent,omitempty&#34; yaml:&#34;percent,omitempty&#34;`</span>
+   <span style=color:#000>Number</span>         <span style=color:#204a87;font-weight:700>int64</span>   <span style=color:#4e9a06>`json:&#34;number,omitempty&#34; yaml:&#34;number,omitempty&#34;`</span>
+   <span style=color:#000>Timeout</span>        <span style=color:#204a87;font-weight:700>int64</span>   <span style=color:#4e9a06>`json:&#34;timeout,omitempty&#34; yaml:&#34;timeout,omitempty&#34;`</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>集合点数据结构参数说明如下：</p>
+<ul>
+<li>name: 集合点名称，可定义为任意字符串</li>
+<li>percent: 触发集合点释放的虚拟用户百分比，范围为 (0, 1]，默认为 1，即全部用户</li>
+<li>number: 触发集合点释放的虚拟用户数量，范围为 (0, N]，N 为当前性能测试的所有并发用户数</li>
+<li>timeout: 虚拟用户到达集合点之间的间隔时间的最大值，单位为毫秒；当最近两个虚拟用户达到集合点的时间间隔大于最大值，则立即释放所有虚拟用户，如果没有指定，默认值为 5000 ms</li>
+</ul>
+<p>集合点使用示例：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>config</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>teststeps</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rendezvous 1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>rendezvous</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rendezvous1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>number</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>50</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>timeout</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>3000</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rendezvous 2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>rendezvous</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rendezvous2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>percent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>0.8</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>timeout</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>3000</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>针对「集合点」机制，有 2 个需要特别注意的点：</p>
+<ul>
+<li>number 和 percent 参数需要二选一并且保证合法；如果没有指定参数、同时指定了两个参数、或者参数不合法，则默认为需要全部虚拟用户到达集合点。</li>
+<li>集合点仅在虚拟用户全部加载完之后的稳定阶段生效。</li>
+</ul>
+<p>可以看出，HttpRunner v4.0 的「集合点」机制也跟 LoadRunner 保持了一致，功能特性和参数配置方法完全相同。</p>
+<h2 id=思考时间think_time>思考时间（think_time）</h2>
+<blockquote>
+<p>思考时间可以模拟用户在不同操作间的停顿时间，最大程度还原用户真实的操作行为。</p>
+</blockquote>
+<p>思考时间的数据结构如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>ThinkTimeConfig</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>Strategy</span> <span style=color:#000>thinkTimeStrategy</span> <span style=color:#4e9a06>`json:&#34;strategy,omitempty&#34; yaml:&#34;strategy,omitempty&#34;`</span>
+   <span style=color:#000>Setting</span>  <span style=color:#204a87;font-weight:700>interface</span><span style=color:#000;font-weight:700>{}</span>       <span style=color:#4e9a06>`json:&#34;setting,omitempty&#34; yaml:&#34;setting,omitempty&#34;`</span>
+   <span style=color:#000>Limit</span>    <span style=color:#204a87;font-weight:700>float64</span>           <span style=color:#4e9a06>`json:&#34;limit,omitempty&#34; yaml:&#34;limit,omitempty&#34;`</span>
+<span style=color:#000;font-weight:700>}</span>
+
+<span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>ThinkTime</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>Time</span> <span style=color:#204a87;font-weight:700>float64</span> <span style=color:#4e9a06>`json:&#34;time&#34; yaml:&#34;time&#34;`</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>其中，<code>ThinkTimeConfig</code> 作为「思考时间」的整体策略，需要在测试用例的 <code>Config</code> 中配置，参数说明如下：</p>
+<ul>
+<li>Strategy (支持如下四种策略)
+<ul>
+<li>default: 默认策略，会保持测试用例中设置的思考时间</li>
+<li>random_percentage: 测试用例中设置的思考时间在指定放缩区间中随机选值</li>
+<li>multiply: 对测试用例中设置的思考时间进行放缩</li>
+<li>ignore: 忽略测试用例中设置的思考时间</li>
+</ul>
+</li>
+<li>Setting (仅需random_percentage、multiply策略下配置，其他模式自动忽略此设置)
+<ul>
+<li>random_percentage：此策略下，需设置思考时间的最小最大放缩比：min_percentage、max_percentage（设置类型为map），默认: [0.5, 1.5]</li>
+<li>multiply：此策略下，直接设置放缩比例（设置类型为float），默认: 1</li>
+</ul>
+</li>
+<li>Limit
+<ul>
+<li>对所有策略有效，如果设置且大于0，则限制最终的思考时间&lt;=设定值，默认: -1(无限制)</li>
+</ul>
+</li>
+</ul>
+<p><code>ThinkTime</code> 作为具体步骤间的「思考时间」配置，以单独的 step 存在，参数说明如下：</p>
+<ul>
+<li>time: 不同测试步间的思考时间，单位为秒（second）</li>
+</ul>
+<p>思考时间使用示例如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>config</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>think_time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>strategy</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>random_percentage</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>setting</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>min_percentage</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>max_percentage</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>1.5</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>limit</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>4</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>teststeps</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>think time 1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>think_time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>think time 2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>think_time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>3</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#000>...</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>在该示例中，思考时间策略为随机比例（<code>random_percentage</code>），介于 100% ~ 150% 之间；limit 设置为 4s。经过换算，测试步骤中的 <code>think time 1</code> 的最终值在 [2, 3]s 之间，<code>think time 2</code> 的最终值在 [3, 4]s 之间。</p>
+<h2 id=用例格式示例>用例格式示例</h2>
+<p>包含「事务」、「集合点」、「思考时间」机制的性能测试用例示例如下。</p>
+<p>YAML 用例格式：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>config</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>load test demo</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>variables</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>app_version</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>v1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>user_agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>iOS/10.3</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>base_url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#39;http://httpbin.org&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>think_time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>strategy</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>random_percentage</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>setting</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>min_percentage</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>max_percentage</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>1.5</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>limit</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>verify</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>false</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>teststeps</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>transaction 1 start</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>transaction</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>tran1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>start</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>get with params</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>request</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>GET</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>/get</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>User-Agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#39;$user_agent,$app_version&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>validate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>check</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>status_code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>assert</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>equals</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>expect</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>200</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>msg</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>check status code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>transaction 1 end</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>transaction</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>tran1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>end</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>think time 1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>think_time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>time</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>1.5</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>post with params</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>request</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>POST</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>/post</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>User-Agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#39;$user_agent,$app_version&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>validate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>check</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>status_code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>assert</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>equals</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>expect</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>200</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>msg</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>check status code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rendezvous 1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>rendezvous</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>rendezvous1</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>percent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>0.8</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>timeout</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>3000</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>name</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>post with params 2</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>request</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>POST</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>url</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>/post</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>User-Agent</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#39;$user_agent,$app_version&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>validate</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#204a87;font-weight:700>check</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>status_code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>assert</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>equals</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>expect</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#0000cf;font-weight:700>200</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>        </span><span style=color:#204a87;font-weight:700>msg</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>check status code</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>对应的 GoTest 用例格式：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>package</span> <span style=color:#000>tests</span>
+
+<span style=color:#204a87;font-weight:700>import</span> <span style=color:#000;font-weight:700>(</span>
+   <span style=color:#4e9a06>&#34;testing&#34;</span>
+   <span style=color:#4e9a06>&#34;time&#34;</span>
+
+   <span style=color:#4e9a06>&#34;github.com/httprunner/httprunner/v4/hrp&#34;</span>
+<span style=color:#000;font-weight:700>)</span>
+
+<span style=color:#204a87;font-weight:700>func</span> <span style=color:#000>TestLoadTestDemo</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>t</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>testing</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>T</span><span style=color:#000;font-weight:700>)</span> <span style=color:#000;font-weight:700>{</span>
+   <span style=color:#000>testcase1</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#ce5c00;font-weight:700>&amp;</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>TestCase</span><span style=color:#000;font-weight:700>{</span>
+      <span style=color:#000>Config</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewConfig</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Load Test Demo&#34;</span><span style=color:#000;font-weight:700>).</span>
+         <span style=color:#000>SetBaseURL</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;http://httpbin.org&#34;</span><span style=color:#000;font-weight:700>).</span>
+         <span style=color:#000>SetThinkTime</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#4e9a06>&#34;random_percentage&#34;</span><span style=color:#000;font-weight:700>,</span>
+            <span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#204a87;font-weight:700>float64</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;min_percentage&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;max_percentage&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#0000cf;font-weight:700>1.5</span><span style=color:#000;font-weight:700>},</span>
+            <span style=color:#0000cf;font-weight:700>4</span><span style=color:#000;font-weight:700>),</span>
+      <span style=color:#000>TestSteps</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[]</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>IStep</span><span style=color:#000;font-weight:700>{</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;transation 1 start&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>StartTransaction</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;trans1&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;headers&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>GET</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/headers&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;headers.\&#34;Content-Type\&#34;&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;application/json&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check http response Content-Type&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;transation 1 end&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>EndTransaction</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;trans1&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;think time1&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>SetThinkTime</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>3</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;user-agent&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>GET</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;/user-agent&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>Validate</span><span style=color:#000;font-weight:700>().</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;status_code&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>200</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check status code&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>AssertEqual</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;headers.\&#34;Content-Type\&#34;&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;application/json&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;check http response Content-Type&#34;</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;rendezvous 1&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>SetRendezvous</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;rend1&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithUserPercent</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>0.8</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>WithTimeout</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>3000</span><span style=color:#000;font-weight:700>),</span>
+         <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStep</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;TestCaseRef&#34;</span><span style=color:#000;font-weight:700>).</span>
+            <span style=color:#000>CallRefCase</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>&amp;</span><span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>TestCase</span><span style=color:#000;font-weight:700>{</span><span style=color:#000>Config</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewConfig</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;TestCase2&#34;</span><span style=color:#000;font-weight:700>)}),</span>
+      <span style=color:#000;font-weight:700>},</span>
+   <span style=color:#000;font-weight:700>}</span>
+
+   <span style=color:#000>b</span> <span style=color:#ce5c00;font-weight:700>:=</span> <span style=color:#000>hrp</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>NewStandaloneBoomer</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>1000</span><span style=color:#000;font-weight:700>,</span> <span style=color:#0000cf;font-weight:700>100</span><span style=color:#000;font-weight:700>)</span> <span style=color:#8f5902;font-style:italic>//spawn_count: 1000, spawn_rate: 100
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#204a87;font-weight:700>go</span> <span style=color:#000>b</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Run</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>testcase1</span><span style=color:#000;font-weight:700>)</span>
+   <span style=color:#000>time</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Sleep</span><span style=color:#000;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>1000</span> <span style=color:#ce5c00;font-weight:700>*</span> <span style=color:#000>time</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Second</span><span style=color:#000;font-weight:700>)</span> <span style=color:#8f5902;font-style:italic>//expected running time
+</span><span style=color:#8f5902;font-style:italic></span>   <span style=color:#000>b</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Quit</span><span style=color:#000;font-weight:700>()</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div>
 </div>
 </main>
 </div>
