@@ -181,7 +181,7 @@ Vary: Accept-Encoding
 如果我们还想将 HTTP 接口耗时详情数据保存为结构化的数据，那我们可以再额外指定 `-s` 或 `--save-tests` 参数，即可存储到 `summary.json` 文件。
 
 ```bash
-$ hrp run demo/testcases/demo_requests.yml --http-stat
+$ hrp run demo/testcases/demo_requests.yml --http-stat --save-tests
 ```
 
 在生成的 `summary.json` 文件中，会新增一个 `httpstat` 字段。

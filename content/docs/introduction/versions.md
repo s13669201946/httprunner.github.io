@@ -66,4 +66,4 @@ HttpRunner v4.0 同时采用了 Golang/Python 两种编程语言，底层会有�
 
 
 [jsonschema]: https://github.com/python-jsonschema/jsonschema
-[依赖环境说明]: http://localhost:1313/docs/user-guide/installation/#%E4%BE%9D%E8%B5%96%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E
+[依赖环境说明]: /docs/user-guide/installation/#%E4%BE%9D%E8%B5%96%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E
