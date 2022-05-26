@@ -30,7 +30,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://httprunner.com/blog/how-to-test-websocket/"><meta property="article:section" content="blog">
 <meta property="article:published_time" content="2022-05-13T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-05-13T23:36:03+08:00">
+<meta property="article:modified_time" content="2022-05-25T22:13:45+08:00">
 <meta itemprop=name content="使用 HttpRunner v4.0 实现 WebSocket 的测试">
 <meta itemprop=description content="HttpRunner 从 v4.0 开始新增支持 WebSocket 协议。
 本文将结合案例初步介绍使用 HttpRunner v4.0 测试 WebSocket 的方法，欢迎大家多多实践，后续我们将基于大家的反馈进行迭代优化。
@@ -39,7 +39,7 @@
 该测试用例使用的被测服务是一个类似于 httpbin 的回显服务，协议类型是 WebSocket 协议：ws://echo.websocket.events。无论客户端发送了什么消息，服务端都会原封不动地返回，具体效果可以参考链接。
 测试用例总共包含了如下的 10 个步骤：
  建立一个新的连接并携带请求头 &ldquo;User-Agent&rdquo;: &ldquo;HttpRunnerPlus&rdquo;，并且对响应状态码 status_code 和响应头 headers.Connection 的内容进行断言 进行一次 ping pong 连接测试，超时时间设为 5 秒 读取建立连接之后，服务端主动推送的赞助消息 &ldquo;echo.websocket.events sponsored by Lob."><meta itemprop=datePublished content="2022-05-13T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-05-13T23:36:03+08:00">
+<meta itemprop=dateModified content="2022-05-25T22:13:45+08:00">
 <meta itemprop=wordCount content="572">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用 HttpRunner v4.0 实现 WebSocket 的测试">
@@ -117,7 +117,9 @@ Versions
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li>
 <a href=/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>博客</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-load-monitoring-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-convert-postman-li>
+<a href=/blog/how-to-convert-postman/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-convert-postman><span>HttpRunner v4.0 新增支持 Postman 用例转换</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-load-monitoring-li>
 <a href=/blog/how-to-load-monitoring/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-load-monitoring><span>HttpRunner 如何基于 Prometheus + Grafana 实现性能监控</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-load-test-li>
 <a href=/blog/how-to-load-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-load-test><span>如何使用 HttpRunner v4.0 开展性能测试</span></a>

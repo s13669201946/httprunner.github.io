@@ -14,27 +14,40 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>转换生成 | HttpRunner</title>
-<meta name=description content="使用主流 API 工具转换生成测试用例">
-<meta property="og:title" content="转换生成">
-<meta property="og:description" content="使用主流 API 工具转换生成测试用例">
+<title>HttpRunner v4.0 新增支持 Postman 用例转换 | HttpRunner</title>
+<meta name=description content="HttpRunner 从 v4.1.0 开始新增支持 Postman 用例转换功能。Postman 是一款强大、实用且容易上手的接口测试工具，它支持将集合（Collection）导出为 JSON 格式的工程文件，从而可以可以灵活地和其他工具进行协调交互。 …">
+<meta property="og:title" content="HttpRunner v4.0 新增支持 Postman 用例转换">
+<meta property="og:description" content="HttpRunner 从 v4.1.0 开始新增支持 Postman 用例转换功能。Postman 是一款强大、实用且容易上手的接口测试工具，它支持将集合（Collection）导出为 JSON 格式的工程文件，从而可以可以灵活地和其他工具进行协调交互。本文将结合具体案例来介绍使用 HttpRunner 进行 Postman 用例转换的功能。如果使用过程中遇到问题，欢迎在下方评论区留言，我们将根据大家的反馈来进行迭代和优化。
+Postman 工程文件导出 首先，我们基于一个实际的 Postman 项目案例来导出 Postman 的工程文件。在 Postman 的 Explore 界面中可以找到非常多的项目案例，这里我们选择一个 Postman 官方提供的工作空间（Workspace）Published Postman Templates，打开该工作空间后可以看到官方提供了非常多的集合，这里我们选择其中的一个集合 Postman Echo 为例，postman-echo 是一个用来调试 REST 客户端发送请求功能是否正常的服务，具体可以参考 postman-echo 的接口文档。
+Postman Echo 集合的详情页面如下图所示，通过 Create a fork 选项，我们可以将集合复制到自己的工作空间，从而可以进行其他自定义修改。这里我们选择直接通过 Export 选项来将 Postman Echo 集合导出为 JSON 格式的工程文件，具体操作方式如下图所示：
+在随后弹出的导出选项中，我们选择最新版本 Collection v2.1，点击 Export 将 Postman 工程文件导出到本地。
+读者可以按照上述的操作流程自行导出 Postman 工程文件到本地，此处笔者分享下自己导出的工程文件 postman_collection.json，从 JSON 工程文件的形式上可以看出，Postman 导出的工程文件与 HttpRunner 的测试用例有相似之处，都是采用了结构化的方式构建请求样例，不过相比较而言，Postman 的工程文件结构更为复杂。关于该工程文件的详细格式说明和其他细节，感兴趣的读者可以参考 Collection 格式的介绍文档，下面我们来演示从 Postman 到 HttpRunner 的用例转换过程。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://httprunner.com/docs/user-guide/gen-tests/convert/"><meta property="article:section" content="docs">
+<meta property="og:url" content="https://httprunner.com/blog/how-to-convert-postman/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2022-05-25T00:00:00+00:00">
 <meta property="article:modified_time" content="2022-05-25T22:13:45+08:00">
-<meta itemprop=name content="转换生成">
-<meta itemprop=description content="使用主流 API 工具转换生成测试用例">
+<meta itemprop=name content="HttpRunner v4.0 新增支持 Postman 用例转换">
+<meta itemprop=description content="HttpRunner 从 v4.1.0 开始新增支持 Postman 用例转换功能。Postman 是一款强大、实用且容易上手的接口测试工具，它支持将集合（Collection）导出为 JSON 格式的工程文件，从而可以可以灵活地和其他工具进行协调交互。本文将结合具体案例来介绍使用 HttpRunner 进行 Postman 用例转换的功能。如果使用过程中遇到问题，欢迎在下方评论区留言，我们将根据大家的反馈来进行迭代和优化。
+Postman 工程文件导出 首先，我们基于一个实际的 Postman 项目案例来导出 Postman 的工程文件。在 Postman 的 Explore 界面中可以找到非常多的项目案例，这里我们选择一个 Postman 官方提供的工作空间（Workspace）Published Postman Templates，打开该工作空间后可以看到官方提供了非常多的集合，这里我们选择其中的一个集合 Postman Echo 为例，postman-echo 是一个用来调试 REST 客户端发送请求功能是否正常的服务，具体可以参考 postman-echo 的接口文档。
+Postman Echo 集合的详情页面如下图所示，通过 Create a fork 选项，我们可以将集合复制到自己的工作空间，从而可以进行其他自定义修改。这里我们选择直接通过 Export 选项来将 Postman Echo 集合导出为 JSON 格式的工程文件，具体操作方式如下图所示：
+在随后弹出的导出选项中，我们选择最新版本 Collection v2.1，点击 Export 将 Postman 工程文件导出到本地。
+读者可以按照上述的操作流程自行导出 Postman 工程文件到本地，此处笔者分享下自己导出的工程文件 postman_collection.json，从 JSON 工程文件的形式上可以看出，Postman 导出的工程文件与 HttpRunner 的测试用例有相似之处，都是采用了结构化的方式构建请求样例，不过相比较而言，Postman 的工程文件结构更为复杂。关于该工程文件的详细格式说明和其他细节，感兴趣的读者可以参考 Collection 格式的介绍文档，下面我们来演示从 Postman 到 HttpRunner 的用例转换过程。"><meta itemprop=datePublished content="2022-05-25T00:00:00+00:00">
 <meta itemprop=dateModified content="2022-05-25T22:13:45+08:00">
-<meta itemprop=wordCount content="89">
+<meta itemprop=wordCount content="1067">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="转换生成">
-<meta name=twitter:description content="使用主流 API 工具转换生成测试用例">
+<meta name=twitter:title content="HttpRunner v4.0 新增支持 Postman 用例转换">
+<meta name=twitter:description content="HttpRunner 从 v4.1.0 开始新增支持 Postman 用例转换功能。Postman 是一款强大、实用且容易上手的接口测试工具，它支持将集合（Collection）导出为 JSON 格式的工程文件，从而可以可以灵活地和其他工具进行协调交互。本文将结合具体案例来介绍使用 HttpRunner 进行 Postman 用例转换的功能。如果使用过程中遇到问题，欢迎在下方评论区留言，我们将根据大家的反馈来进行迭代和优化。
+Postman 工程文件导出 首先，我们基于一个实际的 Postman 项目案例来导出 Postman 的工程文件。在 Postman 的 Explore 界面中可以找到非常多的项目案例，这里我们选择一个 Postman 官方提供的工作空间（Workspace）Published Postman Templates，打开该工作空间后可以看到官方提供了非常多的集合，这里我们选择其中的一个集合 Postman Echo 为例，postman-echo 是一个用来调试 REST 客户端发送请求功能是否正常的服务，具体可以参考 postman-echo 的接口文档。
+Postman Echo 集合的详情页面如下图所示，通过 Create a fork 选项，我们可以将集合复制到自己的工作空间，从而可以进行其他自定义修改。这里我们选择直接通过 Export 选项来将 Postman Echo 集合导出为 JSON 格式的工程文件，具体操作方式如下图所示：
+在随后弹出的导出选项中，我们选择最新版本 Collection v2.1，点击 Export 将 Postman 工程文件导出到本地。
+读者可以按照上述的操作流程自行导出 Postman 工程文件到本地，此处笔者分享下自己导出的工程文件 postman_collection.json，从 JSON 工程文件的形式上可以看出，Postman 导出的工程文件与 HttpRunner 的测试用例有相似之处，都是采用了结构化的方式构建请求样例，不过相比较而言，Postman 的工程文件结构更为复杂。关于该工程文件的详细格式说明和其他细节，感兴趣的读者可以参考 Collection 格式的介绍文档，下面我们来演示从 Postman 到 HttpRunner 的用例转换过程。">
 <link rel=preload href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css as=style>
 <link href=/scss/main.min.8d643e398df6d2d26f89d02d688cad7f8dd0a09042193f8d50b455c1ed22f910.css rel=stylesheet integrity>
 <script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNRMVFG5LL"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-LNRMVFG5LL',{anonymize_ip:!1})}</script>
 </head>
-<body class=td-page>
+<body class="td-page td-blog">
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/>
@@ -43,10 +56,10 @@
 <div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar>
 <ul class="navbar-nav mt-2 mt-lg-0">
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class="nav-link active" href=/docs/><span class=active>文档</span></a>
+<a class=nav-link href=/docs/><span>文档</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
-<a class=nav-link href=/blog/><span>博客</span></a>
+<a class="nav-link active" href=/blog/><span class=active>博客</span></a>
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/community/><span>社区</span></a>
@@ -92,139 +105,27 @@ Versions
 </div>
 </div>
 <ul class="td-sidebar-nav__section pr-md-3 ul-0">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docs-li>
-<a href=/docs/ title="欢迎使用 HttpRunner" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-docs><span>文档</span></a>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-blog-li>
+<a href=/blog/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-blog><span>博客</span></a>
 <ul class=ul-1>
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsintroduction-li>
-<a href=/docs/introduction/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsintroduction><span>🔍 HttpRunner 是什么？</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionoverview-li>
-<a href=/docs/introduction/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionoverview><span>整体概览</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionconcepts-li>
-<a href=/docs/introduction/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionconcepts><span>核心概念</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionfaq-li>
-<a href=/docs/introduction/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionfaq><span>常见问题</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsintroductionversions-li>
-<a href=/docs/introduction/versions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsintroductionversions><span>版本对比</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsquickstart-li>
-<a href=/docs/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsquickstart><span>🚀 快速上手</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guide-li>
-<a href=/docs/user-guide/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guide><span>📚 用户指南</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guideinstallation-li>
-<a href=/docs/user-guide/installation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideinstallation><span>安装说明</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidecli-li>
-<a href=/docs/user-guide/cli/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidecli><span>命令行工具</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidescaffold-li>
-<a href=/docs/user-guide/scaffold/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidescaffold><span>脚手架创建项目</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-docsuser-guidegen-tests-li>
-<a href=/docs/user-guide/gen-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidegen-tests><span>准备测试用例</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidegen-testsrecord-li>
-<a href=/docs/user-guide/gen-tests/record/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsrecord><span>录制生成</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-docsuser-guidegen-testsconvert-li>
-<a href=/docs/user-guide/gen-tests/convert/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testsconvert><span class=td-sidebar-nav-active-item>转换生成</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidegen-testswrite-cases-li>
-<a href=/docs/user-guide/gen-tests/write-cases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guidegen-testswrite-cases><span>手工编写</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideenhance-tests-li>
-<a href=/docs/user-guide/enhance-tests/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideenhance-tests><span>增强测试用例</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvariables-li>
-<a href=/docs/user-guide/enhance-tests/variables/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvariables><span>变量（variables）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsextract-li>
-<a href=/docs/user-guide/enhance-tests/extract/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsextract><span>参数提取（extract）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsdebugtalk-li>
-<a href=/docs/user-guide/enhance-tests/debugtalk/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsdebugtalk><span>自定义函数（debugtalk.xx）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsparameterize-li>
-<a href=/docs/user-guide/enhance-tests/parameterize/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsparameterize><span>参数化数据驱动（parameterize）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testshooks-li>
-<a href=/docs/user-guide/enhance-tests/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testshooks><span>Hook 机制（hooks）</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideenhance-testsvalidate-li>
-<a href=/docs/user-guide/enhance-tests/validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideenhance-testsvalidate><span>结果校验（validate）</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideprotocols-li>
-<a href=/docs/user-guide/protocols/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideprotocols><span>多协议拓展</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsh2-li>
-<a href=/docs/user-guide/protocols/h2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsh2><span>HTTP/2</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolswebsocket-li>
-<a href=/docs/user-guide/protocols/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolswebsocket><span>WebSocket</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolssql-li>
-<a href=/docs/user-guide/protocols/sql/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolssql><span>SQL</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideprotocolsthrift-li>
-<a href=/docs/user-guide/protocols/thrift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideprotocolsthrift><span>Thrift RPC</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideapi-test-li>
-<a href=/docs/user-guide/api-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideapi-test><span>运行接口测试</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testrun-li>
-<a href=/docs/user-guide/api-test/run/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testrun><span>hrp run</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testpytest-li>
-<a href=/docs/user-guide/api-test/pytest/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testpytest><span>hrp pytest</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideapi-testreport-li>
-<a href=/docs/user-guide/api-test/report/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideapi-testreport><span>测试报告</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideload-test-li>
-<a href=/docs/user-guide/load-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideload-test><span>运行性能测试</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testconcepts-li>
-<a href=/docs/user-guide/load-test/concepts/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testconcepts><span>用例增强</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testboom-li>
-<a href=/docs/user-guide/load-test/boom/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testboom><span>hrp boom</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testmonitor-li>
-<a href=/docs/user-guide/load-test/monitor/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testmonitor><span>性能监控</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testmaster-slave-li>
-<a href=/docs/user-guide/load-test/master-slave/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testmaster-slave><span>多机负载</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideload-testreport--li>
-<a href=/docs/user-guide/load-test/report-/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideload-testreport-><span>测试报告</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsuser-guidedem-li>
-<a href=/docs/user-guide/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guidedem><span>接口耗时分析</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsuser-guideintegrate-li>
-<a href=/docs/user-guide/integrate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsuser-guideintegrate><span>二次开发</span></a>
-<ul class="ul-3 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideintegrateextend-li>
-<a href=/docs/user-guide/integrate/extend/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideintegrateextend><span>框架能力扩展</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsuser-guideintegrateintegrate-li>
-<a href=/docs/user-guide/integrate/integrate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsuser-guideintegrateintegrate><span>测试平台集成</span></a>
-</li>
-</ul>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docsexamples-li>
-<a href=/docs/examples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsexamples><span>🔧 案例实践</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docscontribution-guidelines-li>
-<a href=/docs/contribution-guidelines/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docscontribution-guidelines><span>🤝 协作共建</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesversion-li>
-<a href=/docs/contribution-guidelines/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesversion><span>版本号机制</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesissues-li>
-<a href=/docs/contribution-guidelines/issues/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesissues><span>GitHub Issues</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinescommunity-li>
-<a href=/docs/contribution-guidelines/community/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinescommunity><span>用户社区</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docscontribution-guidelinesmilestones-li>
-<a href=/docs/contribution-guidelines/milestones/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docscontribution-guidelinesmilestones><span>版本规划</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-docssponsors-li>
-<a href=/docs/sponsors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docssponsors><span>💖 赞助商</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-docsservices-li>
-<a href=/docs/services/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-docsservices><span>💰 增值服务</span></a>
-<ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesdem-li>
-<a href=/docs/services/dem/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesdem><span>全球数字体验监测平台</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-docsservicesconsultation-li>
-<a href=/docs/services/consultation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-docsservicesconsultation><span>全球数字体验咨询服务</span></a>
-</li>
-</ul>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-bloghow-to-convert-postman-li>
+<a href=/blog/how-to-convert-postman/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-convert-postman><span class=td-sidebar-nav-active-item>HttpRunner v4.0 新增支持 Postman 用例转换</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-load-monitoring-li>
+<a href=/blog/how-to-load-monitoring/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-load-monitoring><span>HttpRunner 如何基于 Prometheus + Grafana 实现性能监控</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-load-test-li>
+<a href=/blog/how-to-load-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-load-test><span>如何使用 HttpRunner v4.0 开展性能测试</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-test-websocket-li>
+<a href=/blog/how-to-test-websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-test-websocket><span>使用 HttpRunner v4.0 实现 WebSocket 的测试</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloghow-to-test-http2-li>
+<a href=/blog/how-to-test-http2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloghow-to-test-http2><span>使用 HttpRunner v4.0 实现 HTTP/2 的测试</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blogdocs-plan-li>
+<a href=/blog/docs-plan/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blogdocs-plan><span>HttpRunner v4.0 用户文档 & 博客规划</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-blogrelease-v4-li>
+<a href=/blog/release-v4/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-blogrelease-v4><span>HttpRunner v4.0 全新发布</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-report-li>
+<a href=/blog/user-survey-report/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey-report><span>HttpRunner 首轮用户调研报告（2022.02）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-bloguser-survey-li>
+<a href=/blog/user-survey/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-bloguser-survey><span>HttpRunner 核心用户招募中，你要加群么？</span></a>
 </li>
 </ul>
 </li>
@@ -235,49 +136,334 @@ Versions
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#postman-工程文件导出>Postman 工程文件导出</a></li>
+<li><a href=#postman-用例转换>Postman 用例转换</a></li>
+<li><a href=#注意事项>注意事项</a></li>
+<li><a href=#whats-next>What&rsquo;s next</a></li>
+</ul>
+</nav></div>
 </aside>
-<main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
-<nav aria-label=breadcrumb class=td-breadcrumbs>
-<ol class=breadcrumb>
-<li class=breadcrumb-item>
-<a href=https://httprunner.com/docs/>文档</a>
-</li>
-<li class=breadcrumb-item>
-<a href=https://httprunner.com/docs/user-guide/>📚 用户指南</a>
-</li>
-<li class=breadcrumb-item>
-<a href=https://httprunner.com/docs/user-guide/gen-tests/>准备测试用例</a>
-</li>
-<li class="breadcrumb-item active" aria-current=page>
-<a href=https://httprunner.com/docs/user-guide/gen-tests/convert/>转换生成</a>
-</li>
-</ol>
-</nav>
+<main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
 <div class=td-content>
-<h1>转换生成</h1>
-<div class=lead>使用主流 API 工具转换生成测试用例</div>
+<h1>HttpRunner v4.0 新增支持 Postman 用例转换</h1>
+<div class="td-byline mb-4">
+<time datetime=2022-05-25 class=text-muted>Wednesday, May 25, 2022</time>
+</div>
 <header class=article-meta>
 </header>
-<h2 id=将输入转化为-jsonyamlpytestgotest>将输入转化为 JSON/YAML/pytest/gotest</h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>$ hrp convert -h
-convert to JSON/YAML/gotest/pytest testcases
+<p>HttpRunner 从 v4.1.0 开始新增支持 Postman 用例转换功能。Postman 是一款强大、实用且容易上手的接口测试工具，它支持将集合（Collection）导出为 JSON 格式的工程文件，从而可以可以灵活地和其他工具进行协调交互。本文将结合具体案例来介绍使用 HttpRunner 进行 Postman 用例转换的功能。如果使用过程中遇到问题，欢迎在下方评论区留言，我们将根据大家的反馈来进行迭代和优化。</p>
+<h2 id=postman-工程文件导出>Postman 工程文件导出</h2>
+<p>首先，我们基于一个实际的 Postman 项目案例来导出 Postman 的工程文件。在 Postman 的 <a href=https://www.postman.com/explore>Explore 界面</a>中可以找到非常多的项目案例，这里我们选择一个 Postman 官方提供的工作空间（Workspace）<a href=https://www.postman.com/postman/workspace/published-postman-templates/overview>Published Postman Templates</a>，打开该工作空间后可以看到官方提供了非常多的集合，这里我们选择其中的一个集合 <a href=https://www.postman.com/postman/workspace/published-postman-templates/collection/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65>Postman Echo</a> 为例，postman-echo 是一个用来调试 REST 客户端发送请求功能是否正常的服务，具体可以参考 <a href=https://www.postman.com/postman/workspace/published-postman-templates/documentation/631643-f695cab7-6878-eb55-7943-ad88e1ccfd65>postman-echo 的接口文档</a>。</p>
+<p>Postman Echo 集合的详情页面如下图所示，通过 <code>Create a fork</code> 选项，我们可以将集合复制到自己的工作空间，从而可以进行其他自定义修改。这里我们选择直接通过 <code>Export</code> 选项来将 Postman Echo 集合导出为 JSON 格式的工程文件，具体操作方式如下图所示：</p>
+<p><img src=/image/postman-echo.png alt="Postman Echo 详情页"></p>
+<p>在随后弹出的导出选项中，我们选择最新版本 Collection v2.1，点击 Export 将 Postman 工程文件导出到本地。</p>
+<p><img src=/image/postman-export.png alt="Postman Echo Export 选项页"></p>
+<p>读者可以按照上述的操作流程自行导出 Postman 工程文件到本地，此处笔者分享下自己导出的工程文件 <a href=https://www.postman.com/collections/92a0446c7162b800282f>postman_collection.json</a>，从 JSON 工程文件的形式上可以看出，Postman 导出的工程文件与 HttpRunner 的测试用例有相似之处，都是采用了结构化的方式构建请求样例，不过相比较而言，Postman 的工程文件结构更为复杂。关于该工程文件的详细格式说明和其他细节，感兴趣的读者可以参考 <a href=https://blog.postman.com/travelogue-of-postman-collection-format-v2/>Collection 格式的介绍文档</a>，下面我们来演示从 Postman 到 HttpRunner 的用例转换过程。</p>
+<h2 id=postman-用例转换>Postman 用例转换</h2>
+<p>使用过 HttpRunner v4.0 的读者可能对 <code>hrp har2case</code> 指令不陌生，不过随着后续支持的输入类型越来越多，HttpRunner 的转换功能将不仅仅局限于支持 Postman、Swagger 等工具导出的工程文件到 HttpRunner 测试用例的转换，还会扩展支持 curl、Apach ab 等指令到测试用例的转换，甚至是会支持测试用例的不同形态之间的相互转换，横向的拓展势必会导致指令冗余以及用户的学习成本增加。因此，HttpRunner 之后的用例转换功能将集中在 <code>hrp convert</code> 一个指令中，不过仍然兼容之前版本中 <code>hrp har2case</code> 的操作，详细规划将在下一期文章《HttpRunner v4.0 用例转换功能规划》中介绍，敬请期待。与 <code>hrp har2case</code> 类似，通过 <code>hrp convert</code> 可以一次性转换一或多个 Postman 工程文件，单个 Postman 工程文件经过转换会生成对应的单个 JSON/YAML 脚本。下面介绍如何使用 <code>hrp convert</code> 指令来进行 Postman 用例转换。</p>
+<p>首先介绍 <code>hrp convert</code> 各个选项的详细说明：</p>
+<ol>
+<li><code>--to-json/--to-yaml/--to-gotest/--to-pytest</code> 用于将输入转化为对应形态的测试用例，四个选项中最多只能指定一个，如果不指定则默认会将输入转化为 JSON 形态的测试用例。当前已经支持将 Postman 用例转换为 JSON/YAML/pytest 三种形态形态的测试用例</li>
+<li><code>--output-dir</code> 后接测试用例的期望输出目录的路径，用于将转换生成的测试用例输出到对应的文件夹，需要注意该路径必须是存在且合法的</li>
+<li><code>--profile</code> 后接 profile 配置文件的路径，profile 文件的后缀可以为 .json/.yaml/.yml，目前支持修改输入中的 Headers 和 Cookies 信息，并且支持替换（不存在则会创建）以及覆盖两种修改模式，下面给出这两种修改模式的 profile 配置文件示例：</li>
+</ol>
+<ul>
+<li>根据 profile 替换指定的 Headers 和 Cookies 信息</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>Header1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;this header will be created or updated&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>cookies</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>Cookie1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;this cookie will be created or updated&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><ul>
+<li>根据 profile 覆盖原有的 Headers 和 Cookies 信息</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>override</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>headers</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>Header1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;all original headers will be overridden&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>cookies</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#204a87;font-weight:700>Cookie1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;all original cookies will be overridden&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><p>下面执行 <code>hrp convert</code> 指令来进行 Postman 用例转换。在前面的 Postman 工程文件导出步骤中，我们得到了文件 postman_collection.json，在该文件所在的目录打开终端并执行 <code>hrp convert postman_collection.json --to-yaml</code> 即可实现转换过程，此处以转化为 YAML 测试用例为例，执行结果如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ hrp convert postman_collection.json --to-yaml                 
+11:53AM INF Set log to color console other than JSON format.
+11:53AM ??? Set log level
+11:53AM INF load file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>postman_collection.json
+11:53AM INF load file <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>postman_collection.json
+11:53AM INF load <span style=color:#204a87;font-weight:700>case</span> as: postman input <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>postman_collection.json
+11:53AM INF start converting input <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>postman_collection.json
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/get?foo1<span style=color:#ce5c00;font-weight:700>=</span>bar1<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>foo2</span><span style=color:#ce5c00;font-weight:700>=</span>bar2
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>POST <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/post
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>POST <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/post
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>PUT <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/put
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>PATCH <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/patch
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>DELETE <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/delete
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/headers
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/response-headers?foo1<span style=color:#ce5c00;font-weight:700>=</span>bar1<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>foo2</span><span style=color:#ce5c00;font-weight:700>=</span>bar2
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/basic-auth
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/digest-auth
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/auth/hawk
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/oauth1
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/cookies/set?foo1<span style=color:#ce5c00;font-weight:700>=</span>bar1<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>foo2</span><span style=color:#ce5c00;font-weight:700>=</span>bar2
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/cookies
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/cookies/delete?foo1<span style=color:#000;font-weight:700>&amp;</span>foo2
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/status/200
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/stream/5
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/delay/2
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/encoding/utf8
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/gzip
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/deflate
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/ip
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/now
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/valid?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/format?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>format</span><span style=color:#ce5c00;font-weight:700>=</span>mm
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/unit?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>unit</span><span style=color:#ce5c00;font-weight:700>=</span>day
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/add?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>years</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#0000cf;font-weight:700>100</span>
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/subtract?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>years</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#0000cf;font-weight:700>50</span>
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/start?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>unit</span><span style=color:#ce5c00;font-weight:700>=</span>month
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/object?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/before?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>target</span><span style=color:#ce5c00;font-weight:700>=</span>2017-10-10
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/after?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>target</span><span style=color:#ce5c00;font-weight:700>=</span>2017-10-10
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/between?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>start</span><span style=color:#ce5c00;font-weight:700>=</span>2017-10-10<span style=color:#000;font-weight:700>&amp;</span><span style=color:#000>end</span><span style=color:#ce5c00;font-weight:700>=</span>2019-10-10
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/time/leap?timestamp<span style=color:#ce5c00;font-weight:700>=</span>2016-10-10
+11:53AM INF convert teststep <span style=color:#000>method</span><span style=color:#ce5c00;font-weight:700>=</span>GET <span style=color:#000>url</span><span style=color:#ce5c00;font-weight:700>=</span>https://postman-echo.com/digest-auth
+11:53AM INF dump data to yaml <span style=color:#000>path</span><span style=color:#ce5c00;font-weight:700>=</span>/Users/bytedance/code/go/httprunner/postman_collection_test.yaml
+11:53AM INF conversion completed output <span style=color:#000>files</span><span style=color:#ce5c00;font-weight:700>=[</span><span style=color:#4e9a06>&#34;postman_collection_test.yaml&#34;</span><span style=color:#ce5c00;font-weight:700>]</span>
+</code></pre></div><p>在执行了上述操作后，可以得到转换生成的 HttpRunner YAML 格式的测试用例，之后可以使用 <code>hrp run</code> 和 <code>hrp boom</code> 基于该测试用例来进行后续的接口/性能测试。同理，我们也可以指定 <code>--to-pytest</code> 选项来将输入转化为 pytest 脚本形态的测试用例：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#8f5902;font-style:italic># NOTE: Generated By HttpRunner v4.1.0-beta</span>
+<span style=color:#8f5902;font-style:italic># FROM: postman_collection_test.json</span>
 
-Usage:
-  hrp convert $path... [flags]
 
-Flags:
-  -h, --help                help for convert
-  -d, --output-dir string   specify output directory, default to the same dir with har file
-  -p, --profile string      specify profile path to override headers (except for auto-generated headers) and cookies
-      --to-gotest           convert to gotest scripts (TODO)
-      --to-json             convert to JSON scripts (default true)
-      --to-pytest           convert to pytest scripts
-      --to-yaml             convert to YAML scripts
+<span style=color:#204a87;font-weight:700>from</span> <span style=color:#000>httprunner</span> <span style=color:#204a87;font-weight:700>import</span> <span style=color:#000>HttpRunner</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>Config</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>Step</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>,</span> <span style=color:#000>RunTestCase</span>
 
-Global Flags:
-      --log-json           set log to json format
-  -l, --log-level string   set log level (default &#34;INFO&#34;)
-</code></pre></div>
+<span style=color:#204a87;font-weight:700>class</span> <span style=color:#000>TestCasePostmanCollectionTest</span><span style=color:#000;font-weight:700>(</span><span style=color:#000>HttpRunner</span><span style=color:#000;font-weight:700>):</span>
+
+    <span style=color:#000>config</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000>Config</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Postman Echo&#34;</span><span style=color:#000;font-weight:700>)</span>
+
+    <span style=color:#000>teststeps</span> <span style=color:#ce5c00;font-weight:700>=</span> <span style=color:#000;font-weight:700>[</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Request Methods - GET Request&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/get&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar2&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Request Methods - POST Raw Text&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>post</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/post&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_headers</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;text/plain&#34;</span><span style=color:#000;font-weight:700>})</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_data</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body.&#34;</span><span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Request Methods - POST Form Data&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>post</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/post&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_headers</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;application/x-www-form-urlencoded&#34;</span><span style=color:#000;font-weight:700>})</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_data</span><span style=color:#000;font-weight:700>({</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar2&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Request Methods - PUT Request&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>put</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/put&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_headers</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;text/plain&#34;</span><span style=color:#000;font-weight:700>})</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_data</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body.&#34;</span><span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Request Methods - PATCH Request&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>patch</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/patch&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_headers</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;text/plain&#34;</span><span style=color:#000;font-weight:700>})</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_data</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body.&#34;</span><span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Request Methods - DELETE Request&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>delete</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/delete&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_headers</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;Content-Type&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;text/plain&#34;</span><span style=color:#000;font-weight:700>})</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_data</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;This is expected to be sent back as part of response body.&#34;</span><span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Headers - Request Headers&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/headers&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_headers</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;my-sample-header&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;Lorem ipsum dolor sit amet&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Headers - Response Headers&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/response-headers&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar2&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Authentication Methods - Basic Auth&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/basic-auth&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Authentication Methods - DigestAuth Success&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/digest-auth&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_headers</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#4e9a06>&#34;Authorization&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#39;Digest username=&#34;postman&#34;, realm=&#34;Users&#34;, nonce=&#34;ni1LiL0O37PRRhofWdCLmwFsnEtH1lew&#34;, uri=&#34;/digest-auth&#34;, response=&#34;254679099562cf07df9b6f5d8d15db44&#34;, opaque=&#34;&#34;&#39;</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Authentication Methods - Hawk Auth&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/auth/hawk&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Authentication Methods - OAuth1.0 (verify signature)&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/oauth1&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Cookie Manipulation - Set Cookies&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/cookies/set&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar1&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;bar2&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Cookie Manipulation - Get Cookies&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/cookies&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Cookie Manipulation - Delete Cookies&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/cookies/delete&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;foo1&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;foo2&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities - Response Status Code&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/status/200&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities - Streamed Response&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/stream/5&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities - Delay Response&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/delay/2&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities - Get UTF8 Encoded Response&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/encoding/utf8&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities - GZip Compressed Response&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/gzip&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities - Deflate Compressed Response&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/deflate&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities - IP address in JSON format&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/ip&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Current UTC time&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/time/now&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Timestamp validity&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/valid&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Format timestamp&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/format&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;format&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;mm&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Extract timestamp unit&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/unit&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;unit&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;day&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Time addition&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/add&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;years&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;100&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Time subtraction&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/subtract&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;years&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;50&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Start of time&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/start&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;unit&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;month&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Object representation&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/object&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Before comparisons&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/before&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;target&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2017-10-10&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - After comparisons&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/after&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;target&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2017-10-10&#34;</span><span style=color:#000;font-weight:700>,</span> <span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Between timestamps&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/between&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span>
+                    <span style=color:#4e9a06>&#34;end&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2019-10-10&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#4e9a06>&#34;start&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2017-10-10&#34;</span><span style=color:#000;font-weight:700>,</span>
+                    <span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>,</span>
+                <span style=color:#000;font-weight:700>}</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Utilities / Date and Time - Leap year check&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;https://postman-echo.com/time/leap&#34;</span><span style=color:#000;font-weight:700>)</span>
+            <span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>with_params</span><span style=color:#000;font-weight:700>(</span><span style=color:#ce5c00;font-weight:700>**</span><span style=color:#000;font-weight:700>{</span><span style=color:#4e9a06>&#34;timestamp&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2016-10-10&#34;</span><span style=color:#000;font-weight:700>})</span>
+        <span style=color:#000;font-weight:700>),</span>
+        <span style=color:#000>Step</span><span style=color:#000;font-weight:700>(</span>
+            <span style=color:#000>RunRequest</span><span style=color:#000;font-weight:700>(</span><span style=color:#4e9a06>&#34;Auth: Digest - DigestAuth Request&#34;</span><span style=color:#000;font-weight:700>)</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>get</span><span style=color:#000;font-weight:700>(</span>
+                <span style=color:#4e9a06>&#34;https://postman-echo.com/digest-auth&#34;</span>
+            <span style=color:#000;font-weight:700>)</span>
+        <span style=color:#000;font-weight:700>),</span>
+    <span style=color:#000;font-weight:700>]</span>
+
+
+<span style=color:#204a87;font-weight:700>if</span> <span style=color:#000>__name__</span> <span style=color:#ce5c00;font-weight:700>==</span> <span style=color:#4e9a06>&#34;__main__&#34;</span><span style=color:#000;font-weight:700>:</span>
+<span style=color:#000>TestCasePostmanCollectionTest</span><span style=color:#000;font-weight:700>()</span><span style=color:#ce5c00;font-weight:700>.</span><span style=color:#000>test_start</span><span style=color:#000;font-weight:700>()</span>
+</code></pre></div><h2 id=注意事项>注意事项</h2>
+<ol>
+<li><code>hrp convert</code> 可以自动识别输入类型，因此不需要通过选项来手动制定输入类型，如遇到无法识别、不支持或转换失败的情况，则会输出错误日志并跳过，不会影响其他转换过程的正常进行</li>
+<li>输出的测试用例文件名格式为 <code>Postman 工程文件名称（不带拓展名）</code> + <code>_test</code> + <code>.json/.yaml/.go/.py 后缀</code> ，如果该文件已经存在则会进行覆盖</li>
+<li>在 profile 配置文件中，指定 <code>override</code> 字段为 <code>false/true</code> 可以选择修改模式为替换/覆盖，需要注意的是，如果不指定该字段则默认修改模式为替换模式</li>
+<li>如果 Postman 工程文件中包含了文件夹层级结构，则 <code>hrp convert</code> 会将层级结构递归展开，所有请求按顺序转换生成 HttpRunner 测试用例中的若干步骤，步骤名称为该请求在原始 Postman 工程文件中的路径，路径中的层级之间用连字符“-”分隔，从而可以有效帮助用户定位到各个请求在原始 Postman 工程文件中的位置</li>
+<li>完整支持 Postman 请求 Params 中的请求参数变量、请求路径变量机制，<code>hrp convert</code> 会自动解析各个变量名并进行替换</li>
+<li>完整支持 Postman 请求 Body 中的 form-data/x-www-form-urlencoded/raw 类型，不过暂不支持 binary / GraphQL 类型</li>
+</ol>
+<h2 id=whats-next>What&rsquo;s next</h2>
+<ol>
+<li>支持转换 Postman 请求 Authorization 中的内容，补充测试用例 Headers 信息</li>
+<li>支持转换 Postman 请求 Pre-request Script 中的内容为 Setup 操作</li>
+<li>支持转换 Postman 请求 Tests 中的内容为请求结果断言操作</li>
+</ol>
+<blockquote>
+<p>本文作者：卜卜星（HttpRunner 核心开发者）<br>
+HttpRunner 项目官网: <a href=https://httprunner.com/>https://httprunner.com/</a><br>
+如果 HttpRunner 对你有过帮助，麻烦帮忙给个 ⭐️star⭐️ 鼓励下吧<br>
+<a href=https://github.com/httprunner/httprunner>https://github.com/httprunner/httprunner</a></p>
+</blockquote>
+<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+<li>
+<a href=/blog/how-to-load-monitoring/ aria-label="上一页 - HttpRunner 如何基于 Prometheus + Grafana 实现性能监控" class="btn btn-primary"><span class=mr-1>←</span>上一页</a>
+</li>
+<a class="btn btn-primary disabled">下一页<span class=ml-1>→</span></a>
+</li>
+</ul>
 </div>
 </main>
 </div>
