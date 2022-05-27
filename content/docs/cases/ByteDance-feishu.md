@@ -4,7 +4,7 @@ weight: 2
 description: 使用 HttpRunner 替换已有测试平台的执行引擎
 ---
 
-### 公司介绍
+## 公司（业务）介绍
 
 <a href="https://www.feishu.cn/"><img src="/image/logo/feishu.jpeg" title="飞书" width="100"></a>
 
@@ -12,7 +12,7 @@ description: 使用 HttpRunner 替换已有测试平台的执行引擎
 
 案例提供人：李隆，原飞书测试开发团队成员（2019~2020）
 
-### 为什么选择 HttpRunner？
+## 为什么选择 HttpRunner？
 
 在我加入飞书前，飞书的研发团队已经开发了一套接口自动化测试平台，重点支持 HTTPS 和 Thrift RPC 协议的接口回归测试，测试用例量累积了 600+。
 
