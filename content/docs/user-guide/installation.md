@@ -82,10 +82,18 @@ hrp version v4.0.0-alpha
 
 ### go install 安装
 
-如果你的系统有 Golang 环境，那么也可以通过 `go install` 命令从 GitHub 仓库中拉取最新代码进行安装。
+如果你的系统有 Golang 环境，那么也可以通过 `go install` 命令从 GitHub 仓库中拉取代码进行安装。
+
+指定版本号（v4.x.y）进行安装：
 
 ```bash
-$ go install github.com/httprunner/httprunner/hrp/cmd/cli@master
+$ go install github.com/httprunner/httprunner/v4/hrp/cmd/cli@v4.x.y
+```
+
+如果你期望使用最新的代码进行安装，可以指定 master 分支进行安装：
+
+```bash
+$ go install github.com/httprunner/httprunner/v4/hrp/cmd/cli@master
 ```
 
 ### 检查安装结果
