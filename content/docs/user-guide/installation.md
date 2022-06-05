@@ -14,14 +14,13 @@ description: HttpRunner 的几种安装方式
 
 为了加速二进制包的下载速度，我们已经将编译产物上传到了阿里云 OSS，并且提供了一键安装部署的脚本。只需执行一条 shell 命令，即可完成 hrp 的下载和安装操作。
 
-> 注：大多数 Linux/macOS 系统中都会预置 curl/wget 命令行工具，如果你的系统中未安装，需自行解决。
-
 ```bash
-# install via curl
 $ bash -c "$(curl -ksSL https://httprunner.com/script/install.sh)"
-# install via wget
-$ bash -c "$(wget https://httprunner.com/script/install.sh -O -)"
 ```
+
+注意：`install.sh` 脚本内部依赖 `curl/tar/mktemp/ls/rm/uname/chmod/command` 命令行工具，大多数 `Linux/macOS` 系统都会预置，如果你的系统中存在缺失，需自行解决。
+
+针对 `Windows` 系统，上述脚本较大概率无法正常运行，建议自行下载编译产物后进行配置。
 
 ### 下载编译产物
 
@@ -35,12 +34,30 @@ $ bash -c "$(wget https://httprunner.com/script/install.sh -O -)"
 - linux + arm64
 - windows + amd64(x86)
 
-获取到编译产物后，你只需给 `hrp` 添加可运行权限即可。同时推荐将 `hrp` 移动到系统 bin 目录，方便全局调用。
+获取到编译产物（`.tar.gz` 格式）后，对压缩包进行解压：
+
+```bash
+$ tar -xzf hrp-xxx.tar.gz
+```
+
+解压后可以获得一个 `hrp` 二进制文件，你只需给 `hrp` 添加可运行权限即可。
 
 ```bash
 $ chmod +x hrp
-$ mv hrp /user/local/bin
 ```
+
+同时为了让 `hrp` 在系统中可以全局调用，推荐将 `hrp` 添加到系统环境变量的 `PATH` 路径中，
+
+针对 `Linux/macOS` 系统，推荐将 `hrp` 移动到系统 `/user/local/bin` 目录。
+
+```bash
+$ mv hrp /user/local/bin/
+```
+
+针对 `Windows` 系统：
+
+- 在 C 盘根目录下创建 `HttpRunner` 目录（自定义目录），将 `hrp.exe` 文件放在该目录下
+- 在「我的电脑=>属性=>高级系统设置=>环境变量」配置中，在 PATH 下新增系统变量，将 `C:\\HttpRunner` 写入 PATH
 
 ### 自行本地编译
 
