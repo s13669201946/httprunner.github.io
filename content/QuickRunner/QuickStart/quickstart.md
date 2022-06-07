@@ -9,7 +9,7 @@ type: docs
 
 ## 案例介绍
 
-为了降低案例实践的上手门槛，我们挑选了一个公网可访问的接口服务网站 [http-bin][http-bin] 作为被测对象。`http-bin` 是一个使用 Python + Flask 编写的 HTTP HTTP Request & Response Service。该服务主要用于测试 HTTP 库，你可以向他发送请求，然后他会按照指定的规则将你的请求返回。
+为了降低案例实践的上手门槛，我们挑选了一个公网可访问的接口服务网站 [http-bin][http-bin] 作为被测对象。`http-bin` 是一个使用 Python + Flask 编写的 HTTP HTTP Request & Response Service。该服务主要用于测试 HTTP 库，你可以向它发送请求，然后它会按照指定的规则将你的请求返回。
 httpbin 支持HTTP/HTTPS，可以很好地满足我们的演示需求。
 
 为了更直观，我们将基本的测试流程分为以下几步：
