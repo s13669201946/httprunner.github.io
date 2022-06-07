@@ -4,7 +4,7 @@ weight: 3
 type: docs
 ---
 QuickRunner支持动态运算，您可以在请求的任意位置调用QuickRunner的内置函数，以便帮助您快速创建压测脚本。
->采用  ${函数名} 的方式调用内置函数。<br/>
+>采用  ${ 函数名 } 的方式调用内置函数。<br/>
 
 目前QuickRunner所支持的函数有：
 
