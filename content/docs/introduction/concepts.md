@@ -86,6 +86,10 @@ HttpRunner 用例的核心为 JSON 结构体，但很多测试场景中需要动
 - debugtalk.py
 - debugtalk.so
 
+## 变量（variables）
+
+在测试用例中，很多时候我们需要对参数进行声明和引用，这就需要用到[变量（variables）机制](/docs/user-guide/enhance-tests/variables/)。
+
 ## 函数（functions）
 
 在 HttpRunner 的测试用例中，约定通过 `${}` 的形式来调用插件函数。
@@ -93,27 +97,6 @@ HttpRunner 用例的核心为 JSON 结构体，但很多测试场景中需要动
 ```
 "${func{$a, $b}}"
 ```
-
-## 变量（variables）
-
-在 HttpRunner 的测试用例中，约定通过 `${}` 或 `$` 的形式来引用变量。
-
-`$abc` or `${abc}`
-
-如果在测试用例中本身就存在 `$` 符号，那么可以通过 `$$` 进行转义。
-
-例如，测试用例中某个字段的原始内容为 `$m`，那么为了避免将其解析为变量，则需要将其写为 `$$m`。
-
-## 变量优先级
-
-在 HttpRunner 测试用例中，变量类型有 3 种：
-
-- config variables：在 config 中定义的变量
-- step variables：在 test step 中定义的变量
-- session variables：在测试用例运行时，从前置 step 提取（extract）的变量
-
-这 3 种变量的优先级从高到低依次为：step variables > session variables > config variables
-
 
 [wiki_testcase]: https://en.wikipedia.org/wiki/Test_case
 [httprunner/funplugin]: https://github.com/httprunner/funplugin

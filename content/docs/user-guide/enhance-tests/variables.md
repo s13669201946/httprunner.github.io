@@ -4,136 +4,106 @@ weight: 1
 description: 基于变量机制实现参数的生命周期管理
 ---
 
-在测试用例内部，HttpRunner 划分了两层变量空间作用域（context）。
-- config ：作为整个测试用例的全局配置项，作用域为整个测试用例；
-- teststeps ：测试步骤的变量空间（context）会继承或覆盖 config 中定义的内容；
-    - 若某变量在 config 中定义了，在某 teststeps 中没有定义，则该 teststeps 会继承该变量
-    - 若某变量在 config 和某 teststeps 中都定义了，则该 teststeps 中使用自己定义的变量值
-- 各个测试步骤（teststeps）的变量空间相互独立，互不影响；
-- 如需在多个测试步骤（teststeps）中传递参数值，则需要使用 extract 关键字，并且只能从前往后传递
+在测试用例中，很多时候我们需要对参数进行声明和引用，这就需要用到变量（variables）机制。
 
+## 变量声明
 
-#### teststeps
-   在测试步骤（teststeps)下声明的变量，作用域只在当前测试步骤（teststeps)下有效。
-声明变量用 variables，变量和对应值用键值对。例如：
-```text
-   "teststeps": [
-   		{
-   			"name": "",
-   			"variables": {
-   				"name": "demo",
-   				"sum": "${SumTwoInt(4,5)}"
-   			},
-   			"request": {
-   				"method": "POST",
-   				"url": "https://www.httpbin.org",
-   				"params": {},
-   				"headers": {
-   					"name": "$name",
-   					"Content-Type": "text/plain"
-   				},
-   				"body": ""
-   			},
-   		}
-   	],
-```
-在上述例子中 ，variables 定义的局部变量，作用域为测试步骤中。
+在 HttpRunner 测试用例中，有 4 个地方可以对变量进行声明。
 
-#### config
-   在 config 下声明的 变量都是全局变量，全局变量分为参数变量 parameters ，配置变量 variables ，这些变量在整个测试用例（testcase）的所有地方均可以引用，例如
-```text
-   "config": {
-   		"name": "request methods testcase: empty testcase",
-   		"variables": {
-   			"name": "demo"
-   		},
-   		"parameters": {
-   			"user_name-password": [
-   				[
-   					"user1",
-   					"123"
-   				],
-   				[
-   					"user2",
-   					"456"
-   				]
-   			]
-   		},
-   		"parameters_setting": {
-   			"strategies": {
-   				"user_name-password": {
-   					"name": "var",
-   					"pickOrder": "sequential"
-   				}
-   			}
-   		}
-   	},
+### 声明全局变量（config variables）
 
-```
-#### 变量优先级
-原则上，尽可能使用不同的变量名称， 当变量之间出现重复名称时，就需要您了解优先级策略。例如：
+在 `config` 下声明的 `variables` 为测试用例全局变量，作用域为整个测试用例，在测试用例的所有地方都可以引用。
+
+### 声明数据驱动（parameters）
+
+在 `config` 下声明的 `parameters` 为测试用例的驱动参数；它的作用域也是覆盖整个测试用例，在测试用例的所有地方都可以引用。
+
+### 声明局部变量（teststeps variables）
+
+在单个测试步骤（`teststep`）下声明的 `variables` 是测试步骤局部变量，作用域仅限当前步骤。
+
+各个测试步骤的变量相互独立，互不影响。
+
+### 提取参数变量（session variables）
+
+还有一种变量声明的方式，可以在某个测试步骤（teststep）中提取（extract）特定的响应参数，并赋值给指定的变量名。该操作也常被成为 `参数关联`。
+
+提取的参数变量类似于 session 参数，作用域为当前步骤及之后的步骤。
+
+## 变量引用
+
+在 HttpRunner 的测试用例中，约定通过 `${}` 或 `$` 的形式来引用变量。
+
+例如：`$var` 或 `${var}`
+
+大多数情况下，采用 `$var` 或 `${var}` 这两种形式都是可以的。但如果在某些字段中存在部分引用变量的情况，例如 `abc123def` 中 `123` 需要引用变量，那么就只能使用 `${var}` 的形式，即 `abc${num}def`；如果使用 `abc$numdef` 的话，变量名称会被识别为 `numdef`。
+
+另一种需要说明的情况，如果在测试用例中本身就存在 `$` 符号，那么可以通过 `$$` 进行转义。
+
+例如，测试用例中某个字段的原始内容为 `$m`，那么为了避免将其解析为变量，则需要将其写为 `$$m`。
+
+## 变量优先级
+
+针对上述的 4 类变量类型，如果声明的变量名称出现重复，则会按照一定的优先级策略进行处理。
+
+优先级从高到低依次为：step variables > session variables > parameter variables > config variables
+
+## 示例
+
+下面通过一个完整的示例进行说明。
+
 ```text
 config:{
     "name": xxx
-    "variables":  {
-        "varA": "configA"  # config variables
+    "variables":  {			# config variables
+        "varA": "configA"
         "varB": "configB"
         "varC": "configC"
     }
-    "parameters" : {
-            "varA-varB": [
-               	    [
-               			"paramA1",
-               			"paramB1"
-               	    ]
-            ]
+    "parameters" : {		# parameters variables
+		"varA-varB": [
+			["paramA1", "paramB1"],
+			["paramA2", "paramB2"],
+		]
     }
-    "parameters_setting": {
-       			"strategies": {
-       				"varA-varB": {
-       					"name": "var",
-       					"pickOrder": "sequential"
-       				}
-       			}
-       		}
 }
 
 teststeps:[
-        {
-            "name": "step 1"
-            "variables":  {
-                "varA": "step1A"   # step variables
-            },
-            "request": {
-                "method" : "GET"
-                "url" : /$varA/$varB/$varC  # varA="step1A", varB="paramB1", varC="configC"
-            }
-            "extract": {
-        		"varA": "body.data.A", # suppose varA="extractVarA"
-                "varB": "body.data.B"  # suppose varB="extractVarB"
-            }
-        },
-        {
-            "name": "step 2"
-            "varialbes": {
-                "varA" : "step2A"
-            }
-            "request": {
-                "url" : /$varA/$varB/$varC # varA="step2A", varB="extractVarB", varC="configC"
-                "method" : "GET"
-            }
-        }
+	{
+		"name": "step 1"
+		"variables":  {		# step variables
+			"varA": "step1A"
+		},
+		"request": {
+			"method" : "GET"
+			"url" : /$varA/$varB/$varC  # varA="step1A", varB="paramB1", varC="configC"
+		}
+		"extract": {
+			"varA": "body.data.A", # suppose varA="extractVarA"
+			"varB": "body.data.B"  # suppose varB="extractVarB"
+		}
+	},
+	{
+		"name": "step 2"
+		"varialbes": {		# step variables
+			"varA" : "step2A"
+		}
+		"request": {
+			"url" : /$varA/$varB/$varC # varA="step2A", varB="extractVarB", varC="configC"
+			"method" : "GET"
+		}
+	}
 ]
 ```
-在以上用例中，变量优先级按以下顺序排列：
 
-- 步骤变量 > 提取变量，例如步骤 2，varA="step2A"
+在步骤 1 中：
 
-- 参数变量 > 配置变量，例如第 1 步，varB="paramB1"
+- varA 定义了局部变量，优先级最高，因此实际值为 step1A
+- varB 未定义局部变量，将继承全局变量；而在全局变量中，parameter 的优先级高于 variables，因此 varB 实际值为 paramB1
+- varC 未定义局部变量，将继承全局变量；在全局变量中，varC 仅在 variables 中进行了声明，因此 varC 的实际值为 configC
 
-- 提取变量 > 参数变量 > 配置变量，例如第 2 步，varB="extractVarB"
+在步骤 2 中：
 
-- 配置变量的优先级最低，例如第 1/2 步，varC="configC"
-
-- 总结：步骤变量 > 提取变量 > 参数变量 > 配置变量
-
+- varA 定义了局部变量，优先级最高，因此实际值为 step2A
+- varB 未定义局部变量；而步骤 1 中有提取该变量，优先级高于全局变量，因此 varB 实际值为 extractVarB
+- varC 未定义局部变量，也不存在同名 session 变量，将继承全局变量，因此 varC 实际值为 configC
