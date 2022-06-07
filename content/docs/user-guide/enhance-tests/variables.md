@@ -3,6 +3,7 @@ title: 变量（variables）
 weight: 1
 description: 基于变量机制实现参数的生命周期管理
 ---
+
 在测试用例内部，HttpRunner 划分了两层变量空间作用域（context）。
 - config ：作为整个测试用例的全局配置项，作用域为整个测试用例；
 - teststeps ：测试步骤的变量空间（context）会继承或覆盖 config 中定义的内容；
@@ -135,3 +136,4 @@ teststeps:[
 - 配置变量的优先级最低，例如第 1/2 步，varC="configC"
 
 - 总结：步骤变量 > 提取变量 > 参数变量 > 配置变量
+

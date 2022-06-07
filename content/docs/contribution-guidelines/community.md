@@ -28,11 +28,11 @@ TesterHome 社区也开设了独立的 [HttpRunner 主题板块]，这也是 Htt
 
 <img src="/image/qrcode.png" alt="HttpRunner" width="300">
 
-## 微信交流群
+## 用户交流群
 
-当前 HttpRunner 组建了一个核心用户微信交流群，基于交流质量的考虑，设置了一定的门槛。
+考虑到很多用户更习惯使用即时通讯群进行交流，我们也组建了 HttpRunner 微信、飞书用户交流群。
 
-如果你期望加入 HttpRunner 核心用户群，请填写[用户调研问卷][survey]并留下你的联系方式，作者将拉你进群。
+加群方式请看这里：[HttpRunner v4 用户交流群，它来啦！](/blog/join-chat-group)
 
 
 [discussions]: https://github.com/httprunner/httprunner/discussions

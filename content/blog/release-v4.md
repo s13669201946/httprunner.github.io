@@ -204,7 +204,7 @@ HttpRunner 的交流途径挺多的，当前重点维护的包括：
 
 https://github.com/httprunner/httprunner
 
-![](/image/star-history.png)
+![](/image/star-history-220426.png)
 
 [jsonschema]: https://github.com/python-jsonschema/jsonschema
 [2021]: https://debugtalk.com/post/my-2021-summary/

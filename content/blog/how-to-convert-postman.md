@@ -26,7 +26,7 @@ Postman Echo 集合的详情页面如下图所示，通过 `Create a fork` 选�
 
 首先介绍 `hrp convert` 各个选项的详细说明：
 
-1. `--to-json/--to-yaml/--to-gotest/--to-pytest` 用于将输入转化为对应形态的测试用例，四个选项中最多只能指定一个，如果不指定则默认会将输入转化为 JSON 形态的测试用例。当前已经支持将 Postman 用例转换为 JSON/YAML/pytest 三种形态形态的测试用例
+1. `--to-json/--to-yaml/--to-gotest/--to-pytest` 用于将输入转化为对应形态的测试用例，四个选项中最多只能指定一个，如果不指定则默认会将输入转化为 JSON 形态的测试用例。当前已经支持将 Postman 用例转换为 JSON/YAML/pytest 三种形态的测试用例
 2. `--output-dir` 后接测试用例的期望输出目录的路径，用于将转换生成的测试用例输出到对应的文件夹，需要注意该路径必须是存在且合法的
 3. `--profile` 后接 profile 配置文件的路径，profile 文件的后缀可以为 .json/.yaml/.yml，目前支持修改输入中的 Headers 和 Cookies 信息，并且支持替换（不存在则会创建）以及覆盖两种修改模式，下面给出这两种修改模式的 profile 配置文件示例：
 

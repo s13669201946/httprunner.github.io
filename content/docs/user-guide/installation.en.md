@@ -9,7 +9,7 @@ description: How to install HttpRunner.
 ## install as CLI tool
 
 ```bash
-$ go get -u github.com/httprunner/httprunner/hrp/cmd/cli@master
+$ go install github.com/httprunner/httprunner/v4/hrp/cmd/cli@master
 ```
 
 Since installed, you will get a `hrp` command with multiple sub-commands.
@@ -46,9 +46,9 @@ Use "hrp [command] --help" for more information about a command.
 Beside using `hrp` as a CLI tool, you can also use it as golang library.
 
 ```bash
-$ go get -u github.com/httprunner/httprunner
+$ go get -u github.com/httprunner/httprunner/v4
 ```
 
-Then you can import `github.com/httprunner/httprunner` and write testcases in Golang.
+Then you can import `github.com/httprunner/httprunner/v4/hrp` and write testcases in Golang.
 
 [github-actions]: https://github.com/httprunner/httprunner/actions

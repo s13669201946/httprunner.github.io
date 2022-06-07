@@ -17,5 +17,7 @@ menu:
 
 <img src="/image/qrcode.png" alt="HttpRunner" width="300">
 
+如果你期望加入 HttpRunner 用户群，请看这里：[HttpRunner v4 用户交流群，它来啦！](/blog/join-chat-group)
+
 [survey]: https://wj.qq.com/s2/9699514/0d19/
 [discussions]: https://github.com/httprunner/httprunner/discussions
