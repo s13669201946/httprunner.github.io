@@ -40,5 +40,5 @@ $ 二进制exe文件路径  --pull.disable-default --pushgateway.listen-address=
 ###  3. 打开客户端，勾选「检测被测系统」框，开启QuickRunner检测
 <img src="/image/QuickRunner/direction/device_info.png" alt="QuickRunner" width="800">
 
-[releases]:
-[github-actions]:
+[releases]: https://github.com/s13669201946/QuickRunner/releases/tag/QuickrunnerV1.0.0
+[github-actions]:https://github.com/s13669201946/QuickRunner/releases/tag/QuickrunnerV1.0.0
