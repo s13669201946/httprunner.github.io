@@ -12,7 +12,6 @@ QuickRunner提供了「检测被测系统」功能，当勾选【检测被测系
 在 [GitHub Releases][releases] 页面中选择您需要的版本,当前 QuickRunner 支持的环境包括：
 
 - macOS(darwin) + amd64(x86)
-- macOS(darwin) + arm64(M1)
 - linux + amd64(x86)
 - linux + arm64
 - windows + amd64(x86)

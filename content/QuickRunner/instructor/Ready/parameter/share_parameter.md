@@ -8,9 +8,9 @@ type: docs
 
 该功能的使用方式如下：
 
-<img src="/image/QuickRunner/direction/share_parameter1.png" alt="QuickRunner" width="800">
+<img src="/image/QuickRunner/direction/config-var.jpg" alt="QuickRunner" width="800">
 <img src="/image/QuickRunner/direction/share_parameter2.png" alt="QuickRunner" width="800">
-<img src="/image/QuickRunner/direction/share_parameter3.png" alt="QuickRunner" width="800">
+
 
 
 

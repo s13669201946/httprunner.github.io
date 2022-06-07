@@ -9,9 +9,6 @@ QuickRunner目前有Linux，macOS，Windows三种不同的版本，同时支持X
 您可根据自身需要在 [GitHub Releases][releases] 页面中选择需要的版本,当前 QuickRunner 支持的环境包括：
 
 - macOS(darwin) + amd64(x86)
-- macOS(darwin) + arm64(M1)
-- linux + amd64(x86)
-- linux + arm64
 - windows + amd64(x86)
 
 工具成功安装界面

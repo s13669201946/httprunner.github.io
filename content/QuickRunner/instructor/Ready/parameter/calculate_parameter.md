@@ -18,7 +18,7 @@ QuickRunner支持动态运算，您可以在请求的任意位置调用QuickRunn
 
 该功能的使用方式如下：
 
-<img src="/image/QuickRunner/direction/calculate_parameter.png" alt="QuickRunner" width="800">
+<img src="/image/QuickRunner/direction/calculate.jpg" alt="QuickRunner" width="800">
 
 
 

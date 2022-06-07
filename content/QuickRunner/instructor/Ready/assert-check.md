@@ -7,7 +7,7 @@ type: docs
 
 QuickRunner支持三种形式的来源检查 "status_code"、"body"、"headers"。<br/>
 
-支持两种形式的提取规则：正则表达式，json路径。
+支持两种形式的提取规则：正则表达式，json 路径。
 
 比较类型有：
 
