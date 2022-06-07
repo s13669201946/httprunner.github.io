@@ -3,7 +3,7 @@ title: hrp pytest
 weight: 2
 description: 通过 hrp pytest 命令行工具启动接口测试
 ---
-目前的HttpRunner支持运行 pytest 的测试用例进行接口测试。由于HttpRunner wraps pytest，因此pytest所有的参数都可以与hrp命令一起使用。
+目前的 HttpRunner 支持运行 pytest 的测试用例进行接口测试。由于 HttpRunner wraps pytest，因此 pytest 所有的参数都可以与 hrp 命令一起使用。
 
 ```text
 $ hrp pytest  [options] [file_or_dir] [file_or_dir] [...]
@@ -245,4 +245,4 @@ to see available fixtures type: pytest --fixtures
 ```text
 hrp pytest testcases/py_test.py --html=/report/index.html  --junit-xml=/report/report.xml
 ```
->温馨提示：测试case的文件应该以_test结尾
+>温馨提示：测试 case 的文件应该以 _test 结尾
