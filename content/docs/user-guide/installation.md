@@ -211,7 +211,33 @@ func TestCaseCallFunction(t *testing.T) {
 ```
 
 ## 依赖环境说明
+- go版本 : go 1.16以上
+- Python版本 : Python3.7 / Python3.8 / Python3.9 / Python3.10
 
+- 依赖库：
+       | **依赖库**               | **版本要求**        | **是否必须** |
+       |:---------------------:|:---------------:|:--------:|
+       | **python**            | 3.7及其以上         | 是        |
+       | **requests**          | 2.22.0及其以上      | 是        |
+       | **pyyaml**            | 5.4.1及其以上       | 是        |
+       | **pydantic**          | 大于1.8.0，小于1.9.0 | 是        |
+       | **loguru**            | 0.4.1及其以上       | 是        |
+       | **jmespath**          | 0.9.5及其以上       | 是        |
+       | **black**             | 22.3.0及其以上      | 是        |
+       | **pytest**            | 7.1.1及其以上       | 是        |
+       | **pytest-html**       | 3.1.1及其以上       | 是        |
+       | **sentry-sdk**        | 0.14.4及其以上      | 是        |
+       | **allure-pytest**     | 2.8.16及其以上      | 否        |
+       | **requests-toolbelt** | 0.9.1及其以上       | 否        |
+       | **filetype**          | 1.0.7及其以上       | 否        |
+       | **Brotli**            | 1.0.9及其以上       | 是        |
+       | **jinja2**            | 3.0.3及其以上       | 是        |
+       | **toml**              | 0.10.2及其以上      | 是        |
+       | **sqlalchemy**        | 1.4.36及其以上      | 否        |
+       | **sentry-sdk**        | 0.14.4及其以上      | 是        |
+       | **allure-pytest**     | 2.8.16及其以上      | 否        |
+       | **requests-toolbelt** | 0.9.1及其以上       | 否        |
+       | **filetype**          | 1.0.7及其以上       | 否        |
 
 
 [releases]: https://github.com/httprunner/httprunner/releases
