@@ -1,6 +1,6 @@
 ---
 title: "常见问题"
-weight: 2
+weight: 3
 description: 关于 QuickRunner 的常见问题
 hide_feedback: true
 type: docs
