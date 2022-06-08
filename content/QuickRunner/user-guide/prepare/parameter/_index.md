@@ -1,7 +1,6 @@
 ---
 title: "参数化"
 weight: 6
-hide_feedback: true
 type: docs
 ---
 
