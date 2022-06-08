@@ -19,7 +19,5 @@ type: docs
 - 核心组件开源
 
 ## 视频演示
-{{< youtube id="-3ferjMTWOk"  autoplay="true" title="QuickRunner演示视频" >}}
-
-
+{{< bilibili BV1a3411G7tw >}}
 
