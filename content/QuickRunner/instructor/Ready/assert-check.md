@@ -25,6 +25,8 @@ QuickRunner支持三种形式的来源检查 "status_code"、"body"、"headers"�
 
 该功能的使用方式如下：
 
-<img src="/image/QuickRunner/direction/assert-check1.png" alt="QuickRunner" width="800">
+<img src="/image/QuickRunner/direction/assert-check1.png" alt="QuickRunner" width="600">
 
-<img src="/image/QuickRunner/direction/assert-check2.png" alt="QuickRunner" width="800">
+<img src="/image/QuickRunner/direction/assert-check2.png" alt="QuickRunner" width="600">
+
+

@@ -83,6 +83,7 @@ description: 该模块主要展示压测过程中的所有指标数据。
 
 
 </table>
+
 该功能的使用方式如下：
 
 <img src="/image/QuickRunner/direction/Indicator_display1.png" alt="QuickRunner" width="900">

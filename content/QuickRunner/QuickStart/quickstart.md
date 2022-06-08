@@ -41,7 +41,7 @@ httpbin 支持HTTP/HTTPS，可以很好地满足我们的演示需求。
 开启压测之前，您可在【压测配置】页面，设置压测配置，定义运行模式。设置结束后，点击【启动】按钮，开启压测。
 <img src="/image/QuickRunner/demo-pressing.png" alt="QuickRunner" width="800">
 
-#### 结果整理
+#### 结果展示
 您可在【压测任务】界面查看压测过程中的所有指标数据
 <img src="/image/QuickRunner/demo-result.png" alt="QuickRunner" width="800">
 
