@@ -21,20 +21,20 @@ $ hrp convert -h
 convert to JSON/YAML/gotest/pytest testcases
 
 Usage:
-hrp convert $path... [flags]
+  hrp convert $path... [flags]
 
 Flags:
--h, --help                help for convert
--d, --output-dir string   specify output directory, default to the same dir with har file
--p, --profile string      specify profile path to override headers (except for auto-generated headers) and cookies
---to-gotest           convert to gotest scripts (TODO)
---to-json             convert to JSON scripts (default)
---to-pytest           convert to pytest scripts
---to-yaml             convert to YAML scripts
+  -h, --help                help for convert
+  -d, --output-dir string   specify output directory, default to the same dir with har file
+  -p, --profile string      specify profile path to override headers (except for auto-generated headers) and cookies
+      --to-gotest           convert to gotest scripts (TODO)
+      --to-json             convert to JSON scripts (default true)
+      --to-pytest           convert to pytest scripts
+      --to-yaml             convert to YAML scripts
 
 Global Flags:
---log-json           set log to json format
--l, --log-level string   set log level (default "INFO")
+      --log-json           set log to json format
+  -l, --log-level string   set log level (default "INFO")
 ```
 
 `hrp convert` 各个选项的详细说明和使用示例如下：
@@ -73,7 +73,7 @@ $ hrp convert postman_collection.json --to-yaml --output-dir testcase/from/postm
 
 `--profile` 后接 profile 配置文件的路径，该文件的后缀可以为 .json/.yaml/.yml，其作用是在转换过程中对测试用例的各个步骤进行全局修改，目前支持修改输入中的 Headers 和 Cookies 信息，并且支持替换（不存在则会创建）以及覆盖两种修改模式，下面给出这两种修改模式的 profile 配置文件示例：
 
-profile.yaml：根据 profile 替换指定的 Headers 和 Cookies 信息
+- profile.yaml：根据 profile 替换指定的 Headers 和 Cookies 信息
 
 ```yaml
 headers:
@@ -82,7 +82,7 @@ cookies:
     Cookie1: "this cookie will be created or updated"
 ```
 
-profile_override.yaml：根据 profile 覆盖原有的 Headers 和 Cookies 信息
+- profile_override.yaml：根据 profile 覆盖原有的 Headers 和 Cookies 信息
 
 ```yaml
 override: true
