@@ -1,13 +1,12 @@
 ---
 title: "欢迎使用 QuickRunner"
-linkTitle: "QuickRunner 🚀"
+linkTitle: "QuickRunner"
 type: docs
 menu:
   main:
     weight: 4
 ---
 
-> 1、QuickRunner  持续收集中，我们将基于用户反馈动态调整产品特性和需求优先级。<br/>
-> 2、欢迎加入 QuickRunner，交流使用经验，分享心得和想法。
+`QuickRunner` 是一款基于开源测试框架 HttpRunner 打造的简单易用、功能强大、数据精准的专业级性能测试工具，产品形态为桌面客户端。
 
-该文档将帮助你理解 QuickRunner 的设计理念和核心概念，并快速熟悉开始使用。
+本文档是 QuickRunner 的官方使用文档，持续迭代完善中。

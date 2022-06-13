@@ -1,6 +1,6 @@
 ---
-title: "实例case"
-weight: 1
+title: 🚀 快速上手
+weight: 2
 description: 一个实例带你快速上手 QuickRunner
 type: docs
 ---
@@ -35,16 +35,20 @@ httpbin 支持HTTP/HTTPS，可以很好地满足我们的演示需求。
 #### 脚本调试
 
 当脚本设置好后，点击界面右上方的【调试】按钮可对脚本进行调试，以此来检查脚本是否可以跑通。
+
 <img src="/image/QuickRunner/debug.png" alt="QuickRunner" width="800">
 
 #### 压测执行
+
 开启压测之前，您可在【压测配置】页面，设置压测配置，定义运行模式。设置结束后，点击【启动】按钮，开启压测。
+
 <img src="/image/QuickRunner/demo-pressing.png" alt="QuickRunner" width="800">
 
 #### 结果展示
-您可在【压测任务】界面查看压测过程中的所有指标数据
-<img src="/image/QuickRunner/demo-result.png" alt="QuickRunner" width="800">
 
+您可在【压测任务】界面查看压测过程中的所有指标数据。
+
+<img src="/image/QuickRunner/demo-result.png" alt="QuickRunner" width="800">
 
 
 ## 总结

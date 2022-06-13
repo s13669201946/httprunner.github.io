@@ -1,7 +1,6 @@
 ---
 title: "脚本准备"
 weight: 2
-hide_feedback: true
 description: 准备压测脚本
 type: docs
 ---
