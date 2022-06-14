@@ -29,4 +29,8 @@ QuickRunner支持三种形式的来源检查 "status_code"、"body"、"headers"�
 
 <img src="/image/QuickRunner/direction/assert-check2.png" alt="QuickRunner" width="600">
 
+#### 正则表达式
 
+使用方式同 json_path 一致，当前仅支持对 body 内容进行正则匹配，可提取 HTML 内容。
+<img src="/image/QuickRunner/direction/correlation_regx1.png" alt="QuickRunner" width="800">
+<img src="/image/QuickRunner/direction/correlation_regx.png" alt="QuickRunner" width="800">
