@@ -59,7 +59,7 @@ description: 手工编写 YAML/JSON/pytest/gotest 测试用例
 |--------------------|------------------------------------------------|
 | verify             | 客户端是否进行 SSL 校验（todo）                           |
 | base_url           | 当前请求的基础 URL（deprecated in v4.1, moved to .env） |
-| headers            | 定义测试用例级别的请求体                                   |
+| headers            | 定义测试用例级别的请求头                                   |
 | environs           | 配置环境变量（如果未指定则会从 .env 文件导入）                     |
 | variables          | 定义测试用例级别的变量                                    |
 | parameters         | 配置参数驱动的数据源                                     |
