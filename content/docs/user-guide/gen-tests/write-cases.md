@@ -249,11 +249,8 @@ teststeps:
 
 与下面即将介绍的代码形态编写测试用例的方式不同，手工编写 YAML/JSON 测试用例具有较大的灵活性并且容易出错，因此在手工编写测试用例的过程中需要格外注意。最后，步骤类型的判断是会有一定优先级的，如果用户在一个测试步骤中指定了多个步骤类型，则会按照 api > testcase > think_time > request > transaction > rendezvous > websocket 的顺序进行类型识别，并最终判断为其中的一类，虽然这种情况极少会出现，但也在此说明一下，以防止发生一些意料之外的错误
 
-## 手工编写 pytest 测试用例
-
+## 手工编写 Pytest 测试用例
 ## 手工编写 gotest 测试用例
-
-
 
 [test case]: https://en.wikipedia.org/wiki/Test_case
 [test suite]: https://en.wikipedia.org/wiki/Test_suite
