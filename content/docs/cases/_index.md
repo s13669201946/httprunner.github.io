@@ -14,7 +14,8 @@ description: 欢迎分享 HttpRunner 在你们公司的落地实践
 
 - 在 HttpRunner 项目首页展示贵公司的 Logo 进行品牌曝光
 - 在 HttpRunner 官网的案例页部分展示完整案例内容（夹带一些团队宣传、招聘需求也是可以的~）
-- 组建 VIP 专属微信（飞书）交流群，获得 HttpRunner 核心开发者的一对一技术支持
+- 组建 VIP 专属微信（飞书）交流群，获得 HttpRunner 核心开发者最高优的一对一技术支持
+- 优先免费体验 HttpRunner 的 GUI 客户端工具 [QuickRunner]
 
 如果你对案例有任何疑问或建议，欢迎随时跟我联系（微信 leolee023）。
 
@@ -46,3 +47,4 @@ description: 欢迎分享 HttpRunner 在你们公司的落地实践
 
 [HttpRunner 开源项目]: https://github.com/httprunner/httprunner
 [GitHub Issues]: https://github.com/httprunner/httprunner.github.io/issues/new?assignees=&labels=用户案例&template=user_case.md&title=
+[QuickRunner]: /quickrunner/
