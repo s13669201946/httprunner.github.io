@@ -234,10 +234,6 @@ func TestCaseCallFunction(t *testing.T) {
        | **jinja2**            | 3.0.3及其以上       | 是        |
        | **toml**              | 0.10.2及其以上      | 是        |
        | **sqlalchemy**        | 1.4.36及其以上      | 否        |
-       | **sentry-sdk**        | 0.14.4及其以上      | 是        |
-       | **allure-pytest**     | 2.8.16及其以上      | 否        |
-       | **requests-toolbelt** | 0.9.1及其以上       | 否        |
-       | **filetype**          | 1.0.7及其以上       | 否        |
 
 
 [releases]: https://github.com/httprunner/httprunner/releases
