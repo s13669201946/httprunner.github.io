@@ -8,8 +8,8 @@ type: docs
 
 该功能的使用方式如下：
 
-<img src="/image/QuickRunner/direction/config-var.jpg" alt="QuickRunner" width="700">
-<img src="/image/QuickRunner/direction/driver_parameter2.png" alt="QuickRunner" width="700">
+<img src="/image/QuickRunner/direction/config-var.jpg" alt="QuickRunner" width="800">
+<img src="/image/QuickRunner/direction/driver_parameter2.png" alt="QuickRunner" width="800">
 
 >参数选取的方式分为“顺序轮询”，“随机选取”两种形式，系统默认“顺序轮询”方式。<br/>
 
