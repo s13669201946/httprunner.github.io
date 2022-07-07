@@ -17,5 +17,5 @@ QuickRunner目前有Linux，macOS，Windows三种不同的版本，同时支持X
 
 >温馨提示：Mac版本目前由于集成了go环境，安装包体积较大导致签名失败，若无法安装请在"系统偏好设置"->"安全与隐私"以下位置点击"仍要打开"。
 
-[releases]:
+[releases]:https://github.com/httprunner/QuickRunner/releases/tag/v1.0.12
 [github-actions]:
